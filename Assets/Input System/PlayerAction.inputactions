@@ -1,0 +1,118 @@
+{
+    "name": "PlayerAction",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "f8ecc7a2-8a96-4455-b973-f7acfbe3e090",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "63846f3e-8c8d-4547-9553-730dea902072",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "71320b45-9bab-46a3-8d9c-e71749497934",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Duck",
+                    "type": "Button",
+                    "id": "14178197-cf91-4be9-88b1-4c88bdfb24ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "5397f957-9000-4dfe-aef2-5c86879f5ad3",
+                    "path": "2DVector",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "12f1e50d-7db1-43de-b2a0-fe3930579c3c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "34c949da-6d9c-457c-b294-f82cc28e40ea",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "751b67da-503a-43d6-9275-c43099811f5d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5042626a-0fdb-4767-8740-f56af7acbffc",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6c481202-b369-4546-9dce-9cf3e92c4ef7",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4351a3e9-5e19-4fd0-bb0c-4cf5eb8f3f76",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Duck",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

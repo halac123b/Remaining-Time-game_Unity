@@ -14,7 +14,6 @@ public class Player1Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         dir = Vector3.zero;
         if(Input.GetKey(KeyCode.UpArrow)){
             dir.x -=1;

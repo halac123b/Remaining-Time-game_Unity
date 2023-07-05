@@ -26,7 +26,6 @@ public class PlayerStatus : MonoBehaviour
     OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
 
     countTrigger = true;
-    Debug.Log("1");
   }
 
   public int GetTimeLeft()

@@ -8,6 +8,7 @@ public class PlayerStatus : MonoBehaviour
   private bool countTrigger = true;
 
   public event EventHandler OnCountDownTrigger;
+  public event EventHandler OnDeadTrigger;
 
   private void Update()
   {
@@ -24,6 +25,11 @@ public class PlayerStatus : MonoBehaviour
 
     timeLeft--;
     OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
+
+    if (timeLeft == 0)
+    {
+      OnDeadTrigger?.Invoke(this, EventArgs.Empty);
+    }
 
     countTrigger = true;
   }

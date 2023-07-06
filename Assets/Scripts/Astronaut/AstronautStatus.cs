@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+
 using UnityEngine;
 
 public class AstronautStatus : NetworkBehaviour
@@ -8,6 +9,9 @@ public class AstronautStatus : NetworkBehaviour
     // Start is called before the first frame update
     private Astronaut_inputSystem astronaut_InputSystem;
     private Animator anim;
+    [SerializeField] private SpriteRenderer spriteRenderer; 
+
+    private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false,NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);    
 
     private void Awake()
     {
@@ -16,7 +20,7 @@ public class AstronautStatus : NetworkBehaviour
     }
     void Start()
     {
-        
+        flipX.OnValueChanged += OnFlipXChanged;
     }
 
     // Update is called once per frame
@@ -29,9 +33,9 @@ public class AstronautStatus : NetworkBehaviour
         //  anim.SetFloat("x", x);
         //   anim.SetFloat("y", y);
         if (x <= -0.01f){
-            transform.localScale = new Vector3(transform.localScale.y,transform.localScale.y,transform.localScale.z);
+            flipX.Value = false;
         }else if (x >= 0.01f){
-            transform.localScale = new Vector3(-transform.localScale.y,transform.localScale.y,transform.localScale.z);
+            flipX.Value = true;
         }
         if (y > 0.01) {
             anim.SetFloat("y", 1f);
@@ -50,6 +54,11 @@ public class AstronautStatus : NetworkBehaviour
         }
         anim.SetFloat("speed", astronaut_InputSystem.GetDirection().magnitude);
         anim.SetInteger("Scale",astronaut_InputSystem.GetSpeedScale());
+    }
+
+    private void OnFlipXChanged(bool oldValue, bool newValue)
+    {
+        spriteRenderer.flipX = newValue;
     }
 
 }

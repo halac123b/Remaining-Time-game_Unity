@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ca28da132216d4c9a80c5dcab85779, type: 3}
   m_Name: Item 1
   m_EditorClassIdentifier: 
-  equipName: Enter name of item
-  image: {fileID: 0}
+  equipName: Item 1
+  image: {fileID: 21300000, guid: 5cea3d61b2eaf8f4fa471703b25c45ec, type: 3}

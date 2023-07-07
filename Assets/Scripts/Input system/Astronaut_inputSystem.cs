@@ -13,7 +13,7 @@ public class Astronaut_inputSystem : NetworkBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private Transform spawnObj;
-
+    [SerializeField] private CapsuleCollider2D capsuleCollider2D;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();            
@@ -50,8 +50,14 @@ public class Astronaut_inputSystem : NetworkBehaviour
     }
     private void Duck(InputAction.CallbackContext context){
         if(context.ReadValueAsButton()){
-            speed = 3f;
-        }else speed = 5f;
+            speed = 3f; 
+            capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x,capsuleCollider2D.offset.y-0.2f);
+            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x,capsuleCollider2D.size.y - 0.4f);
+        }else {
+            speed = 5f;
+            capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x,capsuleCollider2D.offset.y+0.2f);
+            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x,capsuleCollider2D.size.y + 0.4f);
+        }
     }
     public int GetSpeedScale(){
         if(speed > 5f) return 1;

@@ -14,10 +14,10 @@ public class EditPlayerName : MonoBehaviour {
     public event EventHandler OnNameChanged;
 
 
-    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private Text playerNameText;
 
 
-    private string playerName = "Code Monkey";
+    private string playerName = "YourName";
 
 
     private void Awake() {

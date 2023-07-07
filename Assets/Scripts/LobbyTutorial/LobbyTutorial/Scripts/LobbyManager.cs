@@ -93,9 +93,9 @@ public class LobbyManager : MonoBehaviour
 
             RefreshLobbyList();
         };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
+        if(!AuthenticationService.Instance.IsSignedIn)
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
 
     private void HandleRefreshLobbyList()
     {

@@ -24,16 +24,16 @@ public class UI_InputWindow : MonoBehaviour {
 
     private Button_UI okBtn;
     private Button_UI cancelBtn;
-    private TextMeshProUGUI titleText;
-    private TMP_InputField inputField;
+    private Text titleText;
+    private InputField inputField;
 
     private void Awake() {
         instance = this;
 
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
         cancelBtn = transform.Find("cancelBtn").GetComponent<Button_UI>();
-        titleText = transform.Find("titleText").GetComponent<TextMeshProUGUI>();
-        inputField = transform.Find("inputField").GetComponent<TMP_InputField>();
+        titleText = transform.Find("titleText").GetComponent<Text>();
+        inputField = transform.Find("InputField").GetComponent<InputField>();
 
         Hide();
     }

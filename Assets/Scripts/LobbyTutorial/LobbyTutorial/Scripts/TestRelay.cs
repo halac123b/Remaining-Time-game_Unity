@@ -26,7 +26,7 @@ public class TestRelay : MonoBehaviour
         await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () =>
         {
-            Debug.Log("sddssdadsa");
+            Debug.Log("Start TestRelay");
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();

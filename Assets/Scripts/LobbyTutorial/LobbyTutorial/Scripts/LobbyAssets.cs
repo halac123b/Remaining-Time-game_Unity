@@ -1,31 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
 
-public class LobbyAssets : MonoBehaviour {
-
-
-
-    public static LobbyAssets Instance { get; private set; }
+// public class LobbyAssets : MonoBehaviour {
 
 
-    [SerializeField] private Sprite marineSprite;
-    [SerializeField] private Sprite ninjaSprite;
-    [SerializeField] private Sprite zombieSprite;
+
+//     public static LobbyAssets Instance { get; private set; }
 
 
-    private void Awake() {
-        Instance = this;
-    }
+//     [SerializeField] private Sprite marineSprite;
+//     [SerializeField] private Sprite ninjaSprite;
+//     [SerializeField] private Sprite zombieSprite;
 
-    public Sprite GetSprite(LobbyManager.PlayerCharacter playerCharacter) {
-        switch (playerCharacter) {
-            default:
-            case LobbyManager.PlayerCharacter.Marine:   return marineSprite;
-            case LobbyManager.PlayerCharacter.Ninja:    return ninjaSprite;
-            case LobbyManager.PlayerCharacter.Zombie:   return zombieSprite;
-        }
-    }
 
-}
+//     private void Awake() {
+//         Instance = this;
+//     }
+
+//     public Sprite GetSprite(LobbyManager.PlayerCharacter playerCharacter) {
+//         switch (playerCharacter) {
+//             default:
+//             case LobbyManager.PlayerCharacter.Marine:   return marineSprite;
+//             case LobbyManager.PlayerCharacter.Ninja:    return ninjaSprite;
+//             case LobbyManager.PlayerCharacter.Zombie:   return zombieSprite;
+//         }
+//     }
+
+// }

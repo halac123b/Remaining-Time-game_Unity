@@ -17,7 +17,7 @@ public class LobbyManager : MonoBehaviour
 
 
     public const string KEY_PLAYER_NAME = "PlayerName";
-    public const string KEY_PLAYER_CHARACTER = "Character";
+    public const string KEY_PLAYER_COLOR = "Color";
     public const string KEY_GAME_MODE = "GameMode";
     public const string KEY_START_GAME = "StartGame_RelayCode";
 
@@ -50,12 +50,12 @@ public class LobbyManager : MonoBehaviour
         Conquest
     }
 
-    public enum PlayerCharacter
-    {
-        Marine,
-        Ninja,
-        Zombie
-    }
+    // public enum PlayerCharacter
+    // {
+    //     Marine,
+    //     Ninja,
+    //     Zombie
+    // }
 
 
 
@@ -64,6 +64,7 @@ public class LobbyManager : MonoBehaviour
     private float refreshLobbyListTimer = 5f;
     private Lobby joinedLobby;
     private string playerName;
+    private Color playerColor;
 
 
     private void Awake()
@@ -74,6 +75,7 @@ public class LobbyManager : MonoBehaviour
     private void Update()
     {
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
+        // Debug.Log(Data[KEY_PLAYER_NAME);
         HandleLobbyHeartbeat();
         HandleLobbyPolling();
     }
@@ -194,7 +196,7 @@ public class LobbyManager : MonoBehaviour
     {
         return new Player(AuthenticationService.Instance.PlayerId, null, new Dictionary<string, PlayerDataObject> {
             { KEY_PLAYER_NAME, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName) },
-            { KEY_PLAYER_CHARACTER, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, PlayerCharacter.Marine.ToString()) }
+            { KEY_PLAYER_COLOR, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerColor.ToString()) }
         });
     }
 
@@ -333,7 +335,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public async void UpdatePlayerCharacter(PlayerCharacter playerCharacter)
+    public async void UpdatePlayerColor(Color playerColor)
     {
         if (joinedLobby != null)
         {
@@ -343,9 +345,9 @@ public class LobbyManager : MonoBehaviour
 
                 options.Data = new Dictionary<string, PlayerDataObject>() {
                     {
-                        KEY_PLAYER_CHARACTER, new PlayerDataObject(
+                        KEY_PLAYER_COLOR, new PlayerDataObject(
                             visibility: PlayerDataObject.VisibilityOptions.Public,
-                            value: playerCharacter.ToString())
+                            value: playerColor.ToString())
                     }
                 };
 

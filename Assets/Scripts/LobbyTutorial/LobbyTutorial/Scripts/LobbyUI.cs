@@ -17,10 +17,10 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private Transform container;
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI playerCountText;
-    [SerializeField] private TextMeshProUGUI gameModeText;
-    [SerializeField] private Button changeMarineButton;
-    [SerializeField] private Button changeNinjaButton;
-    [SerializeField] private Button changeZombieButton;
+    // [SerializeField] private TextMeshProUGUI gameModeText;
+    // [SerializeField] private Button changeMarineButton;
+    // [SerializeField] private Button changeNinjaButton;
+    // [SerializeField] private Button changeZombieButton;
     [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button changeGameModeButton;
 
@@ -33,28 +33,28 @@ public class LobbyUI : MonoBehaviour
 
         playerSingleTemplate.gameObject.SetActive(false);
 
-        changeMarineButton.onClick.AddListener(() =>
-        {
-            LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Marine);
-        });
-        changeNinjaButton.onClick.AddListener(() =>
-        {
-            LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Ninja);
-        });
-        changeZombieButton.onClick.AddListener(() =>
-        {
-            LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Zombie);
-        });
+        // changeMarineButton.onClick.AddListener(() =>
+        // {
+        //     LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Marine);
+        // });
+        // changeNinjaButton.onClick.AddListener(() =>
+        // {
+        //     LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Ninja);
+        // });
+        // changeZombieButton.onClick.AddListener(() =>
+        // {
+        //     LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Zombie);
+        // });
 
         leaveLobbyButton.onClick.AddListener(() =>
         {
             LobbyManager.Instance.LeaveLobby();
         });
 
-        changeGameModeButton.onClick.AddListener(() =>
-        {
-            LobbyManager.Instance.ChangeGameMode();
-        });
+        // changeGameModeButton.onClick.AddListener(() =>
+        // {
+        //     LobbyManager.Instance.ChangeGameMode();
+        // });
         StartGameButton.onClick.AddListener(() =>
         {
             LobbyManager.Instance.StartGame();
@@ -89,7 +89,7 @@ public class LobbyUI : MonoBehaviour
         UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
     }
 
-    private void UpdateLobby(Lobby lobby)
+    public void UpdateLobby(Lobby lobby)
     {
         ClearLobby();
 
@@ -103,16 +103,15 @@ public class LobbyUI : MonoBehaviour
                 LobbyManager.Instance.IsLobbyHost() &&
                 player.Id != AuthenticationService.Instance.PlayerId // Don't allow kick self
             );
-
-            lobbyPlayerSingleUI.UpdatePlayer(player);
+             lobbyPlayerSingleUI.UpdatePlayer(player);
         }
 
-        changeGameModeButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
+        // changeGameModeButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
         StartGameButton.gameObject.SetActive(LobbyManager.Instance.IsLobbyHost());
 
         lobbyNameText.text = lobby.Name;
         playerCountText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-        gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;
+        // gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;
 
         if (lobby.Data[LobbyManager.KEY_START_GAME].Value == "0") Show();
         else Hide();

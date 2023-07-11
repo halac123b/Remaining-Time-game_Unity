@@ -11,6 +11,7 @@ public class AstronautStatus : NetworkBehaviour
     private Animator anim;
     [SerializeField] private SpriteRenderer spriteRenderer; 
 
+
     private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false,NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);    
 
     private void Awake()

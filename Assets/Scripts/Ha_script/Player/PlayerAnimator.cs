@@ -22,7 +22,7 @@ public class PlayerAnimator : NetworkBehaviour
   {
     animator = GetComponent<Animator>();
     playerMovement = GetComponentInParent<PlayerMovement>();
-    playerStatus = GetComponentInParent<PlayerStatus>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
     playerStatus.OnDeadTrigger += OnDeadAnimation;
 
     sprite = GetComponent<SpriteRenderer>();

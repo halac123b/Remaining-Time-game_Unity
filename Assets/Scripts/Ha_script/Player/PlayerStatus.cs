@@ -2,17 +2,33 @@ using System.Collections;
 using UnityEngine;
 using System;
 
+// Fix: GetTimer(0)
+
 public class PlayerStatus : MonoBehaviour
 {
-  [SerializeField] private int timeLeft = 120;
+  [SerializeField] private int timeLeft = 30;
   private bool countTrigger = true;
+
+  private bool startCounting = false;
 
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
 
+  //private int playerIndex;
+
+  //private TimeManager timeManager;
+
+  // private void Start()
+  // {
+  //   timeManager = FindObjectOfType<TimeManager>();
+  //   //playerIndex = timeManager.GetRandomIndex();
+  //   Debug.Log(playerIndex);
+  //   timeLeft = timeManager.GetTimer();
+  // }
+
   private void Update()
   {
-    if (countTrigger && timeLeft > 0)
+    if (startCounting && countTrigger && timeLeft > 0)
     {
       StartCoroutine(CountDownTime());
     }
@@ -30,6 +46,7 @@ public class PlayerStatus : MonoBehaviour
     {
       OnDeadTrigger?.Invoke(this, EventArgs.Empty);
     }
+    Debug.Log(timeLeft);
 
     countTrigger = true;
   }
@@ -37,5 +54,10 @@ public class PlayerStatus : MonoBehaviour
   public int GetTimeLeft()
   {
     return timeLeft;
+  }
+
+  public void SetStartCounting(bool status)
+  {
+    startCounting = status;
   }
 }

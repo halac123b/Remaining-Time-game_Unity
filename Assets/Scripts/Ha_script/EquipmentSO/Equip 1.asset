@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Equip 1
   m_EditorClassIdentifier: 
   equipName: Equip 1
-  image: {fileID: 21300000, guid: 5cea3d61b2eaf8f4fa471703b25c45ec, type: 3}
+  image: {fileID: 21300000, guid: b9730cb18cbb6a345850a058e96bf724, type: 3}

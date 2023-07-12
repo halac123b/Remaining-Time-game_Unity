@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
@@ -16,6 +14,9 @@ public class TestRelay : MonoBehaviour
   public static TestRelay Instance { get; private set; }
 
   [SerializeField] private GameObject gameUI;
+  [SerializeField] private PlayerStatus playerStatus;
+  [SerializeField] private GameObject oxyBottle;
+  private GameObject spawnObjTransform;
 
   private void Awake()
   {
@@ -50,6 +51,9 @@ CreateRelay()
 
       // Ha's test
       gameUI.SetActive(true);
+      playerStatus.SetStartCounting(true);
+      spawnObjTransform = Instantiate(oxyBottle);
+      spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
       //
 
       return joinCode;
@@ -77,6 +81,7 @@ CreateRelay()
 
       // Ha's test
       gameUI.SetActive(true);
+      playerStatus.SetStartCounting(true);
       //
     }
     catch (RelayServiceException e)
@@ -84,5 +89,4 @@ CreateRelay()
       Debug.Log(e);
     }
   }
-
 }

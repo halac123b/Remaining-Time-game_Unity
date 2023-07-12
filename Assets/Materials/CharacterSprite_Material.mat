@@ -7,17 +7,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerNetworkMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: f2dcf3554d66c004d8e2fd2ea3c61d23, type: 3}
+  m_Name: CharacterSprite_Material
+  m_Shader: {fileID: -6465566751694194690, guid: 7a81597a6dedcd44a911a27a3af4159c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -28,7 +28,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c5afbcc08ae624946a1a07fb71e56521, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -48,24 +48,20 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
     - _CastShadows: 0
     - _Cull: 0
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
     - _SrcBlend: 5
     - _Surface: 1
-    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
-    - _color: {r: 1, g: 0.28982034, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1586403077752425978
+--- !u!114 &3292131427541267784
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

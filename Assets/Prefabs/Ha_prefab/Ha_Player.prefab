@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5509542240812127911}
   - component: {fileID: 6906993800563462769}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Ha_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  gameInput: {fileID: 0}
 --- !u!114 &3063438036189547554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07102a54b2e4bb479abd6e2e618d101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentList: []
+  equipmentList:
+  - {fileID: 11400000, guid: c6bfd07fb600cd543a88399112e73c4c, type: 2}
+  - {fileID: 11400000, guid: ecd7bbb3cdee42c4b86d56702759be27, type: 2}
 --- !u!114 &5147537985918498929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1e75ad5bfea474eb55759cbcd48dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList: []
+  itemList:
+  - item: {fileID: 11400000, guid: 1f0aeda1b23b3594cbfb209499d2d77f, type: 2}
+    number: 5
+  - item: {fileID: 11400000, guid: 020d063a7b839244a8d16e6c514952c0, type: 2}
+    number: 4
 --- !u!114 &5509542240812127911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,8 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322ad16669f1c02458f2ac2b8a04bb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerStatus: {fileID: 0}
+  player: {fileID: 6751661525607383317}
+  playerStatus: {fileID: 5693037301341262881}
 --- !u!212 &9194501360048218635
 SpriteRenderer:
   m_ObjectHideFlags: 0

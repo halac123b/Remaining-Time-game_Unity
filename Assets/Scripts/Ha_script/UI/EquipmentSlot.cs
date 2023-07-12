@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class EquipmentSlot : MonoBehaviour
 {
-  [SerializeField] private PlayerEquip playerEquip;
+  private PlayerEquip playerEquip;
   private Image image;
 
-  private void Start()
+  private void OnEnable()
   {
     image = GetComponent<Image>();
+
+    playerEquip = FindObjectOfType<PlayerEquip>();
     image.sprite = playerEquip.GetCurrentEquip().GetSprite();
     playerEquip.OnChangeEquip += ChangeEquipSprite;
   }

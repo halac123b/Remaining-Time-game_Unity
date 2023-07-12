@@ -4,10 +4,11 @@ using UnityEngine.UI;
 public class ChangeItemBtn : MonoBehaviour
 {
   private Button button;
-  [SerializeField] private PlayerItem playerItem;
+  private PlayerItem playerItem;
 
-  void Start()
+  private void Start()
   {
+    playerItem = FindObjectOfType<PlayerItem>();
     button = GetComponent<Button>();
     button.onClick.AddListener(playerItem.ChangeItem);
   }

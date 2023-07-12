@@ -1,9 +1,10 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
   [SerializeField] private float moveSpeed = 7f;
-  [SerializeField] private GameInput gameInput;
+  private GameInput gameInput;
 
   private Vector2 walkVector;
   private Vector2 lastDirection;
@@ -11,10 +12,15 @@ public class PlayerMovement : MonoBehaviour
   private void Awake()
   {
     lastDirection = new Vector2(0, 1);
+    gameInput = FindObjectOfType<GameInput>();
   }
 
   private void Update()
   {
+    if (!IsOwner)
+    {
+      return;
+    }
     HandleMovement();
   }
 
@@ -41,3 +47,5 @@ public class PlayerMovement : MonoBehaviour
     walkVector = moveDir;
   }
 }
+
+// Fix: Remove LastDirection

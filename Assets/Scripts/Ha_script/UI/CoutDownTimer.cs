@@ -4,11 +4,12 @@ using System;
 
 public class CoutDownTimer : MonoBehaviour
 {
-  [SerializeField] private PlayerStatus playerStatus;
+  private PlayerStatus playerStatus;
   private TextMeshProUGUI textContent;
 
-  private void Start()
+  private void OnEnable()
   {
+    playerStatus = FindObjectOfType<PlayerStatus>();
     playerStatus.OnCountDownTrigger += OnUpdateTime;
     textContent = GetComponent<TextMeshProUGUI>();
     textContent.text = String.Format($"{playerStatus.GetTimeLeft() / 60:D2}:{playerStatus.GetTimeLeft() % 60:D2}");

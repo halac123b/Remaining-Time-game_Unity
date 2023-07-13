@@ -45,7 +45,7 @@ public class PlayerAnimator : NetworkBehaviour
       animator.SetFloat(HORIZONTAL, playerMovement.WalkVector().x);
       flipX.Value = Mathf.Sign(playerMovement.WalkVector().x) >= 0;
     }
-    //playerMovement.transform.localScale = new Vector2(-Mathf.Sign(playerMovement.WalkVector().x), 1f);
+    // playerMovement.transform.localScale = new Vector2(-Mathf.Sign(playerMovement.WalkVector().x), 1f);
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)

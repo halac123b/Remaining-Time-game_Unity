@@ -8,7 +8,6 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
-// using Unity.Services.TestRelay;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class LobbyManager : MonoBehaviour
 
     public static LobbyManager Instance { get; private set; }
 
-
+     
 
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_COLOR = "Color";
@@ -65,8 +64,10 @@ public class LobbyManager : MonoBehaviour
     private float lobbyPollTimer;
     private float refreshLobbyListTimer = 5f;
     private Lobby joinedLobby;
-    private string playerName;
-    private Color playerColor;
+    // private string playerName;
+    // public Color playerColor;
+    private PlayerData playerData;
+    
 
 
     private async void Awake()
@@ -118,7 +119,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void Authenticate(string playerName)
     {
-        this.playerName = playerName;
+
+        playerData.playerName = playerName;
         InitializationOptions initializationOptions = new InitializationOptions();
         initializationOptions.SetProfile(playerName);
 
@@ -127,14 +129,10 @@ public class LobbyManager : MonoBehaviour
         AuthenticationService.Instance.SignedIn += () =>
         {
             // do nothing
+            playerData.Id = AuthenticationService.Instance.PlayerId;   
             Debug.Log(playerName +" Signed in! " + AuthenticationService.Instance.PlayerId);
-
             RefreshLobbyList();
         };
-
-
-       
-     
 
         // AuthenticationService.Instance.SignedIn();
         if(AuthenticationService.Instance.IsSignedIn) {
@@ -201,13 +199,18 @@ public class LobbyManager : MonoBehaviour
                 {
                     if (!IsLobbyHost())
                     {
-                        RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                        
+                        RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value,playerData);
                     }
                     joinedLobby = null;
                     OnGameStarted?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
+    }
+
+    public PlayerData GetPlayerData(){
+        return playerData;
     }
 
     public Lobby GetJoinedLobby()
@@ -239,8 +242,8 @@ public class LobbyManager : MonoBehaviour
     private Player GetPlayer()
     {
         return new Player(AuthenticationService.Instance.PlayerId, null, new Dictionary<string, PlayerDataObject> {
-            { KEY_PLAYER_NAME, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName) },
-            { KEY_PLAYER_COLOR, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerColor.ToString()) }
+            { KEY_PLAYER_NAME, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerData.playerName) },
+            { KEY_PLAYER_COLOR, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerData.color.ToString()) }
         });
     }
 
@@ -269,7 +272,7 @@ public class LobbyManager : MonoBehaviour
     public async void CreateLobby(string lobbyName, bool isPrivate)
     {
         Player player = GetPlayer();
-
+        
         CreateLobbyOptions options = new CreateLobbyOptions
         {
             Player = player,
@@ -353,7 +356,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void UpdatePlayerName(string playerName)
     {
-        this.playerName = playerName;
+        // playerData.playerName = playerName; 
+        playerData.playerName = playerName;
 
         if (joinedLobby != null)
         {
@@ -385,6 +389,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void UpdatePlayerColor(Color playerColor)
     {
+
+        playerData.color = playerColor;
         if (joinedLobby != null)
         {
             try
@@ -493,9 +499,9 @@ public class LobbyManager : MonoBehaviour
         {
             try
             {
-                Debug.Log("StartGame");
+                Debug.Log("StartGame" + playerData.color);
 
-                string relayCode = await RelayManager.Instance.CreateRelay();
+                string relayCode = await RelayManager.Instance.CreateRelay(playerData);
 
                 Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
                 {
@@ -511,5 +517,5 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
-
+   
 }

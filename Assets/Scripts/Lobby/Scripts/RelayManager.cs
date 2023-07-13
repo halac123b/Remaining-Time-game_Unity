@@ -7,12 +7,13 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections;
 
 // public static TestRelay Instance { get; private set; }
 public class RelayManager : MonoBehaviour
 {
   public static RelayManager Instance { get; private set; }
-
+  [SerializeField] private GameObject Loading;
   [SerializeField] private GameObject gameUI;
   [SerializeField] private PlayerStatus playerStatus;
   [SerializeField] private GameObject oxyBottle;
@@ -37,7 +38,7 @@ public class RelayManager : MonoBehaviour
 
   public async
 Task<string>
-CreateRelay()
+CreateRelay(PlayerData playerData)
   {
     try
     {
@@ -46,14 +47,16 @@ CreateRelay()
       RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
 
       NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
+      StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartHost();
 
       // Ha's test
       gameUI.SetActive(true);
+      playerStatus.SetPlayerData(playerData);
       playerStatus.SetStartCounting(true);
       spawnObjTransform = Instantiate(oxyBottle);
       spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
+
       //
 
       return joinCode;
@@ -66,7 +69,9 @@ CreateRelay()
   }
 
 
-  public async void JoinRelay(string joinCode)
+
+
+  public async void JoinRelay(string joinCode,PlayerData playerData)
   {
     try
     {
@@ -76,10 +81,11 @@ CreateRelay()
       RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
 
       NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
+      StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
 
       // Ha's test
+      playerStatus.SetPlayerData(playerData);
       gameUI.SetActive(true);
       playerStatus.SetStartCounting(true);
       //
@@ -89,4 +95,13 @@ CreateRelay()
       Debug.Log(e);
     }
   }
+
+   private IEnumerator ActivateObjectForDuration()
+    {
+        Loading.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
+        Loading.SetActive(false);
+    }
 }

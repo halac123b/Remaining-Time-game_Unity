@@ -10,13 +10,20 @@ public class PlayerAnimator : NetworkBehaviour
   private const string IS_DEAD = "IsDead";
 
   private Animator animator;
+  
 
   private PlayerMovement playerMovement;
   private PlayerStatus playerStatus;
-
   private SpriteRenderer sprite;
 
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
+    new PlayerData 
+    {
+        Id = "",
+        color = Color.white,
+        playerName = ""
+    },NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   private void Awake()
   {
@@ -28,10 +35,23 @@ public class PlayerAnimator : NetworkBehaviour
     sprite = GetComponent<SpriteRenderer>();
 
     flipX.OnValueChanged += OnFlipXChanged;
+    playerData.OnValueChanged += OnPlayerDataChanged;
+    
+  }
+
+    private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
+    {
+      sprite.material.color = playerData.Value.color;
+    }
+
+    private void Start()
+  {
+    if(IsOwner) playerData.Value = playerStatus.GetPlayerData();
   }
 
   private void Update()
   {
+    sprite.material.color = playerData.Value.color;
     if (!IsOwner)
     {
       return;
@@ -58,4 +78,9 @@ public class PlayerAnimator : NetworkBehaviour
   {
     sprite.flipX = newValue;
   }
+
+  public void UpdatePlayerColor(Color color){
+    sprite.material.color = color;
+  }
+
 }

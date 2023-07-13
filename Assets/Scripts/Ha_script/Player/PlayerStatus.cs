@@ -8,11 +8,14 @@ public class PlayerStatus : MonoBehaviour
 {
   [SerializeField] private int timeLeft = 30;
   private bool countTrigger = true;
-
+  public PlayerData playerData;
   private bool startCounting = false;
 
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
+
+
+
 
   //private int playerIndex;
 
@@ -54,6 +57,16 @@ public class PlayerStatus : MonoBehaviour
   public int GetTimeLeft()
   {
     return timeLeft;
+  }
+
+  public void SetPlayerData(PlayerData playerData){
+    this.playerData = playerData;
+    Debug.Log("Player ID is:" + playerData.Id);
+    Debug.Log("Player color is:" + playerData.color);
+  }
+
+  public PlayerData GetPlayerData(){
+    return this.playerData;
   }
 
   public void SetStartCounting(bool status)

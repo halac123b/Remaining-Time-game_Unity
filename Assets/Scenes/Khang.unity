@@ -8394,7 +8394,7 @@ MonoBehaviour:
   - {fileID: -526835129060445694, guid: 9c447c54c8e0416e9446cadb88c48fd3, type: 3}
   - {fileID: 5896261190451672117, guid: 9c447c54c8e0416e9446cadb88c48fd3, type: 3}
   - {fileID: -8256383322693916834, guid: 9c447c54c8e0416e9446cadb88c48fd3, type: 3}
-  m_Speed: 0.02
+  m_Speed: 0.05
 --- !u!114 &1512044794
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,11 +4,11 @@ using Unity.Netcode;
 
 public class PlayerAnimator : NetworkBehaviour
 {
-  private const string IS_MoveING = "IsMoveing";
   private const string HORIZONTAL = "Horizontal";
   private const string VERTICAL = "Vertical";
-  private const string IS_DEAD = "IsDead";
-  private const string IS_PROCESSING = "IsProcessing";
+  private const string IS_PROCESSING = "isprocessing";
+  private const string SPEED = "speed";
+  private const string TYPE_MOVE = "typemove";
 
   private Animator animator;
 
@@ -57,8 +57,8 @@ public class PlayerAnimator : NetworkBehaviour
       return;
     }
 
-    animator.SetFloat("speed", playerMovement.MoveVector().magnitude);
-    animator.SetInteger("typemove", playerMovement.GetTypeMove());
+    animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
+    animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;

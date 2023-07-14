@@ -60,8 +60,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""id"": ""45e58772-ba7c-420d-8001-ffb8b6a8eed6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.001)"",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Press(pressPoint=10)"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -69,7 +69,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""WASD"",
                     ""id"": ""ed55626c-c35e-48ba-b823-a55bb772a13b"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
@@ -146,7 +146,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""61ba504c-f264-46f1-bd5c-3858188814b6"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(pressPoint=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Process"",

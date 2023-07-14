@@ -8,6 +8,7 @@ public class PlayerColision : MonoBehaviour
     private PlayerInput playerInput;
     private bool isProcessing = false;
     private bool canMove = true;
+    private bool TriggerPoccessing = false;
     private int processSpeed = 5;
     private void Awake()
     {
@@ -17,16 +18,19 @@ public class PlayerColision : MonoBehaviour
     public bool CanMove(){
         return canMove;
     }
+
+    public void triggerPoccessing(){
+        TriggerPoccessing = true;
+    }
       private void OnTriggerStay2D(Collider2D other)
     {
         // Debug.Log(1111);
         OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
         if (oxy != null)
         {
-            if (playerInput.GetIsProcessing()){
-            // Debug.Log("M vua nhan E dung khong");
-                {
-                Debug.Log(1222111);
+            if (TriggerPoccessing){
+
+                // Debug.Log("OK");
                 if (!isProcessing)
                 {
                     oxy.SetProcess(true, processSpeed);
@@ -38,7 +42,6 @@ public class PlayerColision : MonoBehaviour
                     oxy.SetProcess(false, processSpeed);
                     isProcessing = false;
                     canMove = true;
-                }
                 }
             }
         }
@@ -58,6 +61,7 @@ public class PlayerColision : MonoBehaviour
         }
         }
     }
+
 
     public bool IsInProcessing()
     {

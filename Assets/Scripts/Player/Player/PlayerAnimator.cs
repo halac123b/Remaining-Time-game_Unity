@@ -62,37 +62,35 @@ public class PlayerAnimator : NetworkBehaviour
 
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
-    if (y > 0.01)
+    
+    if (x <= -0.01f){
+            flipX.Value = false;
+        }else if (x >= 0.01f){
+            flipX.Value = true;
+        }
+    
+    if (y > 0.01f)
     {
-      y = 1f;
+      animator.SetFloat(VERTICAL, 1f);
     }
-    else if (y < -0.01)
+    else if (y < -0.01f)
     {
-      y = -1f;
+      animator.SetFloat(VERTICAL, -1f);
     }
 
-    if (x > 0.01)
+    if (x > 0.01f)
     {
-      x = 1f;
-      y = 0f;
+      animator.SetFloat(VERTICAL, 0f);
+      animator.SetFloat(HORIZONTAL, 1f);
     }
-    else if (x < -0.01)
+    else if (x < -0.01f)
     {
-      x = -1f;
-      y = 0f;
+      animator.SetFloat(VERTICAL, 0f);
+      animator.SetFloat(HORIZONTAL, -1f);
     }
 
     animator.SetBool(IS_PROCESSING, playerMovement.GetProcessStatus());
-
-    animator.SetFloat(VERTICAL, y);
-    animator.SetFloat(HORIZONTAL, x);
-
-
-
-
-
-    flipX.Value = Mathf.Sign(playerMovement.MoveVector().x) >= 0;
-
+    
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)

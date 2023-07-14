@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2168304761050433233}
   - component: {fileID: 2436675357231468110}
   - component: {fileID: 722585710475445250}
+  - component: {fileID: 6937783610988645764}
   - component: {fileID: 2424273072478703770}
   m_Layer: 0
-  m_Name: Ha_Player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1efda94288fb549b0e75c158e6c1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
 --- !u!114 &722585710475445250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +67,19 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &6937783610988645764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983105799261639956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af793a2dd8fa5c4badfdce9cc784bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleCollider2D: {fileID: 5706598560872035430}
 --- !u!114 &2424273072478703770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +121,7 @@ PrefabInstance:
     - target: {fileID: 3473940263355140157, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 79eaa30bc6aaced499f672968466483b, type: 2}
+      objectReference: {fileID: 9100000, guid: 45d0a0782ba3850449ef0238ee43b763, type: 2}
     - target: {fileID: 4627860182594695764, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -175,7 +188,7 @@ PrefabInstance:
       addedObject: {fileID: 5950027866234681810}
     - targetCorrespondingSourceObject: {fileID: 5481892404552572615, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1845058500666973092}
+      addedObject: {fileID: 5706598560872035430}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
 --- !u!95 &2862382065505991866 stripped
 Animator:
@@ -297,8 +310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 2862382065505991866}
---- !u!61 &1845058500666973092
-BoxCollider2D:
+--- !u!70 &5706598560872035430
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -329,16 +342,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015126824, y: 0.63062453}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 2.7692308, y: 2.3076923}
-    newSize: {x: 2.7692308, y: 2.3076923}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0649393, y: 1.6017728}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.008796334, y: 0.6357266}
+  m_Size: {x: 1.0392632, y: 1.3383422}
+  m_Direction: 0

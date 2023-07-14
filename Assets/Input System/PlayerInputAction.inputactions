@@ -1,14 +1,14 @@
 {
-    "name": "PlayerAction",
+    "name": "PlayerInputAction",
     "maps": [
         {
             "name": "Player",
-            "id": "f8ecc7a2-8a96-4455-b973-f7acfbe3e090",
+            "id": "5c3a7f43-6dc7-4c4b-ac0b-a4d1475483dc",
             "actions": [
                 {
                     "name": "Move",
                     "type": "Value",
-                    "id": "63846f3e-8c8d-4547-9553-730dea902072",
+                    "id": "180493ca-7391-48ad-a247-57a68ac6e0f2",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -17,7 +17,7 @@
                 {
                     "name": "Run",
                     "type": "Button",
-                    "id": "71320b45-9bab-46a3-8d9c-e71749497934",
+                    "id": "1528ecea-7935-456a-a109-cd055299e7c9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -26,19 +26,19 @@
                 {
                     "name": "Duck",
                     "type": "Button",
-                    "id": "14178197-cf91-4be9-88b1-4c88bdfb24ec",
+                    "id": "2b783868-7b56-42ce-97a1-d77b34200461",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "5397f957-9000-4dfe-aef2-5c86879f5ad3",
+                    "name": "WASD",
+                    "id": "ed55626c-c35e-48ba-b823-a55bb772a13b",
                     "path": "2DVector",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
@@ -47,7 +47,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "12f1e50d-7db1-43de-b2a0-fe3930579c3c",
+                    "id": "8c15a824-47cf-4f30-97aa-fbc925dd3944",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -58,7 +58,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "34c949da-6d9c-457c-b294-f82cc28e40ea",
+                    "id": "ddaae70d-8e7d-44c5-8154-55011252baf7",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -69,7 +69,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "751b67da-503a-43d6-9275-c43099811f5d",
+                    "id": "f47d2b1e-122d-44d2-b3f8-4ec714d2409b",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -80,7 +80,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "5042626a-0fdb-4767-8740-f56af7acbffc",
+                    "id": "c64a4342-3004-4d10-8d51-28972a8fabe3",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -91,7 +91,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6c481202-b369-4546-9dce-9cf3e92c4ef7",
+                    "id": "d11a4138-17c2-4e3c-b867-62802acfc210",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
@@ -102,7 +102,7 @@
                 },
                 {
                     "name": "",
-                    "id": "4351a3e9-5e19-4fd0-bb0c-4cf5eb8f3f76",
+                    "id": "df288bac-8b05-4aa3-8b71-d28a023e2666",
                     "path": "<Keyboard>/shift",
                     "interactions": "Press(behavior=2)",
                     "processors": "",

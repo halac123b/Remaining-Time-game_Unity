@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +9,7 @@ public class PlayerInput : MonoBehaviour
 {
   private PlayerInputAction playerInputActions;
   private int TypeMove;
+  private bool isProcessing =false;
   [SerializeField] CapsuleCollider2D capsuleCollider2D;
   private void Awake()
   {
@@ -14,6 +17,10 @@ public class PlayerInput : MonoBehaviour
     playerInputActions.Player.Enable();
     playerInputActions.Player.Run.performed += Run;
     playerInputActions.Player.Duck.performed += Duck;
+    
+    playerInputActions.Player.Process.started +=  ProcessStarted;
+    playerInputActions.Player.Process.performed += ProcessPerformed;
+    playerInputActions.Player.Process.canceled +=  ProcessCanceled;
   }
 
   public Vector2 GetMovementVectorNormalized()
@@ -24,6 +31,9 @@ public class PlayerInput : MonoBehaviour
     return inputVector;
   }
 
+  public bool GetIsProcessing(){
+    return isProcessing;
+  }
   public int GetTypeMove()
   {
     return TypeMove;
@@ -35,6 +45,26 @@ public class PlayerInput : MonoBehaviour
       TypeMove = 1;
     }
     else TypeMove = 0;
+  }
+  
+  private void ProcessStarted(InputAction.CallbackContext context)
+  {
+      UnityEngine.Debug.LogWarning("start");
+      isProcessing =true;
+  }
+  private void ProcessPerformed(InputAction.CallbackContext context)
+  {
+      UnityEngine.Debug.LogWarning("perform");
+      isProcessing =false;
+  }
+  private void ProcessCanceled(InputAction.CallbackContext context)
+  {
+    UnityEngine.Debug.LogWarning("cancel");
+    isProcessing = false;
+  }
+  
+  public bool isProcessingPress(){
+      return playerInputActions.Player.Process.IsPressed();
   }
   private void Duck(InputAction.CallbackContext context)
   {

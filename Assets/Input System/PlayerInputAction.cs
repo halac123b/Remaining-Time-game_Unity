@@ -53,6 +53,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Process"",
+                    ""type"": ""Button"",
+                    ""id"": ""45e58772-ba7c-420d-8001-ffb8b6a8eed6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.001)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Duck"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61ba504c-f264-46f1-bd5c-3858188814b6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Process"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Duck = m_Player.FindAction("Duck", throwIfNotFound: true);
+        m_Player_Process = m_Player.FindAction("Process", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Duck;
+    private readonly InputAction m_Player_Process;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Duck => m_Wrapper.m_Player_Duck;
+        public InputAction @Process => m_Wrapper.m_Player_Process;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Duck.started += instance.OnDuck;
             @Duck.performed += instance.OnDuck;
             @Duck.canceled += instance.OnDuck;
+            @Process.started += instance.OnProcess;
+            @Process.performed += instance.OnProcess;
+            @Process.canceled += instance.OnProcess;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -245,6 +271,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Duck.started -= instance.OnDuck;
             @Duck.performed -= instance.OnDuck;
             @Duck.canceled -= instance.OnDuck;
+            @Process.started -= instance.OnProcess;
+            @Process.performed -= instance.OnProcess;
+            @Process.canceled -= instance.OnProcess;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -267,5 +296,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnDuck(InputAction.CallbackContext context);
+        void OnProcess(InputAction.CallbackContext context);
     }
 }

@@ -14,9 +14,6 @@ public class PlayerStatus : MonoBehaviour
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
 
-
-
-
   //private int playerIndex;
 
   //private TimeManager timeManager;
@@ -49,7 +46,6 @@ public class PlayerStatus : MonoBehaviour
     {
       OnDeadTrigger?.Invoke(this, EventArgs.Empty);
     }
-    Debug.Log(timeLeft);
 
     countTrigger = true;
   }
@@ -59,13 +55,15 @@ public class PlayerStatus : MonoBehaviour
     return timeLeft;
   }
 
-  public void SetPlayerData(PlayerData playerData){
+  public void SetPlayerData(PlayerData playerData)
+  {
     this.playerData = playerData;
     Debug.Log("Player ID is:" + playerData.Id);
     Debug.Log("Player color is:" + playerData.color);
   }
 
-  public PlayerData GetPlayerData(){
+  public PlayerData GetPlayerData()
+  {
     return this.playerData;
   }
 

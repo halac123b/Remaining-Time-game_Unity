@@ -9,6 +9,11 @@ public class PlayerMovement : NetworkBehaviour
   private Vector2 walkVector;
   private Vector2 lastDirection;
 
+  private bool canMove = true;
+  private bool isProcessing = false;
+
+  [SerializeField] int processSpeed = 5;
+
   private void Awake()
   {
     lastDirection = new Vector2(0, 1);
@@ -21,7 +26,11 @@ public class PlayerMovement : NetworkBehaviour
     {
       return;
     }
-    HandleMovement();
+
+    if (canMove)
+    {
+      HandleMovement();
+    }
   }
 
   public Vector2 WalkVector()
@@ -45,6 +54,46 @@ public class PlayerMovement : NetworkBehaviour
 
     lastDirection = walkVector;
     walkVector = moveDir;
+  }
+
+  private void OnCollisionStay2D(Collision2D other)
+  {
+    Debug.Log(1111);
+    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
+    if (oxy != null)
+    {
+      if (Input.GetKeyDown(KeyCode.E))
+      {
+        if (!isProcessing)
+        {
+          oxy.SetProcess(true, processSpeed);
+          isProcessing = true;
+          canMove = false;
+        }
+        else
+        {
+          isProcessing = false;
+          canMove = true;
+        }
+      }
+    }
+  }
+
+  private void OnCollisionExit2D(Collision2D other)
+  {
+    if (other.gameObject.GetComponent<OxyStatus>() != null)
+    {
+      if (isProcessing)
+      {
+        isProcessing = false;
+        canMove = true;
+      }
+    }
+  }
+
+  public bool GetProcessStatus()
+  {
+    return isProcessing;
   }
 }
 

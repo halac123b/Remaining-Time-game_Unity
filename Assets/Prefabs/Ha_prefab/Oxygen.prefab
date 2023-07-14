@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4010166869984594338}
   - component: {fileID: 2924799808853200715}
+  - component: {fileID: 5820945987442448763}
   m_Layer: 0
   m_Name: Oxygen
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5820945987442448763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488328111126681376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc86cae1876f914d8600495f7ad70ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 100
 --- !u!1 &5772260576021238944
 GameObject:
   m_ObjectHideFlags: 0

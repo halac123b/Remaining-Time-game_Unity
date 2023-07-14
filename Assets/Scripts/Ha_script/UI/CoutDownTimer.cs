@@ -10,7 +10,6 @@ public class CoutDownTimer : MonoBehaviour
   private void OnEnable()
   {
     playerStatus = FindObjectOfType<PlayerStatus>();
-    Debug.Log(playerStatus);
     playerStatus.OnCountDownTrigger += OnUpdateTime;
     textContent = GetComponent<TextMeshProUGUI>();
     textContent.text = String.Format($"{playerStatus.GetTimeLeft() / 60:D2}:{playerStatus.GetTimeLeft() % 60:D2}");

@@ -8,9 +8,10 @@ public class PlayerAnimator : NetworkBehaviour
   private const string HORIZONTAL = "Horizontal";
   private const string VERTICAL = "Vertical";
   private const string IS_DEAD = "IsDead";
+  private const string IS_PROCESSING = "IsProcessing";
 
   private Animator animator;
-  
+
 
   private PlayerMovement playerMovement;
   private PlayerStatus playerStatus;
@@ -18,12 +19,12 @@ public class PlayerAnimator : NetworkBehaviour
 
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
-    new PlayerData 
+    new PlayerData
     {
-        Id = "",
-        color = Color.white,
-        playerName = ""
-    },NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+      Id = "",
+      color = Color.white,
+      playerName = ""
+    }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   private void Awake()
   {
@@ -36,17 +37,16 @@ public class PlayerAnimator : NetworkBehaviour
 
     flipX.OnValueChanged += OnFlipXChanged;
     playerData.OnValueChanged += OnPlayerDataChanged;
-    
   }
 
-    private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
-    {
-      sprite.material.color = playerData.Value.color;
-    }
-
-    private void Start()
+  private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
-    if(IsOwner) playerData.Value = playerStatus.GetPlayerData();
+    sprite.material.color = playerData.Value.color;
+  }
+
+  private void Start()
+  {
+    if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
   }
 
   private void Update()
@@ -66,6 +66,8 @@ public class PlayerAnimator : NetworkBehaviour
       flipX.Value = Mathf.Sign(playerMovement.WalkVector().x) >= 0;
     }
     // playerMovement.transform.localScale = new Vector2(-Mathf.Sign(playerMovement.WalkVector().x), 1f);
+
+    animator.SetBool(IS_PROCESSING, playerMovement.GetProcessStatus());
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)
@@ -79,7 +81,8 @@ public class PlayerAnimator : NetworkBehaviour
     sprite.flipX = newValue;
   }
 
-  public void UpdatePlayerColor(Color color){
+  public void UpdatePlayerColor(Color color)
+  {
     sprite.material.color = color;
   }
 

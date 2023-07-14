@@ -79,13 +79,11 @@ public class PlayerMovement : NetworkBehaviour
 
   private void OnCollisionStay2D(Collision2D other)
   {
-    Debug.Log(1111);
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
     if (oxy != null)
     {
       if (Input.GetKeyDown(KeyCode.E))
       {
-        Debug.Log(1222111);
         if (!isProcessing)
         {
           oxy.SetProcess(true, processSpeed);
@@ -94,6 +92,7 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
+          Debug.Log("stop");
           oxy.SetProcess(false, processSpeed);
           isProcessing = false;
           canMove = true;
@@ -104,13 +103,14 @@ public class PlayerMovement : NetworkBehaviour
 
   private void OnCollisionExit2D(Collision2D other)
   {
-    if (other.gameObject.GetComponent<OxyStatus>() != null)
+    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
+    if (oxy != null)
     {
       if (isProcessing)
       {
         isProcessing = false;
         canMove = true;
-        other.gameObject.GetComponent<OxyStatus>().SetProcess(false, processSpeed);
+        oxy.SetProcess(false, processSpeed);
       }
     }
   }

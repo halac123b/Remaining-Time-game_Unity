@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 2168304761050433233}
   - component: {fileID: 2436675357231468110}
   - component: {fileID: 722585710475445250}
+  - component: {fileID: 6937783610988645764}
   - component: {fileID: 2424273072478703770}
   - component: {fileID: 4096120220251000042}
   - component: {fileID: 2989976016928849710}
   m_Layer: 0
-  m_Name: Ha_Player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1efda94288fb549b0e75c158e6c1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  processSpeed: 5
 --- !u!114 &722585710475445250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +69,19 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &6937783610988645764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983105799261639956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af793a2dd8fa5c4badfdce9cc784bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleCollider2D: {fileID: 5706598560872035430}
 --- !u!114 &2424273072478703770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 3473940263355140157, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 79eaa30bc6aaced499f672968466483b, type: 2}
+      objectReference: {fileID: 9100000, guid: 45d0a0782ba3850449ef0238ee43b763, type: 2}
     - target: {fileID: 4627860182594695764, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -245,6 +257,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5481892404552572615, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5950027866234681810}
+    - targetCorrespondingSourceObject: {fileID: 5481892404552572615, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5706598560872035430}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0841da3b779f44c8c3a76d42b58e69, type: 3}
 --- !u!95 &2862382065505991866 stripped
 Animator:
@@ -339,3 +354,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 2862382065505991866}
+--- !u!70 &5706598560872035430
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6602078084124355136}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008796334, y: 0.6357266}
+  m_Size: {x: 1.0392632, y: 1.3383422}
+  m_Direction: 0

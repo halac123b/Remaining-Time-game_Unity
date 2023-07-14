@@ -4,7 +4,7 @@ using Unity.Netcode;
 
 public class PlayerAnimator : NetworkBehaviour
 {
-  private const string IS_WALKING = "IsWalking";
+  private const string IS_MoveING = "IsMoveing";
   private const string HORIZONTAL = "Horizontal";
   private const string VERTICAL = "Vertical";
   private const string IS_DEAD = "IsDead";
@@ -57,22 +57,47 @@ public class PlayerAnimator : NetworkBehaviour
       return;
     }
 
-    animator.SetBool(IS_WALKING, playerMovement.WalkVector() != Vector2.zero);
+    animator.SetFloat("speed", playerMovement.MoveVector().magnitude);
+    animator.SetInteger("typemove", playerMovement.GetTypeMove());
 
-    if (playerMovement.WalkVector().y != 0 || playerMovement.WalkVector().x != 0)
+    float x = playerMovement.MoveVector().x;
+    float y = playerMovement.MoveVector().y;
+    if (y > 0.01)
     {
-      animator.SetFloat(VERTICAL, playerMovement.WalkVector().y);
-      animator.SetFloat(HORIZONTAL, playerMovement.WalkVector().x);
-      flipX.Value = Mathf.Sign(playerMovement.WalkVector().x) >= 0;
+      y = 1f;
     }
-    // playerMovement.transform.localScale = new Vector2(-Mathf.Sign(playerMovement.WalkVector().x), 1f);
+    else if (y < -0.01)
+    {
+      y = -1f;
+    }
+
+    if (x > 0.01)
+    {
+      x = 1f;
+      y = 0f;
+    }
+    else if (x < -0.01)
+    {
+      x = -1f;
+      y = 0f;
+    }
 
     animator.SetBool(IS_PROCESSING, playerMovement.GetProcessStatus());
+
+    animator.SetFloat(VERTICAL, y);
+    animator.SetFloat(HORIZONTAL, x);
+
+
+
+
+
+    flipX.Value = Mathf.Sign(playerMovement.MoveVector().x) >= 0;
+
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)
   {
-    animator.SetTrigger(IS_DEAD);
+    animator.SetTrigger("isDeath");
     playerMovement.enabled = false;
   }
 

@@ -24,23 +24,31 @@ public class PlayerInput : MonoBehaviour
     return inputVector;
   }
 
-  public int GetTypeMove(){
+  public int GetTypeMove()
+  {
     return TypeMove;
   }
-   private void Run(InputAction.CallbackContext context){
-        if(context.ReadValueAsButton()){
-            TypeMove = 1;
-        }else TypeMove = 0;
+  private void Run(InputAction.CallbackContext context)
+  {
+    if (context.ReadValueAsButton())
+    {
+      TypeMove = 1;
     }
-    private void Duck(InputAction.CallbackContext context){
-        if(context.ReadValueAsButton()){
-            TypeMove = -1; 
-            capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x,capsuleCollider2D.offset.y-0.2f);
-            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x,capsuleCollider2D.size.y - 0.4f);
-        }else {
-            TypeMove = 0;
-            capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x,capsuleCollider2D.offset.y+0.2f);
-            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x,capsuleCollider2D.size.y + 0.4f);
-        }
+    else TypeMove = 0;
+  }
+  private void Duck(InputAction.CallbackContext context)
+  {
+    if (context.ReadValueAsButton())
+    {
+      TypeMove = -1;
+      capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x, capsuleCollider2D.offset.y - 0.2f);
+      capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x, capsuleCollider2D.size.y - 0.4f);
     }
+    else
+    {
+      TypeMove = 0;
+      capsuleCollider2D.offset = new Vector2(capsuleCollider2D.offset.x, capsuleCollider2D.offset.y + 0.2f);
+      capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.x, capsuleCollider2D.size.y + 0.4f);
+    }
+  }
 }

@@ -85,6 +85,7 @@ public class PlayerMovement : NetworkBehaviour
     {
       if (Input.GetKeyDown(KeyCode.E))
       {
+        Debug.Log(1222111);
         if (!isProcessing)
         {
           oxy.SetProcess(true, processSpeed);
@@ -93,6 +94,7 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
+          oxy.SetProcess(false, processSpeed);
           isProcessing = false;
           canMove = true;
         }
@@ -108,6 +110,7 @@ public class PlayerMovement : NetworkBehaviour
       {
         isProcessing = false;
         canMove = true;
+        other.gameObject.GetComponent<OxyStatus>().SetProcess(false, processSpeed);
       }
     }
   }

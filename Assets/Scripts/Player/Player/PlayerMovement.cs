@@ -82,7 +82,7 @@ public class PlayerMovement : NetworkBehaviour
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
     if (oxy != null)
     {
-      if (Input.GetKeyDown(KeyCode.E))
+      if (playerInput.GetIsProcessing())
       {
         if (!isProcessing)
         {

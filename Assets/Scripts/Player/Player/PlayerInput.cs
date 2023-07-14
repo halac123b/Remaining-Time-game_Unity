@@ -9,18 +9,19 @@ public class PlayerInput : MonoBehaviour
 {
   private PlayerInputAction playerInputActions;
   private int TypeMove;
-  private bool isProcessing =false;
+  private bool isProcessing = false;
   [SerializeField] CapsuleCollider2D capsuleCollider2D;
+
   private void Awake()
   {
     playerInputActions = new PlayerInputAction();
     playerInputActions.Player.Enable();
     playerInputActions.Player.Run.performed += Run;
     playerInputActions.Player.Duck.performed += Duck;
-    
-    playerInputActions.Player.Process.started +=  ProcessStarted;
+
+    playerInputActions.Player.Process.started += ProcessStarted;
     playerInputActions.Player.Process.performed += ProcessPerformed;
-    playerInputActions.Player.Process.canceled +=  ProcessCanceled;
+    playerInputActions.Player.Process.canceled += ProcessCanceled;
   }
 
   public Vector2 GetMovementVectorNormalized()
@@ -31,7 +32,8 @@ public class PlayerInput : MonoBehaviour
     return inputVector;
   }
 
-  public bool GetIsProcessing(){
+  public bool GetIsProcessing()
+  {
     return isProcessing;
   }
   public int GetTypeMove()
@@ -46,25 +48,35 @@ public class PlayerInput : MonoBehaviour
     }
     else TypeMove = 0;
   }
-  
+
   private void ProcessStarted(InputAction.CallbackContext context)
   {
-      UnityEngine.Debug.LogWarning("start");
-      isProcessing =true;
+    if (context.started)
+    {
+      isProcessing = true;
+    }
   }
-  private void ProcessPerformed(InputAction.CallbackContext context)
+
+  IEnumerator CoutDownTrigger()
   {
-      UnityEngine.Debug.LogWarning("perform");
-      isProcessing =false;
-  }
-  private void ProcessCanceled(InputAction.CallbackContext context)
-  {
-    UnityEngine.Debug.LogWarning("cancel");
+    yield return new WaitForFixedUpdate();
     isProcessing = false;
   }
-  
-  public bool isProcessingPress(){
-      return playerInputActions.Player.Process.IsPressed();
+
+  private void ProcessPerformed(InputAction.CallbackContext context)
+  {
+    StartCoroutine(CoutDownTrigger());
+  }
+
+  private void ProcessCanceled(InputAction.CallbackContext context)
+  {
+    StopAllCoroutines();
+    isProcessing = false;
+  }
+
+  public bool isProcessingPress()
+  {
+    return playerInputActions.Player.Process.IsPressed();
   }
   private void Duck(InputAction.CallbackContext context)
   {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -109,8 +110,7 @@ public class LobbyCreateUI : MonoBehaviour
   public void Show()
   {
     gameObject.SetActive(true);
-
-    lobbyName = "MyLobby";
+    lobbyName = $"Lobby #" +  UnityEngine.Random.Range(1000, 9999);
     isPrivate = false;
     maxPlayers = 4;
     gameMode = LobbyManager.GameMode.CaptureTheFlag;

@@ -10,7 +10,6 @@ public class PlayerMovement : NetworkBehaviour
   private Vector2 lastDirection;
 
   private bool canMove = true;
-  private bool isProcessing = false;
 
   [SerializeField] int processSpeed = 5;
 
@@ -46,6 +45,9 @@ public class PlayerMovement : NetworkBehaviour
     }
   }
 
+  public void SetCanMove(bool canMove){
+    this.canMove = canMove;
+  }
   public Vector2 MoveVector()
   {
     return moveVector;
@@ -77,48 +79,9 @@ public class PlayerMovement : NetworkBehaviour
     moveSpeed = speed;
   }
 
-  private void OnCollisionStay2D(Collision2D other)
-  {
-    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
-    if (oxy != null)
-    {
-      if (playerInput.GetIsProcessing())
-      {
-        if (!isProcessing)
-        {
-          oxy.SetProcess(true, processSpeed);
-          isProcessing = true;
-          canMove = false;
-        }
-        else
-        {
-          Debug.Log("stop");
-          oxy.SetProcess(false, processSpeed);
-          isProcessing = false;
-          canMove = true;
-        }
-      }
-    }
-  }
+  
 
-  private void OnCollisionExit2D(Collision2D other)
-  {
-    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
-    if (oxy != null)
-    {
-      if (isProcessing)
-      {
-        isProcessing = false;
-        canMove = true;
-        oxy.SetProcess(false, processSpeed);
-      }
-    }
-  }
-
-  public bool GetProcessStatus()
-  {
-    return isProcessing;
-  }
+  
 }
 
 // Fix: Remove LastDirection

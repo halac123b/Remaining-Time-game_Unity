@@ -56,6 +56,7 @@ public class PlayerAnimator : NetworkBehaviour
 
     private void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if(!IsOwner) return;
         weapon_animator.SetTrigger(ATTACK);
         cover_animator.SetTrigger(ATTACK);
         animator.SetTrigger(ATTACK);

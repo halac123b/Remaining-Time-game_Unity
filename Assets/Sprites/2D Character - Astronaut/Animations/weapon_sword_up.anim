@@ -104,16 +104,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: 
+    functionName: SetWeaponOrderOFF
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.55
-    functionName: SetWeaponOrderON
-    data: 
-    objectReferenceParameter: {fileID: 5983105799261639956, guid: f97f43e6bff9c2f4f81358aafb431b50, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

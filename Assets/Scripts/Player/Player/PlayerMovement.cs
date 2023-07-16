@@ -11,12 +11,10 @@ public class PlayerMovement : NetworkBehaviour
 
   private bool canMove = true;
 
-  [SerializeField] int processSpeed = 5;
-
   private void Awake()
   {
     lastDirection = new Vector2(0, 1);
-    playerInput = FindObjectOfType<PlayerInput>();
+    playerInput = GetComponent<PlayerInput>();
   }
 
   private void Update()

@@ -41,7 +41,7 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void Awake()
   {
-    
+
     playerInput = GetComponentInParent<PlayerInput>();
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerColision = GetComponentInParent<PlayerColision>();
@@ -101,13 +101,9 @@ public class PlayerAnimator : NetworkBehaviour
 
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
     if (!IsOwner) return;
-<<<<<<< HEAD
 
-=======
-    
     weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
-    
->>>>>>> be8e875a04288a4395534fcb35942c3a61b05805
+
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
@@ -133,15 +129,11 @@ public class PlayerAnimator : NetworkBehaviour
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
 
   }
-<<<<<<< HEAD
   private void SetVERNHOR(Animator anim, float x, float y)
   {
-=======
-  private void SetVERNHOR(Animator anim ,float x, float y){
-    
-    anim.SetInteger(TYPE_ATTACK,playerEquip.GetTypeWeapon());
 
->>>>>>> be8e875a04288a4395534fcb35942c3a61b05805
+    anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
+
     if (y > 0.01f)
     {
       weaponSorting.Value = 1;

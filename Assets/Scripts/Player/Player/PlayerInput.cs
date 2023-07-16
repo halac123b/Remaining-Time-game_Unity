@@ -51,10 +51,7 @@ public class PlayerInput : MonoBehaviour
 
   private void ProcessStarted(InputAction.CallbackContext context)
   {
-    if (context.started)
-    {
-      isProcessing = true;
-    }
+    isProcessing = true;
   }
 
   IEnumerator CoutDownTrigger()
@@ -74,10 +71,6 @@ public class PlayerInput : MonoBehaviour
     isProcessing = false;
   }
 
-  public bool isProcessingPress()
-  {
-    return playerInputActions.Player.Process.IsPressed();
-  }
   private void Duck(InputAction.CallbackContext context)
   {
     if (context.ReadValueAsButton())

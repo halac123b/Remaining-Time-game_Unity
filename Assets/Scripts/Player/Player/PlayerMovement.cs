@@ -45,7 +45,8 @@ public class PlayerMovement : NetworkBehaviour
     }
   }
 
-  public void SetCanMove(bool canMove){
+  public void SetCanMove(bool canMove)
+  {
     this.canMove = canMove;
   }
   public Vector2 MoveVector()
@@ -78,10 +79,6 @@ public class PlayerMovement : NetworkBehaviour
   {
     moveSpeed = speed;
   }
-
-  
-
-  
 }
 
 // Fix: Remove LastDirection

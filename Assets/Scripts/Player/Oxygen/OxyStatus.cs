@@ -12,6 +12,13 @@ public class OxyStatus : MonoBehaviour
   private bool countTrigger = true;
   private bool startCounting = false;
 
+  public event EventHandler<IntEventArg> OnProcessing;
+
+  public class IntEventArg : EventArgs
+  {
+    public int value;
+  }
+
   public void Update()
   {
     if (countTrigger && startCounting && process < threshold)
@@ -32,7 +39,7 @@ public class OxyStatus : MonoBehaviour
     // {
     //   OnDeadTrigger?.Invoke(this, EventArgs.Empty);
     // }
-    Debug.Log(process);
+    OnProcessing?.Invoke(this, new IntEventArg { value = process });
 
     countTrigger = true;
   }

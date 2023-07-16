@@ -8,11 +8,13 @@ public class PlayerStatus : MonoBehaviour
 {
   [SerializeField] private int timeLeft = 30;
   private bool countTrigger = true;
-  public PlayerData playerData;
   private bool startCounting = false;
+  
+  public PlayerData playerData;
 
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
+  // public event EventHandler OnAttackTrigger;
 
   //private int playerIndex;
 

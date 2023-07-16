@@ -5,62 +5,64 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerColision : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerMovement playerMovement;
     private bool isProcessing = false;
-    private bool canMove = true;
+    // private bool canMove = true;
+    private bool TriggerPoccessing = false;
     private int processSpeed = 5;
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+        
     }
 
-    public bool CanMove(){
-        return canMove;
+    // public bool CanMove(){
+    //     return canMove;
+    // }
+
+    public void triggerPoccessing(){
+        TriggerPoccessing = true;
     }
-      private void OnTriggerStay2D(Collider2D other)
+private void OnCollisionStay2D(Collision2D other)
+  {
+    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
+    if (oxy != null)
     {
-        // Debug.Log(1111);
-        OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
-        if (oxy != null)
+      if (playerInput.GetIsProcessing())
+      {
+        if (!isProcessing)
         {
-            if (playerInput.GetIsProcessing()){
-            // Debug.Log("M vua nhan E dung khong");
-                {
-                Debug.Log(1222111);
-                if (!isProcessing)
-                {
-                    oxy.SetProcess(true, processSpeed);
-                    isProcessing = true;
-                    canMove = false;
-                }
-                else
-                {
-                    oxy.SetProcess(false, processSpeed);
-                    isProcessing = false;
-                    canMove = true;
-                }
-                }
-            }
+          oxy.SetProcess(true, processSpeed);
+          isProcessing = true;
+          playerMovement.SetCanMove(false);
         }
+        else
+        {
+          Debug.Log("stop");
+          oxy.SetProcess(false, processSpeed);
+          isProcessing = false;
+          playerMovement.SetCanMove(true);
+        }
+      }
     }
+  }
 
-    private void OnTriggerExit2D(Collider2D other)
+  private void OnCollisionExit2D(Collision2D other)
+  {
+    OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
+    if (oxy != null)
     {
-
-        Debug.Log("Exit trigger");
-        if (other.gameObject.GetComponent<OxyStatus>() != null)
-        {
-        if (isProcessing)
-        {
-            isProcessing = false;
-            canMove = true;
-            other.gameObject.GetComponent<OxyStatus>().SetProcess(false, processSpeed);
-        }
-        }
+      if (isProcessing)
+      {
+        isProcessing = false;
+        playerMovement.SetCanMove(true);
+        oxy.SetProcess(false, processSpeed);
+      }
     }
-
-    public bool IsInProcessing()
+  }
+   public bool IsInProcessing()
     {
         return isProcessing;
     }
-    }
+}

@@ -4,15 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scripts/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Khang.unity
-    guid: 829554b140dd097449890104817523ba
-  - enabled: 0
-    path: Assets/Scripts/LobbyTutorial/LobbyTutorial/LobbyTutorial_Done.unity
-    guid: be8200a558cfff84b8ce074fa6e33558
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: b9a984b9439410e4a84c02f6618b8210, type: 2}
+  m_Scenes: []
+  m_configObjects: {}

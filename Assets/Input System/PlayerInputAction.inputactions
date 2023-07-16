@@ -38,7 +38,25 @@
                     "id": "45e58772-ba7c-420d-8001-ffb8b6a8eed6",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.001)",
+                    "interactions": "Press(pressPoint=10)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "c10824b1-e76f-4ff7-bad7-e7f60c12e625",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeWeapon",
+                    "type": "Button",
+                    "id": "f452c7c7-ed18-4c4f-8d15-ad6c7c86b3b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -47,7 +65,7 @@
                     "name": "WASD",
                     "id": "ed55626c-c35e-48ba-b823-a55bb772a13b",
                     "path": "2DVector",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
@@ -124,10 +142,32 @@
                     "name": "",
                     "id": "61ba504c-f264-46f1-bd5c-3858188814b6",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Press(pressPoint=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Process",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c0bc02e-6d28-499f-827c-3054bf3c133d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85b03068-47ba-409e-9daa-d5b12fd2a340",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

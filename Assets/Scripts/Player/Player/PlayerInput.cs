@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-  private PlayerInputAction playerInputActions;
+  public PlayerInputAction playerInputActions;
   private int TypeMove;
   private bool isProcessing = false;
   [SerializeField] CapsuleCollider2D capsuleCollider2D;
 
   private void Awake()
   {
+   
     playerInputActions = new PlayerInputAction();
     playerInputActions.Player.Enable();
     playerInputActions.Player.Run.performed += Run;
@@ -22,6 +24,8 @@ public class PlayerInput : MonoBehaviour
     playerInputActions.Player.Process.started += ProcessStarted;
     playerInputActions.Player.Process.performed += ProcessPerformed;
     playerInputActions.Player.Process.canceled += ProcessCanceled;
+
+    // playerInputActions.Player.Attack.performed += AttackPerformed;
   }
 
   public Vector2 GetMovementVectorNormalized()
@@ -48,6 +52,7 @@ public class PlayerInput : MonoBehaviour
     }
     else TypeMove = 0;
   }
+
 
   private void ProcessStarted(InputAction.CallbackContext context)
   {

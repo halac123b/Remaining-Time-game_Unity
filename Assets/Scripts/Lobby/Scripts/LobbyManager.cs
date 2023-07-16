@@ -72,6 +72,7 @@ public class LobbyManager : MonoBehaviour
 
   private async void Awake()
   {
+    playerData.color = Color.red;
     try
     {
       await UnityServices.InitializeAsync();

@@ -9,16 +9,18 @@ public class PlayerAnimator : NetworkBehaviour
   private const string IS_PROCESSING = "isprocessing";
   private const string SPEED = "speed";
   private const string TYPE_MOVE = "typemove";
+  private const string TYPE_ATTACK = "typeattack";
   private const string ATTACK = "attack";
 
   [SerializeField] private Animator animator;
   [SerializeField] private Animator cover_animator;
   [SerializeField] private Animator weapon_animator;
 
+  private PlayerStatus playerStatus;
+  private PlayerEquip playerEquip;
 
   private PlayerInput playerInput;
   private PlayerMovement playerMovement;
-  private PlayerStatus playerStatus;
   private PlayerColision playerColision;
 
   [SerializeField] private SpriteRenderer weaponcarry;
@@ -39,10 +41,12 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void Awake()
   {
+    
     playerInput = GetComponentInParent<PlayerInput>();
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerColision = GetComponentInParent<PlayerColision>();
     playerStatus = FindObjectOfType<PlayerStatus>();
+    playerEquip = FindObjectOfType<PlayerEquip>();
 
     playerStatus.OnDeadTrigger += OnDeadAnimation;
 
@@ -97,7 +101,13 @@ public class PlayerAnimator : NetworkBehaviour
 
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
     if (!IsOwner) return;
+<<<<<<< HEAD
 
+=======
+    
+    weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    
+>>>>>>> be8e875a04288a4395534fcb35942c3a61b05805
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
@@ -123,8 +133,15 @@ public class PlayerAnimator : NetworkBehaviour
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
 
   }
+<<<<<<< HEAD
   private void SetVERNHOR(Animator anim, float x, float y)
   {
+=======
+  private void SetVERNHOR(Animator anim ,float x, float y){
+    
+    anim.SetInteger(TYPE_ATTACK,playerEquip.GetTypeWeapon());
+
+>>>>>>> be8e875a04288a4395534fcb35942c3a61b05805
     if (y > 0.01f)
     {
       weaponSorting.Value = 1;

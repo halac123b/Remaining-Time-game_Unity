@@ -14,7 +14,7 @@ public class PlayerStatus : MonoBehaviour
 
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
-  public event EventHandler OnAttackTrigger;
+  // public event EventHandler OnAttackTrigger;
 
   //private int playerIndex;
 

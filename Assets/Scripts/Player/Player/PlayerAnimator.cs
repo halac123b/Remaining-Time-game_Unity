@@ -21,11 +21,13 @@ public class PlayerAnimator : NetworkBehaviour
   private PlayerStatus playerStatus;
   private PlayerColision playerColision;
 
+  [SerializeField] private SpriteRenderer weaponcarry;
   [SerializeField] private SpriteRenderer sprite;
   [SerializeField] private SpriteRenderer cover_sprite;
   [SerializeField] private SpriteRenderer weapon_sprite;
 
-
+  private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
     new PlayerData
@@ -47,12 +49,24 @@ public class PlayerAnimator : NetworkBehaviour
     // NetWork Variable
     flipX.OnValueChanged += OnFlipXChanged;
     playerData.OnValueChanged += OnPlayerDataChanged;
+    weaponSorting.OnValueChanged += OnWeaponSortChanged;
+    weaponCarry.OnValueChanged += OnWeaponCarryChanged;
 
     //PlayerInput
     playerInput.playerInputActions.Player.Attack.performed += TriggerAttack;
 
 
   }
+
+    private void OnWeaponCarryChanged(bool previousValue, bool newValue)
+    {
+         weaponcarry.gameObject.SetActive(newValue);
+    }
+
+    private void OnWeaponSortChanged(int previousValue, int newValue)
+    {
+        weaponcarry.sortingOrder = newValue;
+    }
 
     private void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -68,6 +82,10 @@ public class PlayerAnimator : NetworkBehaviour
     
   }
 
+  public void SetWeaponCarry(bool active){
+    if(IsOwner)
+    weaponCarry.Value = active;
+  }
   private void Start()
   {
     if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
@@ -75,13 +93,10 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void Update()
   {
-    sprite.material.color = cover_sprite.material.color  = playerData.Value.color;
   
-    if (!IsOwner)
-    {
-      return;
-    }
-
+    sprite.material.color = cover_sprite.material.color  = playerData.Value.color;
+    if (!IsOwner) return;
+    
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
@@ -99,6 +114,7 @@ public class PlayerAnimator : NetworkBehaviour
     SetVERNHOR(weapon_animator,x,y);
     
     
+   
 
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
     
@@ -106,23 +122,28 @@ public class PlayerAnimator : NetworkBehaviour
   private void SetVERNHOR(Animator anim ,float x, float y){
     if (y > 0.01f)
     {
+      weaponSorting.Value = 1;
       anim.SetFloat(VERTICAL, 1f);
     }
     else if (y < -0.01f)
     {
+      weaponSorting.Value = -1;
       anim.SetFloat(VERTICAL, -1f);
     }
 
     if (x > 0.01f)
     {
+      weaponSorting.Value = -1;
       anim.SetFloat(VERTICAL, 0f);
       anim.SetFloat(HORIZONTAL, 1f);
     }
     else if (x < -0.01f)
     {
+      weaponSorting.Value = -1;
       anim.SetFloat(VERTICAL, 0f);
       anim.SetFloat(HORIZONTAL, -1f);
     }
+
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)
@@ -133,7 +154,7 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void OnFlipXChanged(bool oldValue, bool newValue)
   {
-    weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;
+    weaponcarry.flipX = weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;
   }
 
   public void UpdatePlayerColor(Color color)

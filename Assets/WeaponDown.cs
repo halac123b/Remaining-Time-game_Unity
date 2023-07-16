@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : StateMachineBehaviour
+public class WeaponDown : StateMachineBehaviour
 {
-    private PlayerMovement playerMovement;
-    private PlayerAnimator playerAnimator;
+     private SpriteRenderer weaponcarry;
+    
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       playerAnimator = animator.GetComponent<PlayerAnimator>();
-       playerMovement = animator.GetComponentInParent<PlayerMovement>();
-       playerAnimator.SetWeaponCarry(false);
-       playerMovement.SetCanMove(false);
+        // weaponcarry = animator.gameObject.Find("Player Visual").Find("WeaponCarry").GetComponent<SpriteRenderer>();
+        weaponcarry.gameObject.SetActive(true);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,10 +24,7 @@ public class Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       playerAnimator = animator.GetComponent<PlayerAnimator>();
-       playerMovement = animator.GetComponentInParent<PlayerMovement>();
-       playerAnimator.SetWeaponCarry(true); 
-       playerMovement.SetCanMove(true);
+        weaponcarry.gameObject.SetActive(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -6,6 +6,7 @@ public class WeaponSorting : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private SpriteRenderer weapon_sprite;
+
  
 
     public void SetWeaponOrderON(){

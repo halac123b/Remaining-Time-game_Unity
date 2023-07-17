@@ -104,15 +104,18 @@ public class PlayerAnim : AnimatorController
       flipX.Value = true;
     }
 
-    SetVERNHOR(animator, x, y);
-    SetVERNHOR(cover_animator, x, y);
-    SetVERNHOR(weapon_animator, x, y);
+    Set_VERTICAL_HORIZONTAL(x,y);
 
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
   }
 
-  protected override void SetVERNHOR(Animator anim, float x, float y)
-  {
+  public override void Set_VERTICAL_HORIZONTAL(float x, float y){
+    if(!IsOwner) return;
+    Set_VERTICAL_HORIZONTAL(animator, x, y);
+    Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
+    Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
+  }
+  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
     anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
 
     if (y > 0.01f)

@@ -16,30 +16,27 @@ public class BowAttack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       Vector2 mouse_pos = Input.mousePosition;
-        mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
-        Vector2 TargetVector =new Vector2(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y) -  mouse_pos;
+        PlayerAnim playerAnim = animator.gameObject.transform.parent.gameObject.GetComponentInChildren<PlayerAnim>();
+        playerAnim.UpdataMousePos();
+        Vector2 TargetVector =new Vector2(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y) - playerAnim.GetMousePos();
         TargetVector.Normalize();
-
-        PlayerAnimator playerAnimator = animator.gameObject.transform.parent.gameObject.GetComponentInChildren<PlayerAnimator>();
         float x = -TargetVector.x;
         float y = -TargetVector.y;
         if (x<0.5f && x > -0.5f) x= 0f; 
-        playerAnimator.Set_VERTICAL_HORIZONTAL(x,y);
+        playerAnim.Set_VERTICAL_HORIZONTAL(x,y);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Vector2 mouse_pos =Input.mousePosition;
-        mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
-     
-        Debug.LogWarning(mouse_pos + "  VS  " + animator.gameObject.transform.position );
-     
-        Vector2 TargetVector =new Vector2(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y) -  mouse_pos;
+      
+        PlayerAnim playerAnim = animator.gameObject.transform.parent.gameObject.GetComponentInChildren<PlayerAnim>();
+        Vector2 TargetVector =new Vector2(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y) -  playerAnim.GetMousePos();
         TargetVector.Normalize();
-        GameObject arrow = Instantiate(Arrow,new Vector3(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y+0.5f),new Quaternion());
-        arrow.GetComponent<ArrowMovement>().SetMoveVector(TargetVector);
+;       if (stateInfo.normalizedTime >= 1.5f){
+            GameObject arrow = Instantiate(Arrow,new Vector3(animator.gameObject.transform.position.x,animator.gameObject.transform.position.y+0.5f),new Quaternion());
+            arrow.GetComponent<ArrowMovement>().SetMoveVector(TargetVector);
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

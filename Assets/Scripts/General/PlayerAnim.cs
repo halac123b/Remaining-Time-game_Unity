@@ -7,6 +7,7 @@ public class PlayerAnim : AnimatorController
   [SerializeField] private Animator cover_animator;
   [SerializeField] private Animator weapon_animator;
 
+
   private PlayerEquip playerEquip;
   private PlayerColision playerColision;
 
@@ -18,6 +19,8 @@ public class PlayerAnim : AnimatorController
 
   protected NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0,0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
   private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
     new PlayerData
@@ -37,7 +40,6 @@ public class PlayerAnim : AnimatorController
     flipX.OnValueChanged += OnFlipXChanged;
     weaponSorting.OnValueChanged += OnWeaponSortChanged;
     weaponCarry.OnValueChanged += OnWeaponCarryChanged;
-
   }
 
   private void OnWeaponCarryChanged(bool previousValue, bool newValue)
@@ -50,22 +52,33 @@ public class PlayerAnim : AnimatorController
     weaponcarry.sortingOrder = newValue;
   }
 
-  protected override void TriggerAttackPerformed(InputAction.CallbackContext context)
+  protected override void TriggerAttackStarted(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    base.TriggerAttackPerformed(context);
+    base.TriggerAttackStarted(context);
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
+  }
+  public void UpdataMousePos(){
+    // Update mouse position
+    Vector2 mouse_pos = Input.mousePosition;
+    mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+    mouse.Value = mouse_pos;
   }
   protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
+
+    
+
     base.TriggerAttackCanceled(context);
     weapon_animator.SetTrigger(ATTACK_CANCEL);
     cover_animator.SetTrigger(ATTACK_CANCEL);
   }
 
-
+  public Vector2 GetMousePos(){
+    return mouse.Value;
+  }
 
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
@@ -97,18 +110,12 @@ public class PlayerAnim : AnimatorController
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
 
-    if (x <= -0.01f)
-    {
-      flipX.Value = false;
-    }
-    else if (x >= 0.01f)
-    {
-      flipX.Value = true;
-    }
-
     Set_VERTICAL_HORIZONTAL(x,y);
-
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
+
+    
+
+
   }
 
   public override void Set_VERTICAL_HORIZONTAL(float x, float y){
@@ -118,6 +125,16 @@ public class PlayerAnim : AnimatorController
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
   private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
+
+     if (x <= -0.01f)
+    {
+      flipX.Value = false;
+    }
+    else if (x >= 0.01f)
+    {
+      flipX.Value = true;
+    }
+
     anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
 
     if (y > 0.01f)

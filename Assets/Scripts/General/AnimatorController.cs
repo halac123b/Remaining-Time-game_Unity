@@ -29,7 +29,7 @@ public class AnimatorController : NetworkBehaviour
     playerStatus.OnDeadTrigger += OnDeadAnimation;
 
     //PlayerInput
-    playerInput.playerInputActions.Player.Attack.performed += TriggerAttackPerformed;
+    playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
     playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
   }
 
@@ -39,7 +39,7 @@ public class AnimatorController : NetworkBehaviour
     animator.SetTrigger(ATTACK_CANCEL);
   }
 
-  protected virtual void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  protected virtual void TriggerAttackStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
     animator.SetTrigger(ATTACK);
@@ -66,6 +66,9 @@ public class AnimatorController : NetworkBehaviour
     // Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
   private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
+
+
+
     if (y > 0.01f)
     {
       anim.SetFloat(VERTICAL, 1f);

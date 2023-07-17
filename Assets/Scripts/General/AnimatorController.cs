@@ -71,7 +71,6 @@ public class AnimatorController : NetworkBehaviour
       anim.SetFloat(VERTICAL, 0f);
       anim.SetFloat(HORIZONTAL, -1f);
     }
-
   }
 
   private void OnDeadAnimation(object sender, EventArgs e)

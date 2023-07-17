@@ -10,7 +10,7 @@ using System;
 // using Microsoft.Unity.VisualStudio.Editor;
 
 // public static TestRelay Instance { get; private set; }
-public class RelayManager : MonoBehaviour
+public class RelayManager : NetworkBehaviour
 {
   public static RelayManager Instance { get; private set; }
   [SerializeField] private GameObject Loading;
@@ -28,18 +28,6 @@ public class RelayManager : MonoBehaviour
   {
     Instance = this;
   }
-
-  // Start is called before the first frame update
-  // private async void Start()
-  // {
-  //   await UnityServices.InitializeAsync();
-  //   AuthenticationService.Instance.SignedIn += () =>
-  //   {
-  //     Debug.Log("Start TestRelay");
-  //   };
-
-  //   // await AuthenticationService.Instance.SignInAnonymouslyAsync();
-  // }
 
   public async
 Task<string>
@@ -68,10 +56,11 @@ CreateRelay(PlayerData playerData)
       spawnObjTransform = Instantiate(playerPrefab, new Vector3(-10, 0, 0), Quaternion.identity);
       spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
 
-      spawnObjTransform = Instantiate(playerPrefab, new Vector3(10, 0, 0), Quaternion.identity);
+      spawnObjTransform = Instantiate(monsterPrefab, new Vector3(10, 0, 0), Quaternion.identity);
       spawnObjTransform.GetComponent<NetworkObject>().SpawnWithOwnership(1);
 
-      Debug.Log("Find id" + NetworkManager.Singleton.ConnectedClientsIds.Count);
+      //StartCoroutine(SpawnMonster());
+      Debug.Log("Find id" + NetworkManager.Singleton.ConnectedClientsIds);
 
       return joinCode;
     }
@@ -99,6 +88,7 @@ CreateRelay(PlayerData playerData)
       playerStatus.SetPlayerData(playerData);
       gameUI.SetActive(true);
       playerStatus.SetStartCounting(true);
+      //SpawnMonsterServerRpc();
 
     }
     catch (RelayServiceException e)
@@ -119,8 +109,7 @@ CreateRelay(PlayerData playerData)
       yield return new WaitForSeconds(Time.deltaTime);
       materialLoadding.SetFloat("_Fade", materialLoadding.GetFloat("_Fade") - 0.01f);
     }
-
-
     Loading.SetActive(false);
   }
+
 }

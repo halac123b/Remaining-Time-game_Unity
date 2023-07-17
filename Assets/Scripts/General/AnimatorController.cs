@@ -31,23 +31,19 @@ public class AnimatorController : NetworkBehaviour
     //PlayerInput
     playerInput.playerInputActions.Player.Attack.performed += TriggerAttackPerformed;
     playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
-
-    
-
-
   }
 
-    protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        if (!IsOwner) return;
-      animator.SetTrigger(ATTACK_CANCEL);
-    }
+  protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    animator.SetTrigger(ATTACK_CANCEL);
+  }
 
-   protected virtual void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        if (!IsOwner) return;
-      animator.SetTrigger(ATTACK);
-    }
+  protected virtual void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    animator.SetTrigger(ATTACK);
+  }
 
   protected virtual void Update()
   {

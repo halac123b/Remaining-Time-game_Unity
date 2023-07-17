@@ -52,12 +52,14 @@ public class PlayerAnim : AnimatorController
 
   protected override void TriggerAttackPerformed(InputAction.CallbackContext context)
   {
+    if (!IsOwner) return;
     base.TriggerAttackPerformed(context);
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }
   protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
   {
+    if (!IsOwner) return;
     base.TriggerAttackCanceled(context);
     weapon_animator.SetTrigger(ATTACK_CANCEL);
     cover_animator.SetTrigger(ATTACK_CANCEL);

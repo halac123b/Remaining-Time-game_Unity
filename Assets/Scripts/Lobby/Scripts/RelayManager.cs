@@ -68,8 +68,10 @@ CreateRelay(PlayerData playerData)
       spawnObjTransform = Instantiate(playerPrefab, new Vector3(-10, 0, 0), Quaternion.identity);
       spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
 
-      spawnObjTransform = Instantiate(monsterPrefab, new Vector3(10, 0, 0), Quaternion.identity);
+      spawnObjTransform = Instantiate(playerPrefab, new Vector3(10, 0, 0), Quaternion.identity);
       spawnObjTransform.GetComponent<NetworkObject>().SpawnWithOwnership(1);
+
+      Debug.Log("Find id" + NetworkManager.Singleton.ConnectedClientsIds.Count);
 
       return joinCode;
     }

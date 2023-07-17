@@ -11,12 +11,10 @@ public class PlayerMovement : NetworkBehaviour
 
   private bool canMove = true;
 
-  [SerializeField] int processSpeed = 5;
-
   private void Awake()
   {
     lastDirection = new Vector2(0, 1);
-    playerInput = FindObjectOfType<PlayerInput>();
+    playerInput = GetComponent<PlayerInput>();
   }
 
   private void Update()
@@ -45,7 +43,8 @@ public class PlayerMovement : NetworkBehaviour
     }
   }
 
-  public void SetCanMove(bool canMove){
+  public void SetCanMove(bool canMove)
+  {
     this.canMove = canMove;
   }
   public Vector2 MoveVector()
@@ -78,10 +77,6 @@ public class PlayerMovement : NetworkBehaviour
   {
     moveSpeed = speed;
   }
-
-  
-
-  
 }
 
 // Fix: Remove LastDirection

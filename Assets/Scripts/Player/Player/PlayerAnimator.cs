@@ -41,7 +41,7 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void Awake()
   {
-    
+
     playerInput = GetComponentInParent<PlayerInput>();
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerColision = GetComponentInParent<PlayerColision>();
@@ -62,33 +62,34 @@ public class PlayerAnimator : NetworkBehaviour
 
   }
 
-    private void OnWeaponCarryChanged(bool previousValue, bool newValue)
-    {
-         weaponcarry.gameObject.SetActive(newValue);
-    }
-
-    private void OnWeaponSortChanged(int previousValue, int newValue)
-    {
-        weaponcarry.sortingOrder = newValue;
-    }
-
-    private void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        if(!IsOwner) return;
-        weapon_animator.SetTrigger(ATTACK);
-        cover_animator.SetTrigger(ATTACK);
-        animator.SetTrigger(ATTACK);
-    }
-
-    private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
+  private void OnWeaponCarryChanged(bool previousValue, bool newValue)
   {
-    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-    
+    weaponcarry.gameObject.SetActive(newValue);
   }
 
-  public void SetWeaponCarry(bool active){
-    if(IsOwner)
-    weaponCarry.Value = active;
+  private void OnWeaponSortChanged(int previousValue, int newValue)
+  {
+    weaponcarry.sortingOrder = newValue;
+  }
+
+  private void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    weapon_animator.SetTrigger(ATTACK);
+    cover_animator.SetTrigger(ATTACK);
+    animator.SetTrigger(ATTACK);
+  }
+
+  private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
+  {
+    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+
+  }
+
+  public void SetWeaponCarry(bool active)
+  {
+    if (IsOwner)
+      weaponCarry.Value = active;
   }
   private void Start()
   {
@@ -97,37 +98,41 @@ public class PlayerAnimator : NetworkBehaviour
 
   private void Update()
   {
-  
-    sprite.material.color = cover_sprite.material.color  = playerData.Value.color;
+
+    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
     if (!IsOwner) return;
-    
+
     weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
-    
+
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
-    
-    if (x <= -0.01f){
-            flipX.Value = false;
-        }else if (x >= 0.01f){
-            flipX.Value = true;
-        }
-    
-    SetVERNHOR(animator,x,y);
-    SetVERNHOR(cover_animator,x,y);
-    SetVERNHOR(weapon_animator,x,y);
-    
-    
-   
+
+    if (x <= -0.01f)
+    {
+      flipX.Value = false;
+    }
+    else if (x >= 0.01f)
+    {
+      flipX.Value = true;
+    }
+
+    SetVERNHOR(animator, x, y);
+    SetVERNHOR(cover_animator, x, y);
+    SetVERNHOR(weapon_animator, x, y);
+
+
+
 
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
-    
+
   }
-  private void SetVERNHOR(Animator anim ,float x, float y){
-    
-    anim.SetInteger(TYPE_ATTACK,playerEquip.GetTypeWeapon());
+  private void SetVERNHOR(Animator anim, float x, float y)
+  {
+
+    anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
 
     if (y > 0.01f)
     {
@@ -171,7 +176,4 @@ public class PlayerAnimator : NetworkBehaviour
     sprite.material.color = color;
     cover_sprite.material.color = color;
   }
-
-  
-
 }

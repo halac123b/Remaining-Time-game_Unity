@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using Unity.Netcode;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimator : NetworkBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerAnimator : NetworkBehaviour
   private const string TYPE_MOVE = "typemove";
   private const string TYPE_ATTACK = "typeattack";
   private const string ATTACK = "attack";
+  private const string ATTACK_CANCEL = "attackcancel";
+
 
   [SerializeField] private Animator animator;
   [SerializeField] private Animator cover_animator;
@@ -57,12 +60,23 @@ public class PlayerAnimator : NetworkBehaviour
     weaponCarry.OnValueChanged += OnWeaponCarryChanged;
 
     //PlayerInput
-    playerInput.playerInputActions.Player.Attack.performed += TriggerAttack;
+    playerInput.playerInputActions.Player.Attack.performed += TriggerAttackPerformed;
+    playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
+
+    
 
 
   }
 
-  private void OnWeaponCarryChanged(bool previousValue, bool newValue)
+    private void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (!IsOwner) return;
+      weapon_animator.SetTrigger(ATTACK_CANCEL);
+      cover_animator.SetTrigger(ATTACK_CANCEL);
+      animator.SetTrigger(ATTACK_CANCEL);
+    }
+
+    private void OnWeaponCarryChanged(bool previousValue, bool newValue)
   {
     weaponcarry.gameObject.SetActive(newValue);
   }
@@ -72,7 +86,7 @@ public class PlayerAnimator : NetworkBehaviour
     weaponcarry.sortingOrder = newValue;
   }
 
-  private void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  private void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
     weapon_animator.SetTrigger(ATTACK);
@@ -110,6 +124,24 @@ public class PlayerAnimator : NetworkBehaviour
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
 
+    
+
+    
+    Set_VERTICAL_HORIZONTAL(x,y);
+
+
+
+    animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
+
+  }
+  public void Set_VERTICAL_HORIZONTAL(float x, float y){
+    if(!IsOwner) return;
+    Set_VERTICAL_HORIZONTAL(animator, x, y);
+    Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
+    Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
+  }
+  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
+  {
     if (x <= -0.01f)
     {
       flipX.Value = false;
@@ -118,19 +150,6 @@ public class PlayerAnimator : NetworkBehaviour
     {
       flipX.Value = true;
     }
-
-    SetVERNHOR(animator, x, y);
-    SetVERNHOR(cover_animator, x, y);
-    SetVERNHOR(weapon_animator, x, y);
-
-
-
-
-    animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
-
-  }
-  private void SetVERNHOR(Animator anim, float x, float y)
-  {
 
     anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
 

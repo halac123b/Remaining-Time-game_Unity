@@ -50,12 +50,20 @@ public class PlayerAnim : AnimatorController
     weaponcarry.sortingOrder = newValue;
   }
 
-  protected override void TriggerAttack(InputAction.CallbackContext context)
+  protected override void TriggerAttackPerformed(InputAction.CallbackContext context)
   {
-    base.TriggerAttack(context);
+    base.TriggerAttackPerformed(context);
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }
+  protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
+  {
+    base.TriggerAttackCanceled(context);
+    weapon_animator.SetTrigger(ATTACK_CANCEL);
+    cover_animator.SetTrigger(ATTACK_CANCEL);
+  }
+
+
 
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {

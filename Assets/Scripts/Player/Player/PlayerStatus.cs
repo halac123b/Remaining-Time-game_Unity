@@ -9,7 +9,7 @@ public class PlayerStatus : MonoBehaviour
   [SerializeField] private int timeLeft = 30;
   private bool countTrigger = true;
   private bool startCounting = false;
-  
+
   public PlayerData playerData;
 
   public event EventHandler OnCountDownTrigger;
@@ -27,7 +27,6 @@ public class PlayerStatus : MonoBehaviour
   //   Debug.Log(playerIndex);
   //   timeLeft = timeManager.GetTimer();
   // }
-
   private void Update()
   {
     if (startCounting && countTrigger && timeLeft > 0)

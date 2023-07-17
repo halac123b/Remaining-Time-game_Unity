@@ -1,13 +1,12 @@
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Collections;
+using System;
 // using Microsoft.Unity.VisualStudio.Editor;
 
 // public static TestRelay Instance { get; private set; }
@@ -18,7 +17,11 @@ public class RelayManager : MonoBehaviour
   [SerializeField] private Material materialLoadding;
   [SerializeField] private GameObject gameUI;
   [SerializeField] private PlayerStatus playerStatus;
+
   [SerializeField] private GameObject oxyBottle;
+  [SerializeField] private GameObject playerPrefab;
+  [SerializeField] private GameObject monsterPrefab;
+
   private GameObject spawnObjTransform;
 
   private void Awake()
@@ -56,10 +59,17 @@ CreateRelay(PlayerData playerData)
       gameUI.SetActive(true);
       playerStatus.SetPlayerData(playerData);
       playerStatus.SetStartCounting(true);
+
+      // Spawn oxygen
       spawnObjTransform = Instantiate(oxyBottle);
       spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
 
-      //
+      // Player
+      spawnObjTransform = Instantiate(playerPrefab, new Vector3(-10, 0, 0), Quaternion.identity);
+      spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
+
+      spawnObjTransform = Instantiate(monsterPrefab, new Vector3(10, 0, 0), Quaternion.identity);
+      spawnObjTransform.GetComponent<NetworkObject>().SpawnWithOwnership(1);
 
       return joinCode;
     }
@@ -70,10 +80,7 @@ CreateRelay(PlayerData playerData)
     }
   }
 
-
-
-
-  public async void JoinRelay(string joinCode,PlayerData playerData)
+  public async void JoinRelay(string joinCode, PlayerData playerData)
   {
     try
     {
@@ -90,7 +97,7 @@ CreateRelay(PlayerData playerData)
       playerStatus.SetPlayerData(playerData);
       gameUI.SetActive(true);
       playerStatus.SetStartCounting(true);
-      //
+
     }
     catch (RelayServiceException e)
     {
@@ -98,19 +105,20 @@ CreateRelay(PlayerData playerData)
     }
   }
 
-   private IEnumerator ActivateObjectForDuration()
+  private IEnumerator ActivateObjectForDuration()
+  {
+
+    materialLoadding.SetFloat("_Fade", 1f);
+    Loading.SetActive(true);
+    yield return new WaitForSeconds(3);
+    while (materialLoadding.GetFloat("_Fade") > 0)
     {
 
-        materialLoadding.SetFloat("_Fade",1f);
-        Loading.SetActive(true);     
-        yield return new WaitForSeconds(3);
-        while (materialLoadding.GetFloat("_Fade") > 0 ){
-        
-            yield return new WaitForSeconds(Time.deltaTime);
-            materialLoadding.SetFloat("_Fade",materialLoadding.GetFloat("_Fade") -0.01f);
-        }
-         
-
-        Loading.SetActive(false);
+      yield return new WaitForSeconds(Time.deltaTime);
+      materialLoadding.SetFloat("_Fade", materialLoadding.GetFloat("_Fade") - 0.01f);
     }
+
+
+    Loading.SetActive(false);
+  }
 }

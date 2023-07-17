@@ -4503,6 +4503,8 @@ MonoBehaviour:
   equipmentList:
   - {fileID: 11400000, guid: c6bfd07fb600cd543a88399112e73c4c, type: 2}
   - {fileID: 11400000, guid: ecd7bbb3cdee42c4b86d56702759be27, type: 2}
+  - {fileID: 11400000, guid: 5b4cc52d555f4194ab902f9c1e489604, type: 2}
+  - {fileID: 11400000, guid: 333749eac56612e4c986eb1e9d809a97, type: 2}
 --- !u!1 &824615608
 GameObject:
   m_ObjectHideFlags: 0

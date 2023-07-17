@@ -11,6 +11,7 @@ public class AnimatorController : NetworkBehaviour
   protected const string TYPE_MOVE = "typemove";
   protected const string TYPE_ATTACK = "typeattack";
   protected const string ATTACK = "attack";
+  protected const string ATTACK_CANCEL = "attackcancel";
 
   [SerializeField] protected Animator animator;
 
@@ -28,14 +29,25 @@ public class AnimatorController : NetworkBehaviour
     playerStatus.OnDeadTrigger += OnDeadAnimation;
 
     //PlayerInput
-    playerInput.playerInputActions.Player.Attack.performed += TriggerAttack;
+    playerInput.playerInputActions.Player.Attack.performed += TriggerAttackPerformed;
+    playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
+
+    
+
+
   }
 
-  protected virtual void TriggerAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
-  {
-    if (!IsOwner) return;
-    animator.SetTrigger(ATTACK);
-  }
+    protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (!IsOwner) return;
+      animator.SetTrigger(ATTACK_CANCEL);
+    }
+
+   protected virtual void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (!IsOwner) return;
+      animator.SetTrigger(ATTACK);
+    }
 
   protected virtual void Update()
   {

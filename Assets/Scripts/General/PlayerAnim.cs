@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.UI;
 
 public class PlayerAnim : AnimatorController
 {
@@ -15,8 +16,9 @@ public class PlayerAnim : AnimatorController
   [SerializeField] private SpriteRenderer weaponcarry;
   [SerializeField] private SpriteRenderer cover_sprite;
   [SerializeField] private SpriteRenderer weapon_sprite;
-
   [SerializeField] private SpriteRenderer sprite;
+
+  [SerializeField] public Transform AimBar;
 
   protected NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -46,11 +48,16 @@ public class PlayerAnim : AnimatorController
 
     // Handle Event Custom
     playerEquip.OnChangeEquip += OnChangeEquipped;
+  
+    // Defaaut valua
   }
 
   private void OnChangeEquipped(object sender, EventArgs e)
   {
     if(!IsOwner) return;
+    AimBar.GetComponentInChildren<Slider>().value = 0;
+    AimBar.gameObject.SetActive(false);
+
     PlayerData data = new PlayerData{
       Id = playerData.Value.Id,
       color = playerData.Value.color,
@@ -118,9 +125,17 @@ public class PlayerAnim : AnimatorController
   protected override void Update()
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    
+    if(playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0){
+       AimBar.gameObject.SetActive(true);
+       AimBar.GetComponentInChildren<Slider>().value -= 0.002f;
+    }else if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value <= 0){ 
+       AimBar.gameObject.SetActive(false);
+    } 
+
     if (!IsOwner) return;
 
-    weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    // weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
 
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
@@ -131,7 +146,6 @@ public class PlayerAnim : AnimatorController
     Set_VERTICAL_HORIZONTAL(x,y);
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
 
-    
 
 
   }

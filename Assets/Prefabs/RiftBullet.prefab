@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb171383eb275b4498c09bdf952644bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 30
+  Speed: 50
   moveVector: {x: 0, y: 0}
 --- !u!50 &6305301596888166032
 Rigidbody2D:

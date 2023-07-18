@@ -1,82 +1,74 @@
 using UnityEngine;
-using System;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
+using System;
+using UnityEngine.UI;
 
-public class PlayerAnimator : NetworkBehaviour
+public class PlayerAnimator : AnimatorController
 {
-  private const string HORIZONTAL = "Horizontal";
-  private const string VERTICAL = "Vertical";
-  private const string IS_PROCESSING = "isprocessing";
-  private const string SPEED = "speed";
-  private const string TYPE_MOVE = "typemove";
-  private const string TYPE_ATTACK = "typeattack";
-  private const string ATTACK = "attack";
-  private const string ATTACK_CANCEL = "attackcancel";
-
-
-  [SerializeField] private Animator animator;
   [SerializeField] private Animator cover_animator;
   [SerializeField] private Animator weapon_animator;
 
-  private PlayerStatus playerStatus;
-  private PlayerEquip playerEquip;
 
-  private PlayerInput playerInput;
-  private PlayerMovement playerMovement;
+  private PlayerEquip playerEquip;
   private PlayerColision playerColision;
 
   [SerializeField] private SpriteRenderer weaponcarry;
-  [SerializeField] private SpriteRenderer sprite;
   [SerializeField] private SpriteRenderer cover_sprite;
   [SerializeField] private SpriteRenderer weapon_sprite;
+  [SerializeField] private SpriteRenderer sprite;
 
-  private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  [SerializeField] public Transform AimBar;
+
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  private NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
+  private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+  private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
     new PlayerData
     {
       Id = "",
       color = Color.red,
-      playerName = ""
+      playerName = "",
+      playerWeapon = 0,
     }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-  private void Awake()
+  protected override void Awake()
   {
-
-    playerInput = GetComponentInParent<PlayerInput>();
-    playerMovement = GetComponentInParent<PlayerMovement>();
+    base.Awake();
     playerColision = GetComponentInParent<PlayerColision>();
-    playerStatus = FindObjectOfType<PlayerStatus>();
     playerEquip = FindObjectOfType<PlayerEquip>();
-
-    playerStatus.OnDeadTrigger += OnDeadAnimation;
 
     // NetWork Variable
     flipX.OnValueChanged += OnFlipXChanged;
-    playerData.OnValueChanged += OnPlayerDataChanged;
     weaponSorting.OnValueChanged += OnWeaponSortChanged;
     weaponCarry.OnValueChanged += OnWeaponCarryChanged;
+    playerData.OnValueChanged += OnPlayerDataChanged;
 
-    //PlayerInput
-    playerInput.playerInputActions.Player.Attack.performed += TriggerAttackPerformed;
-    playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
+    // Handle Event Custom
+    playerEquip.OnChangeEquip += OnChangeEquipped;
 
-    
-
-
+    // Defaaut valua
   }
 
-    private void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        if (!IsOwner) return;
-      weapon_animator.SetTrigger(ATTACK_CANCEL);
-      cover_animator.SetTrigger(ATTACK_CANCEL);
-      animator.SetTrigger(ATTACK_CANCEL);
-    }
+  private void OnChangeEquipped(object sender, EventArgs e)
+  {
+    if (!IsOwner) return;
+    AimBar.GetComponentInChildren<Slider>().value = 0;
+    AimBar.gameObject.SetActive(false);
 
-    private void OnWeaponCarryChanged(bool previousValue, bool newValue)
+    PlayerData data = new PlayerData
+    {
+      Id = playerData.Value.Id,
+      color = playerData.Value.color,
+      playerName = playerData.Value.playerName,
+      playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
+    };
+    playerData.Value = data;
+  }
+
+  private void OnWeaponCarryChanged(bool previousValue, bool newValue)
   {
     weaponcarry.gameObject.SetActive(newValue);
   }
@@ -86,17 +78,38 @@ public class PlayerAnimator : NetworkBehaviour
     weaponcarry.sortingOrder = newValue;
   }
 
-  private void TriggerAttackPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  protected override void TriggerAttackStarted(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
+    base.TriggerAttackStarted(context);
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
-    animator.SetTrigger(ATTACK);
+  }
+  public void UpdataMousePos()
+  {
+    if (!IsOwner) return;
+    // Update mouse position
+    Vector2 mouse_pos = Input.mousePosition;
+    mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+    mouse.Value = mouse_pos;
+  }
+  protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    base.TriggerAttackCanceled(context);
+    weapon_animator.SetTrigger(ATTACK_CANCEL);
+    cover_animator.SetTrigger(ATTACK_CANCEL);
+  }
+
+  public Vector2 GetMousePos()
+  {
+    return mouse.Value;
   }
 
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
 
   }
 
@@ -105,18 +118,30 @@ public class PlayerAnimator : NetworkBehaviour
     if (IsOwner)
       weaponCarry.Value = active;
   }
+
   private void Start()
   {
     if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
   }
 
-  private void Update()
-  {
 
+  protected override void Update()
+  {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+
+    if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
+    {
+      AimBar.gameObject.SetActive(true);
+      AimBar.GetComponentInChildren<Slider>().value -= 0.002f;
+    }
+    else if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value <= 0)
+    {
+      AimBar.gameObject.SetActive(false);
+    }
+
     if (!IsOwner) return;
 
-    weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    // weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
 
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
@@ -124,24 +149,23 @@ public class PlayerAnimator : NetworkBehaviour
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
 
-    
-
-    
-    Set_VERTICAL_HORIZONTAL(x,y);
-
-
-
+    Set_VERTICAL_HORIZONTAL(x, y);
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
 
+
+
   }
-  public void Set_VERTICAL_HORIZONTAL(float x, float y){
-    if(!IsOwner) return;
+
+  public override void Set_VERTICAL_HORIZONTAL(float x, float y)
+  {
+    if (!IsOwner) return;
     Set_VERTICAL_HORIZONTAL(animator, x, y);
     Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
   private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
+
     if (x <= -0.01f)
     {
       flipX.Value = false;
@@ -176,13 +200,6 @@ public class PlayerAnimator : NetworkBehaviour
       anim.SetFloat(VERTICAL, 0f);
       anim.SetFloat(HORIZONTAL, -1f);
     }
-
-  }
-
-  private void OnDeadAnimation(object sender, EventArgs e)
-  {
-    animator.SetTrigger("isDeath");
-    playerMovement.enabled = false;
   }
 
   private void OnFlipXChanged(bool oldValue, bool newValue)

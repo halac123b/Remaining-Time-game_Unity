@@ -5,11 +5,11 @@ using UnityEngine;
 public class Attack : StateMachineBehaviour
 {
   private PlayerMovement playerMovement;
-  private PlayerAnim playerAnim;
+  private PlayerAnimator playerAnim;
   // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
   override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
-    playerAnim = animator.GetComponent<PlayerAnim>();
+    playerAnim = animator.GetComponent<PlayerAnimator>();
     playerMovement = animator.GetComponentInParent<PlayerMovement>();
     playerAnim.SetWeaponCarry(false);
     playerMovement.SetCanMove(false);
@@ -24,7 +24,7 @@ public class Attack : StateMachineBehaviour
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
   override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
-    playerAnim = animator.GetComponent<PlayerAnim>();
+    playerAnim = animator.GetComponent<PlayerAnimator>();
     playerMovement = animator.GetComponentInParent<PlayerMovement>();
     playerAnim.SetWeaponCarry(true);
     playerMovement.SetCanMove(true);

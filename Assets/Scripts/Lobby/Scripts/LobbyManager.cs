@@ -15,8 +15,6 @@ public class LobbyManager : MonoBehaviour
 
   public static LobbyManager Instance { get; private set; }
 
-
-
   public const string KEY_PLAYER_NAME = "PlayerName";
   public const string KEY_PLAYER_COLOR = "Color";
   public const string KEY_GAME_MODE = "GameMode";
@@ -83,9 +81,11 @@ public class LobbyManager : MonoBehaviour
     }
     Instance = this;
   }
+
   private void Start()
   {
     SetupEvents();
+    LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
   }
 
   // Setup authentication event handlers if desired
@@ -130,17 +130,15 @@ public class LobbyManager : MonoBehaviour
     InitializationOptions initializationOptions = new InitializationOptions();
     initializationOptions.SetProfile(playerName);
 
-
     await UnityServices.InitializeAsync(initializationOptions);
+
     AuthenticationService.Instance.SignedIn += () =>
     {
-      // do nothing
       playerData.Id = AuthenticationService.Instance.PlayerId;
       Debug.Log(playerName + " Signed in! " + AuthenticationService.Instance.PlayerId);
       RefreshLobbyList();
     };
 
-    // AuthenticationService.Instance.SignedIn();
     if (AuthenticationService.Instance.IsSignedIn)
     {
       Debug.Log(AuthenticationService.Instance.PlayerId + " is Sign in before");

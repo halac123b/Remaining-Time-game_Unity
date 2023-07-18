@@ -5,8 +5,6 @@ public class PlayerColision : MonoBehaviour
   [SerializeField] private PlayerInput playerInput;
   [SerializeField] private PlayerMovement playerMovement;
   private bool isProcessing = false;
-
-  private bool TriggerPoccessing = false;
   private int processSpeed = 5;
   private void Awake()
   {
@@ -14,10 +12,7 @@ public class PlayerColision : MonoBehaviour
 
   }
 
-  public void triggerPoccessing()
-  {
-    TriggerPoccessing = true;
-  }
+
   private void OnCollisionStay2D(Collision2D other)
   {
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();

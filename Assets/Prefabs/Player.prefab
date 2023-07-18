@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 464243944edf6ba4093d5caa655cf28c, type: 2}
+    - target: {fileID: 1801980062021713399, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 5207410506420730678}
     - target: {fileID: 2253333509047948522, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -46,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2937502944756389676, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_Size.x
-      value: 20.48
+      value: 2.7692308
       objectReference: {fileID: 0}
     - target: {fileID: 2937502944756389676, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_Size.y
-      value: 20.48
+      value: 2.3076923
       objectReference: {fileID: 0}
     - target: {fileID: 2937502944756389676, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_Sprite
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2937502944756389676, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2937502944756389676, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -80,6 +84,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3788231590327568506, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788231590327568506, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788231590327568506, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069285581771096958, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6058163460433585248}
     - target: {fileID: 5119164225725045134, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_RootOrder
       value: 0

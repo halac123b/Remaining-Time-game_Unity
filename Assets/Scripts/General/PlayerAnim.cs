@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerAnim : AnimatorController
 {
@@ -27,7 +28,8 @@ public class PlayerAnim : AnimatorController
     {
       Id = "",
       color = Color.red,
-      playerName = ""
+      playerName = "",
+      playerWeapon = 0,
     }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   protected override void Awake()
@@ -40,6 +42,22 @@ public class PlayerAnim : AnimatorController
     flipX.OnValueChanged += OnFlipXChanged;
     weaponSorting.OnValueChanged += OnWeaponSortChanged;
     weaponCarry.OnValueChanged += OnWeaponCarryChanged;
+    playerData.OnValueChanged += OnPlayerDataChanged;
+
+    // Handle Event Custom
+    playerEquip.OnChangeEquip += OnChangeEquipped;
+  }
+
+  private void OnChangeEquipped(object sender, EventArgs e)
+  {
+    if(!IsOwner) return;
+    PlayerData data = new PlayerData{
+      Id = playerData.Value.Id,
+      color = playerData.Value.color,
+      playerName = playerData.Value.playerName,
+      playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
+    };
+    playerData.Value = data;
   }
 
   private void OnWeaponCarryChanged(bool previousValue, bool newValue)
@@ -60,6 +78,7 @@ public class PlayerAnim : AnimatorController
     cover_animator.SetTrigger(ATTACK);
   }
   public void UpdataMousePos(){
+    if(!IsOwner) return;
     // Update mouse position
     Vector2 mouse_pos = Input.mousePosition;
     mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
@@ -68,9 +87,6 @@ public class PlayerAnim : AnimatorController
   protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-
-    
-
     base.TriggerAttackCanceled(context);
     weapon_animator.SetTrigger(ATTACK_CANCEL);
     cover_animator.SetTrigger(ATTACK_CANCEL);
@@ -83,6 +99,7 @@ public class PlayerAnim : AnimatorController
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
 
   }
 
@@ -97,6 +114,7 @@ public class PlayerAnim : AnimatorController
     if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
   }
 
+    
   protected override void Update()
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;

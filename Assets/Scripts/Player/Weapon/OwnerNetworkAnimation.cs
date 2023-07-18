@@ -9,5 +9,14 @@ public class OwnerNetworkAnimator : NetworkAnimator
         {
             return false;
         }
+
+        [SerializeField] private SpriteRenderer sprite;
+    
+        public void SetOrderUp(){
+            sprite.sortingOrder = 1;
+        }
+        public void SetOrderDown(){
+            sprite.sortingOrder = -1;
+        }
     }
 

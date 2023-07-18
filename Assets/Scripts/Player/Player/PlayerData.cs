@@ -11,14 +11,18 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
   public string Id;
   public Color color;
   public string playerName;
+  public int playerWeapon;
 
-
+  public void SetWeapon(int weapon){
+    playerWeapon = weapon;
+  }
   public bool Equals(PlayerData other)
   {
     return
         Id == other.Id &&
         color == other.color &&
-        playerName == other.playerName;
+        playerName == other.playerName &&
+        playerWeapon == other.playerWeapon;
   }
 
   public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -26,6 +30,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     serializer.SerializeValue(ref Id);
     serializer.SerializeValue(ref color);
     serializer.SerializeValue(ref playerName);
+    serializer.SerializeValue(ref playerWeapon);
   }
 
 }

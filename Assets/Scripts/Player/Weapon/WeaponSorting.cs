@@ -10,9 +10,13 @@ public class WeaponSorting : MonoBehaviour
  
 
     public void SetWeaponOrderON(){
-      weapon_sprite.sortingOrder = 1;
+      weapon_sprite.sortingOrder = 2;
     }
     public void SetWeaponOrderOFF(){
-        weapon_sprite.sortingOrder = -1;
+        weapon_sprite.sortingOrder = -2;
+    }
+
+    public void SetWeaponOrderOverOn(){
+        weapon_sprite.sortingOrder = 6;
     }
 }

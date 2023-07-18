@@ -28,4 +28,8 @@ public class PlayerEquip : MonoBehaviour
   public int GetTypeWeapon(){
     return currentEquip;
   }
+
+  public EquipmentSO GetEquip(int i){
+    return equipmentList[i];
+  }
 }

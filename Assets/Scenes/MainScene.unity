@@ -3002,7 +3002,7 @@ MonoBehaviour:
   materialLoadding: {fileID: 2100000, guid: ee0364b02189a4d4fbeedf78dc6b2b2b, type: 2}
   gameUI: {fileID: 1895755533}
   playerStatus: {fileID: 818246421}
-  oxyBottle: {fileID: 4488328111126681376, guid: fdb581ec8502e844db43fd28a5cf751c, type: 3}
+  oxyBottle: {fileID: 5910600176990297310, guid: fdb581ec8502e844db43fd28a5cf751c, type: 3}
   playerPrefab: {fileID: 1310933839547251545, guid: f97f43e6bff9c2f4f81358aafb431b50, type: 3}
   monsterPrefab: {fileID: 3557018738088949461, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
 --- !u!4 &572245941

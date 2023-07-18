@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerColision : MonoBehaviour
+public class PlayerColision : NetworkBehaviour
 {
   [SerializeField] private PlayerInput playerInput;
   [SerializeField] private PlayerMovement playerMovement;
@@ -9,9 +10,7 @@ public class PlayerColision : MonoBehaviour
   private void Awake()
   {
     playerInput = FindObjectOfType<PlayerInput>();
-
   }
-
 
   private void OnCollisionStay2D(Collision2D other)
   {
@@ -22,13 +21,27 @@ public class PlayerColision : MonoBehaviour
       {
         if (!isProcessing)
         {
-          oxy.SetProcess(true, processSpeed);
+          if (IsClient)
+          {
+            oxy.SetProcessServerRpc(true, processSpeed);
+          }
+          else
+          {
+            oxy.SetProcess(true, processSpeed);
+          }
           isProcessing = true;
           playerMovement.SetCanMove(false);
         }
         else
         {
-          oxy.SetProcess(false, processSpeed);
+          if (IsClient)
+          {
+            oxy.SetProcessServerRpc(true, -processSpeed);
+          }
+          else
+          {
+            oxy.SetProcess(false, -processSpeed);
+          }
           isProcessing = false;
           playerMovement.SetCanMove(true);
         }

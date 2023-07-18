@@ -20,9 +20,9 @@ public class PlayerAnim : AnimatorController
 
   [SerializeField] public Transform AimBar;
 
-  protected NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0,0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
@@ -48,17 +48,18 @@ public class PlayerAnim : AnimatorController
 
     // Handle Event Custom
     playerEquip.OnChangeEquip += OnChangeEquipped;
-  
+
     // Defaaut valua
   }
 
   private void OnChangeEquipped(object sender, EventArgs e)
   {
-    if(!IsOwner) return;
+    if (!IsOwner) return;
     AimBar.GetComponentInChildren<Slider>().value = 0;
     AimBar.gameObject.SetActive(false);
 
-    PlayerData data = new PlayerData{
+    PlayerData data = new PlayerData
+    {
       Id = playerData.Value.Id,
       color = playerData.Value.color,
       playerName = playerData.Value.playerName,
@@ -84,8 +85,9 @@ public class PlayerAnim : AnimatorController
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }
-  public void UpdataMousePos(){
-    if(!IsOwner) return;
+  public void UpdataMousePos()
+  {
+    if (!IsOwner) return;
     // Update mouse position
     Vector2 mouse_pos = Input.mousePosition;
     mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
@@ -99,7 +101,8 @@ public class PlayerAnim : AnimatorController
     cover_animator.SetTrigger(ATTACK_CANCEL);
   }
 
-  public Vector2 GetMousePos(){
+  public Vector2 GetMousePos()
+  {
     return mouse.Value;
   }
 
@@ -121,17 +124,20 @@ public class PlayerAnim : AnimatorController
     if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
   }
 
-    
+
   protected override void Update()
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-    
-    if(playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0){
-       AimBar.gameObject.SetActive(true);
-       AimBar.GetComponentInChildren<Slider>().value -= 0.002f;
-    }else if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value <= 0){ 
-       AimBar.gameObject.SetActive(false);
-    } 
+
+    if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
+    {
+      AimBar.gameObject.SetActive(true);
+      AimBar.GetComponentInChildren<Slider>().value -= 0.002f;
+    }
+    else if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value <= 0)
+    {
+      AimBar.gameObject.SetActive(false);
+    }
 
     if (!IsOwner) return;
 
@@ -143,22 +149,24 @@ public class PlayerAnim : AnimatorController
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
 
-    Set_VERTICAL_HORIZONTAL(x,y);
+    Set_VERTICAL_HORIZONTAL(x, y);
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
 
 
 
   }
 
-  public override void Set_VERTICAL_HORIZONTAL(float x, float y){
-    if(!IsOwner) return;
+  public override void Set_VERTICAL_HORIZONTAL(float x, float y)
+  {
+    if (!IsOwner) return;
     Set_VERTICAL_HORIZONTAL(animator, x, y);
     Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
-  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
+  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
+  {
 
-     if (x <= -0.01f)
+    if (x <= -0.01f)
     {
       flipX.Value = false;
     }

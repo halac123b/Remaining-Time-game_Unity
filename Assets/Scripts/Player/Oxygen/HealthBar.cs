@@ -9,12 +9,7 @@ public class HealthBar : MonoBehaviour
   [SerializeField] private Slider slider;
   [SerializeField] private Gradient gradient;
   [SerializeField] private Image fill;
-  [SerializeField] private OxyStatus oxyStatus;
 
-  public void Start()
-  {
-    oxyStatus.OnProcessing += SetHealth;
-  }
   public void SetMaxHealth(int health)
   {
     slider.maxValue = health;
@@ -23,9 +18,9 @@ public class HealthBar : MonoBehaviour
     fill.color = gradient.Evaluate(1f);
   }
 
-  public void SetHealth(object sender, OxyStatus.IntEventArg arg)
+  public void SetHealth(int oldValue, int newValue)
   {
-    slider.value = arg.value / slider.maxValue * 100;
+    slider.value = newValue / slider.maxValue * 100;
 
     fill.color = gradient.Evaluate(slider.normalizedValue);
   }

@@ -1,13 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
+using System;
+using UnityEngine.UI;
 
 public class MonsterAnimator : AnimatorController
 {
     // Start is called before the first frame update
-    
+    [SerializeField] public Transform AimBar;
+    private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     protected override void Awake(){
         base.Awake();
         playerInput.playerInputActions.Player.Attack.started += TriggerAttack01Started;
@@ -16,6 +17,27 @@ public class MonsterAnimator : AnimatorController
 
 
     }
+    protected override void Update()
+    {
+        base.Update();
+        if (!IsOwner) return;
+    }
+
+/////////////////////Support////////////////////////////////
+     public Vector2 GetMousePos()
+    {
+        return mouse.Value;
+    }
+    public void UpdataMousePos()
+    {
+        if (!IsOwner) return;
+        // Update mouse position
+        Vector2 mouse_pos = Input.mousePosition;
+        mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+        mouse.Value = mouse_pos;
+    }
+
+/////////////////////////////Handle Event////////////////////////////// 
 
     private void TriggerAttack01Started(InputAction.CallbackContext context)
     {
@@ -41,9 +63,4 @@ public class MonsterAnimator : AnimatorController
     }
 
     // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-        if (!IsOwner) return;
-    }
 }

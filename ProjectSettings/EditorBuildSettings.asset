@@ -15,7 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbySelection.unity
     guid: 829554b140dd097449890104817523ba
   - enabled: 1
+
     path: Assets/Scenes/ShoppingPhase.unity
     guid: a7537e0d21a7c8647abf82cc1f1d5c17
+
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 93d026396b9395a4084d2cfe513ed34a, type: 2}

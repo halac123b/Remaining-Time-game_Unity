@@ -45,6 +45,7 @@ public class PlayerAnimator : AnimatorController
     weaponSorting.OnValueChanged += OnWeaponSortChanged;
     weaponCarry.OnValueChanged += OnWeaponCarryChanged;
     playerData.OnValueChanged += OnPlayerDataChanged;
+    playerStatus.OnDeadTrigger += OnDeadAnimation;
 
     // Handle Event Custom
     playerEquip.OnChangeEquip += OnChangeEquipped;
@@ -67,58 +68,6 @@ public class PlayerAnimator : AnimatorController
     };
     playerData.Value = data;
   }
-
-  private void OnWeaponCarryChanged(bool previousValue, bool newValue)
-  {
-    weaponcarry.gameObject.SetActive(newValue);
-  }
-
-  private void OnWeaponSortChanged(int previousValue, int newValue)
-  {
-    weaponcarry.sortingOrder = newValue;
-  }
-
-  protected override void TriggerAttackStarted(InputAction.CallbackContext context)
-  {
-    if (!IsOwner) return;
-    base.TriggerAttackStarted(context);
-    weapon_animator.SetTrigger(ATTACK);
-    cover_animator.SetTrigger(ATTACK);
-  }
-  public void UpdataMousePos()
-  {
-    if (!IsOwner) return;
-    // Update mouse position
-    Vector2 mouse_pos = Input.mousePosition;
-    mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
-    mouse.Value = mouse_pos;
-  }
-  protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
-  {
-    if (!IsOwner) return;
-    base.TriggerAttackCanceled(context);
-    weapon_animator.SetTrigger(ATTACK_CANCEL);
-    cover_animator.SetTrigger(ATTACK_CANCEL);
-  }
-
-  public Vector2 GetMousePos()
-  {
-    return mouse.Value;
-  }
-
-  private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
-  {
-    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-    weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
-
-  }
-
-  public void SetWeaponCarry(bool active)
-  {
-    if (IsOwner)
-      weaponCarry.Value = active;
-  }
-
   private void Start()
   {
     if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
@@ -141,6 +90,9 @@ public class PlayerAnimator : AnimatorController
 
     if (!IsOwner) return;
 
+    
+    animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
+
     // weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
 
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
@@ -155,15 +107,33 @@ public class PlayerAnimator : AnimatorController
 
 
   }
-
-  public override void Set_VERTICAL_HORIZONTAL(float x, float y)
+  
+/////////////////////Support////////////////////////////////
+  public void UpdataMousePos()
   {
     if (!IsOwner) return;
-    Set_VERTICAL_HORIZONTAL(animator, x, y);
+    // Update mouse position
+    Vector2 mouse_pos = Input.mousePosition;
+    mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+    mouse.Value = mouse_pos;
+  }
+  public Vector2 GetMousePos()
+  {
+    return mouse.Value;
+  }
+  public void SetWeaponCarry(bool active)
+  {
+    if (IsOwner)
+      weaponCarry.Value = active;
+  }
+  public override void Set_VERTICAL_HORIZONTAL(float x, float y)
+  {
+    base.Set_VERTICAL_HORIZONTAL(x,y);
+    if (!IsOwner) return;
     Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
-  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
+  public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
 
     if (x <= -0.01f)
@@ -201,15 +171,50 @@ public class PlayerAnimator : AnimatorController
       anim.SetFloat(HORIZONTAL, -1f);
     }
   }
-
-  private void OnFlipXChanged(bool oldValue, bool newValue)
-  {
-    weaponcarry.flipX = weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;
-  }
-
   public void UpdatePlayerColor(Color color)
   {
     sprite.material.color = color;
     cover_sprite.material.color = color;
+  }
+/////////////////////////////Handle Event////////////////////////////// 
+  private void OnFlipXChanged(bool oldValue, bool newValue)
+  {
+    weaponcarry.flipX = weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;
+  }
+  private void OnDeadAnimation(object sender, EventArgs e)
+  {
+    animator.SetTrigger("isDeath");
+    playerMovement.enabled = false;
+  }
+
+  private void OnWeaponCarryChanged(bool previousValue, bool newValue)
+  {
+    weaponcarry.gameObject.SetActive(newValue);
+  }
+
+  private void OnWeaponSortChanged(int previousValue, int newValue)
+  {
+    weaponcarry.sortingOrder = newValue;
+  }
+
+  private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
+  {
+    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
+
+  }
+  protected override void TriggerAttackStarted(InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    base.TriggerAttackStarted(context);
+    weapon_animator.SetTrigger(ATTACK);
+    cover_animator.SetTrigger(ATTACK);
+  }
+  protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
+  {
+    base.TriggerAttackCanceled(context);
+    if (!IsOwner) return;
+    weapon_animator.SetTrigger(ATTACK_CANCEL);
+    cover_animator.SetTrigger(ATTACK_CANCEL);
   }
 }

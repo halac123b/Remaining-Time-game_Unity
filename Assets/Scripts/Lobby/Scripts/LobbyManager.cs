@@ -79,7 +79,6 @@ public class LobbyManager : MonoBehaviour
     Instance = this;
 
     SetupEvents();
-    LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
   }
 
   private IEnumerator Start()

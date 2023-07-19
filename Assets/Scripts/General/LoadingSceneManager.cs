@@ -83,6 +83,7 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   // Here we set up what to do for each scene, like changing the music
   private void OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
   {
+    
     // We only care the host/server is loading because every manager handles
     // their information and behavior on the server runtime
     if (!NetworkManager.Singleton.IsServer)

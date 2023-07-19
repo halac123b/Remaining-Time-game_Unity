@@ -80,6 +80,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack02"",
+                    ""type"": ""Button"",
+                    ""id"": ""53955021-00c7-4c52-9882-0eee0795f2ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack03"",
+                    ""type"": ""Button"",
+                    ""id"": ""75173de7-ee59-40aa-9429-730e4ba134f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +210,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd1fcde7-d5a5-4465-9611-c158e121b2cc"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack02"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2c7b655-e9e0-48c3-809b-ab3004fdafa3"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack03"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +246,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Process = m_Player.FindAction("Process", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_Player_Attack02 = m_Player.FindAction("Attack02", throwIfNotFound: true);
+        m_Player_Attack03 = m_Player.FindAction("Attack03", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +315,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Process;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_ChangeWeapon;
+    private readonly InputAction m_Player_Attack02;
+    private readonly InputAction m_Player_Attack03;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -283,6 +327,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Process => m_Wrapper.m_Player_Process;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
+        public InputAction @Attack02 => m_Wrapper.m_Player_Attack02;
+        public InputAction @Attack03 => m_Wrapper.m_Player_Attack03;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +356,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @ChangeWeapon.started += instance.OnChangeWeapon;
             @ChangeWeapon.performed += instance.OnChangeWeapon;
             @ChangeWeapon.canceled += instance.OnChangeWeapon;
+            @Attack02.started += instance.OnAttack02;
+            @Attack02.performed += instance.OnAttack02;
+            @Attack02.canceled += instance.OnAttack02;
+            @Attack03.started += instance.OnAttack03;
+            @Attack03.performed += instance.OnAttack03;
+            @Attack03.canceled += instance.OnAttack03;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -332,6 +384,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @ChangeWeapon.started -= instance.OnChangeWeapon;
             @ChangeWeapon.performed -= instance.OnChangeWeapon;
             @ChangeWeapon.canceled -= instance.OnChangeWeapon;
+            @Attack02.started -= instance.OnAttack02;
+            @Attack02.performed -= instance.OnAttack02;
+            @Attack02.canceled -= instance.OnAttack02;
+            @Attack03.started -= instance.OnAttack03;
+            @Attack03.performed -= instance.OnAttack03;
+            @Attack03.canceled -= instance.OnAttack03;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -357,5 +415,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnProcess(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnAttack02(InputAction.CallbackContext context);
+        void OnAttack03(InputAction.CallbackContext context);
     }
 }

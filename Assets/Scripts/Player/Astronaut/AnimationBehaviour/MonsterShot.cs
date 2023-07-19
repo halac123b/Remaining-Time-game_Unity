@@ -56,7 +56,7 @@ public class MonsterShot : StateMachineBehaviour
       }
       else if (x == 0f && y <= -0.05f) y_delta = -0.5f;
 
-      GameObject arrow = Instantiate(Bullet, new Vector3(animator.gameObject.transform.position.x + x_delta, animator.gameObject.transform.position.y + 1f + y_delta), new Quaternion(0,0,180,0));
+      GameObject arrow = Instantiate(Bullet, new Vector3(animator.gameObject.transform.position.x + x_delta, animator.gameObject.transform.position.y + 1f + y_delta), new Quaternion());
       arrow.GetComponent<BulletItemMovement>().SetMoveVector(TargetVector);
     }
   }

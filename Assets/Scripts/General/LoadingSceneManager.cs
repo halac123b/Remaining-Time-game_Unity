@@ -9,6 +9,7 @@ public enum SceneName : byte
   Bootstrap,
   Menu,
   LobbySelection,
+  StandbyPhase,
   ShoppingPhase,
 };
 
@@ -19,6 +20,12 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   private SceneName m_sceneActive;
 
   private int numPlayer = 0;
+
+  private int currentRound = 1;
+  public int GetRound()
+  {
+    return currentRound;
+  }
 
   // After running the menu scene, which initiates this manager, we subscribe to these events
   // due to the fact that when a network session ends it cannot longer listen to them.
@@ -83,7 +90,7 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   // Here we set up what to do for each scene, like changing the music
   private void OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
   {
-    
+
     // We only care the host/server is loading because every manager handles
     // their information and behavior on the server runtime
     if (!NetworkManager.Singleton.IsServer)

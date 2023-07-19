@@ -18,6 +18,8 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
 
   private SceneName m_sceneActive;
 
+  private int numPlayer = 0;
+
   // After running the menu scene, which initiates this manager, we subscribe to these events
   // due to the fact that when a network session ends it cannot longer listen to them.
   public void Init()
@@ -96,8 +98,19 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
     {
       // When a client/host connects tell the manager
       case SceneName.ShoppingPhase:
+
         ShoppingManager.Instance.ServerSceneInit();
         break;
     }
+  }
+
+  public void SetNumPlayer(int num)
+  {
+    numPlayer = num;
+  }
+
+  public int GetNumPlayer()
+  {
+    return numPlayer;
   }
 }

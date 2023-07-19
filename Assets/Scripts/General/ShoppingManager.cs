@@ -31,16 +31,28 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     numberConnected++;
 
     // Check if is the last client
-    if (numberConnected != 2)
+    if (numberConnected != LoadingSceneManager.Instance.GetNumPlayer())
       return;
 
     NetworkObjectSpawner.SpawnNewNetworkObject(oxyBottle);
-    NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
-    NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(10, 0, 0), 1);
+    switch (numberConnected)
+    {
+      case 1:
+        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
+        break;
+      case 2:
+        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(-10, 0, 0), 1);
+        break;
+      case 3:
+        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(-10, 0, 0), 1);
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), 2);
+        break;
+    }
 
     playerStatus.SetStartCounting(true);
 
     gameUI.SetActive(true);
-
   }
 }

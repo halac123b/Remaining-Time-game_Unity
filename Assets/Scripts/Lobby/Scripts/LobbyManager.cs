@@ -522,6 +522,7 @@ public class LobbyManager : MonoBehaviour
         });
         joinedLobby = lobby;
 
+        LoadingSceneManager.Instance.SetNumPlayer(lobby.Players.Count);
         LoadingSceneManager.Instance.LoadScene(nextScene);
       }
       catch (LobbyServiceException e)

@@ -85,7 +85,7 @@ public class LobbyManager : MonoBehaviour
   private void Start()
   {
     SetupEvents();
-    LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
+    // LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
   }
 
   // Setup authentication event handlers if desired

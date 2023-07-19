@@ -26,7 +26,7 @@ public class AnimatorController : NetworkBehaviour
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerStatus = FindObjectOfType<PlayerStatus>();
 
-    playerStatus.OnDeadTrigger += OnDeadAnimation;
+    
 
     //PlayerInput
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
@@ -50,7 +50,6 @@ public class AnimatorController : NetworkBehaviour
     if (!IsOwner) return;
 
     animator.SetFloat(SPEED, playerMovement.MoveVector().magnitude);
-    animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
     float x = playerMovement.MoveVector().x;
     float y = playerMovement.MoveVector().y;
@@ -65,9 +64,9 @@ public class AnimatorController : NetworkBehaviour
     // Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     // Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
-  private void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
+  public virtual void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
 
-
+    
 
     if (y > 0.01f)
     {
@@ -90,9 +89,5 @@ public class AnimatorController : NetworkBehaviour
     }
   }
 
-  private void OnDeadAnimation(object sender, EventArgs e)
-  {
-    animator.SetTrigger("isDeath");
-    playerMovement.enabled = false;
-  }
+  
 }

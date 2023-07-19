@@ -36,7 +36,7 @@ public class PlayerColision : NetworkBehaviour
         {
           if (IsClient)
           {
-            oxy.SetProcessServerRpc(true, -processSpeed);
+            oxy.SetProcessServerRpc(false, -processSpeed);
           }
           else
           {

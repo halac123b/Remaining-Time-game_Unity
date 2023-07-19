@@ -4,7 +4,7 @@ using System;
 
 // Fix: GetTimer(0)
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatus : SingletonPersistent<PlayerStatus>
 {
   [SerializeField] private int timeLeft = 30;
   private bool countTrigger = true;

@@ -44,7 +44,6 @@ public class LobbyUI : MonoBehaviour
     StartGameButton.onClick.AddListener(() =>
     {
       LobbyManager.Instance.StartGame();
-
     });
   }
 
@@ -109,8 +108,11 @@ public class LobbyUI : MonoBehaviour
   {
     foreach (Transform child in container)
     {
-      if (child == playerSingleTemplate) continue;
-      Destroy(child.gameObject);
+      if (child != null)
+      {
+        if (child == playerSingleTemplate) continue;
+        Destroy(child.gameObject);
+      }
     }
   }
 
@@ -123,7 +125,4 @@ public class LobbyUI : MonoBehaviour
   {
     gameObject.SetActive(true);
   }
-
-
-
 }

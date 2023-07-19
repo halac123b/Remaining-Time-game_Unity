@@ -9,7 +9,7 @@ public enum SceneName : byte
   Bootstrap,
   Menu,
   LobbySelection,
-  CharacterSelection,
+  ShoppingPhase,
 };
 
 public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
@@ -34,10 +34,12 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   // Coroutine for the loading effect. It use an alpha in out effect
   private IEnumerator Loading(SceneName sceneToLoad, bool isNetworkSessionActive)
   {
-    LoadingFadeEffect.Instance.FadeIn();
-
-    // Here the player still sees the black screen
-    yield return new WaitUntil(() => LoadingFadeEffect.s_canLoad);
+    if (sceneToLoad != SceneName.Menu)
+    {
+      LoadingFadeEffect.Instance.FadeIn();
+      // Here the player still sees the black screen
+      yield return new WaitUntil(() => LoadingFadeEffect.s_canLoad);
+    }
 
     if (isNetworkSessionActive)
     {
@@ -45,7 +47,6 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
       {
         LoadSceneNetwork(sceneToLoad);
       }
-
     }
     else
     {
@@ -56,7 +57,10 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
     // scene to load before we continue
     yield return new WaitForSeconds(1f);
 
-    LoadingFadeEffect.Instance.FadeOut();
+    if (sceneToLoad != SceneName.Menu)
+    {
+      LoadingFadeEffect.Instance.FadeOut();
+    }
   }
 
   private void LoadSceneLocal(SceneName sceneToLoad)
@@ -91,7 +95,8 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
     switch (m_sceneActive)
     {
       // When a client/host connects tell the manager
-      case SceneName.CharacterSelection:
+      case SceneName.ShoppingPhase:
+        ShoppingManager.Instance.ServerSceneInit();
         break;
     }
   }

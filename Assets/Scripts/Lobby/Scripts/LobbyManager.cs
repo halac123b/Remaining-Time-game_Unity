@@ -1,18 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
 public class LobbyManager : MonoBehaviour
 {
-
-
   public static LobbyManager Instance { get; private set; }
 
   public const string KEY_PLAYER_NAME = "PlayerName";
@@ -20,7 +17,7 @@ public class LobbyManager : MonoBehaviour
   public const string KEY_GAME_MODE = "GameMode";
   public const string KEY_START_GAME = "StartGame_RelayCode";
 
-
+  [SerializeField] private SceneName nextScene = SceneName.ShoppingPhase;
 
   public event EventHandler OnLeftLobby;
 
@@ -80,12 +77,20 @@ public class LobbyManager : MonoBehaviour
       Debug.LogException(e);
     }
     Instance = this;
-  }
 
-  private void Start()
-  {
     SetupEvents();
     LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
+  }
+
+  private IEnumerator Start()
+  {
+    // Wait for the network Scene Manager to start
+    yield return new WaitUntil(() => NetworkManager.Singleton.SceneManager != null);
+
+    // Set the events on the loading manager
+    // Doing this because every time the network session ends the loading manager stops
+    // detecting the events
+    LoadingSceneManager.Instance.Init();
   }
 
   // Setup authentication event handlers if desired
@@ -516,6 +521,8 @@ public class LobbyManager : MonoBehaviour
                    }
         });
         joinedLobby = lobby;
+
+        LoadingSceneManager.Instance.LoadScene(nextScene);
       }
       catch (LobbyServiceException e)
       {

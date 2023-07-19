@@ -5,13 +5,11 @@ using System.Collections;
 
 public class MenuController : MonoBehaviour
 {
-  [SerializeField]
-  private PlayerDataSO[] m_PlayerDatas;
+  [SerializeField] private PlayerDataSO[] m_PlayerDatas;
 
-  [SerializeField]
-  private SceneName nextScene = SceneName.LobbySelection;
+  [SerializeField] private SceneName nextScene = SceneName.LobbySelection;
 
-  private IEnumerator Start()
+  private void Start()
   {
     // -- To test with latency on development builds --
     // To set the latency, jitter and packet-loss percentage values for develop builds we need
@@ -30,15 +28,7 @@ public class MenuController : MonoBehaviour
                 dropRate: 3);
 #endif
 
-    ClearAllCharacterData();
-
-    // Wait for the network Scene Manager to start
-    yield return new WaitUntil(() => NetworkManager.Singleton.SceneManager != null);
-
-    // Set the events on the loading manager
-    // Doing this because every time the network session ends the loading manager stops
-    // detecting the events
-    LoadingSceneManager.Instance.Init();
+    //ClearAllCharacterData();
   }
 
   private void ClearAllCharacterData()

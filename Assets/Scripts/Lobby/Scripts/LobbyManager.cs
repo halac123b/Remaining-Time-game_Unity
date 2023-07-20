@@ -79,6 +79,17 @@ public class LobbyManager : MonoBehaviour
     Instance = this;
 
     SetupEvents();
+    // ParrelSync should only be used within the Unity Editor so you should use the UNITY_EDITOR define
+
+#if UNITY_EDITOR
+    if (ParrelSync.ClonesManager.IsClone())
+    {
+      // When using a ParrelSync clone, switch to a different authentication profile to force the clone
+      // to sign in as a different anonymous user account.
+      string customArgument = ParrelSync.ClonesManager.GetArgument();
+      AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
+    }
+#endif
     LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
   }
 

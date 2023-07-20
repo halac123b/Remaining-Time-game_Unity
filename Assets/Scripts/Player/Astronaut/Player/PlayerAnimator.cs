@@ -70,7 +70,7 @@ public class PlayerAnimator : AnimatorController
   }
   private void Start()
   {
-    if (IsOwner) playerData.Value = playerStatus.GetPlayerData();
+    if (IsOwner) playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
   }
 
 
@@ -90,7 +90,7 @@ public class PlayerAnimator : AnimatorController
 
     if (!IsOwner) return;
 
-    
+
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 
     // weaponcarry.sprite = playerEquip.GetCurrentEquip().GetSprite();
@@ -107,8 +107,8 @@ public class PlayerAnimator : AnimatorController
 
 
   }
-  
-/////////////////////Support////////////////////////////////
+
+  /////////////////////Support////////////////////////////////
   public void UpdataMousePos()
   {
     if (!IsOwner) return;
@@ -128,7 +128,7 @@ public class PlayerAnimator : AnimatorController
   }
   public override void Set_VERTICAL_HORIZONTAL(float x, float y)
   {
-    base.Set_VERTICAL_HORIZONTAL(x,y);
+    base.Set_VERTICAL_HORIZONTAL(x, y);
     if (!IsOwner) return;
     Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
@@ -176,7 +176,7 @@ public class PlayerAnimator : AnimatorController
     sprite.material.color = color;
     cover_sprite.material.color = color;
   }
-/////////////////////////////Handle Event////////////////////////////// 
+  /////////////////////////////Handle Event////////////////////////////// 
   private void OnFlipXChanged(bool oldValue, bool newValue)
   {
     weaponcarry.flipX = weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;

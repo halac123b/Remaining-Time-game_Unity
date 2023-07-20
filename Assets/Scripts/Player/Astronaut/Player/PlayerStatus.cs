@@ -10,8 +10,6 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private bool countTrigger = true;
   private bool startCounting = false;
 
-  public PlayerData playerData;
-
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
   // public event EventHandler OnAttackTrigger;
@@ -54,18 +52,6 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public int GetTimeLeft()
   {
     return timeLeft;
-  }
-
-  public void SetPlayerData(PlayerData playerData)
-  {
-    this.playerData = playerData;
-    Debug.Log("Player ID is:" + playerData.Id);
-    Debug.Log("Player color is:" + playerData.color);
-  }
-
-  public PlayerData GetPlayerData()
-  {
-    return this.playerData;
   }
 
   public void SetStartCounting(bool status)

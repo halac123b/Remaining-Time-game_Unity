@@ -17,7 +17,7 @@ public class LobbyManager : MonoBehaviour
   public const string KEY_GAME_MODE = "GameMode";
   public const string KEY_START_GAME = "StartGame_RelayCode";
 
-  [SerializeField] private SceneName nextScene = SceneName.ShoppingPhase;
+  [SerializeField] private SceneName nextScene = SceneName.StandbyPhase;
 
   public event EventHandler OnLeftLobby;
 
@@ -63,7 +63,7 @@ public class LobbyManager : MonoBehaviour
   // public Color playerColor;
   private PlayerData playerData;
 
-
+  [SerializeField] private RelayManager relayManager;
 
   private async void Awake()
   {
@@ -102,6 +102,8 @@ public class LobbyManager : MonoBehaviour
     // Doing this because every time the network session ends the loading manager stops
     // detecting the events
     LoadingSceneManager.Instance.Init();
+    relayManager.OnClientConnect += LoadScene;
+
   }
 
   // Setup authentication event handlers if desired
@@ -534,13 +536,18 @@ public class LobbyManager : MonoBehaviour
         joinedLobby = lobby;
 
         LoadingSceneManager.Instance.SetNumPlayer(lobby.Players.Count);
-        LoadingSceneManager.Instance.LoadScene(nextScene);
       }
       catch (LobbyServiceException e)
       {
         Debug.Log(e);
       }
     }
+
+  }
+  public void LoadScene(object sender, EventArgs e)
+  {
+    LoadingSceneManager.Instance.LoadScene(nextScene);
+    Debug.Log("xxxxx");
   }
 
 }

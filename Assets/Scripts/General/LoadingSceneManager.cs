@@ -26,6 +26,11 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   {
     return currentRound;
   }
+  public void GoNextRound()
+  {
+    currentRound++;
+  }
+
 
   // After running the menu scene, which initiates this manager, we subscribe to these events
   // due to the fact that when a network session ends it cannot longer listen to them.
@@ -109,6 +114,10 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
 
         ShoppingManager.Instance.ServerSceneInit();
         break;
+
+        // case SceneName.StandbyPhase:
+        //   StandbyManager.Instance.ServerSceneInit();
+        //   break;
     }
   }
 

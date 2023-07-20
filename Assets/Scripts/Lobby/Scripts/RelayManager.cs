@@ -7,26 +7,24 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.Collections;
 using System;
-// using Microsoft.Unity.VisualStudio.Editor;
 
-// public static TestRelay Instance { get; private set; }
-public class RelayManager : MonoBehaviour
+public class RelayManager : NetworkBehaviour
 {
   public static RelayManager Instance { get; private set; }
   //[SerializeField] private GameObject Loading;
   [SerializeField] private Material materialLoadding;
-  //[SerializeField] private GameObject gameUI;
-  [SerializeField] private PlayerStatus playerStatus;
 
-  // [SerializeField] private GameObject oxyBottle;
-  // [SerializeField] private GameObject playerPrefab;
-  // [SerializeField] private GameObject monsterPrefab;
+  private int clientId;
 
   private GameObject spawnObjTransform;
+
+  public event EventHandler OnClientConnect;
 
   private void Awake()
   {
     Instance = this;
+    clientId = 0;
+    DontDestroyOnLoad(gameObject);
   }
 
   // Start is called before the first frame update
@@ -53,21 +51,8 @@ public class RelayManager : MonoBehaviour
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartHost();
 
-      // // Ha's test
-      // gameUI.SetActive(true);
-      playerStatus.SetPlayerData(playerData);
-      // playerStatus.SetStartCounting(true);
-
-      // // Spawn oxygen
-      // spawnObjTransform = Instantiate(oxyBottle);
-      // spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
-
-      // // Player
-      // spawnObjTransform = Instantiate(playerPrefab, new Vector3(-10, 0, 0), Quaternion.identity);
-      // spawnObjTransform.GetComponent<NetworkObject>().Spawn(true);
-
-      // spawnObjTransform = Instantiate(playerPrefab, new Vector3(10, 0, 0), Quaternion.identity);
-      // spawnObjTransform.GetComponent<NetworkObject>().SpawnWithOwnership(1);
+      PointManager.Instance.SetPlayerData(clientId, playerData);
+      clientId++;
 
       return joinCode;
     }
@@ -91,16 +76,21 @@ public class RelayManager : MonoBehaviour
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
 
-      // // Ha's test
-      playerStatus.SetPlayerData(playerData);
-      // gameUI.SetActive(true);
-      // playerStatus.SetStartCounting(true);
-
+      // SetPlayerDataServerRpc(playerData);
+      StartCoroutine(Test(playerData));
     }
+
     catch (RelayServiceException e)
     {
       Debug.Log(e);
     }
+  }
+
+  IEnumerator Test(PlayerData playerData)
+  {
+    yield return new WaitForSeconds(3.45f);
+    SetPlayerDataServerRpc(playerData);
+    Debug.Log("client" + playerData.playerName);
   }
 
   // private IEnumerator ActivateObjectForDuration()
@@ -119,4 +109,26 @@ public class RelayManager : MonoBehaviour
 
   //   Loading.SetActive(false);
   // }
+
+  // [ClientRpc]
+  // private void SetPlayerDataClientRpc(PlayerData playerData)
+  // {
+  //   PointManager.Instance.SetPlayerData(clientId, playerData);
+  //   clientId++;
+  //   Debug.Log("RPC1" + clientId);
+  //   for (int i = 0; i < PointManager.Instance.playerPoint.Length; i++)
+  //   {
+  //     Debug.Log("xx" + PointManager.Instance.playerPoint[i].playerData.playerName);
+  //   }
+  // }
+
+  [ServerRpc(RequireOwnership = false)]
+  private void SetPlayerDataServerRpc(PlayerData playerData)
+  {
+    // SetPlayerDataClientRpc(playerData);
+    PointManager.Instance.SetPlayerData(clientId, playerData);
+    clientId++;
+    OnClientConnect?.Invoke(this, EventArgs.Empty);
+    Debug.Log("RPC2");
+  }
 }

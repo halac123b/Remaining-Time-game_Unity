@@ -72,9 +72,6 @@ public class PlayerAnimator : AnimatorController
   {
     if (IsOwner)
     {
-      // PlayerData data;
-      // GetDataServerRpc(out data, Convert.ToInt32(OwnerClientId));
-      // playerData.Value = data;
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
     }
   }
@@ -109,9 +106,6 @@ public class PlayerAnimator : AnimatorController
 
     Set_VERTICAL_HORIZONTAL(x, y);
     animator.SetBool(IS_PROCESSING, playerColision.IsInProcessing());
-
-
-
   }
 
   /////////////////////Support////////////////////////////////
@@ -223,10 +217,4 @@ public class PlayerAnimator : AnimatorController
     weapon_animator.SetTrigger(ATTACK_CANCEL);
     cover_animator.SetTrigger(ATTACK_CANCEL);
   }
-
-  // [ServerRpc(RequireOwnership = false)]
-  // private void GetDataServerRpc(out PlayerData data, int index)
-  // {
-  //   data = PointManager.Instance.GetPlayerData(index);
-  // }
 }

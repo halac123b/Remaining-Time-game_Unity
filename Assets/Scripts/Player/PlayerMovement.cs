@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -11,10 +12,17 @@ public class PlayerMovement : NetworkBehaviour
 
   private bool canMove = true;
 
+  private int clientId = -1;
+
   private void Awake()
   {
     lastDirection = new Vector2(0, 1);
     playerInput = GetComponent<PlayerInput>();
+    Debug.Log("client xx: " + IsOwner);
+    if (IsOwner)
+    {
+      clientId = Convert.ToInt32(OwnerClientId);
+    }
   }
 
   private void Update()
@@ -76,6 +84,11 @@ public class PlayerMovement : NetworkBehaviour
   public void SetSpeed(float speed)
   {
     moveSpeed = speed;
+  }
+
+  public int GetClientId()
+  {
+    return clientId;
   }
 }
 

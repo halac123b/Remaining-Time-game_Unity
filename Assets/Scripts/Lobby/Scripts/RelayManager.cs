@@ -75,11 +75,7 @@ public class RelayManager : NetworkBehaviour
       NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
-      
-      PointManager.Instance.SetPlayerData(Convert.ToInt32(OwnerClientId), playerData);
-      Debug.Log("Client ID: "+ OwnerClientId);
 
-      // SetPlayerDataServerRpc(playerData);
       StartCoroutine(Test(playerData));
     }
 
@@ -91,9 +87,8 @@ public class RelayManager : NetworkBehaviour
 
   IEnumerator Test(PlayerData playerData)
   {
-    yield return new WaitForSeconds(3.45f);
+    yield return new WaitForSeconds(3.5f);
     SetPlayerDataServerRpc(playerData);
-    Debug.Log("client" + playerData.playerName);
   }
 
   // private IEnumerator ActivateObjectForDuration()

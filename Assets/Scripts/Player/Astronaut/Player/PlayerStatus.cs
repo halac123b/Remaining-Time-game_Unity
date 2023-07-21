@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using Unity.Netcode;
 
 // Fix: GetTimer(0)
 
@@ -12,6 +13,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
+
   // public event EventHandler OnAttackTrigger;
 
   //private int playerIndex;
@@ -25,6 +27,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   //   Debug.Log(playerIndex);
   //   timeLeft = timeManager.GetTimer();
   // }
+
   private void Update()
   {
     if (startCounting && countTrigger && timeLeft > 0)

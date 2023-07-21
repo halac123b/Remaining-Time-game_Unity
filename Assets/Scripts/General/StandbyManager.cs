@@ -7,9 +7,6 @@ using Unity.Collections;
 
 public class StandbyManager : SingletonNetwork<StandbyManager>
 {
-
-  private int numberConnected = 0;
-
   [SerializeField] TextMeshProUGUI[] playerName;
   [SerializeField] Image[] playerAvatar;
   [SerializeField] TextMeshProUGUI[] playerPoint;
@@ -68,11 +65,12 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
       UpdateUIClientRpc(2, data);
     }
 
-    Invoke("LoadNextScene",5f);
+    Invoke("LoadNextScene", 5f);
   }
 
-  private void LoadNextScene(){
-      LoadingSceneManager.Instance.LoadScene(nextScene);
+  private void LoadNextScene()
+  {
+    LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 
   [ClientRpc]

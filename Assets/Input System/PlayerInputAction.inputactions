@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "E_Btn",
+                    "type": "Button",
+                    "id": "df89f2bb-03e2-471b-9229-020ceade3eca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Q_Btn",
+                    "type": "Button",
+                    "id": "31a163a9-e70e-4891-9d7f-945006d9f17f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -208,6 +226,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack03",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "417a8098-ef68-4061-8982-529c7cdfb1ff",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "E_Btn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68c013a4-a895-4365-bfce-d047127384d9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Q_Btn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

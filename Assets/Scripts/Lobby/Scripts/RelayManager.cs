@@ -75,6 +75,9 @@ public class RelayManager : NetworkBehaviour
       NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
+      
+      PointManager.Instance.SetPlayerData(Convert.ToInt32(OwnerClientId), playerData);
+      Debug.Log("Client ID: "+ OwnerClientId);
 
       // SetPlayerDataServerRpc(playerData);
       StartCoroutine(Test(playerData));

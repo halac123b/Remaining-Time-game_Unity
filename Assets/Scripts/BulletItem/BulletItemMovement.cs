@@ -31,7 +31,7 @@ public class BulletItemMovement : MonoBehaviour
         transform.rotation = rotation;
         transform.position += new Vector3(moveVector.x, moveVector.y) * -Speed*Time.deltaTime;
     }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         Destroy(gameObject);

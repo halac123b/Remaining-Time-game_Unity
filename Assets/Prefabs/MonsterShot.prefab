@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6291795863611120399}
   - component: {fileID: 9007801731078027504}
   - component: {fileID: 4636399935624149561}
-  - component: {fileID: 636215034146582084}
+  - component: {fileID: 6505021614108395101}
   m_Layer: 6
   m_Name: MonsterShot
   m_TagString: Untagged
@@ -211,8 +211,8 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!68 &636215034146582084
-EdgeCollider2D:
+--- !u!58 &6505021614108395101
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -243,19 +243,6 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.282, y: 0.29}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.40356344, y: -0.60112077}
-  - {x: 0.3676001, y: -0.5964525}
-  - {x: 0.31274426, y: -0.56629527}
-  - {x: 0.27374458, y: -0.48626348}
-  - {x: 0.2534544, y: -0.3774473}
-  - {x: 0.2522005, y: -0.19858724}
-  - {x: 0.29802364, y: -0.027737472}
-  - {x: 0.35550573, y: 0.034828614}
-  - {x: 0.4048802, y: 0.036991034}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Offset: {x: 0.0012751162, y: 0.0031646432}
+  serializedVersion: 2
+  m_Radius: 0.03464517

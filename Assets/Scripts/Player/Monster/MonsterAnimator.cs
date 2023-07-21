@@ -14,9 +14,25 @@ public class MonsterAnimator : AnimatorController
         playerInput.playerInputActions.Player.Attack.started += TriggerAttack01Started;
         playerInput.playerInputActions.Player.Attack02.started += TriggerAttack02Started;
         playerInput.playerInputActions.Player.Attack03.started += TriggerAttack03Started;
+        playerInput.playerInputActions.Player.E_Btn.started += TriggerSummonGrunt;
+        playerInput.playerInputActions.Player.Q_Btn.started += TriggerSummonHunter;
 
 
     }
+
+    private void TriggerSummonHunter(InputAction.CallbackContext context)
+    {
+        if(IsOwner)
+        animator.SetTrigger("summonHunter");
+    }
+
+    private void TriggerSummonGrunt(InputAction.CallbackContext context)
+    {
+        if(IsOwner)
+        animator.SetTrigger("summonGrunt");
+
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -42,7 +58,7 @@ public class MonsterAnimator : AnimatorController
     private void TriggerAttack01Started(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-
+        
         animator.SetInteger(TYPE_ATTACK,1);
         animator.SetTrigger(ATTACK);
     }

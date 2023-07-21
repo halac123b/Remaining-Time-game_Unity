@@ -2999,7 +2999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialLoadding: {fileID: 2100000, guid: ee0364b02189a4d4fbeedf78dc6b2b2b, type: 2}
-  playerStatus: {fileID: 818246421}
 --- !u!4 &572245941
 Transform:
   m_ObjectHideFlags: 0
@@ -4424,7 +4423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14259dc4bfdeef4db5654c97251127d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 3
+  nextScene: 4
+  relayManager: {fileID: 572245940}
 --- !u!4 &818158579
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,6 @@ public class EquipmentSlot : MonoBehaviour
 
   private void ChangeEquipSprite(object sender, EventArgs e)
   {
-    image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    if (image) image.sprite = playerEquip.GetCurrentEquip().GetSprite();
   }
 }

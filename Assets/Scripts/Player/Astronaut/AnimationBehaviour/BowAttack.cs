@@ -42,7 +42,7 @@ public class BowAttack : StateMachineBehaviour
     TargetVector.Normalize();
     playerAnim.AimBar.gameObject.SetActive(false);
 
-    ; if (stateInfo.normalizedTime >= TimeAim)
+    if (stateInfo.normalizedTime >= TimeAim)
     {
       GameObject arrow = Instantiate(Arrow, new Vector3(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y + 0.5f), new Quaternion());
       arrow.GetComponent<BulletItemMovement>().SetMoveVector(TargetVector);

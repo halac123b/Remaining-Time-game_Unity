@@ -98,6 +98,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""E_Btn"",
+                    ""type"": ""Button"",
+                    ""id"": ""df89f2bb-03e2-471b-9229-020ceade3eca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Q_Btn"",
+                    ""type"": ""Button"",
+                    ""id"": ""31a163a9-e70e-4891-9d7f-945006d9f17f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +250,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Attack03"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""417a8098-ef68-4061-8982-529c7cdfb1ff"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""E_Btn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68c013a4-a895-4365-bfce-d047127384d9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Q_Btn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +288,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Player_Attack02 = m_Player.FindAction("Attack02", throwIfNotFound: true);
         m_Player_Attack03 = m_Player.FindAction("Attack03", throwIfNotFound: true);
+        m_Player_E_Btn = m_Player.FindAction("E_Btn", throwIfNotFound: true);
+        m_Player_Q_Btn = m_Player.FindAction("Q_Btn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +359,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_Attack02;
     private readonly InputAction m_Player_Attack03;
+    private readonly InputAction m_Player_E_Btn;
+    private readonly InputAction m_Player_Q_Btn;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -329,6 +373,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @Attack02 => m_Wrapper.m_Player_Attack02;
         public InputAction @Attack03 => m_Wrapper.m_Player_Attack03;
+        public InputAction @E_Btn => m_Wrapper.m_Player_E_Btn;
+        public InputAction @Q_Btn => m_Wrapper.m_Player_Q_Btn;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +408,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Attack03.started += instance.OnAttack03;
             @Attack03.performed += instance.OnAttack03;
             @Attack03.canceled += instance.OnAttack03;
+            @E_Btn.started += instance.OnE_Btn;
+            @E_Btn.performed += instance.OnE_Btn;
+            @E_Btn.canceled += instance.OnE_Btn;
+            @Q_Btn.started += instance.OnQ_Btn;
+            @Q_Btn.performed += instance.OnQ_Btn;
+            @Q_Btn.canceled += instance.OnQ_Btn;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -390,6 +442,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Attack03.started -= instance.OnAttack03;
             @Attack03.performed -= instance.OnAttack03;
             @Attack03.canceled -= instance.OnAttack03;
+            @E_Btn.started -= instance.OnE_Btn;
+            @E_Btn.performed -= instance.OnE_Btn;
+            @E_Btn.canceled -= instance.OnE_Btn;
+            @Q_Btn.started -= instance.OnQ_Btn;
+            @Q_Btn.performed -= instance.OnQ_Btn;
+            @Q_Btn.canceled -= instance.OnQ_Btn;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -417,5 +475,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnAttack02(InputAction.CallbackContext context);
         void OnAttack03(InputAction.CallbackContext context);
+        void OnE_Btn(InputAction.CallbackContext context);
+        void OnQ_Btn(InputAction.CallbackContext context);
     }
 }

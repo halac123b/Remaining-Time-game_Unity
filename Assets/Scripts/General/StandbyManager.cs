@@ -68,7 +68,11 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
       UpdateUIClientRpc(2, data);
     }
 
-    //LoadingSceneManager.Instance.LoadScene(nextScene);
+    Invoke("LoadNextScene",5f);
+  }
+
+  private void LoadNextScene(){
+      LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 
   [ClientRpc]

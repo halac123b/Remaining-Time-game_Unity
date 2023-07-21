@@ -14,7 +14,7 @@ public class RelayManager : NetworkBehaviour
   //[SerializeField] private GameObject Loading;
   [SerializeField] private Material materialLoadding;
 
-  private int clientId;
+  private ulong clientId;
 
   private GameObject spawnObjTransform;
 
@@ -120,7 +120,7 @@ public class RelayManager : NetworkBehaviour
   }
 
   [ClientRpc]
-  private void SetPlayerDataClientRpc(int index, PlayerData playerData)
+  private void SetPlayerDataClientRpc(ulong index, PlayerData playerData)
   {
     if (!IsHost)
     {

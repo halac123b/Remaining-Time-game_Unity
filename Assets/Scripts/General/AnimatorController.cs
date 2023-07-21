@@ -19,7 +19,21 @@ public class AnimatorController : NetworkBehaviour
 
   protected PlayerInput playerInput;
   protected PlayerMovement playerMovement;
+  protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
+    new PlayerData
+    {
+      Id = 0,
+      color = Color.red,
+      playerName = "",
+      playerWeapon = 0,
+    }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+  protected virtual void Start(){
+    if (IsOwner)
+    {
+      playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
+    }
+  }
   protected virtual void Awake()
   {
     playerInput = GetComponentInParent<PlayerInput>();

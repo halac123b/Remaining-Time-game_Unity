@@ -25,14 +25,6 @@ public class PlayerAnimator : AnimatorController
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   private NetworkVariable<int> weaponSorting = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
-    new PlayerData
-    {
-      Id = "",
-      color = Color.red,
-      playerName = "",
-      playerWeapon = 0,
-    }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   protected override void Awake()
   {
@@ -68,14 +60,6 @@ public class PlayerAnimator : AnimatorController
     };
     playerData.Value = data;
   }
-  private void Start()
-  {
-    if (IsOwner)
-    {
-      playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
-    }
-  }
-
 
   protected override void Update()
   {

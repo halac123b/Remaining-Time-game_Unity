@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class SummonSubMonster : StateMachineBehaviour
@@ -20,12 +21,13 @@ public class SummonSubMonster : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(stateInfo.normalizedTime >= 1f){
+        
+        if(stateInfo.normalizedTime >= 1f && animator.GetComponent<MonsterAnimator>().Is_Server()){
             
-            Instantiate(submonter,new Vector3(animator.transform.position.x+1,animator.transform.position.y + 2f),new Quaternion());
-            Instantiate(submonter,new Vector3(animator.transform.position.x-1,animator.transform.position.y + 2f),new Quaternion());
-            Instantiate(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y+1 + 2f),new Quaternion());
-            Instantiate(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y-1 + 2f),new Quaternion());
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x+1,animator.transform.position.y + 2f), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x-1,animator.transform.position.y + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y+1 + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y-1 + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
         }
         
     }

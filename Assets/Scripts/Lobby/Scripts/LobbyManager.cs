@@ -152,7 +152,7 @@ public class LobbyManager : MonoBehaviour
 
     AuthenticationService.Instance.SignedIn += () =>
     {
-      playerData.Id = AuthenticationService.Instance.PlayerId;
+      playerData.Id = 0;
       Debug.Log(playerName + " Signed in! " + AuthenticationService.Instance.PlayerId);
       RefreshLobbyList();
     };

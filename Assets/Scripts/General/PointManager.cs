@@ -73,9 +73,10 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
     return playerPoint[index].playerData;
   }
 
-  public void SetPlayerData(int index, PlayerData playerData)
+  public void SetPlayerData(ulong index, PlayerData playerData)
   {
     playerPoint[index].playerData = playerData;
+    playerData.Id = index;
     Debug.Log("Player ID is:" + playerData.Id);
     Debug.Log("Player color is:" + playerData.color);
   }

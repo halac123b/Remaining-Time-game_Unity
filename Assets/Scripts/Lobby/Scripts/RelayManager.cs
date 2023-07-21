@@ -14,7 +14,7 @@ public class RelayManager : NetworkBehaviour
   //[SerializeField] private GameObject Loading;
   [SerializeField] private Material materialLoadding;
 
-  private int clientId;
+  private ulong clientId;
 
   private GameObject spawnObjTransform;
 
@@ -76,7 +76,7 @@ public class RelayManager : NetworkBehaviour
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
       
-      PointManager.Instance.SetPlayerData(Convert.ToInt32(OwnerClientId), playerData);
+      PointManager.Instance.SetPlayerData(OwnerClientId, playerData);
       Debug.Log("Client ID: "+ OwnerClientId);
 
       // SetPlayerDataServerRpc(playerData);
@@ -125,7 +125,7 @@ public class RelayManager : NetworkBehaviour
   }
 
   [ClientRpc]
-  private void SetPlayerDataClientRpc(int index, PlayerData playerData)
+  private void SetPlayerDataClientRpc(ulong index, PlayerData playerData)
   {
     if (!IsHost)
     {

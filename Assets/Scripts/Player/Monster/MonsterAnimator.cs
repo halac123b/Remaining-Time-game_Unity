@@ -19,18 +19,16 @@ public class MonsterAnimator : AnimatorController
 
 
     }
-
-    private void TriggerSummonHunter(InputAction.CallbackContext context)
+    public bool Is_Server(){
+        return IsServer;
+    }
+    protected override void Start()
     {
-        if(IsOwner)
-        animator.SetTrigger("summonHunter");
+        base.Start();
     }
 
-    private void TriggerSummonGrunt(InputAction.CallbackContext context)
-    {
-        if(IsOwner)
-        animator.SetTrigger("summonGrunt");
-
+    public PlayerData GetPlayerData(){
+        return playerData.Value;
     }
 
     protected override void Update()
@@ -55,6 +53,18 @@ public class MonsterAnimator : AnimatorController
 
 /////////////////////////////Handle Event////////////////////////////// 
 
+     private void TriggerSummonHunter(InputAction.CallbackContext context)
+    {
+        if(IsOwner)
+        animator.SetTrigger("summonHunter");
+    }
+
+    private void TriggerSummonGrunt(InputAction.CallbackContext context)
+    {
+        if(IsOwner)
+        animator.SetTrigger("summonGrunt");
+
+    }
     private void TriggerAttack01Started(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;

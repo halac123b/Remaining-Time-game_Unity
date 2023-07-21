@@ -8,7 +8,7 @@ using UnityEngine;
 public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 {
 
-  public string Id;
+  public ulong Id;
   public Color color;
   public string playerName;
   public int playerWeapon;

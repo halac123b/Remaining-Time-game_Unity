@@ -536,6 +536,10 @@ public class LobbyManager : MonoBehaviour
         joinedLobby = lobby;
 
         LoadingSceneManager.Instance.SetNumPlayer(lobby.Players.Count);
+        if (lobby.Players.Count == 1)
+        {
+          LoadingSceneManager.Instance.LoadScene(nextScene);
+        }
       }
       catch (LobbyServiceException e)
       {
@@ -547,7 +551,6 @@ public class LobbyManager : MonoBehaviour
   public void LoadScene(object sender, EventArgs e)
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
-    Debug.Log("xxxxx");
   }
 
 }

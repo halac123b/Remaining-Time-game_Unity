@@ -42,11 +42,11 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
       case 2:
         NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(-10, 0, 0), 1);
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(10, 0, 0), 1);
         break;
       case 3:
         NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(-10, 0, 0), 1);
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(10, 0, 0), 1);
         NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), 2);
         break;
     }

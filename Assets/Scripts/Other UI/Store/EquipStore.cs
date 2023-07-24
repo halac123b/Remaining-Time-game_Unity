@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -123,5 +122,11 @@ public class EquipStore : MonoBehaviour
   {
     currentSlot += 4;
     UpdateSlot();
+  }
+
+  private void BuyItem(int index)
+  {
+    EquipmentSO equip = equipmentList[currentSlot + index];
+
   }
 }

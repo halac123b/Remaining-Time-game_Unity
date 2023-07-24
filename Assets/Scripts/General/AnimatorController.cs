@@ -28,7 +28,8 @@ public class AnimatorController : NetworkBehaviour
       playerWeapon = 0,
     }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-  protected virtual void Start(){
+  protected virtual void Start()
+  {
     if (IsOwner)
     {
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
@@ -39,8 +40,6 @@ public class AnimatorController : NetworkBehaviour
     playerInput = GetComponentInParent<PlayerInput>();
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerStatus = FindObjectOfType<PlayerStatus>();
-
-    
 
     //PlayerInput
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
@@ -71,16 +70,18 @@ public class AnimatorController : NetworkBehaviour
     Set_VERTICAL_HORIZONTAL(animator, x, y);
   }
 
-  
-  public virtual void Set_VERTICAL_HORIZONTAL(float x, float y){
-    if(!IsOwner) return;
+
+  public virtual void Set_VERTICAL_HORIZONTAL(float x, float y)
+  {
+    if (!IsOwner) return;
     Set_VERTICAL_HORIZONTAL(animator, x, y);
     // Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     // Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
-  public virtual void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y){
+  public virtual void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
+  {
 
-    
+
 
     if (y > 0.01f)
     {
@@ -103,5 +104,5 @@ public class AnimatorController : NetworkBehaviour
     }
   }
 
-  
+
 }

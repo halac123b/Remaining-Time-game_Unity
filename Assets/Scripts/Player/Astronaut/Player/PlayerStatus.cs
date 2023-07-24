@@ -11,22 +11,22 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private bool countTrigger = true;
   private bool startCounting = false;
 
+  private int point = 100;
+
+  public int bid = 0;
+
+  public int GetPoint()
+  {
+    return point;
+  }
+
+  public void SetPoint(int number)
+  {
+    point = number;
+  }
+
   public event EventHandler OnCountDownTrigger;
   public event EventHandler OnDeadTrigger;
-
-  // public event EventHandler OnAttackTrigger;
-
-  //private int playerIndex;
-
-  //private TimeManager timeManager;
-
-  // private void Start()
-  // {
-  //   timeManager = FindObjectOfType<TimeManager>();
-  //   //playerIndex = timeManager.GetRandomIndex();
-  //   Debug.Log(playerIndex);
-  //   timeLeft = timeManager.GetTimer();
-  // }
 
   private void Update()
   {

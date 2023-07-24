@@ -11,6 +11,7 @@ public enum SceneName : byte
   LobbySelection,
   StandbyPhase,
   ShoppingPhase,
+  MainPhase
 };
 
 public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
@@ -110,14 +111,18 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
     switch (m_sceneActive)
     {
       // When a client/host connects tell the manager
-      case SceneName.ShoppingPhase:
+      case SceneName.StandbyPhase:
+        StandbyManager.Instance.ServerSceneInit();
+        break;
 
+      case SceneName.ShoppingPhase:
         ShoppingManager.Instance.ServerSceneInit();
         break;
 
-        // case SceneName.StandbyPhase:
-        //   StandbyManager.Instance.ServerSceneInit();
-        //   break;
+      case SceneName.MainPhase:
+        Debug.Log("I'm here");
+        MainPhaseManager.Instance.ServerSceneInit();
+        break;
     }
   }
 

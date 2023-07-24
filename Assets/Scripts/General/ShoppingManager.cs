@@ -6,21 +6,24 @@ using UnityEngine;
 
 public class ShoppingManager : SingletonNetwork<ShoppingManager>
 {
-  [SerializeField] private GameObject oxyBottle;
+  // [SerializeField] private GameObject oxyBottle;
   [SerializeField] private GameObject playerPrefab;
   [SerializeField] private GameObject monsterPrefab;
 
+  [SerializeField] CountDown countDown;
+
   [SerializeField] private GameObject gameUI;
-  private PlayerStatus playerStatus;
 
   private int numberConnected = 0;
 
   Vector3[] spawnPoint = new Vector3[2] { new Vector3(-10, 0, 0), new Vector3(10, 0, 0) };
 
+  [SerializeField] SceneName nextScene = SceneName.MainPhase;
+
   public override void Awake()
   {
     base.Awake();
-    playerStatus = FindObjectOfType<PlayerStatus>();
+    countDown.OnTimeOut += LoadNextScene;
   }
 
   // So this method is called on the server each time a player enters the scene.
@@ -36,7 +39,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     if (numberConnected != LoadingSceneManager.Instance.GetNumPlayer())
       return;
 
-    NetworkObjectSpawner.SpawnNewNetworkObject(oxyBottle);
+    // NetworkObjectSpawner.SpawnNewNetworkObject(oxyBottle);
     ulong monsterIndex = 10;
 
     for (ulong i = 0; Convert.ToInt16(i) < numberConnected; i++)
@@ -72,8 +75,13 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
     }
 
-    playerStatus.SetStartCounting(true);
+    countDown.SetStartCounting();
 
     gameUI.SetActive(true);
+  }
+
+  private void LoadNextScene(object sender, EventArgs e)
+  {
+    LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 }

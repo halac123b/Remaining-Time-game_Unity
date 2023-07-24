@@ -7,6 +7,9 @@ using Unity.Collections;
 
 public class StandbyManager : SingletonNetwork<StandbyManager>
 {
+  [SerializeField] CountDown countDown;
+  private int numberConnected = 0;
+
   [SerializeField] TextMeshProUGUI[] playerName;
   [SerializeField] Image[] playerAvatar;
   [SerializeField] TextMeshProUGUI[] playerPoint;
@@ -23,6 +26,8 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   public void Start()
   {
+    countDown.OnTimeOut += LoadNextScene;
+
     if (!IsServer)
     {
       return;
@@ -35,19 +40,6 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     PointManager.Instance.IncreasePointAll(increaseAmount);
 
     int numPlayer = LoadingSceneManager.Instance.GetNumPlayer();
-
-    // FixedString128Bytes[] name = new FixedString128Bytes[numPlayer];
-    // int[] index = new int[numPlayer];
-    // int[] point = new int[numPlayer];
-    // int[] rank = new int[numPlayer];
-
-    // for (int i = 0; i < numPlayer; i++)
-    // {
-    //   name[i] = PointManager.Instance.playerPoint[i].playerData.playerName;
-    //   index[i] = PointManager.Instance.playerPoint[i].playerIndex;
-    //   point[i] = PointManager.Instance.playerPoint[i].point;
-    //   rank[i] = PointManager.Instance.playerPoint[i].rank;
-    // }
 
     PlayerPoint playerData = PointManager.Instance.playerPoint[0];
 
@@ -64,13 +56,6 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
       PlayerPoint data = PointManager.Instance.playerPoint[2];
       UpdateUIClientRpc(2, data);
     }
-
-    Invoke("LoadNextScene", 5f);
-  }
-
-  private void LoadNextScene()
-  {
-    LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 
   [ClientRpc]
@@ -95,7 +80,23 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     roundText.text = roundSlider.value.ToString() + "/6";
   }
 
+  private void LoadNextScene(object sender, EventArgs e)
+  {
+    LoadingSceneManager.Instance.LoadScene(nextScene);
+  }
 
+  public void ServerSceneInit()
+  {
+    Debug.Log("HHH" + numberConnected);
+    Debug.Log("ggg" + LoadingSceneManager.Instance.GetNumPlayer());
+    numberConnected++;
+
+    // Check if is the last client
+    if (numberConnected != LoadingSceneManager.Instance.GetNumPlayer())
+      return;
+
+    countDown.SetStartCounting();
+  }
 }
 
 

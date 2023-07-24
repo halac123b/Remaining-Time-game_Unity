@@ -80,9 +80,6 @@ public class AnimatorController : NetworkBehaviour
   }
   public virtual void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
-
-
-
     if (y > 0.01f)
     {
       anim.SetFloat(VERTICAL, 1f);

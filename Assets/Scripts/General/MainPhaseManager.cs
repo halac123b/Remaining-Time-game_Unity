@@ -17,6 +17,12 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
       return;
 
 
+    StartCountClientRpc();
+  }
+
+  [ClientRpc]
+  private void StartCountClientRpc()
+  {
     countDown.SetStartCounting();
   }
 }

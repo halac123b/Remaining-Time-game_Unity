@@ -95,6 +95,12 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     if (numberConnected != LoadingSceneManager.Instance.GetNumPlayer())
       return;
 
+    StartCountClientRpc();
+  }
+
+  [ClientRpc]
+  private void StartCountClientRpc()
+  {
     countDown.SetStartCounting();
   }
 }

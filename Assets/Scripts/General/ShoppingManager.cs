@@ -75,7 +75,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
     }
 
-    countDown.SetStartCounting();
+    StartCountClientRpc();
 
     gameUI.SetActive(true);
   }
@@ -83,5 +83,11 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   private void LoadNextScene(object sender, EventArgs e)
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
+  }
+
+  [ClientRpc]
+  private void StartCountClientRpc()
+  {
+    countDown.SetStartCounting();
   }
 }

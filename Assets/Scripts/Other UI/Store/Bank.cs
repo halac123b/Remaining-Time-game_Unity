@@ -30,6 +30,16 @@ public class Bank : MonoBehaviour
 
     stepArrow[0].onClick.AddListener(delegate { UpdateBid(step); });
     stepArrow[1].onClick.AddListener(delegate { UpdateBid(-step); });
+
+    gameObject.SetActive(false);
+  }
+
+  private void OnEnable()
+  {
+    if (gameObject.transform.localScale == new Vector3(0, 0, 0))
+    {
+      gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+    }
   }
 
   private void DisplayStep()

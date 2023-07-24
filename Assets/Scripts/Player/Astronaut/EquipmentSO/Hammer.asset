@@ -15,3 +15,7 @@ MonoBehaviour:
   equipName: Hammer
   TypeWeapon: 1
   image: {fileID: 21300000, guid: fd2f23afedb280244ba7dcbc7931bb5d, type: 3}
+  price: 40
+  damage: 70
+  speed: 0.6
+  range: 15

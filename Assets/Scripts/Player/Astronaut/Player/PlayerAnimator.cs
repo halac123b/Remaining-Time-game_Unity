@@ -184,8 +184,10 @@ public class PlayerAnimator : AnimatorController
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-    weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
-
+    if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
+    {
+      weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
+    }
   }
   protected override void TriggerAttackStarted(InputAction.CallbackContext context)
   {

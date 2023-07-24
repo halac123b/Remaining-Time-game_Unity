@@ -22,14 +22,29 @@ public class PlayerEquip : MonoBehaviour
 
   public EquipmentSO GetCurrentEquip()
   {
+    if (equipmentList.Count == 0)
+    {
+      return null;
+    }
     return equipmentList[currentEquip];
   }
 
-  public int GetTypeWeapon(){
+  public int GetTypeWeapon()
+  {
     return currentEquip;
   }
 
-  public EquipmentSO GetEquip(int i){
+  public EquipmentSO GetEquip(int i)
+  {
+    if (i >= equipmentList.Count)
+    {
+      return null;
+    }
     return equipmentList[i];
+  }
+
+  public void AddEquip(EquipmentSO equip)
+  {
+    equipmentList.Add(equip);
   }
 }

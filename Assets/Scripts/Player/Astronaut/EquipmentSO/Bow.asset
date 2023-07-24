@@ -15,3 +15,7 @@ MonoBehaviour:
   equipName: Bow
   TypeWeapon: 3
   image: {fileID: 21300000, guid: 4f0fa1344ba632240b04d398fd842d8a, type: 3}
+  price: 20
+  damage: 15
+  speed: 0.8
+  range: 50

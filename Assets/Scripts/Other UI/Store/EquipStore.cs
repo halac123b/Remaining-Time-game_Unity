@@ -22,11 +22,19 @@ public class EquipStore : MonoBehaviour
 
   [SerializeField] Button[] buyBtn;
 
+  [SerializeField] TextMeshProUGUI pointText;
+
+  [SerializeField] PlayerEquip playerEquip;
+  [SerializeField] PlayerStatus playerStatus;
+
+
   private int currentSlot;
-  private int lastActiveEquip = -1;
+  private int lastActiveEquip = 0;
 
   private void Start()
   {
+    pointText.text = playerStatus.GetPoint().ToString();
+
     exitBtn.onClick.AddListener(Exit);
     navigationBtn[0].onClick.AddListener(NavigateLeft);
     navigationBtn[1].onClick.AddListener(NavigateRight);
@@ -35,6 +43,11 @@ public class EquipStore : MonoBehaviour
     itemSlotBtn[1].onClick.AddListener(delegate { UpdateInfo(1); });
     itemSlotBtn[2].onClick.AddListener(delegate { UpdateInfo(2); });
     itemSlotBtn[3].onClick.AddListener(delegate { UpdateInfo(3); });
+
+    buyBtn[0].onClick.AddListener(delegate { BuyEquip(0); });
+    buyBtn[1].onClick.AddListener(delegate { BuyEquip(1); });
+    buyBtn[2].onClick.AddListener(delegate { BuyEquip(2); });
+    buyBtn[3].onClick.AddListener(delegate { BuyEquip(3); });
   }
 
   private void OnEnable()
@@ -42,6 +55,7 @@ public class EquipStore : MonoBehaviour
     currentSlot = 0;
     UpdateSlot();
     UpdateInfo(0);
+    pointText.text = playerStatus.GetPoint().ToString();
   }
 
   private void UpdateSlot()
@@ -90,6 +104,7 @@ public class EquipStore : MonoBehaviour
     {
       itemSlotBtn[lastActiveEquip].gameObject.GetComponent<Image>().color = greenColor;
     }
+
     itemSlotBtn[index].gameObject.GetComponent<Image>().color = Color.red;
 
     lastActiveEquip = index;
@@ -128,5 +143,24 @@ public class EquipStore : MonoBehaviour
   {
     EquipmentSO equip = equipmentList[currentSlot + index];
 
+  }
+
+  private void BuyEquip(int index)
+  {
+    if (currentSlot + index > equipmentList.Count)
+    {
+      return;
+    }
+
+    if (equipmentList[currentSlot + index].GetPrice() > playerStatus.GetPoint())
+    {
+      return;
+    }
+
+    playerStatus.SetPoint(playerStatus.GetPoint() - equipmentList[currentSlot + index].GetPrice());
+    playerEquip.AddEquip(equipmentList[currentSlot + index]);
+    equipmentList.RemoveAt(currentSlot + index);
+    pointText.text = playerStatus.GetPoint().ToString();
+    UpdateSlot();
   }
 }

@@ -12,7 +12,12 @@ public class EquipmentSlot : MonoBehaviour
     image = GetComponent<Image>();
 
     playerEquip = FindObjectOfType<PlayerEquip>();
-    image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+
+    if (playerEquip.GetCurrentEquip() != null)
+    {
+      image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    }
+
     playerEquip.OnChangeEquip += ChangeEquipSprite;
   }
 

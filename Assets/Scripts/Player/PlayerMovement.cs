@@ -8,20 +8,22 @@ public class PlayerMovement : NetworkBehaviour
   private PlayerInput playerInput;
 
   private Vector2 moveVector;
-  private Vector2 lastDirection;
+
+  private NetworkVariable<ulong> clientId = new NetworkVariable<ulong>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
   private bool canMove = true;
 
-  private int clientId = -1;
-
   private void Awake()
   {
-    lastDirection = new Vector2(0, 1);
     playerInput = GetComponent<PlayerInput>();
-    Debug.Log("client xx: " + IsOwner);
+  }
+
+  private void Start()
+  {
+    Debug.Log("xxx" + IsOwner);
     if (IsOwner)
     {
-      clientId = Convert.ToInt32(OwnerClientId);
+      clientId.Value = OwnerClientId;
     }
   }
 
@@ -60,11 +62,6 @@ public class PlayerMovement : NetworkBehaviour
     return moveVector;
   }
 
-  public Vector2 LastDirection()
-  {
-    return lastDirection;
-  }
-
   private void HandleMovement()
   {
     Vector2 inputVector = playerInput.GetMovementVectorNormalized();
@@ -73,7 +70,6 @@ public class PlayerMovement : NetworkBehaviour
 
     transform.position += new Vector3(inputVector.x, inputVector.y) * moveDistance;
 
-    lastDirection = moveVector;
     moveVector = inputVector;
   }
   public int GetTypeMove()
@@ -86,10 +82,8 @@ public class PlayerMovement : NetworkBehaviour
     moveSpeed = speed;
   }
 
-  public int GetClientId()
+  public ulong GetClientId()
   {
-    return clientId;
+    return clientId.Value;
   }
 }
-
-// Fix: Remove LastDirection

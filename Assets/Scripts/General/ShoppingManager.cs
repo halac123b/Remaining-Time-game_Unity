@@ -15,6 +15,8 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   private int numberConnected = 0;
 
+  Vector3[] spawnPoint = new Vector3[2] { new Vector3(-10, 0, 0), new Vector3(10, 0, 0) };
+
   public override void Awake()
   {
     base.Awake();
@@ -35,19 +37,38 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
       return;
 
     NetworkObjectSpawner.SpawnNewNetworkObject(oxyBottle);
+    ulong monsterIndex = 10;
+
+    for (ulong i = 0; Convert.ToInt16(i) < numberConnected; i++)
+    {
+      if (PointManager.Instance.playerPoint[i].playerIndex == 0)
+      {
+        monsterIndex = i;
+        break;
+      }
+    }
+
     switch (numberConnected)
     {
       case 1:
-        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
+        NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
         break;
       case 2:
-        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(10, 0, 0), 1);
+        NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(0, -5, 0), 1);
         break;
       case 3:
-        NetworkObjectSpawner.SpawnNewNetworkObject(monsterPrefab, new Vector3(-10, 0, 0));
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(10, 0, 0), 1);
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), 2);
+        for (ulong i = 0; i < 3; i++)
+        {
+          if (i != monsterIndex)
+          {
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(0, -5, 0), monsterIndex);
+          }
+          else
+          {
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, spawnPoint[(i <= 1) ? i : 1], i);
+          }
+        }
         break;
     }
 

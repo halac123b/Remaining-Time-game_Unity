@@ -7,13 +7,13 @@ using UnityEngine;
 
 public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 {
-
   public ulong Id;
   public Color color;
   public string playerName;
   public int playerWeapon;
 
-  public void SetWeapon(int weapon){
+  public void SetWeapon(int weapon)
+  {
     playerWeapon = weapon;
   }
   public bool Equals(PlayerData other)

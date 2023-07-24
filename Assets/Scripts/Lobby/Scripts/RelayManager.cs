@@ -76,7 +76,7 @@ public class RelayManager : NetworkBehaviour
       //StartCoroutine(ActivateObjectForDuration());
       NetworkManager.Singleton.StartClient();
 
-      StartCoroutine(Test(playerData));
+      StartCoroutine(CallServer(playerData));
     }
 
     catch (RelayServiceException e)
@@ -85,7 +85,7 @@ public class RelayManager : NetworkBehaviour
     }
   }
 
-  IEnumerator Test(PlayerData playerData)
+  IEnumerator CallServer(PlayerData playerData)
   {
     yield return new WaitForSeconds(3.5f);
     SetPlayerDataServerRpc(playerData);

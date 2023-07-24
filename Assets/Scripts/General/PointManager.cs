@@ -80,9 +80,4 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
     Debug.Log("Player ID is:" + playerData.Id);
     Debug.Log("Player color is:" + playerData.color);
   }
-
-  public PlayerPoint[] GetAllData()
-  {
-    return playerPoint;
-  }
 }

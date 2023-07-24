@@ -5,8 +5,6 @@ using System.Collections;
 
 public class MenuController : MonoBehaviour
 {
-  [SerializeField] private PlayerDataSO[] m_PlayerDatas;
-
   [SerializeField] private SceneName nextScene = SceneName.LobbySelection;
 
   private void Start()
@@ -29,15 +27,6 @@ public class MenuController : MonoBehaviour
 #endif
 
     //ClearAllCharacterData();
-  }
-
-  private void ClearAllCharacterData()
-  {
-    // Clean the all the data of the characters so we can start with a clean slate
-    foreach (PlayerDataSO data in m_PlayerDatas)
-    {
-      data.EmptyData();
-    }
   }
 
   public void OnClickStart()

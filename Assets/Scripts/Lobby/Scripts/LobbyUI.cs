@@ -106,6 +106,7 @@ public class LobbyUI : MonoBehaviour
 
   private void ClearLobby()
   {
+    if (container)
     foreach (Transform child in container)
     {
       if (child != null)

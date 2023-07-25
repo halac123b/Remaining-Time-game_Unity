@@ -12,7 +12,7 @@ public class CountDown : MonoBehaviour
 
   private bool startCounting = false;
 
-  private int timeLeft;
+  public int timeLeft;
   private bool countTrigger = true;
 
   private void Start()

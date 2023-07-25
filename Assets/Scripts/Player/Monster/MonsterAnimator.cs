@@ -31,7 +31,7 @@ public class MonsterAnimator : AnimatorController
 
   public PlayerData GetPlayerData()
   {
-    return playerData.Value;
+    return playerData.Value; 
   }
 
   protected override void Update()

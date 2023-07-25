@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53ca28da132216d4c9a80c5dcab85779, type: 3}
-  m_Name: Item 2
+  m_Name: Oxygen
   m_EditorClassIdentifier: 
-  equipName: Item 2
-  image: {fileID: 21300000, guid: ab44bcbdd3ab680498a8e4b67438b2b6, type: 3}
+  equipName: OxyGen
+  image: {fileID: 21300000, guid: e74103ff726538648a69bc1098d6b00b, type: 3}

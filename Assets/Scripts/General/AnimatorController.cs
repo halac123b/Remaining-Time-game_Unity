@@ -16,7 +16,7 @@ public class AnimatorController : NetworkBehaviour
   [SerializeField] protected Animator animator;
 
   protected PlayerStatus playerStatus;
-
+  public bool canattack =true;
   protected PlayerInput playerInput;
   protected PlayerMovement playerMovement;
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
@@ -28,8 +28,13 @@ public class AnimatorController : NetworkBehaviour
       playerWeapon = 0,
     }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-  protected virtual void Start()
-  {
+
+  public PlayerData GetPlayerData(){
+    return playerData.Value;
+  }
+  
+  protected virtual void Start(){
+
     if (IsOwner)
     {
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
@@ -48,13 +53,13 @@ public class AnimatorController : NetworkBehaviour
 
   protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null) return;
+    if (!IsOwner || animator == null || !canattack) return;
     animator.SetTrigger(ATTACK_CANCEL);
   }
 
   protected virtual void TriggerAttackStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null) return;
+    if (!IsOwner || animator == null || !canattack) return;
     animator.SetTrigger(ATTACK);
   }
 
@@ -74,7 +79,7 @@ public class AnimatorController : NetworkBehaviour
   public virtual void Set_VERTICAL_HORIZONTAL(float x, float y)
   {
     if (!IsOwner) return;
-    Set_VERTICAL_HORIZONTAL(animator, x, y);
+     Set_VERTICAL_HORIZONTAL(animator, x, y);
     // Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     // Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }

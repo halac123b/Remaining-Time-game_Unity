@@ -1,20 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Unity.Netcode;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : NetworkBehaviour
 {
   public PlayerInputAction playerInputActions;
+  private Item_Equip_Inventory inventory;
+  private PlayerItem playerItem;
   private int TypeMove;
   private bool isProcessing = false;
   [SerializeField] CapsuleCollider2D capsuleCollider2D;
+  [SerializeField] PlayerAnimator playerAnimator;
 
   private void Awake()
   {
+    inventory =  FindAnyObjectByType<Item_Equip_Inventory>();  
+    playerItem = FindAnyObjectByType<PlayerItem>();
     playerInputActions = new PlayerInputAction();
     playerInputActions.Player.Enable();
     playerInputActions.Player.Run.performed += Run;
@@ -24,10 +31,59 @@ public class PlayerInput : MonoBehaviour
     playerInputActions.Player.Process.performed += ProcessPerformed;
     playerInputActions.Player.Process.canceled += ProcessCanceled;
 
-    // playerInputActions.Player.Attack.performed += AttackPerformed;
+    playerInputActions.Player._1.performed += _1Use;
+    playerInputActions.Player._2.performed += _2Use;
+    playerInputActions.Player._3.performed += _3Use;
+    playerInputActions.Player.tab.started += OpenInventory;
+    playerInputActions.Player.tab.canceled += CloseInventory;
+    
+    
+
   }
 
-  public Vector2 GetMovementVectorNormalized()
+  private void Start()
+  {
+    
+  }
+
+    private void CloseInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+      if(!IsOwner) return;
+        // UnityEngine.Debug.LogError($"show = false");
+        inventory.show_inventory = false;
+        playerAnimator.canattack = true;
+
+
+    }
+
+    private void OpenInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+      if(!IsOwner) return;
+        // UnityEngine.Debug.LogError($"show = true");
+
+        inventory.show_inventory = true;
+        playerAnimator.canattack = false;
+
+    }
+    private void _1Use(InputAction.CallbackContext context)
+    {
+      if(!IsOwner) return;
+      if(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()).number -= 1; 
+    }
+
+    private void _2Use(InputAction.CallbackContext context)
+    {
+      if(!IsOwner) return;
+      if(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()).number -= 1;   
+    }
+
+    private void _3Use(InputAction.CallbackContext context)
+    {
+      if(!IsOwner) return;
+      if(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()).number -= 1; 
+    }
+
+    public Vector2 GetMovementVectorNormalized()
   {
     Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 

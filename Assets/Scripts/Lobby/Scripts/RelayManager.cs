@@ -111,12 +111,10 @@ public class RelayManager : NetworkBehaviour
   [ServerRpc(RequireOwnership = false)]
   private void SetPlayerDataServerRpc(PlayerData playerData)
   {
-    // SetPlayerDataClientRpc(playerData);
     PointManager.Instance.SetPlayerData(clientId, playerData);
     SetPlayerDataClientRpc(clientId, playerData);
     clientId++;
     OnClientConnect?.Invoke(this, EventArgs.Empty);
-    Debug.Log("RPC2");
   }
 
   [ClientRpc]
@@ -125,7 +123,6 @@ public class RelayManager : NetworkBehaviour
     if (!IsHost)
     {
       PointManager.Instance.SetPlayerData(index, playerData);
-      Debug.Log("RPC3");
     }
   }
 }

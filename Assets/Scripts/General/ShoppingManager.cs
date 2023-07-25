@@ -65,11 +65,11 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         {
           if (i != monsterIndex)
           {
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(0, -5, 0), monsterIndex);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), i);
           }
           else
           {
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, spawnPoint[(i <= 1) ? i : 1], i);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, spawnPoint[(i <= 1) ? i : 1], monsterIndex);
           }
         }
         break;

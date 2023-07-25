@@ -12,6 +12,7 @@ public struct PlayerPoint : INetworkSerializable
   public int point;
   public PlayerData playerData;
   public int rank;
+  public Vector3 spawnPoint;
 
   public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
   {
@@ -19,6 +20,7 @@ public struct PlayerPoint : INetworkSerializable
     serializer.SerializeValue(ref point);
     serializer.SerializeValue(ref playerData);
     serializer.SerializeValue(ref rank);
+    serializer.SerializeValue(ref spawnPoint);
   }
 }
 
@@ -48,9 +50,9 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
   {
     List<int> index = new List<int> { 0, 1, 2 };
     System.Random random = new System.Random();
-    for (int i = 0; i < playerPoint.Length; i++)
+    for (int i = 0; i < 3; i++)
     {
-      playerPoint[i].playerIndex = random.Next(index.Count);
+      playerPoint[i].playerIndex = index[random.Next(index.Count)];
       index.Remove(playerPoint[i].playerIndex);
     }
 

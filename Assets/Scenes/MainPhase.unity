@@ -955,6 +955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953769047}
   - component: {fileID: 953769048}
+  - component: {fileID: 953769049}
   m_Layer: 0
   m_Name: TargetPoint
   m_TagString: Untagged
@@ -1012,6 +1013,26 @@ MonoBehaviour:
   - {fileID: 2006729862}
   - {fileID: 1110033495}
   - {fileID: 917492813}
+  countDown: {fileID: 2133532891}
+--- !u!114 &953769049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953769046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1164572544
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &1051268208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1376,6 +1397,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDown: {fileID: 2133532891}
+  sceneName: {fileID: 648690811}
+  playerPrefab: {fileID: 1310933839547251545, guid: f97f43e6bff9c2f4f81358aafb431b50, type: 3}
+  monsterPrefab: {fileID: 7552313123406739431, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
 --- !u!1001 &1995217770
 PrefabInstance:
   m_ObjectHideFlags: 0

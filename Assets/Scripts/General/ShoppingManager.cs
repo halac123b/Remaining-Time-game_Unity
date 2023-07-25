@@ -20,10 +20,17 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] SceneName nextScene = SceneName.MainPhase;
 
+  [SerializeField] PlayerStatus playerStatus;
+
   public override void Awake()
   {
     base.Awake();
     countDown.OnTimeOut += LoadNextScene;
+
+    if (IsServer)
+    {
+      UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
+    }
   }
 
   // So this method is called on the server each time a player enters the scene.
@@ -83,11 +90,35 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   private void LoadNextScene(object sender, EventArgs e)
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
+
+    UpdatePointServerRpc(NetworkManager.Singleton.LocalClientId, playerStatus.GetPoint(), playerStatus.bid);
   }
 
   [ClientRpc]
   private void StartCountClientRpc()
   {
     countDown.SetStartCounting();
+    playerStatus.SetPoint(PointManager.Instance.playerPoint[NetworkManager.Singleton.LocalClientId].point);
+  }
+
+  [ClientRpc]
+  private void UpdateStatusClientRpc(int point1, int point2)
+  {
+    ulong index = NetworkManager.Singleton.LocalClientId;
+    if (index == 1)
+    {
+      PointManager.Instance.playerPoint[index].point = point1;
+    }
+    else if (index == 2)
+    {
+      PointManager.Instance.playerPoint[index].point = point2;
+    }
+  }
+
+  [ServerRpc(RequireOwnership = false)]
+  private void UpdatePointServerRpc(ulong index, int point, int bidAmount)
+  {
+    PointManager.Instance.playerPoint[index].point = point;
+    PointManager.Instance.playerPoint[index].bidAmount = bidAmount;
   }
 }

@@ -89,6 +89,8 @@ public class RelayManager : NetworkBehaviour
   {
     yield return new WaitForSeconds(3.5f);
     SetPlayerDataServerRpc(playerData);
+
+    Destroy(gameObject);
   }
 
   // private IEnumerator ActivateObjectForDuration()

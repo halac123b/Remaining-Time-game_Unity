@@ -11,7 +11,8 @@ public enum SceneName : byte
   LobbySelection,
   StandbyPhase,
   ShoppingPhase,
-  MainPhase
+  MainPhase,
+  ResultPhase
 };
 
 public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
@@ -120,8 +121,11 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
         break;
 
       case SceneName.MainPhase:
-        Debug.Log("I'm here");
         MainPhaseManager.Instance.ServerSceneInit();
+        break;
+
+      case SceneName.ResultPhase:
+        ResultPhaseManager.Instance.ServerSceneInit();
         break;
     }
   }

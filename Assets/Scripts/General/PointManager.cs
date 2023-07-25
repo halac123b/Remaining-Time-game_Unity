@@ -13,6 +13,7 @@ public struct PlayerPoint : INetworkSerializable
   public PlayerData playerData;
   public int rank;
   public Vector3 spawnPoint;
+  public int bidAmount;
 
   public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
   {

@@ -14,6 +14,12 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   [SerializeField] private GameObject playerPrefab;
   [SerializeField] private GameObject monsterPrefab;
 
+  [SerializeField] private CoutDownTimer lifeTime;
+
+  [SerializeField] private SceneName nextScene = SceneName.ResultPhase;
+
+  private PlayerStatus playerStatus;
+
   public void ServerSceneInit()
   {
     numberConnected++;
@@ -21,7 +27,6 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     // Check if is the last client
     if (numberConnected != LoadingSceneManager.Instance.GetNumPlayer())
       return;
-
 
     StartCountClientRpc();
   }
@@ -34,15 +39,19 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   private void Start()
   {
+    playerStatus = FindObjectOfType<PlayerStatus>();
     if (IsServer)
     {
       countDown.OnTimeOut += StartGame;
     }
+
+    playerStatus.OnDeadTrigger += LoadNextScene;
   }
 
   private void StartGame(object sender, EventArgs e)
   {
     sceneName.text = "READY..";
+    Destroy(countDown.gameObject);
     StartCoroutine(SpawnPlayer());
   }
 
@@ -56,6 +65,15 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     }
 
     sceneName.text = "GO!!";
-    sceneName.gameObject.SetActive(false);
+
+    yield return new WaitForSeconds(0.5f);
+    Destroy(sceneName.gameObject);
+    lifeTime.gameObject.SetActive(true);
+    playerStatus.SetStartCounting(true);
+  }
+
+  private void LoadNextScene(object sender, EventArgs e)
+  {
+    LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 }

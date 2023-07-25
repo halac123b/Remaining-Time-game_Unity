@@ -167,6 +167,10 @@ public class PlayerAnimator : AnimatorController
   }
   private void OnDeadAnimation(object sender, EventArgs e)
   {
+    if (animator == null)
+    {
+      return;
+    }
     animator.SetTrigger("isDeath");
     playerMovement.enabled = false;
   }

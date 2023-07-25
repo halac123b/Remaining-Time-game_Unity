@@ -48,13 +48,13 @@ public class AnimatorController : NetworkBehaviour
 
   protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner) return;
+    if (!IsOwner || animator == null) return;
     animator.SetTrigger(ATTACK_CANCEL);
   }
 
   protected virtual void TriggerAttackStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner) return;
+    if (!IsOwner || animator == null) return;
     animator.SetTrigger(ATTACK);
   }
 

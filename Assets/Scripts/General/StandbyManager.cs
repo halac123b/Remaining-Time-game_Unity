@@ -87,8 +87,6 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   public void ServerSceneInit()
   {
-    Debug.Log("HHH" + numberConnected);
-    Debug.Log("ggg" + LoadingSceneManager.Instance.GetNumPlayer());
     numberConnected++;
 
     // Check if is the last client

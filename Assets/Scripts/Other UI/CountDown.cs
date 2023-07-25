@@ -37,7 +37,6 @@ public class CountDown : MonoBehaviour
 
     timeLeft--;
     timeText.text = timeLeft.ToString();
-    Debug.Log("xxx" + timeLeft);
 
     if (timeLeft == 0)
     {

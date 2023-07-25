@@ -52,7 +52,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
     for (ulong i = 0; i < 3; i++)
     {
-      NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(PointManager.Instance.playerPoint[i].rank == 0 ? monsterPrefab : playerPrefab, PointManager.Instance.playerPoint[i].spawnPoint, i);
+      NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(PointManager.Instance.playerPoint[i].playerIndex == 0 ? monsterPrefab : playerPrefab, PointManager.Instance.playerPoint[i].spawnPoint, i);
     }
 
     sceneName.text = "GO!!";

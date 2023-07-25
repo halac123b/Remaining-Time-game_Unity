@@ -17249,7 +17249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 10
+  amountTime: 4
 --- !u!224 &6676842341239740897 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5620503436586299494, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}

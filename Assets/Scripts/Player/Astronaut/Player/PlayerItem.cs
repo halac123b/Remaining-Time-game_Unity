@@ -11,35 +11,42 @@ public class PlayerItem : MonoBehaviour
     public int number;
   }
 
-  [SerializeField] private List<ItemSlot> itemList = new List<ItemSlot>();
+  [SerializeField] public List<ItemSlot> itemList = new List<ItemSlot>();
 
-  private int currentItem = 0;
 
-  public event EventHandler OnChangeItem;
+  // public event EventHandler OnChangeItem;
 
-  public ItemSlot GetCurrentItem()
+  // public ItemSlot GetCurrentItem()
+  // {
+  //   return itemList[currentItem];
+  // }
+
+  public ItemSlot GetItem(string name)
   {
-    return itemList[currentItem];
+      foreach (var Item in itemList){
+
+        if(Item.item.GetName() == name){
+          return Item;
+        }
+      }
+      return null;
   }
 
   private void Update()
   {
-    if (Input.GetKeyDown(KeyCode.F))
+    for(int i = 0 ; i < itemList.Count;i++)
     {
-      Debug.Log(3);
-      itemList[currentItem].number--;
-      if (itemList[currentItem].number == 0)
+      if (itemList[i].number == 0)
       {
-        itemList.RemoveAt(currentItem);
-        currentItem = (currentItem + itemList.Count - 1) % itemList.Count;
+        itemList.RemoveAt(i);
       }
-      OnChangeItem?.Invoke(this, EventArgs.Empty);
     }
+
   }
 
-  public void ChangeItem()
-  {
-    currentItem = (currentItem + 1) % itemList.Count;
-    OnChangeItem?.Invoke(this, EventArgs.Empty);
-  }
+  // public void ChangeItem()
+  // {
+  //   currentItem = (currentItem + 1) % itemList.Count;
+  //   OnChangeItem?.Invoke(this, EventArgs.Empty);
+  // }
 }

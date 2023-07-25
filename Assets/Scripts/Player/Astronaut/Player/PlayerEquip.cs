@@ -36,11 +36,13 @@ public class PlayerEquip : MonoBehaviour
 
   public EquipmentSO GetEquip(int i)
   {
-    if (i >= equipmentList.Count)
+    foreach (var weapon in equipmentList)
     {
-      return null;
+      if (weapon.GetTypeWeapon() == i){
+        return weapon;
+      }
     }
-    return equipmentList[i];
+    return null;
   }
 
   public void AddEquip(EquipmentSO equip)

@@ -10,6 +10,6 @@ public class ChangeItemBtn : MonoBehaviour
   {
     playerItem = FindObjectOfType<PlayerItem>();
     button = GetComponent<Button>();
-    button.onClick.AddListener(playerItem.ChangeItem);
+    // button.onClick.AddListener(playerItem.ChangeItem);
   }
 }

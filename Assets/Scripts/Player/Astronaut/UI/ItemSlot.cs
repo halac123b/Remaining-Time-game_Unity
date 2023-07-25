@@ -5,21 +5,26 @@ using TMPro;
 
 public class ItemSlot : MonoBehaviour
 {
-  private PlayerItem playerItem;
+  // private PlayerItem playerItem;
+  [SerializeField] private InventoryUI inventoryUI;
+  [SerializeField] private int slot;
   [SerializeField] private Image image;
   [SerializeField] private TextMeshProUGUI numberText;
 
   private void OnEnable()
   {
-    playerItem = FindObjectOfType<PlayerItem>();
-    image.sprite = playerItem.GetCurrentItem().item.GetSprite();
-    numberText.text = playerItem.GetCurrentItem().number.ToString();
-    playerItem.OnChangeItem += ChangeItem;
+    // playerItem = FindObjectOfType<PlayerItem>();
   }
 
-  private void ChangeItem(object sender, EventArgs e)
+  private void Update()
   {
-    image.sprite = playerItem.GetCurrentItem().item.GetSprite();
-    numberText.text = playerItem.GetCurrentItem().number.ToString();
+    if(inventoryUI.GetInventory(slot).item != null &&  inventoryUI.GetInventory(slot).number!="0"){
+      image.sprite = inventoryUI.GetInventory(slot).item.GetSprite();
+      numberText.text = inventoryUI.GetInventory(slot).number;
+    }else{
+      image.sprite = null;
+      numberText.text = "";
+    }
   }
+  
 }

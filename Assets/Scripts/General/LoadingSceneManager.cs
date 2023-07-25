@@ -11,7 +11,8 @@ public enum SceneName : byte
   LobbySelection,
   StandbyPhase,
   ShoppingPhase,
-  MainPhase
+  MainPhase,
+  MapDesert
 };
 
 public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>

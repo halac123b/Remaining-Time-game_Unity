@@ -7,19 +7,14 @@ public class MonsterShot : StateMachineBehaviour
 {
   [SerializeField] GameObject Bullet;
   private float TimeAim = 1f;
+  
   // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
   private float x, y;
   override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     MonsterAnimator monsterAnimator = animator.gameObject.GetComponent<MonsterAnimator>();
-     monsterAnimator.AimBar.gameObject.SetActive(true);
-     monsterAnimator.AimBar.GetComponentInChildren<Slider>().value = 0;
-
-  }
-  // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-  override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-  {
-     MonsterAnimator  monsterAnimator = animator.gameObject.transform.parent.gameObject.GetComponentInChildren< MonsterAnimator>();
+    monsterAnimator.AimBar.gameObject.SetActive(true);
+    monsterAnimator.AimBar.GetComponentInChildren<Slider>().value = 0;
      monsterAnimator.UpdataMousePos();
     Vector2 TargetVector = new Vector2(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y) -  monsterAnimator.GetMousePos();
     TargetVector.Normalize();
@@ -27,6 +22,12 @@ public class MonsterShot : StateMachineBehaviour
     y = -TargetVector.y;
     if (x < 0.5f && x > -0.5f) x = 0f;
      monsterAnimator.Set_VERTICAL_HORIZONTAL(x, y);
+
+  }
+  // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+  override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+  {
+     MonsterAnimator  monsterAnimator = animator.gameObject.transform.parent.gameObject.GetComponentInChildren< MonsterAnimator>();
 
      monsterAnimator.AimBar.GetComponentInChildren<Slider>().value = stateInfo.normalizedTime / TimeAim;
 

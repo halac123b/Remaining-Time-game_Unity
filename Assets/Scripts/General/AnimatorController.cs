@@ -16,7 +16,7 @@ public class AnimatorController : NetworkBehaviour
   [SerializeField] protected Animator animator;
 
   protected PlayerStatus playerStatus;
-  public bool canattack =true;
+  public bool canattack = true;
   protected PlayerInput playerInput;
   protected PlayerMovement playerMovement;
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
@@ -29,15 +29,16 @@ public class AnimatorController : NetworkBehaviour
     }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
-  public PlayerData GetPlayerData(){
+  public PlayerData GetPlayerData()
+  {
     return playerData.Value;
   }
-  
-  protected virtual void Start(){
 
+  protected virtual void Start()
+  {
     if (IsOwner)
     {
-      playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(OwnerClientId));
+      playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(NetworkManager.Singleton.LocalClientId));
     }
   }
   protected virtual void Awake()
@@ -79,7 +80,7 @@ public class AnimatorController : NetworkBehaviour
   public virtual void Set_VERTICAL_HORIZONTAL(float x, float y)
   {
     if (!IsOwner) return;
-     Set_VERTICAL_HORIZONTAL(animator, x, y);
+    Set_VERTICAL_HORIZONTAL(animator, x, y);
     // Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     // Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }

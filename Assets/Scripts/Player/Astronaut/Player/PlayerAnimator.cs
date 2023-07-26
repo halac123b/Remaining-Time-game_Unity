@@ -45,6 +45,15 @@ public class PlayerAnimator : AnimatorController
     // Defaaut valua
   }
 
+  protected override void Start()
+  {
+    base.Start();
+    if (IsOwner)
+    {
+      sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    }
+  }
+
   private void OnChangeEquipped(object sender, EventArgs e)
   {
     if (!IsOwner) return;
@@ -63,8 +72,6 @@ public class PlayerAnimator : AnimatorController
 
   protected override void Update()
   {
-    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-
     if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
     {
       AimBar.gameObject.SetActive(true);
@@ -129,7 +136,7 @@ public class PlayerAnimator : AnimatorController
       flipX.Value = true;
     }
 
-    anim.SetInteger(TYPE_ATTACK, playerEquip.GetTypeWeapon());
+    anim.SetInteger(TYPE_ATTACK, playerData.Value.playerWeapon);
 
     if (y > 0.01f)
     {
@@ -199,7 +206,7 @@ public class PlayerAnimator : AnimatorController
     base.TriggerAttackStarted(context);
     if (!IsOwner || !canattack) return;
     weapon_animator.SetTrigger(ATTACK);
-    cover_animator.SetTrigger(ATTACK); 
+    cover_animator.SetTrigger(ATTACK);
   }
   protected override void TriggerAttackCanceled(InputAction.CallbackContext context)
   {

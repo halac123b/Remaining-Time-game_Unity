@@ -25,20 +25,19 @@ public class SpawnPointManager : NetworkBehaviour
 
   private void SetSpawnPoint(Vector3 pos)
   {
-    Debug.Log("setxx" + pos);
     currentSpawnPoint = pos;
   }
 
   private void SendSpawnPoint(object sender, EventArgs e)
   {
     SetSpawnPointServerRpc(Convert.ToInt32(NetworkManager.Singleton.LocalClientId), currentSpawnPoint);
+    Debug.Log("destroy");
     Destroy(gameObject, 0.5f);
   }
 
   [ServerRpc(RequireOwnership = false)]
   private void SetSpawnPointServerRpc(int clientId, Vector3 pos)
   {
-    Debug.Log("spawn " + pos);
     PointManager.Instance.playerPoint[clientId].spawnPoint = pos;
   }
 }

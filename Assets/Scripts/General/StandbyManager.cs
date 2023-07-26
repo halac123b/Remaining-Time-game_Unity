@@ -63,7 +63,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
   {
     playerName[index].text = data.playerData.playerName;
 
-    if (0 == Convert.ToInt32(OwnerClientId))
+    if (index == Convert.ToInt32(NetworkManager.Singleton.LocalClientId))
     {
       playerName[index].color = Color.yellow;
     }

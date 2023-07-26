@@ -40,19 +40,33 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private void Start()
   {
     playerStatus = FindObjectOfType<PlayerStatus>();
-    if (IsServer)
-    {
-      countDown.OnTimeOut += StartGame;
-    }
 
+    if (!IsServer)
+      return;
+    countDown.OnTimeOut += StartGame;
     playerStatus.OnDeadTrigger += LoadNextScene;
   }
 
   private void StartGame(object sender, EventArgs e)
   {
+    ReadyClientRpc();
+    StartCoroutine(SpawnPlayer());
+  }
+
+  [ClientRpc]
+  private void ReadyClientRpc()
+  {
     sceneName.text = "READY..";
     Destroy(countDown.gameObject);
-    StartCoroutine(SpawnPlayer());
+  }
+
+  [ClientRpc]
+  private void StartGameClientRpc()
+  {
+    sceneName.text = "GO!!";
+    Destroy(sceneName.gameObject, 0.5f);
+    lifeTime.gameObject.SetActive(true);
+    playerStatus.SetStartCounting(true);
   }
 
   IEnumerator SpawnPlayer()
@@ -64,12 +78,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
       NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(PointManager.Instance.playerPoint[i].playerIndex == 0 ? monsterPrefab : playerPrefab, PointManager.Instance.playerPoint[i].spawnPoint, i);
     }
 
-    sceneName.text = "GO!!";
-
-    yield return new WaitForSeconds(0.5f);
-    Destroy(sceneName.gameObject);
-    lifeTime.gameObject.SetActive(true);
-    playerStatus.SetStartCounting(true);
+    StartGameClientRpc();
   }
 
   private void LoadNextScene(object sender, EventArgs e)

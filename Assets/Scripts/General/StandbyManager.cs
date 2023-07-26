@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Unity.Netcode;
-using Unity.Collections;
 
 public class StandbyManager : SingletonNetwork<StandbyManager>
 {
@@ -24,14 +23,14 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   [SerializeField] private SceneName nextScene = SceneName.ShoppingPhase;
 
-  public void Start()
+  private void Start()
   {
-    countDown.OnTimeOut += LoadNextScene;
-
-    if (!IsServer)
+    if (!IsHost)
     {
       return;
     }
+    countDown.OnTimeOut += LoadNextScene;
+
     if (LoadingSceneManager.Instance.GetRound() != 1)
     {
       PointManager.Instance.RollPlayerIndex();

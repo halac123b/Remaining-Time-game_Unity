@@ -1650,7 +1650,19 @@ MonoBehaviour:
   sceneName: {fileID: 648690811}
   playerPrefab: {fileID: 1310933839547251545, guid: f97f43e6bff9c2f4f81358aafb431b50, type: 3}
   monsterPrefab: {fileID: 7552313123406739431, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
+  oxyPrefab: {fileID: 5910600176990297310, guid: fdb581ec8502e844db43fd28a5cf751c, type: 3}
   lifeTime: {fileID: 1199726801}
+  nextScene: 6
+  randomSpawnOxy:
+  - {fileID: 1976854220}
+  - {fileID: 888814274}
+  - {fileID: 1314615802}
+  - {fileID: 676387060}
+  - {fileID: 1354904993}
+  - {fileID: 1553259003}
+  - {fileID: 1554467138}
+  - {fileID: 2030058823}
+  - {fileID: 82908534}
 --- !u!1 &1553259002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,3 +2296,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountTime: 7
+  timeLeft: 0

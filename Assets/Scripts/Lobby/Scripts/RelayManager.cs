@@ -90,7 +90,6 @@ public class RelayManager : NetworkBehaviour
     yield return new WaitForSeconds(3.5f);
     SetPlayerDataServerRpc(playerData);
 
-    gameObject.GetComponent<NetworkObject>().Despawn();
     Destroy(gameObject, 1.5f);
   }
 
@@ -118,6 +117,12 @@ public class RelayManager : NetworkBehaviour
     SetPlayerDataClientRpc(clientId, playerData);
     clientId++;
     OnClientConnect?.Invoke(this, EventArgs.Empty);
+
+    if (clientId == 3)
+    {
+      gameObject.GetComponent<NetworkObject>().Despawn();
+      Destroy(gameObject);
+    }
   }
 
   [ClientRpc]

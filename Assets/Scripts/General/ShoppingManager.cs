@@ -22,14 +22,13 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] PlayerStatus playerStatus;
 
-  public override void Awake()
+  private void Start()
   {
-    base.Awake();
-    countDown.OnTimeOut += LoadNextScene;
-
-    if (IsServer)
+    Debug.Log("zzz" + IsHost);
+    if (IsHost)
     {
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
+      countDown.OnTimeOut += LoadNextScene;
     }
   }
 

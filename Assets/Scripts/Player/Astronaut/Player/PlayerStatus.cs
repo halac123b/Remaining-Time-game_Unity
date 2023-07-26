@@ -57,6 +57,11 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
     return timeLeft;
   }
 
+  public void SetTimeLeft(int amount)
+  {
+    timeLeft = amount;
+  }
+
   public void SetStartCounting(bool status)
   {
     startCounting = status;

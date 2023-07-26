@@ -1,0 +1,472 @@
+fileFormatVersion: 2
+guid: 3eb32315c69faa343a835d99ffabc215
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: HangingFlag_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 4
+      width: 30
+      height: 51
+    spriteID: 168fd3914f6a505419f3173c651d202b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 4}
+  - name: HangingFlag_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 63
+      width: 30
+      height: 51
+    spriteID: fcd7d8e7f27bd38488557eca86dd557a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 63}
+  - name: HangingFlag_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 122
+      width: 30
+      height: 51
+    spriteID: 427be634897418f439ec59746a8fb38e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 122}
+  - name: HangingFlag_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 181
+      width: 30
+      height: 51
+    spriteID: cfa91b5f3afd98a489ee29bc8d7e208d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 181}
+  - name: HangingFlag_Frame_4
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 31
+      height: 51
+    spriteID: cc8aead83582a974da95dd04f64ebfce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: HangingFlag_Frame_5
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 63
+      width: 31
+      height: 51
+    spriteID: 43e2af09394435f4d8a57400a0c3e135
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 63}
+  - name: HangingFlag_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 81
+      y: 4
+      width: 30
+      height: 51
+    spriteID: 8c8047fdd47b7a348b3801f99c72fb58
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 81, y: 4}
+  - name: HangingFlag_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 81
+      y: 63
+      width: 30
+      height: 51
+    spriteID: 6fa698cbff6e2ef4cb57454378388b23
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 81, y: 63}
+  - name: HangingFlag_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 81
+      y: 122
+      width: 30
+      height: 51
+    spriteID: 126ba2678a7385645b0aaca956bd0579
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 81, y: 122}
+  - name: HangingFlag_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 81
+      y: 181
+      width: 30
+      height: 51
+    spriteID: 11c2b7201b4c21840876d3cb9ac70a43
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 81, y: 181}
+  - name: HangingFlag_Frame_10
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 122
+      width: 31
+      height: 51
+    spriteID: 6c443308dbc02a04582e1467f1646d5e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 122}
+  - name: HangingFlag_Frame_11
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.078431375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 181
+      width: 31
+      height: 51
+    spriteID: 4d5c18fae87836c4cb9ceda51880230b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 181}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -105190312
+    name: HangingFlag
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: HangingFlag_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 168fd3914f6a505419f3173c651d202b
+    - name: HangingFlag_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: fcd7d8e7f27bd38488557eca86dd557a
+    - name: HangingFlag_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 427be634897418f439ec59746a8fb38e
+    - name: HangingFlag_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: cfa91b5f3afd98a489ee29bc8d7e208d
+    - name: HangingFlag_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 1
+        y: 4
+        width: 31
+        height: 51
+      spriteId: cc8aead83582a974da95dd04f64ebfce
+    - name: HangingFlag_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 1
+        y: 4
+        width: 31
+        height: 51
+      spriteId: 43e2af09394435f4d8a57400a0c3e135
+    - name: HangingFlag_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 8c8047fdd47b7a348b3801f99c72fb58
+    - name: HangingFlag_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 6fa698cbff6e2ef4cb57454378388b23
+    - name: HangingFlag_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 126ba2678a7385645b0aaca956bd0579
+    - name: HangingFlag_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 1
+        y: 4
+        width: 30
+        height: 51
+      spriteId: 11c2b7201b4c21840876d3cb9ac70a43
+    - name: HangingFlag_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 1
+        y: 4
+        width: 31
+        height: 51
+      spriteId: 6c443308dbc02a04582e1467f1646d5e
+    - name: HangingFlag_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 1
+        y: 4
+        width: 31
+        height: 51
+      spriteId: 4d5c18fae87836c4cb9ceda51880230b
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 32, y: 64}

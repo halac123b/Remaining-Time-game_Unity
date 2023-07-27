@@ -5,7 +5,7 @@ using System;
 
 public class PlayerEquip : MonoBehaviour
 {
-  [SerializeField] private List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+  [SerializeField] public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
 
   private int currentEquip = 0;
 
@@ -38,7 +38,8 @@ public class PlayerEquip : MonoBehaviour
   {
     foreach (var weapon in equipmentList)
     {
-      if (weapon.GetTypeWeapon() == i){
+      if (weapon.GetTypeWeapon() == i)
+      {
         return weapon;
       }
     }

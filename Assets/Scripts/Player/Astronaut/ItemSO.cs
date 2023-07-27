@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item Detail", fileName = "New Item")]
 public class ItemSO : ScriptableObject
 {
-  [SerializeField] private string equipName = "Enter name of item";
-  [SerializeField] private Sprite image;
+  public string equipName = "ItemName";
+  public Sprite image;
+  public int price = 30;
+  public string description = "This item is so good";
 
   public Sprite GetSprite()
   {

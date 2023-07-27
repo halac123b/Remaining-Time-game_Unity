@@ -44,7 +44,6 @@ public class SellStore : MonoBehaviour
   private Mode storeMode = Mode.Weapon;
 
   private int currentSlot;
-  private int lastActiveEquip = 0;
 
   private void Start()
   {
@@ -64,6 +63,7 @@ public class SellStore : MonoBehaviour
     buyBtn[3].onClick.AddListener(delegate { SellEquip(3); });
 
     sellTimeBtn.onClick.AddListener(SellTime);
+    UpdateTime();
   }
 
   private void SellTime()
@@ -115,6 +115,7 @@ public class SellStore : MonoBehaviour
   private void UpdateTime()
   {
     timeLeft.text = playerStatus.GetTimeLeft().ToString();
+
   }
 
   private void ChangeColorMode(int index)

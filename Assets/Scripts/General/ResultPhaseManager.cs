@@ -14,14 +14,17 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
 
   [SerializeField] private TextMeshProUGUI sceneName;
 
-  [SerializeField] Image[] playerAvatar;
-  [SerializeField] Sprite[] characterSprite;
+  [SerializeField] private Image[] playerAvatar;
+  [SerializeField] private Sprite[] characterSprite;
 
-  [SerializeField] TextMeshProUGUI[] playerName;
+  [SerializeField] private TextMeshProUGUI[] playerName;
 
-  [SerializeField] TextMeshProUGUI[] playerPoint;
+  [SerializeField] private TextMeshProUGUI[] playerPoint;
 
-  [SerializeField] TextMeshProUGUI[] resultText;
+  [SerializeField] private TextMeshProUGUI[] resultText;
+
+  [SerializeField] private Image secondPos;
+  [SerializeField] private Sprite rankIcon;
 
   public void ServerSceneInit()
   {
@@ -48,13 +51,20 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     }
     countDown.OnTimeOut += LoadNextScene;
 
+    bool dualWin = false;
+
     PlayerPoint playerData;
     for (int i = 0; i < 3; i++)
     {
-
       playerData = PointManager.Instance.playerPoint[i];
       Debug.Log("vvv" + playerData.roundRank);
+
+      if (dualWin && playerData.roundRank == 0)
+      {
+        UpdateUIClientRpc(1, playerData, true);
+      }
       UpdateUIClientRpc(playerData.roundRank, playerData);
+      dualWin = true;
     }
   }
 
@@ -65,7 +75,7 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
   }
 
   [ClientRpc]
-  private void UpdateUIClientRpc(int index, PlayerPoint data)
+  private void UpdateUIClientRpc(int index, PlayerPoint data, bool dualWin = false)
   {
     sceneName.text = LoadingSceneManager.Instance.GetRound().ToString();
 
@@ -87,7 +97,12 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
 
     if (index == 0)
     {
-      resultText[0].text = "+" + data.bidAmount.ToString() + " $";
+      resultText[index].text = "+" + data.bidAmount.ToString() + " $";
+    }
+    else if (index == 1 && data.roundRank == 0)
+    {
+      resultText[index].text = "+" + data.bidAmount.ToString() + " $";
+      secondPos.sprite = rankIcon;
     }
     else if (index == 2)
     {

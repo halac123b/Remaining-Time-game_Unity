@@ -18,6 +18,8 @@ public class OxyStatus : NetworkBehaviour
 
   public event EventHandler<IntEventArg> OnProcessing;
 
+  public event EventHandler OnOxyComplete;
+
   public class IntEventArg : EventArgs
   {
     public int value;
@@ -41,13 +43,13 @@ public class OxyStatus : NetworkBehaviour
     yield return new WaitForSeconds(1);
 
     process.Value += speed;
-    //OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
 
-    // if (timeLeft == 0)
-    // {
-    //   OnDeadTrigger?.Invoke(this, EventArgs.Empty);
-    // }
     OnProcessing?.Invoke(this, new IntEventArg { value = process.Value });
+
+    if (process.Value == threshold)
+    {
+      OnOxyComplete?.Invoke(this, EventArgs.Empty);
+    }
 
     countTrigger = true;
   }

@@ -22,6 +22,8 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] PlayerStatus playerStatus;
 
+  public event EventHandler OnUpdatePoint;
+
   private void Start()
   {
     if (IsHost)
@@ -80,7 +82,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
     }
 
-    StartCountClientRpc();
+    StartCountClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
 
     gameUI.SetActive(true);
   }
@@ -93,10 +95,24 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   }
 
   [ClientRpc]
-  private void StartCountClientRpc()
+  private void StartCountClientRpc(int point1, int point2)
   {
     countDown.SetStartCounting();
-    playerStatus.SetPoint(PointManager.Instance.playerPoint[NetworkManager.Singleton.LocalClientId].point);
+
+    if (NetworkManager.Singleton.LocalClientId == 1)
+    {
+      playerStatus.SetPoint(point1);
+    }
+    else if (NetworkManager.Singleton.LocalClientId == 2)
+    {
+      playerStatus.SetPoint(point2);
+    }
+    else
+    {
+      playerStatus.SetPoint(PointManager.Instance.playerPoint[0].point);
+    }
+
+    OnUpdatePoint?.Invoke(this, EventArgs.Empty);
   }
 
   [ClientRpc]

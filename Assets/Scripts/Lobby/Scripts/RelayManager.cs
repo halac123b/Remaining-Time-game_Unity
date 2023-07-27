@@ -116,10 +116,11 @@ public class RelayManager : NetworkBehaviour
     PointManager.Instance.SetPlayerData(clientId, playerData);
     SetPlayerDataClientRpc(clientId, playerData);
     clientId++;
-    OnClientConnect?.Invoke(this, EventArgs.Empty);
 
     if (clientId == 3)
     {
+      OnClientConnect?.Invoke(this, EventArgs.Empty);
+
       gameObject.GetComponent<NetworkObject>().Despawn();
       Destroy(gameObject);
     }

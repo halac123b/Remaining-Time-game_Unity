@@ -21,6 +21,8 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   [SerializeField] private Transform[] randomSpawnOxy;
 
+  private OxyStatus oxyStatus;
+
   private Vector3 oxySpawnPoint;
 
   private PlayerStatus playerStatus;
@@ -54,15 +56,6 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     countDown.OnTimeOut += StartGame;
 
     playerStatus.OnDeadTrigger += ResultRecord;
-
-    if (NetworkManager.Singleton.LocalClientId == 0)
-    {
-      playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() + 15);
-    }
-    else if (NetworkManager.Singleton.LocalClientId == 1)
-    {
-      playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() + 10);
-    }
 
     if (IsHost)
     {
@@ -98,7 +91,11 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
     if (IsHost)
     {
-      NetworkObjectSpawner.SpawnNewNetworkObject(oxyPrefab, oxySpawnPoint);
+      GameObject oxy = NetworkObjectSpawner.SpawnNewNetworkObject(oxyPrefab, oxySpawnPoint);
+
+      oxyStatus = oxy.GetComponent<OxyStatus>();
+
+      oxyStatus.OnOxyComplete += OxyVictory;
 
       for (ulong i = 0; i < 3; i++)
       {
@@ -112,6 +109,30 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     Destroy(sceneName.gameObject);
     lifeTime.gameObject.SetActive(true);
     playerStatus.SetStartCounting(true);
+  }
+
+  private void OxyVictory(object sender, EventArgs e)
+  {
+    if (currentRank == 2)
+    {
+      PointManager.Instance.playerPoint[1].roundRank = PointManager.Instance.playerPoint[2].roundRank = 0;
+      PointManager.Instance.playerPoint[0].roundRank = 2;
+    }
+
+    else if (currentRank == 1)
+    {
+      for (int i = 1; i < 3; i++)
+      {
+        if (PointManager.Instance.playerPoint[i].roundRank == -1)
+        {
+          PointManager.Instance.playerPoint[i].roundRank = 0;
+          PointManager.Instance.playerPoint[0].roundRank = 1;
+          break;
+        }
+      }
+    }
+
+    currentRank = -1;
   }
 
   private void LoadNextScene()
@@ -143,7 +164,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   private void Update()
   {
-    if (currentRank == 0 && IsHost && !endRound)
+    if (currentRank == -1 && IsHost && !endRound)
     {
       ResetTimeClientRpc();
       endRound = true;

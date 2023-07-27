@@ -102,6 +102,7 @@ public class LobbyManager : MonoBehaviour
     // Doing this because every time the network session ends the loading manager stops
     // detecting the events
     LoadingSceneManager.Instance.Init();
+
     relayManager.OnClientConnect += LoadScene;
 
   }

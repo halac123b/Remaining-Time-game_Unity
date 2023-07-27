@@ -1,0 +1,472 @@
+fileFormatVersion: 2
+guid: 9d75d1d5e8d0ad64280de58a26488b04
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: StandingFlag_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 71
+      width: 30
+      height: 59
+    spriteID: 1c2fefee72744fc428916592bc6cfbc5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 71}
+  - name: StandingFlag_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 138
+      width: 30
+      height: 59
+    spriteID: a739f0aaa75c07d4ea9cd90a958d0dec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 138}
+  - name: StandingFlag_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 4
+      width: 30
+      height: 59
+    spriteID: 626b3338062e5124487f9542963c9329
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 4}
+  - name: StandingFlag_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 71
+      width: 30
+      height: 59
+    spriteID: 6ec60cd7272ddd1438cb8ff102fb79d4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 71}
+  - name: StandingFlag_Frame_4
+    originalName: 
+    pivot: {x: 0.48387095, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 31
+      height: 59
+    spriteID: b50329a51ae3bd644b8183e3d742acb5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: StandingFlag_Frame_5
+    originalName: 
+    pivot: {x: 0.48387095, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 71
+      width: 31
+      height: 59
+    spriteID: ba07c805975ed8c45aea7ac9eec08c29
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 71}
+  - name: StandingFlag_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 138
+      width: 30
+      height: 59
+    spriteID: 9f20d6795cf95114398ad668558625c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 138}
+  - name: StandingFlag_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 4
+      width: 30
+      height: 59
+    spriteID: 82f05e82753d9c74d8150499701c8604
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 120, y: 4}
+  - name: StandingFlag_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 71
+      width: 30
+      height: 59
+    spriteID: 13e4b0fdd97c07643aaa28d0b1adf77b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 120, y: 71}
+  - name: StandingFlag_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 138
+      width: 30
+      height: 59
+    spriteID: 3ceffe973bbfa3c47afb947f9f1e13ac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 120, y: 138}
+  - name: StandingFlag_Frame_10
+    originalName: 
+    pivot: {x: 0.48387095, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 138
+      width: 31
+      height: 59
+    spriteID: d89cbd543b45816438c70be51728436c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 138}
+  - name: StandingFlag_Frame_11
+    originalName: 
+    pivot: {x: 0.48387095, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 4
+      width: 31
+      height: 59
+    spriteID: 384ed0a525442ce48b3f333f74347339
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 1824627628
+    name: StandingFlag
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: StandingFlag_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 1c2fefee72744fc428916592bc6cfbc5
+    - name: StandingFlag_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: a739f0aaa75c07d4ea9cd90a958d0dec
+    - name: StandingFlag_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 626b3338062e5124487f9542963c9329
+    - name: StandingFlag_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 6ec60cd7272ddd1438cb8ff102fb79d4
+    - name: StandingFlag_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 1
+        y: 0
+        width: 31
+        height: 59
+      spriteId: b50329a51ae3bd644b8183e3d742acb5
+    - name: StandingFlag_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 1
+        y: 0
+        width: 31
+        height: 59
+      spriteId: ba07c805975ed8c45aea7ac9eec08c29
+    - name: StandingFlag_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 9f20d6795cf95114398ad668558625c9
+    - name: StandingFlag_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 82f05e82753d9c74d8150499701c8604
+    - name: StandingFlag_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 13e4b0fdd97c07643aaa28d0b1adf77b
+    - name: StandingFlag_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 1
+        y: 0
+        width: 30
+        height: 59
+      spriteId: 3ceffe973bbfa3c47afb947f9f1e13ac
+    - name: StandingFlag_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 1
+        y: 0
+        width: 31
+        height: 59
+      spriteId: d89cbd543b45816438c70be51728436c
+    - name: StandingFlag_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 1
+        y: 0
+        width: 31
+        height: 59
+      spriteId: 384ed0a525442ce48b3f333f74347339
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 32, y: 64}

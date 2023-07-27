@@ -58,7 +58,6 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     {
       playerData = PointManager.Instance.playerPoint[i];
 
-      Debug.Log("zz: " + playerData.bidAmount.ToString());
       if (playerData.roundRank == 0 && !dualWin)
       {
         dualWin = true;

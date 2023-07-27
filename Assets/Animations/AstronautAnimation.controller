@@ -298,6 +298,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: attack
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: typeattack
+    m_EventTreshold: -1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8209493926551022131}
   m_Solo: 0
@@ -1202,7 +1205,7 @@ AnimatorController:
   - m_Name: typeattack
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 0
+    m_DefaultInt: -1
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: attackcancel

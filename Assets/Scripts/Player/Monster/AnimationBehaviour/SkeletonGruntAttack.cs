@@ -7,6 +7,13 @@ public class SkeletonGruntAttack : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+      foreach (var param in animator.parameters)
+      {
+         if (param.type == AnimatorControllerParameterType.Trigger)
+         {
+            animator.ResetTrigger(param.name);
+         }
+      }
        animator.GetComponent<SkeletonGruntAnimation>().SetCantMove();
     }
 

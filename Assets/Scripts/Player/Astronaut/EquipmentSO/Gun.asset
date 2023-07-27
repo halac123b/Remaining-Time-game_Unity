@@ -19,3 +19,4 @@ MonoBehaviour:
   damage: 40
   speed: 1.8
   range: 40
+  nockBack: 10

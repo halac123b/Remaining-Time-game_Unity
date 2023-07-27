@@ -8,6 +8,13 @@ public class SkeletonHunterAttack : StateMachineBehaviour
     [SerializeField] GameObject Arrow;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+      foreach (var param in animator.parameters)
+      {
+         if (param.type == AnimatorControllerParameterType.Trigger)
+         {
+            animator.ResetTrigger(param.name);
+         }
+      }
        animator.GetComponent<SkeletonHunterAnimation>().SetCantMove();
     }
 
@@ -21,8 +28,10 @@ public class SkeletonHunterAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        SkeletonHunterAnimation anim =  animator.GetComponent<SkeletonHunterAnimation>();
-       GameObject arrow = Instantiate(Arrow, new Vector3(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y + 0.5f), new Quaternion());
-       arrow.GetComponent<BulletItemMovement>().SetMoveVector(new Vector2(- anim.GetShotTarget().x,-anim.GetShotTarget().y));
+       if (Arrow){
+         GameObject arrow = Instantiate(Arrow, new Vector3(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y + 0.5f), new Quaternion());
+         arrow.GetComponent<BulletItemMovement>().SetMoveVector(new Vector2(- anim.GetShotTarget().x,-anim.GetShotTarget().y));
+       }
        anim.SetCanMove();
        
     }

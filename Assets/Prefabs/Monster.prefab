@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3416456467640675089}
+  canattack: 1
   AimBar: {fileID: 8501821099943254005}
 --- !u!95 &3416456467640675089
 Animator:
@@ -602,6 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capsuleCollider2D: {fileID: 5235669726515727550}
+  playerAnimator: {fileID: 0}
 --- !u!70 &5235669726515727550
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -679,7 +681,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

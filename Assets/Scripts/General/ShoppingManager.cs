@@ -24,7 +24,6 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   private void Start()
   {
-    Debug.Log("zzz" + IsHost);
     if (IsHost)
     {
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);

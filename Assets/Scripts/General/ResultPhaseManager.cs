@@ -51,8 +51,9 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     PlayerPoint playerData;
     for (int i = 0; i < 3; i++)
     {
-      playerData = PointManager.Instance.playerPoint[i];
 
+      playerData = PointManager.Instance.playerPoint[i];
+      Debug.Log("vvv" + playerData.roundRank);
       UpdateUIClientRpc(playerData.roundRank, playerData);
     }
   }
@@ -90,7 +91,7 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     }
     else if (index == 2)
     {
-      resultText[2].text = "-" + data.bidAmount.ToString() + " $";
+      resultText[1].text = "-" + data.bidAmount.ToString() + " $";
     }
   }
 }

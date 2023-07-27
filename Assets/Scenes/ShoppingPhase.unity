@@ -16814,7 +16814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 5
+  amountTime: 10
   timeLeft: 0
 --- !u!224 &6676842341239740897 stripped
 RectTransform:

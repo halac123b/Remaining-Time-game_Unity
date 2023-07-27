@@ -29,11 +29,6 @@ public class MonsterAnimator : AnimatorController
     base.Start();
   }
 
-  public PlayerData GetPlayerData()
-  {
-    return playerData.Value; 
-  }
-
   protected override void Update()
   {
     base.Update();

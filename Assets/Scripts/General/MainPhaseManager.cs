@@ -27,6 +27,8 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   [SerializeField] private int beginTimeAmount = 30;
 
+  private bool endRound = false;
+
   private int currentRank = 2;
 
   public void ServerSceneInit()
@@ -78,6 +80,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private void RecordServerRpc(ulong index)
   {
     PointManager.Instance.playerPoint[index].roundRank = currentRank;
+    Debug.Log("hhh" + currentRank);
     currentRank--;
   }
 
@@ -140,10 +143,11 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   private void Update()
   {
-    if (currentRank == 0 && IsHost)
+    if (currentRank == 0 && IsHost && !endRound)
     {
-      CalculateResult();
       ResetTimeClientRpc();
+      endRound = true;
+      Invoke("CalculateResult", 1f);
     }
   }
 }

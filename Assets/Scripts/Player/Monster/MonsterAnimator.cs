@@ -8,6 +8,8 @@ public class MonsterAnimator : AnimatorController
 {
   // Start is called before the first frame update
   [SerializeField] public Transform AimBar;
+    protected const string HURT = "hurt";
+
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected override void Awake()
   {
@@ -49,6 +51,10 @@ public class MonsterAnimator : AnimatorController
     mouse.Value = mouse_pos;
   }
 
+  public void GetHurt(int dame,Vector2 pos,int nockBack){
+        animator.SetTrigger(HURT);
+        GetComponentInParent<Rigidbody2D>().AddForce(new Vector2(pos.x - transform.position.x,pos.y - transform.position.y)*-nockBack);
+    }
   /////////////////////////////Handle Event////////////////////////////// 
 
   private void TriggerSummonHunter(InputAction.CallbackContext context)

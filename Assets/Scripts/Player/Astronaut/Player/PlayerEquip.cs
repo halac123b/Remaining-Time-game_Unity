@@ -13,7 +13,7 @@ public class PlayerEquip : MonoBehaviour
 
   private void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Q))
+    if (Input.GetKeyDown(KeyCode.Q) && equipmentList.Count>=0)
     {
       currentEquip = (currentEquip + 1) % equipmentList.Count;
       OnChangeEquip?.Invoke(this, EventArgs.Empty);
@@ -31,6 +31,7 @@ public class PlayerEquip : MonoBehaviour
 
   public int GetTypeWeapon()
   {
+    if (equipmentList.Count == 0) return -1;
     return currentEquip;
   }
 

@@ -10,6 +10,8 @@ public class EquipmentSO : ScriptableObject
   public int damage = 15;
   public float speed = 0.8f;
   public int range = 15;
+  public int nockBack = 10;
+
 
   public Sprite GetSprite()
   {

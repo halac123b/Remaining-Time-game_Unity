@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.UI;
+// using UnityEditor;
 
 public class PlayerAnimator : AnimatorController
 {
@@ -48,6 +49,18 @@ public class PlayerAnimator : AnimatorController
   protected override void Start()
   {
     base.Start();
+    if (!IsOwner) return;
+    AimBar.GetComponentInChildren<Slider>().value = 0;
+    AimBar.gameObject.SetActive(false);
+
+    PlayerData data = new PlayerData
+    {
+      Id = playerData.Value.Id,
+      color = playerData.Value.color,
+      playerName = playerData.Value.playerName,
+      playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
+    };
+    playerData.Value = data;
     if (IsOwner)
     {
       sprite.material.color = cover_sprite.material.color = playerData.Value.color;
@@ -57,8 +70,10 @@ public class PlayerAnimator : AnimatorController
   private void OnChangeEquipped(object sender, EventArgs e)
   {
     if (!IsOwner) return;
-    AimBar.GetComponentInChildren<Slider>().value = 0;
-    AimBar.gameObject.SetActive(false);
+    if(AimBar && AimBar.GetComponentInChildren<Slider>()) {
+      AimBar.GetComponentInChildren<Slider>().value = 0;
+      AimBar.gameObject.SetActive(false);
+    }
 
     PlayerData data = new PlayerData
     {
@@ -72,6 +87,7 @@ public class PlayerAnimator : AnimatorController
 
   protected override void Update()
   {
+    //  Unsupported.SmartReset(weapon_animator);
     if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
     {
       AimBar.gameObject.SetActive(true);
@@ -170,7 +186,9 @@ public class PlayerAnimator : AnimatorController
   /////////////////////////////Handle Event////////////////////////////// 
   private void OnFlipXChanged(bool oldValue, bool newValue)
   {
-    weaponcarry.flipX = weapon_sprite.flipX = cover_sprite.flipX = sprite.flipX = newValue;
+    weaponcarry.flipX  = cover_sprite.flipX = sprite.flipX = newValue;
+    if(newValue) weapon_sprite.transform.localScale = new Vector3(-1,1,1);
+    else weapon_sprite.transform.localScale = new Vector3(1,1,1);
   }
   private void OnDeadAnimation(object sender, EventArgs e)
   {
@@ -193,11 +211,13 @@ public class PlayerAnimator : AnimatorController
   }
 
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
-  {
+  { 
+    if(sprite && cover_sprite)
     sprite.material.color = cover_sprite.material.color = playerData.Value.color;
     if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
     {
-      weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
+      // Debug.LogError("playerData.Value.playerWeapon: "+playerData.Value.playerWeapon);
+      if(weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
     }
   }
   protected override void TriggerAttackStarted(InputAction.CallbackContext context)

@@ -9,6 +9,8 @@ public class SkeletonGruntAnimation : MonoBehaviour
     protected const string SPEED = "speed";
     protected const string ATTACK = "attack";
     protected const string ATTACK_CANCEL = "attackcancel";
+    protected const string HURT = "hurt";
+
     // Start is called before the first frame update
     [SerializeField] SkeletonGruntMovement skeletonGruntMovement;
     [SerializeField] Animator animator;
@@ -72,7 +74,10 @@ public class SkeletonGruntAnimation : MonoBehaviour
         }
         return false;
     }
-
+    public void GetHurt(int dame,int nockBack){
+        animator.SetTrigger(HURT);
+        
+    }
     public void SetCantMove(){
         skeletonGruntMovement.canmove = false;
     }

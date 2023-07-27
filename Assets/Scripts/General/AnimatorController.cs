@@ -41,13 +41,23 @@ public class AnimatorController : NetworkBehaviour
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(NetworkManager.Singleton.LocalClientId));
     }
   }
+  /// <summary>
+  /// Reset is called when the user hits the Reset button in the Inspector's
+  /// context menu or when adding the component the first time.
+  /// </summary>
+  private void Reset()
+  {
+    
+  }
   protected virtual void Awake()
   {
     playerInput = GetComponentInParent<PlayerInput>();
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerStatus = FindObjectOfType<PlayerStatus>();
 
+    
     //PlayerInput
+    // if (playerInput.playerInputActions != null) Debug.LogError("playerInput!");
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
     playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
   }

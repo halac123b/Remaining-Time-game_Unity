@@ -90,7 +90,8 @@ public class RelayManager : NetworkBehaviour
     yield return new WaitForSeconds(3.5f);
     SetPlayerDataServerRpc(playerData);
 
-    Destroy(gameObject, 1.5f);
+    Destroy(gameObject, 2f);
+    Debug.Log("fag");
   }
 
   // private IEnumerator ActivateObjectForDuration()
@@ -119,6 +120,7 @@ public class RelayManager : NetworkBehaviour
 
     if (clientId == 3)
     {
+      Debug.Log("gaga");
       OnClientConnect?.Invoke(this, EventArgs.Empty);
 
       gameObject.GetComponent<NetworkObject>().Despawn();

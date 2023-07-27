@@ -73,7 +73,6 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private void RecordServerRpc(ulong index)
   {
     PointManager.Instance.playerPoint[index].roundRank = currentRank;
-    Debug.Log("hhh" + currentRank);
     currentRank--;
   }
 
@@ -146,11 +145,15 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     {
       if (PointManager.Instance.playerPoint[i].roundRank == 0)
       {
-        PointManager.Instance.playerPoint[i].point += PointManager.Instance.playerPoint[i].bidAmount;
+        PointManager.Instance.playerPoint[i].point += PointManager.Instance.playerPoint[i].bidAmount * 2;
       }
       else if (PointManager.Instance.playerPoint[i].roundRank == 2)
       {
         PointManager.Instance.playerPoint[i].point -= PointManager.Instance.playerPoint[i].bidAmount;
+      }
+      else if (PointManager.Instance.playerPoint[i].roundRank == 1)
+      {
+        PointManager.Instance.playerPoint[i].point += PointManager.Instance.playerPoint[i].bidAmount;
       }
     }
     LoadNextScene();
@@ -160,6 +163,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private void ResetTimeClientRpc()
   {
     playerStatus.SetTimeLeft(beginTimeAmount);
+    Debug.Log("aaa " + playerStatus.GetTimeLeft());
   }
 
   private void Update()

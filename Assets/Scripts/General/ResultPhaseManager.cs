@@ -57,14 +57,20 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     for (int i = 0; i < 3; i++)
     {
       playerData = PointManager.Instance.playerPoint[i];
-      Debug.Log("vvv" + playerData.roundRank);
 
+      Debug.Log("zz: " + playerData.bidAmount.ToString());
+      if (playerData.roundRank == 0 && !dualWin)
+      {
+        dualWin = true;
+      }
       if (dualWin && playerData.roundRank == 0)
       {
         UpdateUIClientRpc(1, playerData, true);
       }
-      UpdateUIClientRpc(playerData.roundRank, playerData);
-      dualWin = true;
+      else
+      {
+        UpdateUIClientRpc(playerData.roundRank, playerData);
+      }
     }
   }
 
@@ -95,6 +101,7 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
       playerPoint[index].color = Color.red;
     }
 
+    Debug.Log("vavaa " + data.bidAmount.ToString());
     if (index == 0)
     {
       resultText[index].text = "+" + data.bidAmount.ToString() + " $";
@@ -106,7 +113,7 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     }
     else if (index == 2)
     {
-      resultText[1].text = "-" + data.bidAmount.ToString() + " $";
+      resultText[index].text = "-" + data.bidAmount.ToString() + " $";
     }
   }
 }

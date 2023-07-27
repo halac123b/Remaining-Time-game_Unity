@@ -31,6 +31,12 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
       countDown.OnTimeOut += LoadNextScene;
     }
+    countDown.OnTimeOut += UpdatePointBid;
+  }
+
+  private void UpdatePointBid(object sender, EventArgs e)
+  {
+    UpdatePointServerRpc(NetworkManager.Singleton.LocalClientId, playerStatus.GetPoint(), playerStatus.bid);
   }
 
   // So this method is called on the server each time a player enters the scene.
@@ -90,8 +96,6 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   private void LoadNextScene(object sender, EventArgs e)
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
-
-    UpdatePointServerRpc(NetworkManager.Singleton.LocalClientId, playerStatus.GetPoint(), playerStatus.bid);
   }
 
   [ClientRpc]
@@ -134,5 +138,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   {
     PointManager.Instance.playerPoint[index].point = point;
     PointManager.Instance.playerPoint[index].bidAmount = bidAmount;
+
+    Debug.Log("bbb " + index + " " + PointManager.Instance.playerPoint[index].point + " " + PointManager.Instance.playerPoint[index].bidAmount);
   }
 }

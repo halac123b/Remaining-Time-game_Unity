@@ -24,6 +24,7 @@ public struct PlayerPoint : INetworkSerializable
     serializer.SerializeValue(ref rank);
     serializer.SerializeValue(ref spawnPoint);
     serializer.SerializeValue(ref roundRank);
+    serializer.SerializeValue(ref bidAmount);
   }
 }
 

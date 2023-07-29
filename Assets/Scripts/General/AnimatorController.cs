@@ -47,7 +47,7 @@ public class AnimatorController : NetworkBehaviour
   /// </summary>
   private void Reset()
   {
-    
+
   }
   protected virtual void Awake()
   {
@@ -55,7 +55,6 @@ public class AnimatorController : NetworkBehaviour
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerStatus = FindObjectOfType<PlayerStatus>();
 
-    
     //PlayerInput
     // if (playerInput.playerInputActions != null) Debug.LogError("playerInput!");
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;

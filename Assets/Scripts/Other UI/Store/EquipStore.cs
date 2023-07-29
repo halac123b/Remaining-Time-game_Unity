@@ -7,8 +7,8 @@ public class EquipStore : MonoBehaviour
 {
   [SerializeField] Button exitBtn;
 
-  public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
   [SerializeField] private List<ItemSO> itemList = new List<ItemSO>();
+  private EquipmentInStore equipmentStock;
 
   [SerializeField] Image[] sprite;
   [SerializeField] TextMeshProUGUI nameEquip;
@@ -25,9 +25,9 @@ public class EquipStore : MonoBehaviour
 
   [SerializeField] TextMeshProUGUI pointText;
 
-  [SerializeField] PlayerEquip playerEquip;
-  [SerializeField] PlayerStatus playerStatus;
-  [SerializeField] PlayerItem playerItem;
+  PlayerEquip playerEquip;
+  PlayerStatus playerStatus;
+  PlayerItem playerItem;
 
   [SerializeField] GameObject weaponDescription;
   [SerializeField] TextMeshProUGUI itemDescription;
@@ -45,6 +45,13 @@ public class EquipStore : MonoBehaviour
   private int currentSlot;
   private int lastActiveEquip = 0;
 
+  private void Awake()
+  {
+    equipmentStock = FindObjectOfType<EquipmentInStore>();
+    playerEquip = FindObjectOfType<PlayerEquip>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
+    playerItem = FindObjectOfType<PlayerItem>();
+  }
   private void Start()
   {
     pointText.text = playerStatus.GetPoint().ToString();
@@ -123,7 +130,7 @@ public class EquipStore : MonoBehaviour
       navigationBtn[0].gameObject.SetActive(false);
     }
 
-    if ((storeMode == Mode.Weapon && currentSlot + 4 <= equipmentList.Count) || (storeMode == Mode.Item && currentSlot + 4 <= itemList.Count))
+    if ((storeMode == Mode.Weapon && currentSlot + 4 <= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && currentSlot + 4 <= itemList.Count))
     {
       navigationBtn[1].gameObject.SetActive(true);
     }
@@ -134,7 +141,7 @@ public class EquipStore : MonoBehaviour
 
     for (int i = 0; i < 4; i++)
     {
-      if ((storeMode == Mode.Weapon && i + currentSlot >= equipmentList.Count) || (storeMode == Mode.Item && i + currentSlot >= itemList.Count))
+      if ((storeMode == Mode.Weapon && i + currentSlot >= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && i + currentSlot >= itemList.Count))
       {
         sprite[i].sprite = alpha;
         price[i].text = "";
@@ -143,8 +150,8 @@ public class EquipStore : MonoBehaviour
       {
         if (storeMode == Mode.Weapon)
         {
-          sprite[i].sprite = equipmentList[currentSlot + i].GetSprite();
-          price[i].text = equipmentList[currentSlot + i].GetPrice().ToString() + "$";
+          sprite[i].sprite = equipmentStock.equipmentList[currentSlot + i].GetSprite();
+          price[i].text = equipmentStock.equipmentList[currentSlot + i].GetPrice().ToString() + "$";
         }
 
         else if (storeMode == Mode.Item)
@@ -161,7 +168,7 @@ public class EquipStore : MonoBehaviour
   private void UpdateInfo(int index)
   {
     // Update color
-    if ((storeMode == Mode.Weapon && index + currentSlot >= equipmentList.Count) || (storeMode == Mode.Item && index + currentSlot >= itemList.Count))
+    if ((storeMode == Mode.Weapon && index + currentSlot >= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && index + currentSlot >= itemList.Count))
     {
       return;
     }
@@ -178,7 +185,7 @@ public class EquipStore : MonoBehaviour
 
     if (storeMode == Mode.Weapon)
     {
-      EquipmentSO equip = equipmentList[currentSlot + index];
+      EquipmentSO equip = equipmentStock.equipmentList[currentSlot + index];
       nameEquip.text = equip.GetName();
 
       detailSlider[0].value = equip.damage;
@@ -219,21 +226,21 @@ public class EquipStore : MonoBehaviour
 
   private void BuyEquip(int index)
   {
-    if ((storeMode == Mode.Weapon && currentSlot + index > equipmentList.Count) || (storeMode == Mode.Item && currentSlot + index > itemList.Count))
+    if ((storeMode == Mode.Weapon && currentSlot + index > equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && currentSlot + index > itemList.Count))
     {
       return;
     }
 
-    if ((storeMode == Mode.Weapon && equipmentList[currentSlot + index].GetPrice() > playerStatus.GetPoint()) || (storeMode == Mode.Item && itemList[currentSlot + index].price > playerStatus.GetPoint()))
+    if ((storeMode == Mode.Weapon && equipmentStock.equipmentList[currentSlot + index].GetPrice() > playerStatus.GetPoint()) || (storeMode == Mode.Item && itemList[currentSlot + index].price > playerStatus.GetPoint()))
     {
       return;
     }
 
     if (storeMode == Mode.Weapon)
     {
-      playerStatus.SetPoint(playerStatus.GetPoint() - equipmentList[currentSlot + index].GetPrice());
-      playerEquip.AddEquip(equipmentList[currentSlot + index]);
-      equipmentList.RemoveAt(currentSlot + index);
+      playerStatus.SetPoint(playerStatus.GetPoint() - equipmentStock.equipmentList[currentSlot + index].GetPrice());
+      playerEquip.AddEquip(equipmentStock.equipmentList[currentSlot + index]);
+      equipmentStock.equipmentList.RemoveAt(currentSlot + index);
       pointText.text = playerStatus.GetPoint().ToString();
       UpdateSlot();
     }

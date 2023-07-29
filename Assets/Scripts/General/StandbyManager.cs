@@ -27,7 +27,6 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
   {
     if (!IsHost)
     {
-      Debug.Log("Sorry");
       return;
     }
     countDown.OnTimeOut += LoadNextScene;

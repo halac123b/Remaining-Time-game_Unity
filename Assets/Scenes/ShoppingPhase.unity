@@ -4307,7 +4307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2195696c76c2c82408e619d8eabe8a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 50
+  timeLeft: 20
   bid: 0
 --- !u!1 &64389441031471925
 GameObject:
@@ -19404,6 +19404,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 47476332338737875}
     - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
+      propertyPath: equipmentStock
+      value: 
+      objectReference: {fileID: 8599423328848770034}
+    - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
       propertyPath: itemDescription
       value: 
       objectReference: {fileID: 2825282337110630467}
@@ -19488,17 +19492,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2825282337110630470 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
-  m_PrefabInstance: {fileID: 2825282337110630465}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435931321720312188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7249e82ae5c844ea779d358d7c518f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2845253419802861210
@@ -20953,7 +20946,7 @@ RectTransform:
   m_GameObject: {fileID: 4657899151912617068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1604300175972243287}
@@ -21579,7 +21572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 45
+  amountTime: 20
   timeLeft: 0
 --- !u!224 &6676842341239740897 stripped
 RectTransform:
@@ -22064,7 +22057,7 @@ MonoBehaviour:
   - {fileID: 491369225449798928}
   - {fileID: 2253401980113602179}
   - {fileID: 1628087042}
-  equipStore: {fileID: 2825282337110630470}
+  equipStore: {fileID: 0}
   timeLeft: {fileID: 2070622744}
   sellTimeBtn: {fileID: 1460929169}
   timeSellField: {fileID: 1271804678}
@@ -22650,6 +22643,7 @@ GameObject:
   - component: {fileID: 1360928353315941742}
   - component: {fileID: 4035218492980721623}
   - component: {fileID: 47476332338737875}
+  - component: {fileID: 8599423328848770034}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -22657,6 +22651,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8599423328848770034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599423328848770033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffdd777fecef3348b55ce10846dd5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentList:
+  - {fileID: 11400000, guid: 333749eac56612e4c986eb1e9d809a97, type: 2}
+  - {fileID: 11400000, guid: 3c5b14542ead4d046a13f75058187d4b, type: 2}
+  - {fileID: 11400000, guid: ecd7bbb3cdee42c4b86d56702759be27, type: 2}
+  - {fileID: 11400000, guid: f0ad19d1c9ea4334f837f83fcea62bff, type: 2}
+  - {fileID: 11400000, guid: c6bfd07fb600cd543a88399112e73c4c, type: 2}
+  - {fileID: 11400000, guid: 5b4cc52d555f4194ab902f9c1e489604, type: 2}
 --- !u!222 &8637103409430749384
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -22,6 +20,8 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] PlayerStatus playerStatus;
 
+  private int clientSendPoint = 0;
+
   public event EventHandler OnUpdatePoint;
 
   private void Start()
@@ -29,7 +29,6 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     if (IsHost)
     {
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
-      countDown.OnTimeOut += LoadNextScene;
     }
     countDown.OnTimeOut += UpdatePointBid;
   }
@@ -93,7 +92,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     gameUI.SetActive(true);
   }
 
-  private void LoadNextScene(object sender, EventArgs e)
+  private void LoadNextScene()
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
   }
@@ -138,7 +137,10 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   {
     PointManager.Instance.playerPoint[index].point = point;
     PointManager.Instance.playerPoint[index].bidAmount = bidAmount;
-
-    Debug.Log("bbb " + index + " " + PointManager.Instance.playerPoint[index].point + " " + PointManager.Instance.playerPoint[index].bidAmount);
+    clientSendPoint++;
+    if (clientSendPoint == 3)
+    {
+      LoadNextScene();
+    }
   }
 }

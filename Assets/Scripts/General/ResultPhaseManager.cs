@@ -58,10 +58,6 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     {
       playerData = PointManager.Instance.playerPoint[i];
 
-      if (playerData.roundRank == 0 && !dualWin)
-      {
-        dualWin = true;
-      }
       if (dualWin && playerData.roundRank == 0)
       {
         UpdateUIClientRpc(1, playerData, true);
@@ -69,6 +65,10 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
       else
       {
         UpdateUIClientRpc(playerData.roundRank, playerData);
+      }
+      if (playerData.roundRank == 0 && !dualWin)
+      {
+        dualWin = true;
       }
     }
   }
@@ -100,7 +100,6 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
       playerPoint[index].color = Color.red;
     }
 
-    Debug.Log("vavaa " + data.bidAmount.ToString());
     if (index == 0)
     {
       resultText[index].text = "+" + data.bidAmount.ToString() + " $";

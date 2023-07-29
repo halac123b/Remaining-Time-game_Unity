@@ -25,7 +25,7 @@ public class SellStore : MonoBehaviour
 
   [SerializeField] Button[] changeModeBtn;
 
-  [SerializeField] EquipStore equipStore;
+  [SerializeField] EquipmentInStore equipStore;
 
   [SerializeField] TextMeshProUGUI timeLeft;
   [SerializeField] Button sellTimeBtn;

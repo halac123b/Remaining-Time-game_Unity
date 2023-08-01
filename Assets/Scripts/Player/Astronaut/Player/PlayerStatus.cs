@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.Netcode;
@@ -14,6 +15,17 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private int point = 100;
 
   public int bid = 0;
+
+  public int moveSpeed = 5;
+
+  public int monsterAttack = 5;
+  public int monsterHealth = 20;
+  public int monsterRebornTime = 5;
+
+  public bool ezrealEnable = false;
+  public bool garenEnable = false;
+
+  public List<BuffSO> buffList = new List<BuffSO>();
 
   public int GetPoint()
   {

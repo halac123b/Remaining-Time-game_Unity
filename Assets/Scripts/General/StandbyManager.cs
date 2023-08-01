@@ -67,6 +67,11 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
       playerName[index].color = Color.yellow;
     }
 
+    if (Convert.ToInt16(NetworkManager.Singleton.LocalClientId) == index)
+    {
+      PointManager.Instance.playerPoint[index] = data;
+    }
+
     playerAvatar[index].sprite = characterSprite[Mathf.Clamp(data.playerIndex, 0, 1)];
 
     playerPoint[index].text = data.point.ToString() + " $";

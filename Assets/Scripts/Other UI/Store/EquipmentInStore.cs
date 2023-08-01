@@ -3,5 +3,7 @@ using UnityEngine;
 
 public class EquipmentInStore : MonoBehaviour
 {
-  [SerializeField] public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+  public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+
+  public List<MonsterSkillSO> skillList = new List<MonsterSkillSO>();
 }

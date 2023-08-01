@@ -1,11 +1,13 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
+using System;
 
 public class Smith : NetworkBehaviour
 {
   [SerializeField] GameObject buttonUI;
   [SerializeField] GameObject shopUI;
+  [SerializeField] GameObject monsterShopUI;
 
   private bool interactive = false;
 
@@ -43,7 +45,14 @@ public class Smith : NetworkBehaviour
     {
       if (Input.GetKeyDown(KeyCode.E))
       {
-        shopUI.SetActive(true);
+        if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex == 0)
+        {
+          monsterShopUI.SetActive(true);
+        }
+        else
+        {
+          shopUI.SetActive(true);
+        }
       }
     }
   }

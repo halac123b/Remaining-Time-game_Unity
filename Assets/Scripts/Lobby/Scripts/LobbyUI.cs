@@ -72,6 +72,7 @@ public class LobbyUI : MonoBehaviour
 
   private void UpdateLobby()
   {
+    if(playerSingleTemplate != null)
     UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
   }
 
@@ -80,7 +81,7 @@ public class LobbyUI : MonoBehaviour
     ClearLobby();
 
     foreach (Player player in lobby.Players)
-    {
+    { 
       Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
       playerSingleTransform.gameObject.SetActive(true);
       LobbyPlayerSingleUI lobbyPlayerSingleUI = playerSingleTransform.GetComponent<LobbyPlayerSingleUI>();

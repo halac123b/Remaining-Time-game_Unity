@@ -2,44 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonGruntAttack : StateMachineBehaviour
+public class SubMonsterDeath : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-  
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      // foreach (var param in animator.parameters)
-      // {
-      //    if (param.type == AnimatorControllerParameterType.Trigger)
-      //    {
-      //       animator.ResetTrigger(param.name);
-      //    }
-      // }
-      //  Rigidbody2D rigidbody2D = animator.GetComponentInParent<Rigidbody2D>();
-      //  rigidbody2D.AddForce(new Vector2());
-      animator.GetComponent<SkeletonGruntAnimation>().SetCantMove();
+        //  deathTime(animator);
+        SkeletonGruntAnimation skeletonGruntAnimation = animator.GetComponent<SkeletonGruntAnimation>();
+        SkeletonHunterAnimation skeletonHunterAnimation = animator.GetComponent<SkeletonHunterAnimation>();
+        if (skeletonGruntAnimation){
+            skeletonGruntAnimation.ShowFloatText("+5s");
+        }
+        if (skeletonHunterAnimation){
+            skeletonHunterAnimation.ShowFloatText("+5s");
+
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
+        if (stateInfo.normalizedTime >= 3)
+        Destroy(animator.GetComponentInParent<SkeletonMovement>().gameObject);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-      //  Rigidbody2D rigidbody2D = animator.GetComponentInParent<Rigidbody2D>();
-      //  rigidbody2D.transform.position += new Vector3();
-      animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
-      // reset(animator); 
-      animator.GetComponent<SkeletonGruntAnimation>().SetCanMove();
-      
+    // override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // {
        
-    }
-
-    // private IEnumerable reset(Animator animator){
-    //   yield return new WaitForSeconds(1f);
     // }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

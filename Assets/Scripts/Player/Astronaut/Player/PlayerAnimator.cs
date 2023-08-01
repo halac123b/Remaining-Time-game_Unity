@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.UI;
+using TMPro;
 // using UnityEditor;
 
 public class PlayerAnimator : AnimatorController
@@ -19,7 +20,9 @@ public class PlayerAnimator : AnimatorController
   [SerializeField] private SpriteRenderer weapon_sprite;
   [SerializeField] private SpriteRenderer sprite;
 
+  [SerializeField] private TextMeshPro playername;
   [SerializeField] public Transform AimBar;
+
 
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -29,6 +32,7 @@ public class PlayerAnimator : AnimatorController
 
   protected override void Awake()
   {
+    
     base.Awake();
     playerColision = GetComponentInParent<PlayerColision>();
     playerEquip = FindObjectOfType<PlayerEquip>();
@@ -58,17 +62,18 @@ public class PlayerAnimator : AnimatorController
   {
     base.Start();
     if (!IsOwner) return;
-    AimBar.GetComponentInChildren<Slider>().value = 0;
+    AimBar.GetComponentInChildren<Slider>().value = 0; 
     AimBar.gameObject.SetActive(false);
 
-    PlayerData data = new PlayerData
+      PlayerData data = new PlayerData
     {
       Id = playerData.Value.Id,
       color = playerData.Value.color,
-      playerName = playerData.Value.playerName,
+      playerName = playerData.Value.playerName, 
       playerWeapon = (playerEquip.GetCurrentEquip() == null) ? -1 : playerEquip.GetCurrentEquip().GetTypeWeapon(),
     };
     playerData.Value = data;
+
     if (IsOwner)
     {
       sprite.material.color = cover_sprite.material.color = playerData.Value.color;
@@ -97,6 +102,7 @@ public class PlayerAnimator : AnimatorController
   protected override void Update()
   {
     //  Unsupported.SmartReset(weapon_animator);
+    playername.text = playerData.Value.playerName;
     if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
     {
       AimBar.gameObject.SetActive(true);

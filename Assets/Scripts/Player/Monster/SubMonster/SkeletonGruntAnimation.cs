@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SkeletonGruntAnimation : MonoBehaviour
+public class SkeletonGruntAnimation : NetworkBehaviour
 {
     protected const string HORIZONTAL = "Horizontal";
     protected const string VERTICAL = "Vertical";
@@ -10,15 +12,27 @@ public class SkeletonGruntAnimation : MonoBehaviour
     protected const string ATTACK = "attack";
     protected const string ATTACK_CANCEL = "attackcancel";
     protected const string HURT = "hurt";
+    protected const string DEATH= "death";
+
 
     // Start is called before the first frame update
-    [SerializeField] SkeletonGruntMovement skeletonGruntMovement;
+    [SerializeField] SkeletonMovement skeletonMovement;
     [SerializeField] Animator animator;
+    [SerializeField] public Transform AimBar;
 
+    private float countDownt = 0;
+    private Weapon reset_weapon;
     // Update is called once per frame
+   
+
     void Update()
-    {
-        Vector3 direction = skeletonGruntMovement.Getdirection();
+    {   
+        AimBar.GetComponentInChildren<Slider>().value = skeletonMovement.HP.Value/100f;
+        if (skeletonMovement.HP.Value <= 0) {
+            return;
+        }
+        countDownt+= Time.deltaTime;
+        Vector3 direction = skeletonMovement.Getdirection();
         float x = direction.x;
         float y =direction.y;
 
@@ -43,7 +57,14 @@ public class SkeletonGruntAnimation : MonoBehaviour
         }
 
         animator.SetFloat(SPEED,direction.magnitude);
-        if (InRangeAttack()) animator.SetTrigger(ATTACK);
+        if (!skeletonMovement.canmove)animator.SetFloat(SPEED,0);
+        
+        if (InRangeAttack() && countDownt >=3) {
+            animator.SetTrigger(ATTACK);
+            countDownt = 0;
+        }
+        if (InRangeAttack()) skeletonMovement.canmove = false;
+        else skeletonMovement.canmove = true;
     }
 
     /////////////////////Support//////////////////////////
@@ -74,15 +95,33 @@ public class SkeletonGruntAnimation : MonoBehaviour
         }
         return false;
     }
-    public void GetHurt(int dame,int nockBack){
-        animator.SetTrigger(HURT);
-        
+
+    public void GetHurt(int dame,Vector2 pos,int nockBack, Weapon weapon){
+        // if (skeletonMovement.HP < 0) return;
+        reset_weapon = weapon;
+        if(!IsOwner) return;
+        if (skeletonMovement.HP.Value > 0 ) {
+            animator.SetTrigger(HURT);
+            GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
+            skeletonMovement.HP.Value -= dame;
+        }
+        if (skeletonMovement.HP.Value <=0)
+        {
+            animator.SetTrigger(DEATH);
+            reset_weapon.increateTime(5);
+        }
+    }
+    public void ShowFloatText(string text){
+            GameObject floatingtext = Instantiate(reset_weapon.FloatingText,reset_weapon.playerMovement.transform.position, Quaternion.identity,    reset_weapon.playerMovement.transform);
+            floatingtext.GetComponent<TextMesh>().text = text;
     }
     public void SetCantMove(){
-        skeletonGruntMovement.canmove = false;
+        if(!IsOwner) return;
+        skeletonMovement.canmove = false;
     }
     public void SetCanMove(){
-        skeletonGruntMovement.canmove = true;
+        if(!IsOwner) return;
+        skeletonMovement.canmove = true;
 
     }
 }

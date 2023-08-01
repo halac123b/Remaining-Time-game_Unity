@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class SkeletonGruntMovement : MonoBehaviour
+public class SkeletonMovement : NetworkBehaviour
 {
     public bool canmove = true;
+    public NetworkVariable<float> HP =  new NetworkVariable<float>(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     void Update()
     {
         // Tìm tất cả các vật thể trong bán kính 10 đơn vị xung quanh vật thể của bạn
-         if(canmove)   transform.position += Getdirection() * Time.deltaTime * 3f;
+         if(canmove && HP.Value > 0)   transform.position += Getdirection() * Time.deltaTime * 3f;
         
     }
     /////////////////////Support//////////////////////////

@@ -13,7 +13,7 @@ public class AnimatorController : NetworkBehaviour
   protected const string ATTACK = "attack";
   protected const string ATTACK_CANCEL = "attackcancel";
 
-  [SerializeField] protected Animator animator;
+  [SerializeField] public Animator animator;
 
   protected PlayerStatus playerStatus;
 

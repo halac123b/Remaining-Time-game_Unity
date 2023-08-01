@@ -52,6 +52,7 @@ public class MonsterAnimator : AnimatorController
   }
 
   public void GetHurt(int dame,Vector2 pos,int nockBack){
+        if (!IsOwner) return;
         animator.SetTrigger(HURT);
         GetComponentInParent<Rigidbody2D>().AddForce(new Vector2(pos.x - transform.position.x,pos.y - transform.position.y)*-nockBack);
     }

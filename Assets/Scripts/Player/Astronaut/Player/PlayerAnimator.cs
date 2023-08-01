@@ -233,7 +233,7 @@ public class PlayerAnimator : AnimatorController
   {
     if (!IsOwner || weapon_animator == null || cover_animator == null) return;
     base.TriggerAttackStarted(context);
-    if (!IsOwner || !canattack) return;
+    if (!IsOwner || !playerStatus.canattack) return;
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }

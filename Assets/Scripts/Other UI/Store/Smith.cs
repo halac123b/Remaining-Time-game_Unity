@@ -9,9 +9,16 @@ public class Smith : NetworkBehaviour
   [SerializeField] GameObject shopUI;
   [SerializeField] GameObject monsterShopUI;
 
+  private PlayerStatus playerStatus;
+
   private bool interactive = false;
 
   [SerializeField] private List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+
+  private void Awake()
+  {
+    playerStatus = FindObjectOfType<PlayerStatus>();
+  }
 
   private void OnTriggerEnter2D(Collider2D other)
   {
@@ -53,6 +60,9 @@ public class Smith : NetworkBehaviour
         {
           shopUI.SetActive(true);
         }
+
+        playerStatus.canattack = false;
+        playerStatus.canMove = false;
       }
     }
   }

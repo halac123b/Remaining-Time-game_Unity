@@ -12,6 +12,9 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private bool countTrigger = true;
   private bool startCounting = false;
 
+  public bool canattack = true;
+  public bool canMove = true;
+
   private int point = 100;
 
   public int bid = 0;

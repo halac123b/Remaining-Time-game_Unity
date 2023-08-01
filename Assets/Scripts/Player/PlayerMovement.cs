@@ -11,16 +11,16 @@ public class PlayerMovement : NetworkBehaviour
 
   private NetworkVariable<ulong> clientId = new NetworkVariable<ulong>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-  private bool canMove = true;
+  private PlayerStatus playerStatus;
 
   private void Awake()
   {
     playerInput = GetComponent<PlayerInput>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
   }
 
   private void Start()
   {
-    Debug.Log("xxx" + IsOwner);
     if (IsOwner)
     {
       clientId.Value = OwnerClientId;
@@ -33,7 +33,7 @@ public class PlayerMovement : NetworkBehaviour
     {
       return;
     }
-    if (canMove)
+    if (playerStatus.canMove)
     {
       HandleMovement();
     }
@@ -55,7 +55,7 @@ public class PlayerMovement : NetworkBehaviour
 
   public void SetCanMove(bool canMove)
   {
-    this.canMove = canMove;
+    playerStatus.canMove = canMove;
   }
   public Vector2 MoveVector()
   {

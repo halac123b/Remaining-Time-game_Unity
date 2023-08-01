@@ -16,7 +16,7 @@ public class AnimatorController : NetworkBehaviour
   [SerializeField] protected Animator animator;
 
   protected PlayerStatus playerStatus;
-  public bool canattack = true;
+
   protected PlayerInput playerInput;
   protected PlayerMovement playerMovement;
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
@@ -41,14 +41,7 @@ public class AnimatorController : NetworkBehaviour
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(NetworkManager.Singleton.LocalClientId));
     }
   }
-  /// <summary>
-  /// Reset is called when the user hits the Reset button in the Inspector's
-  /// context menu or when adding the component the first time.
-  /// </summary>
-  private void Reset()
-  {
 
-  }
   protected virtual void Awake()
   {
     playerInput = GetComponentInParent<PlayerInput>();
@@ -63,13 +56,13 @@ public class AnimatorController : NetworkBehaviour
 
   protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !canattack) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack) return;
     animator.SetTrigger(ATTACK_CANCEL);
   }
 
   protected virtual void TriggerAttackStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !canattack) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack) return;
     animator.SetTrigger(ATTACK);
   }
 

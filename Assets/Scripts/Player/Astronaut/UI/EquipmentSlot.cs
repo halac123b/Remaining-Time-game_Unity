@@ -1,8 +1,9 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class EquipmentSlot : MonoBehaviour
+public class EquipmentSlot : NetworkBehaviour
 {
   private PlayerEquip playerEquip;
   private Image image;
@@ -13,9 +14,19 @@ public class EquipmentSlot : MonoBehaviour
 
     playerEquip = FindObjectOfType<PlayerEquip>();
 
-    if (playerEquip.GetCurrentEquip() != null)
+    if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex != 0)
     {
-      image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+      if (playerEquip.GetCurrentEquip() != null)
+      {
+        image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+      }
+    }
+    else
+    {
+      if (playerEquip.GetCurrentMonster() != null)
+      {
+        image.sprite = playerEquip.GetCurrentMonster().image;
+      }
     }
 
     playerEquip.OnChangeEquip += ChangeEquipSprite;
@@ -23,6 +34,14 @@ public class EquipmentSlot : MonoBehaviour
 
   private void ChangeEquipSprite(object sender, EventArgs e)
   {
-    if (image) image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+
+    if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex != 0)
+    {
+      image.sprite = playerEquip.GetCurrentEquip().GetSprite();
+    }
+    else
+    {
+      image.sprite = playerEquip.GetCurrentMonster().image;
+    }
   }
 }

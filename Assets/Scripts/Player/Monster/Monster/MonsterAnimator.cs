@@ -8,7 +8,9 @@ public class MonsterAnimator : AnimatorController
 {
   // Start is called before the first frame update
   [SerializeField] public Transform AimBar;
-    protected const string HURT = "hurt";
+  protected const string HURT = "hurt";
+
+  private PlayerEquip playerEquip;
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected override void Awake()
@@ -17,10 +19,9 @@ public class MonsterAnimator : AnimatorController
     playerInput.playerInputActions.Player.Attack.started += TriggerAttack01Started;
     playerInput.playerInputActions.Player.Attack02.started += TriggerAttack02Started;
     playerInput.playerInputActions.Player.Attack03.started += TriggerAttack03Started;
-    playerInput.playerInputActions.Player.E_Btn.started += TriggerSummonGrunt;
-    playerInput.playerInputActions.Player.Q_Btn.started += TriggerSummonHunter;
+    playerInput.playerInputActions.Player.E_Btn.started += TriggerSummon;
 
-
+    playerEquip = FindObjectOfType<PlayerEquip>();
   }
   public bool Is_Server()
   {
@@ -51,24 +52,28 @@ public class MonsterAnimator : AnimatorController
     mouse.Value = mouse_pos;
   }
 
-  public void GetHurt(int dame,Vector2 pos,int nockBack){
-        if (!IsOwner) return;
-        animator.SetTrigger(HURT);
-        GetComponentInParent<Rigidbody2D>().AddForce(new Vector2(pos.x - transform.position.x,pos.y - transform.position.y)*-nockBack);
-    }
-  /////////////////////////////Handle Event////////////////////////////// 
-
-  private void TriggerSummonHunter(InputAction.CallbackContext context)
+  public void GetHurt(int dame, Vector2 pos, int nockBack)
   {
-    if (IsOwner)
-      animator.SetTrigger("summonHunter");
+    if (!IsOwner) return;
+    animator.SetTrigger(HURT);
+    GetComponentInParent<Rigidbody2D>().AddForce(new Vector2(pos.x - transform.position.x, pos.y - transform.position.y) * -nockBack);
   }
+  /////////////////////////////Handle Event//////////////////////////////
 
-  private void TriggerSummonGrunt(InputAction.CallbackContext context)
+  private void TriggerSummon(InputAction.CallbackContext context)
   {
-    if (IsOwner)
-      animator.SetTrigger("summonGrunt");
-
+    if (IsOwner && playerEquip.canTriggerSkill && playerEquip.GetCurrentMonster() != null)
+    {
+      switch (playerEquip.GetCurrentMonster().TypeWeapon)
+      {
+        case 0:
+          animator.SetTrigger("summonHunter");
+          break;
+        case 1:
+          animator.SetTrigger("summonGrunt");
+          break;
+      }
+    }
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {

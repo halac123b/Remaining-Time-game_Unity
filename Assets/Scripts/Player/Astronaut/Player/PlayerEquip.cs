@@ -2,20 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Netcode;
 
-public class PlayerEquip : MonoBehaviour
+public class PlayerEquip : NetworkBehaviour
 {
-  [SerializeField] public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+  public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
 
-  private int currentEquip = 0;
+  public List<SubMonsterSO> subMonsterList = new List<SubMonsterSO>();
+
+  public int currentEquip = 0;
+  public int currentMonster = 0;
 
   public event EventHandler OnChangeEquip;
 
+  public bool canTriggerSkill = false;
+
   private void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Q) && equipmentList.Count>0)
+    if (Input.GetKeyDown(KeyCode.Q) && (equipmentList.Count > 0 || PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex == 0))
     {
-      currentEquip = (currentEquip + 1) % equipmentList.Count;
+      if (equipmentList.Count > 0)
+      {
+        currentEquip = (currentEquip + 1) % equipmentList.Count;
+      }
+      currentMonster = (currentMonster + 1) % subMonsterList.Count;
       OnChangeEquip?.Invoke(this, EventArgs.Empty);
     }
   }
@@ -27,6 +37,15 @@ public class PlayerEquip : MonoBehaviour
       return null;
     }
     return equipmentList[currentEquip];
+  }
+
+  public SubMonsterSO GetCurrentMonster()
+  {
+    if (subMonsterList.Count == 0)
+    {
+      return null;
+    }
+    return subMonsterList[currentMonster];
   }
 
   public int GetTypeWeapon()

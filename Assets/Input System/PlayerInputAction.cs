@@ -109,15 +109,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Q_Btn"",
-                    ""type"": ""Button"",
-                    ""id"": ""31a163a9-e70e-4891-9d7f-945006d9f17f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""1"",
                     ""type"": ""Button"",
                     ""id"": ""7f4686a5-65f1-4c52-ad00-47bf25f2fdc1"",
@@ -300,17 +291,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""68c013a4-a895-4365-bfce-d047127384d9"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Q_Btn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e90f5757-6f66-4026-b680-86d0c6e44733"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
@@ -369,7 +349,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Attack02 = m_Player.FindAction("Attack02", throwIfNotFound: true);
         m_Player_Attack03 = m_Player.FindAction("Attack03", throwIfNotFound: true);
         m_Player_E_Btn = m_Player.FindAction("E_Btn", throwIfNotFound: true);
-        m_Player_Q_Btn = m_Player.FindAction("Q_Btn", throwIfNotFound: true);
         m_Player__1 = m_Player.FindAction("1", throwIfNotFound: true);
         m_Player__2 = m_Player.FindAction("2", throwIfNotFound: true);
         m_Player__3 = m_Player.FindAction("3", throwIfNotFound: true);
@@ -444,7 +423,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack02;
     private readonly InputAction m_Player_Attack03;
     private readonly InputAction m_Player_E_Btn;
-    private readonly InputAction m_Player_Q_Btn;
     private readonly InputAction m_Player__1;
     private readonly InputAction m_Player__2;
     private readonly InputAction m_Player__3;
@@ -462,7 +440,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Attack02 => m_Wrapper.m_Player_Attack02;
         public InputAction @Attack03 => m_Wrapper.m_Player_Attack03;
         public InputAction @E_Btn => m_Wrapper.m_Player_E_Btn;
-        public InputAction @Q_Btn => m_Wrapper.m_Player_Q_Btn;
         public InputAction @_1 => m_Wrapper.m_Player__1;
         public InputAction @_2 => m_Wrapper.m_Player__2;
         public InputAction @_3 => m_Wrapper.m_Player__3;
@@ -503,9 +480,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @E_Btn.started += instance.OnE_Btn;
             @E_Btn.performed += instance.OnE_Btn;
             @E_Btn.canceled += instance.OnE_Btn;
-            @Q_Btn.started += instance.OnQ_Btn;
-            @Q_Btn.performed += instance.OnQ_Btn;
-            @Q_Btn.canceled += instance.OnQ_Btn;
             @_1.started += instance.On_1;
             @_1.performed += instance.On_1;
             @_1.canceled += instance.On_1;
@@ -549,9 +523,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @E_Btn.started -= instance.OnE_Btn;
             @E_Btn.performed -= instance.OnE_Btn;
             @E_Btn.canceled -= instance.OnE_Btn;
-            @Q_Btn.started -= instance.OnQ_Btn;
-            @Q_Btn.performed -= instance.OnQ_Btn;
-            @Q_Btn.canceled -= instance.OnQ_Btn;
             @_1.started -= instance.On_1;
             @_1.performed -= instance.On_1;
             @_1.canceled -= instance.On_1;
@@ -592,7 +563,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAttack02(InputAction.CallbackContext context);
         void OnAttack03(InputAction.CallbackContext context);
         void OnE_Btn(InputAction.CallbackContext context);
-        void OnQ_Btn(InputAction.CallbackContext context);
         void On_1(InputAction.CallbackContext context);
         void On_2(InputAction.CallbackContext context);
         void On_3(InputAction.CallbackContext context);

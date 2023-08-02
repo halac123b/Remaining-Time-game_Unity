@@ -19,6 +19,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   [SerializeField] SceneName nextScene = SceneName.MainPhase;
 
   [SerializeField] PlayerStatus playerStatus;
+  [SerializeField] PlayerEquip playerEquip;
 
   private int clientSendPoint = 0;
 
@@ -31,11 +32,13 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
     }
     countDown.OnTimeOut += UpdatePointBid;
+    playerEquip.canTriggerSkill = false;
   }
 
   private void UpdatePointBid(object sender, EventArgs e)
   {
     UpdatePointServerRpc(NetworkManager.Singleton.LocalClientId, playerStatus.GetPoint(), playerStatus.bid);
+    playerEquip.canTriggerSkill = true;
   }
 
   // So this method is called on the server each time a player enters the scene.

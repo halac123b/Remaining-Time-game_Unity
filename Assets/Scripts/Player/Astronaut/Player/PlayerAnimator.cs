@@ -32,7 +32,7 @@ public class PlayerAnimator : AnimatorController
 
   protected override void Awake()
   {
-    
+
     base.Awake();
     playerColision = GetComponentInParent<PlayerColision>();
     playerEquip = FindObjectOfType<PlayerEquip>();
@@ -62,14 +62,14 @@ public class PlayerAnimator : AnimatorController
   {
     base.Start();
     if (!IsOwner) return;
-    AimBar.GetComponentInChildren<Slider>().value = 0; 
+    AimBar.GetComponentInChildren<Slider>().value = 0;
     AimBar.gameObject.SetActive(false);
 
-      PlayerData data = new PlayerData
+    PlayerData data = new PlayerData
     {
       Id = playerData.Value.Id,
       color = playerData.Value.color,
-      playerName = playerData.Value.playerName, 
+      playerName = playerData.Value.playerName,
       playerWeapon = (playerEquip.GetCurrentEquip() == null) ? -1 : playerEquip.GetCurrentEquip().GetTypeWeapon(),
     };
     playerData.Value = data;
@@ -111,6 +111,12 @@ public class PlayerAnimator : AnimatorController
     else if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value <= 0)
     {
       AimBar.gameObject.SetActive(false);
+    }
+
+    if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
+    {
+      Debug.LogError("playerData.Value.playerWeapon: " + playerData.Value.playerWeapon);
+      if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
     }
 
     if (!IsOwner) return;

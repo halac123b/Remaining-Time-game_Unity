@@ -16,7 +16,6 @@ public class PlayerInput : NetworkBehaviour
   private int TypeMove;
   private bool isProcessing = false;
   [SerializeField] CapsuleCollider2D capsuleCollider2D;
-  [SerializeField] PlayerAnimator playerAnimator;
 
   private PlayerStatus playerStatus;
 

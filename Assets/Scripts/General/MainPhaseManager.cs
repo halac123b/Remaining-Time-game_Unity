@@ -74,6 +74,12 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   {
     PointManager.Instance.playerPoint[index].roundRank = currentRank;
     currentRank--;
+
+    if (currentRank == 0)
+    {
+      PointManager.Instance.playerPoint[index].roundRank = currentRank;
+      currentRank--;
+    }
   }
 
   private void StartGame(object sender, EventArgs e)
@@ -106,8 +112,12 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     yield return new WaitForSeconds(0.5f);
 
     Destroy(sceneName.gameObject);
-    lifeTime.gameObject.SetActive(true);
-    playerStatus.SetStartCounting(true);
+
+    if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex != 0)
+    {
+      lifeTime.gameObject.SetActive(true);
+      playerStatus.SetStartCounting(true);
+    }
   }
 
   private void OxyVictory(object sender, EventArgs e)

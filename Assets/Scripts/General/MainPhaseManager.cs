@@ -77,7 +77,14 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
     if (currentRank == 0)
     {
-      PointManager.Instance.playerPoint[index].roundRank = currentRank;
+      for (int i = 0; i < 3; i++)
+      {
+        if (PointManager.Instance.playerPoint[i].playerIndex == 0)
+        {
+          PointManager.Instance.playerPoint[i].roundRank = currentRank;
+          break;
+        }
+      }
       currentRank--;
     }
   }
@@ -124,8 +131,17 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   {
     if (currentRank == 2)
     {
-      PointManager.Instance.playerPoint[1].roundRank = PointManager.Instance.playerPoint[2].roundRank = 0;
-      PointManager.Instance.playerPoint[0].roundRank = 2;
+      for (int i = 0; i < 3; i++)
+      {
+        if (PointManager.Instance.playerPoint[i].playerIndex == 0)
+        {
+          PointManager.Instance.playerPoint[i].roundRank = 2;
+        }
+        else
+        {
+          PointManager.Instance.playerPoint[i].roundRank = 0;
+        }
+      }
     }
 
     else if (currentRank == 1)
@@ -134,8 +150,14 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
       {
         if (PointManager.Instance.playerPoint[i].roundRank == -1)
         {
-          PointManager.Instance.playerPoint[i].roundRank = 0;
-          PointManager.Instance.playerPoint[0].roundRank = 1;
+          if (PointManager.Instance.playerPoint[i].playerIndex == 0)
+          {
+            PointManager.Instance.playerPoint[i].roundRank = 1;
+          }
+          else
+          {
+            PointManager.Instance.playerPoint[i].roundRank = 0;
+          }
           break;
         }
       }

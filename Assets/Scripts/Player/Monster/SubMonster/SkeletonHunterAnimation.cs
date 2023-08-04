@@ -21,18 +21,22 @@ public class SkeletonHunterAnimation : NetworkBehaviour
     [SerializeField] Animator animator;
     [SerializeField] public Transform AimBar;
 
-    private Weapon reset_weapon;
+        public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     
     private Vector2 shottarget;
     // Update is called once per frame
     private float countDownt = 0;
+    private float time = 0;
     void Update()
-    {
+    {   
+        time += Time.deltaTime;
+        countDownt += Time.deltaTime;
+
         AimBar.GetComponentInChildren<Slider>().value = skeletonMovement.HP.Value/100f;
         if (skeletonMovement.HP.Value <= 0) {
             return;
         }
-        countDownt += Time.deltaTime;
         Vector3 direction = skeletonMovement.Getdirection();
         if (direction != new Vector3(0,0)) shottarget = direction;
         float x = direction.x;
@@ -98,26 +102,43 @@ public class SkeletonHunterAnimation : NetworkBehaviour
         }
         return new Vector2 (0,0);
     }
-    public void GetHurt(int dame,Vector2 pos,int nockBack, Weapon weapon){
+
+    [ServerRpc(RequireOwnership = false)]
+    public void GetHurtServerRpc(int dame,Vector2 pos,int nockBack, ulong id){
         // if (skeletonMovement.HP < 0) return;
-        reset_weapon = weapon;
+        
         if(!IsOwner) return;
-        if (skeletonMovement.HP.Value > 0 ) {
+
+        index.Value = id;
+
+        if (skeletonMovement.HP.Value > 0 && time >= 1 ) {
+            time = 0;
             animator.SetTrigger(HURT);
             GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
             skeletonMovement.HP.Value -= dame;
         }
-        if (skeletonMovement.HP.Value <=0)
+        if (skeletonMovement.HP.Value <=0 )
         {
             animator.SetTrigger(DEATH);
-            reset_weapon.increateTime(5);
+            foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
+                // Debug.LogError(o.GetPlayerData().Id+" ==? "+index.Value);
+                if (o.GetPlayerData().Id == index.Value){
+                    o.weapon.increaseTime(5);
+                }
+            }
+            Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
     }
 
     public void ShowFloatText(string text){
-            GameObject floatingtext = Instantiate(reset_weapon.FloatingText,reset_weapon.playerMovement.transform.position, Quaternion.identity,    reset_weapon.playerMovement.transform);
-            floatingtext.transform.position += new Vector3(Random.Range(-1f, 1f),Random.Range(-1f, 1f),0);
-            floatingtext.GetComponent<TextMesh>().text = text;
+            // Debug.LogError("Index: " +index.Value);
+            foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
+                if (o.GetPlayerData().Id == index.Value){
+                    GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
+                    floatingtext.GetComponent<TextMesh>().text = text;
+
+                }
+            }
     }
     public void SetCantMove(){
         if(!IsOwner) return;

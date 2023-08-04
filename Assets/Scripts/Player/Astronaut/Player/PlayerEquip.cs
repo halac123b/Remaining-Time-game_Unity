@@ -6,7 +6,9 @@ using Unity.Netcode;
 
 public class PlayerEquip : NetworkBehaviour
 {
-  public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+  [SerializeField] public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
+  [SerializeField] public List<EquipmentSO> all = new List<EquipmentSO>();
+ 
 
   public List<SubMonsterSO> subMonsterList = new List<SubMonsterSO>();
 
@@ -56,7 +58,7 @@ public class PlayerEquip : NetworkBehaviour
 
   public EquipmentSO GetEquip(int i)
   {
-    foreach (var weapon in equipmentList)
+    foreach (var weapon in all)
     {
       if (weapon.GetTypeWeapon() == i)
       {

@@ -14,11 +14,12 @@ public class AnimatorController : NetworkBehaviour
   protected const string ATTACK_CANCEL = "attackcancel";
 
   [SerializeField] public Animator animator;
+  [SerializeField] public GameObject FloatingText;
 
   protected PlayerStatus playerStatus;
 
   protected PlayerInput playerInput;
-  protected PlayerMovement playerMovement;
+  public PlayerMovement playerMovement;
   protected NetworkVariable<PlayerData> playerData = new NetworkVariable<PlayerData>(
     new PlayerData
     {

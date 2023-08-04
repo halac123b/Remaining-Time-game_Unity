@@ -56,7 +56,7 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
     System.Random random = new System.Random();
     for (int i = 0; i < 3; i++)
     {
-      playerPoint[i].playerIndex = index[random.Next(index.Count)];
+      playerPoint[i].playerIndex = (i)%3;//index[random.Next(index.Count)];
       index.Remove(playerPoint[i].playerIndex);
     }
 
@@ -83,7 +83,7 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
   {
     playerData.Id = index;
     playerPoint[index].playerData = playerData;
-    Debug.Log("Player ID is:" + playerData.Id);
-    Debug.Log("Player color is:" + playerData.color);
+    // Debug.Log("Player ID is:" + playerData.Id);
+    // Debug.Log("Player color is:" + playerData.color);
   }
 }

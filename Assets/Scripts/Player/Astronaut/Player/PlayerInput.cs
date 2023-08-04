@@ -122,12 +122,16 @@ public class PlayerInput : NetworkBehaviour
 
   private void ProcessPerformed(InputAction.CallbackContext context)
   {
-    StartCoroutine(CoutDownTrigger());
+    if(!IsOwner) return;
+    StartCoroutine(CoutDownTrigger()); // ???
+
   }
 
   private void ProcessCanceled(InputAction.CallbackContext context)
   {
-    StopAllCoroutines();
+    if(!IsOwner) return;
+
+    StopAllCoroutines(); // ???
     isProcessing = false;
   }
 

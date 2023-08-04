@@ -109,7 +109,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
       oxyStatus.OnOxyComplete += OxyVictory;
 
-      for (ulong i = 0; i < 3; i++)
+      for (ulong i = 0; Convert.ToInt32(i) < NetworkManager.Singleton.ConnectedClients.Count; i++)
       {
         NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(PointManager.Instance.playerPoint[i].playerIndex == 0 ? monsterPrefab : playerPrefab, PointManager.Instance.playerPoint[i].spawnPoint, i);
       }

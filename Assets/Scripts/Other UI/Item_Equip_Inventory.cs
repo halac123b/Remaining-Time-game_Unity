@@ -12,6 +12,7 @@ public class Item_Equip_Inventory : MonoBehaviour
 
   private void Awake()
   {
+    
   }
 
   void Start()

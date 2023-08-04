@@ -24,6 +24,7 @@ public class SummonSubMonster : StateMachineBehaviour
         
         if(stateInfo.normalizedTime >= 1f && animator.GetComponent<MonsterAnimator>().Is_Server()){
             
+            
             NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x+1,animator.transform.position.y + 2f), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
             NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x-1,animator.transform.position.y + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
             NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y+1 + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);

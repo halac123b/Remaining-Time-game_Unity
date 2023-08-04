@@ -5685,6 +5685,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentList: []
+  all:
+  - {fileID: 11400000, guid: 333749eac56612e4c986eb1e9d809a97, type: 2}
+  - {fileID: 11400000, guid: 3c5b14542ead4d046a13f75058187d4b, type: 2}
+  - {fileID: 11400000, guid: ecd7bbb3cdee42c4b86d56702759be27, type: 2}
+  - {fileID: 11400000, guid: f0ad19d1c9ea4334f837f83fcea62bff, type: 2}
+  - {fileID: 11400000, guid: c6bfd07fb600cd543a88399112e73c4c, type: 2}
+  - {fileID: 11400000, guid: 5b4cc52d555f4194ab902f9c1e489604, type: 2}
   subMonsterList:
   - {fileID: 11400000, guid: 77cc7812954b7e54bac8474e3a37f2a1, type: 2}
   - {fileID: 11400000, guid: b2d9608aeb941374785ee4a0a493de40, type: 2}
@@ -26234,6 +26241,7 @@ GameObject:
   - component: {fileID: 4035218492980721623}
   - component: {fileID: 47476332338737875}
   - component: {fileID: 8599423328848770034}
+  - component: {fileID: 8599423328848770035}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26263,6 +26271,25 @@ MonoBehaviour:
   skillList:
   - {fileID: 11400000, guid: 5d1ac3ec66dde19498332e8f3702ddc1, type: 2}
   - {fileID: 11400000, guid: 4c2a2d64a38a1c346a97ea6343461c4a, type: 2}
+--- !u!114 &8599423328848770035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599423328848770033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1811425517
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!222 &8637103409430749384
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubMonsterHurt : StateMachineBehaviour
+public class MonsterDeath : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    // override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    // {
-    //     // SkeletonGruntAnimation skeletonGruntAnimation = animator.GetComponent<SkeletonGruntAnimation>();
-    //     // SkeletonHunterAnimation skeletonHunterAnimation = animator.GetComponent<SkeletonHunterAnimation>();
-    //     // if (skeletonGruntAnimation){
-
-    //     //     skeletonGruntAnimation.skeletonGruntMovement.HP.Value -= dame;
-    //     //     skeletonGruntAnimation.reset_weapon = resetWeapon;
-    //     // }
-    // }
+     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //  deathTime(animator);
+       
+        MonsterAnimator monsterAnimator = animator.GetComponent<MonsterAnimator>();
+        if (monsterAnimator){
+            monsterAnimator.SetMove(true);
+            monsterAnimator.ShowFloatText("+20s");
+        }
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+            
+        if (stateInfo.normalizedTime >=0.2)
+        animator.SetTrigger("revive");
+    }
+
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Destroy(animator.GetComponent<CapsuleCollider2D>());
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

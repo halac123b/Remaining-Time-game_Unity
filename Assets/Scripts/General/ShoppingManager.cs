@@ -19,13 +19,19 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] SceneName nextScene = SceneName.MainPhase;
 
-  [SerializeField] PlayerStatus playerStatus;
+  PlayerStatus playerStatus;
   [SerializeField] PlayerEquip playerEquip;
 
   private int clientSendPoint = 0;
 
   public event EventHandler OnUpdatePoint;
 
+  public override void Awake()
+  {
+    base.Awake();
+    playerStatus = FindObjectOfType<PlayerStatus>();
+    playerEquip = FindObjectOfType<PlayerEquip>();
+  }
   private void Start()
   {
     if (IsHost)
@@ -66,7 +72,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
       }
     }
-    
+
     Dictionary<int, GameObject> Character = new Dictionary<int, GameObject>()
 {
     {0, monsterPrefab},
@@ -75,8 +81,9 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
 };
 
-    for (ulong i=0; Convert.ToInt32(i) < NetworkManager.Singleton.ConnectedClients.Count;i++){
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(Character[PointManager.Instance.playerPoint[Convert.ToInt32(i)].playerIndex], new Vector3(i, i, 0),i);
+    for (ulong i = 0; Convert.ToInt32(i) < NetworkManager.Singleton.ConnectedClients.Count; i++)
+    {
+      NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(Character[PointManager.Instance.playerPoint[Convert.ToInt32(i)].playerIndex], new Vector3(i, i, 0), i);
     }
 
 
@@ -142,10 +149,14 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     if (index == 1)
     {
       PointManager.Instance.playerPoint[index].point = point1;
+
+      playerStatus.SetPoint(point1);
     }
     else if (index == 2)
     {
       PointManager.Instance.playerPoint[index].point = point2;
+
+      playerStatus.SetPoint(point2);
     }
   }
 

@@ -26,7 +26,7 @@ public class EquipStore : MonoBehaviour
   [SerializeField] TextMeshProUGUI pointText;
 
   PlayerEquip playerEquip;
-  [SerializeField] PlayerStatus playerStatus;
+  PlayerStatus playerStatus;
   PlayerItem playerItem;
 
   [SerializeField] GameObject weaponDescription;
@@ -50,6 +50,7 @@ public class EquipStore : MonoBehaviour
     equipmentStock = FindObjectOfType<EquipmentInStore>();
     playerEquip = FindObjectOfType<PlayerEquip>();
     playerItem = FindObjectOfType<PlayerItem>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
   }
   private void Start()
   {

@@ -20,8 +20,8 @@ public class MonsterAnimator : AnimatorController
 
   private PlayerEquip playerEquip;
 
+  private float time = 0;
 
-  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected override void Awake()
   {
     base.Awake();

@@ -10,7 +10,7 @@ public class Bank : MonoBehaviour
   [SerializeField] private int minBid = 30;
   [SerializeField] private int step = 10;
 
-  [SerializeField] PlayerStatus playerStatus;
+  PlayerStatus playerStatus;
 
   private int bidCurrent;
 
@@ -21,6 +21,10 @@ public class Bank : MonoBehaviour
 
   [SerializeField] private ShoppingManager manager;
 
+  private void Awake()
+  {
+    playerStatus = FindObjectOfType<PlayerStatus>();
+  }
   private void Start()
   {
     manager.OnUpdatePoint += FirstUpdate;

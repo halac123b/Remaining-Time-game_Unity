@@ -129,7 +129,6 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   private void OxyVictory(object sender, EventArgs e)
   {
-    Debug.Log("gg " + currentRank);
     if (currentRank == 2)
     {
       for (int i = 0; i < 3; i++)

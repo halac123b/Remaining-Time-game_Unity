@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
     private List<Button> buttons = new List<Button>();
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
         playerItem = FindAnyObjectByType<PlayerItem>();
         Button[] buttons_t =  UI.gameObject.GetComponentsInChildren<Button>();
         

@@ -21,12 +21,14 @@ public class SkeletonGruntAnimation : NetworkBehaviour
     [SerializeField] public Transform AimBar;
 
     private float countDownt = 0;
-    private Weapon reset_weapon;
+    public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     // Update is called once per frame
    
+   private float time = 0;
 
     void Update()
     {   
+        time += Time.deltaTime;
         AimBar.GetComponentInChildren<Slider>().value = skeletonMovement.HP.Value/100f;
         if (skeletonMovement.HP.Value <= 0) {
             return;
@@ -95,25 +97,34 @@ public class SkeletonGruntAnimation : NetworkBehaviour
         }
         return false;
     }
-
-    public void GetHurt(int dame,Vector2 pos,int nockBack, Weapon weapon){
-        // if (skeletonMovement.HP < 0) return;
-        reset_weapon = weapon;
+    [ServerRpc(RequireOwnership = false)]
+    public void GetHurtServerRpc(int dame,Vector2 pos,int nockBack, ulong id){
         if(!IsOwner) return;
-        if (skeletonMovement.HP.Value > 0 ) {
+        index.Value = id;
+        if (skeletonMovement.HP.Value > 0 && time >= 1) {
+            time = 0;
             animator.SetTrigger(HURT);
             GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
             skeletonMovement.HP.Value -= dame;
         }
+
         if (skeletonMovement.HP.Value <=0)
         {
             animator.SetTrigger(DEATH);
-            reset_weapon.increateTime(5);
+            if( animator.GetComponent<CapsuleCollider2D>()){
+                Destroy(animator.GetComponent<CapsuleCollider2D>());
+            }//else Debug.LogError("Seen't Collider"); 
+
         }
     }
     public void ShowFloatText(string text){
-            GameObject floatingtext = Instantiate(reset_weapon.FloatingText,reset_weapon.playerMovement.transform.position, Quaternion.identity,    reset_weapon.playerMovement.transform);
-            floatingtext.GetComponent<TextMesh>().text = text;
+            foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
+                if (o.GetPlayerData().Id == index.Value){
+                    GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
+                    floatingtext.GetComponent<TextMesh>().text = text;
+                    o.weapon.increaseTime(5);
+                }
+            }
     }
     public void SetCantMove(){
         if(!IsOwner) return;

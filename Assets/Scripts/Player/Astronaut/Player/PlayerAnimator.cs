@@ -14,6 +14,7 @@ public class PlayerAnimator : AnimatorController
 
   private PlayerEquip playerEquip;
   private PlayerColision playerColision;
+  [SerializeField] public Weapon weapon;
 
   [SerializeField] private SpriteRenderer weaponcarry;
   [SerializeField] private SpriteRenderer cover_sprite;
@@ -80,28 +81,10 @@ public class PlayerAnimator : AnimatorController
     }
   }
 
-  private void OnChangeEquipped(object sender, EventArgs e)
-  {
-    if (!IsOwner) return;
-    if (AimBar && AimBar.GetComponentInChildren<Slider>())
-    {
-      AimBar.GetComponentInChildren<Slider>().value = 0;
-      AimBar.gameObject.SetActive(false);
-    }
 
-    PlayerData data = new PlayerData
-    {
-      Id = playerData.Value.Id,
-      color = playerData.Value.color,
-      playerName = playerData.Value.playerName,
-      playerWeapon = playerEquip.GetCurrentEquip() == null ? -1 : playerEquip.GetCurrentEquip().GetTypeWeapon(),
-    };
-    playerData.Value = data;
-  }
 
-  protected override void Update()
+  private void FixedUpdate()
   {
-    //  Unsupported.SmartReset(weapon_animator);
     playername.text = playerData.Value.playerName;
     if (playerData.Value.playerWeapon == 4 && AimBar.GetComponentInChildren<Slider>().value > 0)
     {
@@ -113,12 +96,10 @@ public class PlayerAnimator : AnimatorController
       AimBar.gameObject.SetActive(false);
     }
 
-    if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
-    {
-      // Debug.LogError("playerData.Value.playerWeapon: " + playerData.Value.playerWeapon);
-      if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
-    }
 
+  }
+  protected override void Update()
+  {
     if (!IsOwner) return;
 
 
@@ -205,6 +186,24 @@ public class PlayerAnimator : AnimatorController
     cover_sprite.material.color = color;
   }
   /////////////////////////////Handle Event////////////////////////////// 
+  private void OnChangeEquipped(object sender, EventArgs e)
+  {
+    if (!IsOwner) return;
+    if (AimBar && AimBar.GetComponentInChildren<Slider>())
+    {
+      AimBar.GetComponentInChildren<Slider>().value = 0;
+      AimBar.gameObject.SetActive(false);
+    }
+
+    PlayerData data = new PlayerData
+    {
+      Id = playerData.Value.Id,
+      color = playerData.Value.color,
+      playerName = playerData.Value.playerName,
+      playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
+    };
+    playerData.Value = data;
+  }
   private void OnFlipXChanged(bool oldValue, bool newValue)
   {
     weaponcarry.flipX = cover_sprite.flipX = sprite.flipX = newValue;

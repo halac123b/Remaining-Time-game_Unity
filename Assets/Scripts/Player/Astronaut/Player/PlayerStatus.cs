@@ -9,6 +9,9 @@ using Unity.Netcode;
 public class PlayerStatus : SingletonPersistent<PlayerStatus>
 {
   [SerializeField] private int timeLeft = 30;
+
+  // public ulong ClientIndex = NetworkManager.Singleton.LocalClientId;
+
   private bool countTrigger = true;
   private bool startCounting = false;
 

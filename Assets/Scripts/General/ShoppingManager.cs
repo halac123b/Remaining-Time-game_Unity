@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -65,30 +66,43 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
         break;
       }
     }
+    
+    Dictionary<int, GameObject> Character = new Dictionary<int, GameObject>()
+{
+    {0, monsterPrefab},
+    {1, playerPrefab},
+    {2, playerPrefab}
 
-    switch (numberConnected)
-    {
-      case 1:
-        NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
-        break;
-      case 2:
-        NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
-        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(0, -5, 0), 1);
-        break;
-      case 3:
-        for (ulong i = 0; i < 3; i++)
-        {
-          if (i != monsterIndex)
-          {
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), i);
-          }
-          else
-          {
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, spawnPoint[(i <= 1) ? i : 1], monsterIndex);
-          }
-        }
-        break;
+};
+
+    for (ulong i=0; Convert.ToInt32(i) < NetworkManager.Singleton.ConnectedClients.Count;i++){
+        NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(Character[PointManager.Instance.playerPoint[Convert.ToInt32(i)].playerIndex], new Vector3(i, i, 0),i);
     }
+
+
+    // switch (PointManager.Instance.playerPoint.Length)
+    // {
+    //   case 1:
+    //     NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
+    //     break;
+    //   case 2:
+    //     NetworkObjectSpawner.SpawnNewNetworkObject(playerPrefab, new Vector3(-10, 0, 0));
+    //     NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, new Vector3(0, -5, 0), 1);
+    //     break;
+    //   case 3:
+    //     for (ulong i = 0; i < 3; i++)
+    //     {
+    //       if (i != monsterIndex)
+    //       {
+    //         NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(playerPrefab, new Vector3(0, -5, 0), i);
+    //       }
+    //       else
+    //       {
+    //         NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(monsterPrefab, spawnPoint[(i <= 1) ? i : 1], monsterIndex);
+    //       }
+    //     }
+    //     break;
+    // }
 
     StartCountClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
 
@@ -141,7 +155,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     PointManager.Instance.playerPoint[index].point = point;
     PointManager.Instance.playerPoint[index].bidAmount = bidAmount;
     clientSendPoint++;
-    if (clientSendPoint == 3)
+    if (clientSendPoint == NetworkManager.Singleton.ConnectedClients.Count)
     {
       LoadNextScene();
     }

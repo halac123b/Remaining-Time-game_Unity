@@ -243,9 +243,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4484233701363179511}
     - target: {fileID: 4831608051584819511, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 6532385549668140179}
+    - target: {fileID: 4831608051584819511, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: playername
       value: 
       objectReference: {fileID: 7155795505164686837}
+    - target: {fileID: 4831608051584819511, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: FloatingText
+      value: 
+      objectReference: {fileID: 2699428507742238733, guid: e509eeda6d729b249addea5b1fc7bc06, type: 3}
+    - target: {fileID: 4831608051584819511, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 904183392285999326}
     - target: {fileID: 6002696831812080720, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: playerAnimator
       value: 

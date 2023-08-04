@@ -94,7 +94,7 @@ public class PlayerAnimator : AnimatorController
       Id = playerData.Value.Id,
       color = playerData.Value.color,
       playerName = playerData.Value.playerName,
-      playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
+      playerWeapon = playerEquip.GetCurrentEquip() == null ? -1 : playerEquip.GetCurrentEquip().GetTypeWeapon(),
     };
     playerData.Value = data;
   }
@@ -115,7 +115,7 @@ public class PlayerAnimator : AnimatorController
 
     if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
     {
-      Debug.LogError("playerData.Value.playerWeapon: " + playerData.Value.playerWeapon);
+      // Debug.LogError("playerData.Value.playerWeapon: " + playerData.Value.playerWeapon);
       if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
     }
 

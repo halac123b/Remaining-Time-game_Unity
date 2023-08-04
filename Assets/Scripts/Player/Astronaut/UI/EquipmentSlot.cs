@@ -42,6 +42,13 @@ public class EquipmentSlot : NetworkBehaviour
     else
     {
       image.sprite = playerEquip.GetCurrentMonster().image;
+      Debug.Log("gaga");
     }
+  }
+
+  override public void OnDestroy()
+  {
+    base.OnDestroy();
+    playerEquip.OnChangeEquip -= ChangeEquipSprite;
   }
 }

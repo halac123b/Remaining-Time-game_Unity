@@ -46,7 +46,8 @@ public class OxyStatus : NetworkBehaviour
 
     OnProcessing?.Invoke(this, new IntEventArg { value = process.Value });
 
-    if (process.Value == threshold)
+    Debug.Log("faga" + process.Value);
+    if (process.Value >= threshold)
     {
       OnOxyComplete?.Invoke(this, EventArgs.Empty);
     }

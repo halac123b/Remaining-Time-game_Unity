@@ -26,6 +26,8 @@ public class PlayerEquip : NetworkBehaviour
         currentEquip = (currentEquip + 1) % equipmentList.Count;
       }
       currentMonster = (currentMonster + 1) % subMonsterList.Count;
+
+      Debug.Log("vit " + currentMonster);
       OnChangeEquip?.Invoke(this, EventArgs.Empty);
     }
   }

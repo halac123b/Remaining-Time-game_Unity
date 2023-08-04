@@ -3,19 +3,22 @@ using Unity.Netcode;
 
 public class PlayerColision : NetworkBehaviour
 {
-
-  [SerializeField] private PlayerInput playerInput;
-  [SerializeField] private PlayerMovement playerMovement;
+  private PlayerInput playerInput;
+  private PlayerMovement playerMovement;
   private bool isProcessing = false;
   private int processSpeed = 5;
-  
-  private void Awake()
-  {
-    playerInput = FindObjectOfType<PlayerInput>();
-  }
 
+  private void Start()
+  {
+    playerInput = GetComponent<PlayerInput>();
+    playerMovement = GetComponent<PlayerMovement>();
+  }
   private void OnCollisionStay2D(Collision2D other)
   {
+    if (!IsOwner)
+    {
+      return;
+    }
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
     if (oxy != null)
     {
@@ -51,7 +54,7 @@ public class PlayerColision : NetworkBehaviour
     }
   }
 
-  
+
   private void OnCollisionExit2D(Collision2D other)
   {
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();

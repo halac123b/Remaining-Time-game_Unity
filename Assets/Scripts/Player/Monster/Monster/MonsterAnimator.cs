@@ -12,6 +12,7 @@ public class MonsterAnimator : AnimatorController
 
   private PlayerEquip playerEquip;
 
+
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   protected override void Awake()
   {
@@ -77,7 +78,7 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack) return;
     animator.SetInteger(TYPE_ATTACK, 1);
     animator.SetTrigger(ATTACK);
   }

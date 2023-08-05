@@ -24,7 +24,8 @@ public class SkeletonGruntAnimation : NetworkBehaviour
     public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     // Update is called once per frame
    
-   private float time = 0;
+   public const float TIME = 1f;
+   public float time = 0;
 
     void Update()
     {   
@@ -97,11 +98,11 @@ public class SkeletonGruntAnimation : NetworkBehaviour
         }
         return false;
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void GetHurtServerRpc(int dame,Vector2 pos,int nockBack, ulong id){
+    [ClientRpc]
+    public void GetHurtClientRpc(int dame,Vector2 pos,int nockBack, ulong id){
         if(!IsOwner) return;
         index.Value = id;
-        if (skeletonMovement.HP.Value > 0 && time >= 1) {
+        if (skeletonMovement.HP.Value > 0 && (time >= TIME)) {
             time = 0;
             animator.SetTrigger(HURT);
             GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
@@ -111,10 +112,7 @@ public class SkeletonGruntAnimation : NetworkBehaviour
         if (skeletonMovement.HP.Value <=0)
         {
             animator.SetTrigger(DEATH);
-            if( animator.GetComponent<CapsuleCollider2D>()){
-                Destroy(animator.GetComponent<CapsuleCollider2D>());
-            }//else Debug.LogError("Seen't Collider"); 
-
+            Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
     }
     public void ShowFloatText(string text){

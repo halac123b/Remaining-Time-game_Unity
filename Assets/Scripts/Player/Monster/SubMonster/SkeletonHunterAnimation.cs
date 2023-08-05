@@ -27,7 +27,9 @@ public class SkeletonHunterAnimation : NetworkBehaviour
     private Vector2 shottarget;
     // Update is called once per frame
     private float countDownt = 0;
-    private float time = 0;
+    
+    public const float TIME = 1f;
+    public float time = 0;
     void Update()
     {   
         time += Time.deltaTime;
@@ -103,15 +105,15 @@ public class SkeletonHunterAnimation : NetworkBehaviour
         return new Vector2 (0,0);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void GetHurtServerRpc(int dame,Vector2 pos,int nockBack, ulong id){
+    [ClientRpc]
+    public void GetHurtClientRpc(int dame,Vector2 pos,int nockBack, ulong id){
         // if (skeletonMovement.HP < 0) return;
         
         if(!IsOwner) return;
 
         index.Value = id;
 
-        if (skeletonMovement.HP.Value > 0 && time >= 1 ) {
+        if (skeletonMovement.HP.Value > 0 && (time >= TIME) ) {
             time = 0;
             animator.SetTrigger(HURT);
             GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
@@ -120,12 +122,6 @@ public class SkeletonHunterAnimation : NetworkBehaviour
         if (skeletonMovement.HP.Value <=0 )
         {
             animator.SetTrigger(DEATH);
-            foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
-                // Debug.LogError(o.GetPlayerData().Id+" ==? "+index.Value);
-                if (o.GetPlayerData().Id == index.Value){
-                    o.weapon.increaseTime(5);
-                }
-            }
             Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
     }
@@ -136,6 +132,7 @@ public class SkeletonHunterAnimation : NetworkBehaviour
                 if (o.GetPlayerData().Id == index.Value){
                     GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
                     floatingtext.GetComponent<TextMesh>().text = text;
+                    o.weapon.increaseTime(5);
 
                 }
             }

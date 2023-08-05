@@ -55,6 +55,7 @@ public class PlayerMovement : NetworkBehaviour
 
   public void SetCanMove(bool canMove)
   {
+    if(IsOwner)
     playerStatus.canMove = canMove;
   }
   public Vector2 MoveVector()
@@ -77,10 +78,10 @@ public class PlayerMovement : NetworkBehaviour
     return playerInput.GetTypeMove();
   }
 
-  public void SetSpeed(float speed)
-  {
-    moveSpeed = speed;
-  }
+  // public void SetSpeed(float speed)
+  // {
+  //   moveSpeed = speed;
+  // }
 
   public ulong GetClientId()
   {

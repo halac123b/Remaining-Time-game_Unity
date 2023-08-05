@@ -5,13 +5,15 @@ using UnityEngine;
 public class MonsterDeath : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+        MonsterAnimator monsterAnimator ;
+
      override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //  deathTime(animator);
        
-        MonsterAnimator monsterAnimator = animator.GetComponent<MonsterAnimator>();
+        monsterAnimator = animator.GetComponent<MonsterAnimator>();
         if (monsterAnimator){
-            monsterAnimator.SetMove(true);
+            monsterAnimator.SetMove(false);
             monsterAnimator.ShowFloatText("+20s");
         }
     }
@@ -19,7 +21,7 @@ public class MonsterDeath : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            
+        monsterAnimator.SetMove(false);    
         if (stateInfo.normalizedTime >=0.2)
         animator.SetTrigger("revive");
     }
@@ -29,6 +31,8 @@ public class MonsterDeath : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Destroy(animator.GetComponent<CapsuleCollider2D>());
+        monsterAnimator.SetMove(false);
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

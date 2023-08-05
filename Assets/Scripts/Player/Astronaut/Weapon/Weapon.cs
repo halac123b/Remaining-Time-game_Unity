@@ -26,8 +26,13 @@ public class Weapon : NetworkBehaviour
         Destroy(gameObject.GetComponent<PolygonCollider2D>());
         if (playerAnimator.GetPlayerData().playerWeapon <3 && count == ((playerAnimator.GetPlayerData().playerWeapon == 0 )?(10):(15)) ){
             // count =0;
+            float x = playerAnimator.animator.GetFloat("Horizontal");
+            float y = playerAnimator.animator.GetFloat("Vertical");
+            if (Mathf.Abs(y) >0.1f) x = 0;
             var trigg=gameObject.AddComponent<PolygonCollider2D>();
             trigg.isTrigger = true;
+            trigg.offset += new Vector2(-Mathf.Abs(x),y);
+            // Debug.LogError("(x,y): "+x+" "+y);
         }
     }
     private void Update()
@@ -50,9 +55,9 @@ public class Weapon : NetworkBehaviour
 
                 // Debug.LogError("i see OnTriggerEnter2D" + NetworkManager.Singleton.LocalClientId);  
 
-                if(monsteranimator) monsteranimator.GetHurtServerRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
-                else if(gruntanimator) gruntanimator.GetHurtServerRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
-                else if(hunteranimaor) hunteranimaor.GetHurtServerRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
+                if(monsteranimator && monsteranimator.time >= MonsterAnimator.TIME) monsteranimator.GetHurtClientRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
+                else if(gruntanimator && gruntanimator.time >= SkeletonGruntAnimation.TIME) gruntanimator.GetHurtClientRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
+                else if(hunteranimaor && hunteranimaor.time >= SkeletonHunterAnimation.TIME) hunteranimaor.GetHurtClientRpc(equipmentSO.damage,attackVector,equipmentSO.nockBack,playerAnimator.GetPlayerData().Id);
             }
         }
     }

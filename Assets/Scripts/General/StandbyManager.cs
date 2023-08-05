@@ -19,7 +19,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   private PlayerData playerData;
 
-  [SerializeField] int increaseAmount = 100;
+  [SerializeField] int increaseAmount = 500;
 
   [SerializeField] private SceneName nextScene = SceneName.ShoppingPhase;
 

@@ -17,7 +17,7 @@ public class MonsterRevive : StateMachineBehaviour
         // Debug.LogError("length: "+ stateInfo.length);
         // Debug.LogError("normtime: "+ stateInfo.normalizedTime);
 
-        if (monsterAnimation.HP.Value <= monsterAnimation.MAX_HP)  monsterAnimation.ADDhp(0.5f);
+        if (monsterAnimation.HP.Value < monsterAnimation.MAX_HP)  monsterAnimation.ADDhp(0.3f);
         else animator.SetTrigger("exit");
         
         

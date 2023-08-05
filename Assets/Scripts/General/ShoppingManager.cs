@@ -121,6 +121,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     int intValue = (int)nextScene + LoadingSceneManager.Instance.nextMap;
     nextScene = (SceneName)intValue;
     LoadingSceneManager.Instance.LoadScene(nextScene);
+    playerStatus.Renew();
   }
 
   [ClientRpc]

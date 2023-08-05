@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class SubMonsterHurt : StateMachineBehaviour
 {
+    MonsterAnimator monsterAnimation;
+    SkeletonGruntAnimation skeletonGruntAnimation;
+    SkeletonHunterAnimation skeletonHunterAnimation;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    // override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    // {
-    //     // SkeletonGruntAnimation skeletonGruntAnimation = animator.GetComponent<SkeletonGruntAnimation>();
-    //     // SkeletonHunterAnimation skeletonHunterAnimation = animator.GetComponent<SkeletonHunterAnimation>();
-    //     // if (skeletonGruntAnimation){
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+     //   monsterAnimation = animator.GetComponent<MonsterAnimator>();
+     //   skeletonGruntAnimation = animator.GetComponent<SkeletonGruntAnimation>();
+     //   skeletonHunterAnimation = animator.GetComponent<SkeletonHunterAnimation>();
+     //    Destroy(animator.GetComponent<CapsuleCollider2D>());
 
-    //     //     skeletonGruntAnimation.skeletonGruntMovement.HP.Value -= dame;
-    //     //     skeletonGruntAnimation.reset_weapon = resetWeapon;
-    //     // }
-    // }
-
+    }
+ 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -25,8 +26,25 @@ public class SubMonsterHurt : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Destroy(animator.GetComponent<CapsuleCollider2D>());
-        animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
+
+     //    Destroy(animator.GetComponent<CapsuleCollider2D>());
+     //   if (monsterAnimation){
+     //        CapsuleCollider2D capsuleCollider2D = monsterAnimation.gameObject.AddComponent<CapsuleCollider2D>();
+     //        capsuleCollider2D.isTrigger = true;
+     //        capsuleCollider2D.size = new Vector2(1f,2.5f);
+     //        capsuleCollider2D.offset = new Vector2(0f,2f);
+     //   }else if (skeletonGruntAnimation){
+     //        CapsuleCollider2D capsuleCollider2D = skeletonGruntAnimation.gameObject.AddComponent<CapsuleCollider2D>();
+     //        capsuleCollider2D.isTrigger = true;
+     //        capsuleCollider2D.size = new Vector2(0,0.2f);
+     //        capsuleCollider2D.offset = new Vector2(0.1f,0.3f);
+     //   }else if (skeletonHunterAnimation){
+     //        CapsuleCollider2D capsuleCollider2D = skeletonHunterAnimation.gameObject.AddComponent<CapsuleCollider2D>();
+     //        capsuleCollider2D.isTrigger = true;
+     //        capsuleCollider2D.size = new Vector2(0,0.2f);
+     //        capsuleCollider2D.offset = new Vector2(0.1f,0.3f);
+     //   }
+      animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

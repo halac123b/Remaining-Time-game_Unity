@@ -9,6 +9,7 @@ public class Attack : StateMachineBehaviour
   // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
   override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
+    // Debug.LogError("IN ATTACK");
     playerAnim = animator.GetComponent<PlayerAnimator>();
     playerMovement = animator.GetComponentInParent<PlayerMovement>();
     playerAnim.SetWeaponCarry(false);
@@ -24,6 +25,7 @@ public class Attack : StateMachineBehaviour
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
   override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
+    // Debug.LogError("OUT ATTACK");
     playerAnim = animator.GetComponent<PlayerAnimator>();
     playerMovement = animator.GetComponentInParent<PlayerMovement>();
     playerAnim.SetWeaponCarry(true);

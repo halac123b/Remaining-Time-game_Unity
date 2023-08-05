@@ -118,6 +118,8 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   private void LoadNextScene()
   {
+    int intValue = (int)nextScene + LoadingSceneManager.Instance.nextMap;
+    nextScene = (SceneName)intValue;
     LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 

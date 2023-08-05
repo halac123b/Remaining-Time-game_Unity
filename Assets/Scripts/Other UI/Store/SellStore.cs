@@ -19,13 +19,13 @@ public class SellStore : MonoBehaviour
 
   [SerializeField] TextMeshProUGUI pointText;
 
-  [SerializeField] PlayerEquip playerEquip;
-  [SerializeField] PlayerStatus playerStatus;
-  [SerializeField] PlayerItem playerItem;
+  PlayerEquip playerEquip;
+  PlayerStatus playerStatus;
+  PlayerItem playerItem;
 
   [SerializeField] Button[] changeModeBtn;
 
-  [SerializeField] EquipmentInStore equipStore;
+  EquipmentInStore equipStore;
 
   [SerializeField] TextMeshProUGUI timeLeft;
   [SerializeField] Button sellTimeBtn;
@@ -44,6 +44,14 @@ public class SellStore : MonoBehaviour
   private Mode storeMode = Mode.Weapon;
 
   private int currentSlot;
+
+  private void Awake()
+  {
+    playerStatus = FindObjectOfType<PlayerStatus>();
+    playerEquip = FindObjectOfType<PlayerEquip>();
+    playerItem = FindObjectOfType<PlayerItem>();
+    equipStore = FindObjectOfType<EquipmentInStore>();
+  }
 
   private void Start()
   {

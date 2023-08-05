@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item Detail", fileName = "New Item")]
 public class ItemSO : ScriptableObject
 {
   public string equipName = "ItemName";
@@ -18,5 +17,9 @@ public class ItemSO : ScriptableObject
   public string GetName()
   {
     return equipName;
+  }
+
+  virtual public void Activate(PlayerStatus playerStatus)
+  {
   }
 }

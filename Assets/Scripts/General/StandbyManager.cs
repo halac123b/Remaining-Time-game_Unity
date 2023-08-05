@@ -23,6 +23,10 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   [SerializeField] private SceneName nextScene = SceneName.ShoppingPhase;
 
+  [SerializeField] Sprite[] mapSprite;
+
+  [SerializeField] Image mapImage;
+
   private void Start()
   {
     if (!IsHost)
@@ -35,6 +39,11 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     {
       PointManager.Instance.RollPlayerIndex();
     }
+
+    // Random next map
+    System.Random random = new System.Random();
+    //LoadingSceneManager.Instance.nextMap = random.Next(2);
+    LoadingSceneManager.Instance.nextMap = 0;
 
     PointManager.Instance.IncreasePointAll(increaseAmount);
 
@@ -82,6 +91,8 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
     roundSlider.value = LoadingSceneManager.Instance.GetRound();
     roundText.text = roundSlider.value.ToString() + "/6";
+
+    mapImage.sprite = mapSprite[LoadingSceneManager.Instance.nextMap];
   }
 
   private void LoadNextScene(object sender, EventArgs e)

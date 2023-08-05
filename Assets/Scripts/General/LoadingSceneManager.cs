@@ -12,6 +12,7 @@ public enum SceneName : byte
   StandbyPhase,
   ShoppingPhase,
   MainPhase,
+  MainPhasev2,
   ResultPhase
 };
 
@@ -32,6 +33,8 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   {
     currentRound++;
   }
+
+  public int nextMap = 0;
 
 
   // After running the menu scene, which initiates this manager, we subscribe to these events

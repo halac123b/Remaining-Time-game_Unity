@@ -49,13 +49,11 @@ public class EquipStore : MonoBehaviour
   {
     equipmentStock = FindObjectOfType<EquipmentInStore>();
     playerEquip = FindObjectOfType<PlayerEquip>();
-    playerStatus = FindObjectOfType<PlayerStatus>();
     playerItem = FindObjectOfType<PlayerItem>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
   }
   private void Start()
   {
-    pointText.text = playerStatus.GetPoint().ToString();
-
     exitBtn.onClick.AddListener(Exit);
     navigationBtn[0].onClick.AddListener(NavigateLeft);
     navigationBtn[1].onClick.AddListener(NavigateRight);
@@ -116,7 +114,7 @@ public class EquipStore : MonoBehaviour
     currentSlot = 0;
     UpdateSlot();
     UpdateInfo(0);
-    pointText.text = playerStatus.GetPoint().ToString();
+    pointText.text = playerStatus.GetPoint().ToString() + "$";
   }
 
   private void UpdateSlot()

@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonUI: {fileID: 1601071366}
   shopUI: {fileID: 4657899151912617068}
-  monsterShopUI: {fileID: 0}
+  monsterShopUI: {fileID: 5605101693412991998}
   equipmentList: []
 --- !u!61 &674461748
 BoxCollider2D:
@@ -20702,6 +20702,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 832573189}
     - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
       propertyPath: playerItem
       value: 

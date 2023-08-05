@@ -10,20 +10,19 @@ public class MonsterAnimator : AnimatorController
   // Start is called before the first frame update
   [SerializeField] public Transform AimBar;
   [SerializeField] public Transform HPbar;
- 
-    protected const string HURT = "hurt";
-    protected const string DEATH = "death";
 
-   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+  protected const string HURT = "hurt";
+  protected const string DEATH = "death";
+
+  private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  public NetworkVariable<float> HP =  new NetworkVariable<float>(300f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-  
+  public NetworkVariable<float> HP = new NetworkVariable<float>(300f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
   private PlayerEquip playerEquip;
 
   public const float TIME  = 1f;
   public float time = 0;
-
-  
+ 
   protected override void Awake()
   {
     base.Awake();
@@ -32,7 +31,7 @@ public class MonsterAnimator : AnimatorController
     playerInput.playerInputActions.Player.Attack02.started += TriggerAttack02Started;
     playerInput.playerInputActions.Player.Attack03.started += TriggerAttack03Started;
 
-    playerInput.playerInputActions.Player.E_Btn.started += TriggerSummon;  
+    playerInput.playerInputActions.Player.E_Btn.started += TriggerSummon;
 
     playerEquip = FindAnyObjectByType<PlayerEquip>();
   }
@@ -62,13 +61,16 @@ public class MonsterAnimator : AnimatorController
   {
     return mouse.Value;
   }
-  public void ADDhp (float hp){
-    if(IsOwner) HP.Value+=hp;
+  public void ADDhp(float hp)
+  {
+    if (IsOwner) HP.Value += hp;
   }
-  public void SetMove (bool canMove){
-     if (IsOwner){
-       playerStatus.canMove = canMove;
-     }
+  public void SetMove(bool canMove)
+  {
+    if (IsOwner)
+    {
+      playerStatus.canMove = canMove;
+    }
   }
   public void UpdataMousePos()
   {
@@ -78,7 +80,7 @@ public class MonsterAnimator : AnimatorController
     mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
     mouse.Value = mouse_pos;
   }
-    [ClientRpc]
+    [ClientRpc] 
     public void GetHurtClientRpc(int dame,Vector2 pos,int nockBack,ulong id){
         if (!IsOwner ) return;
         index.Value = id;
@@ -87,17 +89,22 @@ public class MonsterAnimator : AnimatorController
             animator.SetTrigger(HURT);
             GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
             HP.Value -= dame;
-        }    
+        }     
         if (HP.Value <=0  )
         {
             animator.SetTrigger(DEATH);
             Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
-        
-
+         
+ 
+      if (HP.Value <= 0)
+      {
+        animator.SetTrigger(DEATH);
+        Destroy(animator.GetComponent<CapsuleCollider2D>());
+      }
     }
     public void ShowFloatText(string text){
-
+ 
             foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
                 if (o.GetPlayerData().Id == index.Value){
                     GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
@@ -106,6 +113,7 @@ public class MonsterAnimator : AnimatorController
                 }
             }
     }
+  }
   /////////////////////////////Handle Event////////////////////////////// 
 
   private void TriggerSummonHunter(InputAction.CallbackContext context)
@@ -115,7 +123,7 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerSummon(InputAction.CallbackContext context)
   {
-  
+
     if (IsOwner && playerEquip.canTriggerSkill && playerEquip.GetCurrentMonster() != null)
     {
       switch (playerEquip.GetCurrentMonster().TypeWeapon)
@@ -131,7 +139,7 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !playerStatus.canMove) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack) return;
     animator.SetInteger(TYPE_ATTACK, 1);
     animator.SetTrigger(ATTACK);
   }

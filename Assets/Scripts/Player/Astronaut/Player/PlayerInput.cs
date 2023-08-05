@@ -31,7 +31,7 @@ public class PlayerInput : NetworkBehaviour
     playerInputActions.Player.Duck.performed += Duck;
 
     playerInputActions.Player.Process.started += ProcessStarted;
-    playerInputActions.Player.Process.performed += ProcessPerformed;
+    //playerInputActions.Player.Process.performed += ProcessPerformed;
     playerInputActions.Player.Process.canceled += ProcessCanceled;
 
     playerInputActions.Player._1.performed += _1Use;
@@ -41,19 +41,17 @@ public class PlayerInput : NetworkBehaviour
     playerInputActions.Player.tab.canceled += CloseInventory;
   }
 
-  private void Start()
-  {
-
-  }
-
   private void CloseInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
     // UnityEngine.Debug.LogError($"show = false");
     inventory.show_inventory = false;
     playerStatus.canattack = true;
+  }
 
-
+  private void OnDisable()
+  {
+    playerInputActions.Player.Disable();
   }
 
   private void OpenInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -111,7 +109,10 @@ public class PlayerInput : NetworkBehaviour
 
   private void ProcessStarted(InputAction.CallbackContext context)
   {
+    if (!IsOwner) return;
     isProcessing = true;
+
+    StartCoroutine(CoutDownTrigger());
   }
 
   IEnumerator CoutDownTrigger()
@@ -120,18 +121,16 @@ public class PlayerInput : NetworkBehaviour
     isProcessing = false;
   }
 
-  private void ProcessPerformed(InputAction.CallbackContext context)
-  {
-    if(!IsOwner) return;
-    StartCoroutine(CoutDownTrigger()); // ???
+  // private void ProcessPerformed(InputAction.CallbackContext context)
+  // {
 
-  }
+
+  // }
 
   private void ProcessCanceled(InputAction.CallbackContext context)
   {
-    if(!IsOwner) return;
-
-    StopAllCoroutines(); // ???
+    if (!IsOwner) return;
+    // StopAllCoroutines();
     isProcessing = false;
   }
 

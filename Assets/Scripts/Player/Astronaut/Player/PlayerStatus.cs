@@ -16,7 +16,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public bool canattack = true;
   public bool canMove = true;
 
-  private int point = 100;
+  private int point;
 
   public int bid = 0;
 
@@ -86,4 +86,8 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   {
     startCounting = status;
   }
+
+  // public override void OnDestroy(){
+  //   Debug.Log("Bye " + point);
+  // }
 }

@@ -84,7 +84,7 @@ public class PlayerAnimator : AnimatorController
     }
   }
 
-  
+
 
   private void FixedUpdate()
   {
@@ -98,8 +98,8 @@ public class PlayerAnimator : AnimatorController
     {
       AimBar.gameObject.SetActive(false);
     }
-      
-    
+
+
   }
   protected override void Update()
   {
@@ -242,12 +242,12 @@ public class PlayerAnimator : AnimatorController
   private void OnPlayerDataChanged(PlayerData previousValue, PlayerData newValue)
   {
     if (sprite && cover_sprite)
-    sprite.material.color = cover_sprite.material.color = playerData.Value.color;
-    if(playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
-      {
-        // Debug.LogError("playerData.Value.playerWeapon: "+playerData.Value.playerWeapon);
-        if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
-      }
+      sprite.material.color = cover_sprite.material.color = playerData.Value.color;
+    if (playerEquip.GetEquip(playerData.Value.playerWeapon) != null)
+    {
+      // Debug.LogError("playerData.Value.playerWeapon: "+playerData.Value.playerWeapon);
+      if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
+    }
   }
   protected void TriggerAttackStarted(InputAction.CallbackContext context)
   {

@@ -8,6 +8,9 @@ public class BulletItemMovement : MonoBehaviour
     public float Speed = 20;
     private Quaternion rotation;
     public Vector2 moveVector;
+    public int damage;
+    public int nockBack;
+    public ulong idOwner;
     // [SerializeField] Rigidbody2D rigidbody2D;
     public void SetMoveVector(Vector2 movevector){
         moveVector = movevector;
@@ -32,8 +35,40 @@ public class BulletItemMovement : MonoBehaviour
         transform.position += new Vector3(moveVector.x, moveVector.y) * -Speed*Time.deltaTime;
     }
     
-    private void OnCollisionEnter2D(Collision2D other)
+     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        // Debug.LogError("Vo");
+        bool throuth = false;
+        if (other.gameObject.layer ==LayerMask.NameToLayer("Monster")){
+            // EquipmentSO equipmentSO = playerEquip.GetEquip(playerAnimator.GetPlayerData().playerWeapon);
+            //     if (!equipmentSO) return;
+            var monsteranimator = other.gameObject.GetComponent<MonsterAnimator>();
+            var gruntanimator = other.gameObject.GetComponent<SkeletonGruntAnimation>();
+            var hunteranimaor = other.gameObject.GetComponent<SkeletonHunterAnimation>();
+            // Debug.LogError(monsteranimator +"/"+ gruntanimator +"/"+hunteranimaor);
+
+            // Debug.LogError("i see OnTriggerEnter2D" + NetworkManager.Singleton.LocalClientId);  
+            Vector2 nockbackVector = new Vector2 (-moveVector.x,-moveVector.y);
+            if(monsteranimator){
+                if (monsteranimator.time >= MonsterAnimator.TIME){
+                    monsteranimator.GetHurtClientRpc(damage,nockbackVector,nockBack,idOwner);
+                }else throuth = true;
+            } 
+
+            else if(gruntanimator) {
+                if  (gruntanimator.time >= SkeletonGruntAnimation.TIME) {
+                    gruntanimator.GetHurtClientRpc(damage,nockbackVector,nockBack,idOwner);
+                }else throuth =true;
+            }
+
+            else if(hunteranimaor){
+                 if  (hunteranimaor.time >= SkeletonHunterAnimation.TIME) {
+                    hunteranimaor.GetHurtClientRpc(damage,nockbackVector,nockBack,idOwner);
+                }else throuth =true;
+
+            }
+        }
+        if (!throuth) Destroy(gameObject);
     }
+    
 }

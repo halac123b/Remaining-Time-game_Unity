@@ -58,6 +58,9 @@ public class RifleAttack : StateMachineBehaviour
 
       GameObject arrow = Instantiate(Bullet, new Vector3(animator.gameObject.transform.position.x + x_delta, animator.gameObject.transform.position.y + 0.5f + y_delta), new Quaternion());
       arrow.GetComponent<BulletItemMovement>().SetMoveVector(TargetVector);
+      arrow.GetComponent<BulletItemMovement>().damage = 90;
+      arrow.GetComponent<BulletItemMovement>().nockBack = 10;
+      arrow.GetComponent<BulletItemMovement>().idOwner = animator.GetComponent<Weapon>().playerAnimator.GetPlayerData().Id;
     }
   }
   //}

@@ -49,22 +49,13 @@ public class AnimatorController : NetworkBehaviour
     playerMovement = GetComponentInParent<PlayerMovement>();
     playerStatus = FindObjectOfType<PlayerStatus>();
 
-    //PlayerInput
-    // if (playerInput.playerInputActions != null) Debug.LogError("playerInput!");
-    playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
     playerInput.playerInputActions.Player.Attack.canceled += TriggerAttackCanceled;
   }
 
   protected virtual void TriggerAttackCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !playerStatus.canattack) return;
+    if (!IsOwner || animator == null) return;
     animator.SetTrigger(ATTACK_CANCEL);
-  }
-
-  protected virtual void TriggerAttackStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
-  {
-    if (!IsOwner || animator == null || !playerStatus.canattack) return;
-    animator.SetTrigger(ATTACK);
   }
 
   protected virtual void Update()

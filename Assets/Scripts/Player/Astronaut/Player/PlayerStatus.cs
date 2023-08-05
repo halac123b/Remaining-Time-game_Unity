@@ -10,8 +10,6 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 {
   [SerializeField] private int timeLeft = 30;
 
-  // public ulong ClientIndex = NetworkManager.Singleton.LocalClientId;
-
   private bool countTrigger = true;
   private bool startCounting = false;
 
@@ -33,6 +31,10 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   public List<BuffSO> buffList = new List<BuffSO>();
 
+  public void Renew (){
+    canattack = true;
+    canMove = true;
+  }
   public int GetPoint()
   {
     return point;

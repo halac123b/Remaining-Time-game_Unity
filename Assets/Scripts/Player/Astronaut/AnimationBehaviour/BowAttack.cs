@@ -46,6 +46,10 @@ public class BowAttack : StateMachineBehaviour
     {
       GameObject arrow = Instantiate(Arrow, new Vector3(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y + 0.5f), new Quaternion());
       arrow.GetComponent<BulletItemMovement>().SetMoveVector(TargetVector);
+      arrow.GetComponent<BulletItemMovement>().damage = 40;
+      arrow.GetComponent<BulletItemMovement>().nockBack = 1;
+      arrow.GetComponent<BulletItemMovement>().idOwner = animator.GetComponent<Weapon>().playerAnimator.GetPlayerData().Id;
+
     }
   }
 

@@ -112,6 +112,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   private void LoadNextScene()
   {
     LoadingSceneManager.Instance.LoadScene(nextScene);
+    playerStatus.Renew();
   }
 
   [ClientRpc]

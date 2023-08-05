@@ -47,6 +47,8 @@ public class PlayerAnimator : AnimatorController
     // Handle Event Custom
     playerEquip.OnChangeEquip += OnChangeEquipped;
 
+    playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
+
     // Defaaut valua
   }
 
@@ -63,6 +65,7 @@ public class PlayerAnimator : AnimatorController
   {
     base.Start();
     if (!IsOwner) return;
+    playerStatus.Renew();
     AimBar.GetComponentInChildren<Slider>().value = 0;
     AimBar.gameObject.SetActive(false);
 
@@ -202,7 +205,13 @@ public class PlayerAnimator : AnimatorController
       playerName = playerData.Value.playerName,
       playerWeapon = playerEquip.GetCurrentEquip().GetTypeWeapon(),
     };
+
+    if (animator) animator.ResetTrigger(ATTACK);
+     if (weapon_animator) weapon_animator.ResetTrigger(ATTACK);
+    if ( cover_animator) cover_animator.ResetTrigger(ATTACK);
+
     playerData.Value = data;
+
   }
   private void OnFlipXChanged(bool oldValue, bool newValue)
   {
@@ -240,11 +249,12 @@ public class PlayerAnimator : AnimatorController
         if (weaponcarry) weaponcarry.sprite = playerEquip.GetEquip(playerData.Value.playerWeapon).GetSprite();
       }
   }
-  protected override void TriggerAttackStarted(InputAction.CallbackContext context)
+  protected void TriggerAttackStarted(InputAction.CallbackContext context)
   {
-    if (!IsOwner || weapon_animator == null || cover_animator == null) return;
-    base.TriggerAttackStarted(context);
-    if (!IsOwner || !playerStatus.canattack) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack || !playerStatus.canMove) return;
+    animator.SetTrigger(ATTACK);
+
+    if ( weapon_animator == null || cover_animator == null) return;
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }

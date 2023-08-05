@@ -95,13 +95,6 @@ public class MonsterAnimator : AnimatorController
             animator.SetTrigger(DEATH);
             Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
-         
- 
-      if (HP.Value <= 0)
-      {
-        animator.SetTrigger(DEATH);
-        Destroy(animator.GetComponent<CapsuleCollider2D>());
-      }
     }
     public void ShowFloatText(string text){
  
@@ -113,7 +106,6 @@ public class MonsterAnimator : AnimatorController
                 }
             }
     }
-  }
   /////////////////////////////Handle Event////////////////////////////// 
 
   private void TriggerSummonHunter(InputAction.CallbackContext context)

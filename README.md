@@ -1,6 +1,6 @@
 # Remaining-Time-game_Unity
 
-<img src="./Assets/Sprites/BG_OpenGame.jpg">
+<img src="./Assets/Sprites/BG_OpenGame.jpg" width="60%">
 
 A multiplayer game with diverse roles, allowing players to choose between cooperation and betrayal, akin to Among Us. <br>
 

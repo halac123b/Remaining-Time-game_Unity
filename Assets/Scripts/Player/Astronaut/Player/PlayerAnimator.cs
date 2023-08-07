@@ -14,7 +14,7 @@ public class PlayerAnimator : AnimatorController
 
   private PlayerEquip playerEquip;
   private PlayerColision playerColision;
-  [SerializeField] public Weapon weapon;
+  public Weapon weapon;
 
   [SerializeField] private SpriteRenderer weaponcarry;
   [SerializeField] private SpriteRenderer cover_sprite;
@@ -22,8 +22,7 @@ public class PlayerAnimator : AnimatorController
   [SerializeField] private SpriteRenderer sprite;
 
   [SerializeField] private TextMeshPro playername;
-  [SerializeField] public Transform AimBar;
-
+  public Transform AimBar;
 
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   private NetworkVariable<bool> weaponCarry = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -48,8 +47,6 @@ public class PlayerAnimator : AnimatorController
     playerEquip.OnChangeEquip += OnChangeEquipped;
 
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
-
-    // Defaaut valua
   }
 
   public override void OnNetworkSpawn()
@@ -207,8 +204,8 @@ public class PlayerAnimator : AnimatorController
     };
 
     if (animator) animator.ResetTrigger(ATTACK);
-     if (weapon_animator) weapon_animator.ResetTrigger(ATTACK);
-    if ( cover_animator) cover_animator.ResetTrigger(ATTACK);
+    if (weapon_animator) weapon_animator.ResetTrigger(ATTACK);
+    if (cover_animator) cover_animator.ResetTrigger(ATTACK);
 
     playerData.Value = data;
 
@@ -254,7 +251,7 @@ public class PlayerAnimator : AnimatorController
     if (!IsOwner || animator == null || !playerStatus.canattack || !playerStatus.canMove) return;
     animator.SetTrigger(ATTACK);
 
-    if ( weapon_animator == null || cover_animator == null) return;
+    if (weapon_animator == null || cover_animator == null) return;
     weapon_animator.SetTrigger(ATTACK);
     cover_animator.SetTrigger(ATTACK);
   }

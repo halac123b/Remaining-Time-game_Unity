@@ -66,19 +66,29 @@ public class PlayerInput : NetworkBehaviour
   private void _1Use(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()).number -= 1;
+    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item != null &&
+        playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()) != null)
+    {
+      playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(2).item.GetName()).number -= 1;
+    }
   }
 
   private void _2Use(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()).number -= 1;
+    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()) != null)
+    {
+      playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(1).item.GetName()).number -= 1;
+    }
   }
 
   private void _3Use(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()) != null) playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()).number -= 1;
+    if (inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item != null && playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()) != null)
+    {
+      playerItem.GetItem(inventory.GetComponentInChildren<InventoryUI>().GetInventory(0).item.GetName()).number -= 1;
+    }
   }
 
   public Vector2 GetMovementVectorNormalized()

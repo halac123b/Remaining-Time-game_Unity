@@ -1545,7 +1545,6 @@ MonoBehaviour:
   countDown: {fileID: 6631988674882061963}
   gameUI: {fileID: 1677193756479773165}
   nextScene: 5
-  playerStatus: {fileID: 47476332338737875}
   playerEquip: {fileID: 1360928353315941742}
 --- !u!1 &852793917
 GameObject:
@@ -3113,7 +3112,6 @@ MonoBehaviour:
   exitBtn: {fileID: 1849791655824562818}
   minBid: 30
   step: 10
-  playerStatus: {fileID: 47476332338737875}
   bid: {fileID: 1060845598}
   currentPoint: {fileID: 1017285084}
   stepArrow:
@@ -20737,11 +20735,11 @@ PrefabInstance:
     - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
       propertyPath: itemList.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 020d063a7b839244a8d16e6c514952c0, type: 2}
+      objectReference: {fileID: 11400000, guid: 9b7538ef9bbbbc744af0f08250fd1b53, type: 2}
     - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
       propertyPath: itemList.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 1f0aeda1b23b3594cbfb209499d2d77f, type: 2}
+      objectReference: {fileID: 11400000, guid: b64fdb821cf26c540854f95c78742e56, type: 2}
     - target: {fileID: 5898529995768451858, guid: 34acbccc133a3cb459b6d7ff05373a2a, type: 3}
       propertyPath: itemList.Array.data[2]
       value: 
@@ -24925,14 +24923,10 @@ MonoBehaviour:
   - {fileID: 4130014179837003418}
   - {fileID: 2695383867538096731}
   pointText: {fileID: 7168958766853361196}
-  playerEquip: {fileID: 1360928353315941742}
-  playerStatus: {fileID: 47476332338737875}
-  playerItem: {fileID: 4035218492980721623}
   changeModeBtn:
   - {fileID: 491369225449798928}
   - {fileID: 2253401980113602179}
   - {fileID: 1628087042}
-  equipStore: {fileID: 0}
   timeLeft: {fileID: 2070622744}
   sellTimeBtn: {fileID: 1460929169}
   timeSellField: {fileID: 1271804678}

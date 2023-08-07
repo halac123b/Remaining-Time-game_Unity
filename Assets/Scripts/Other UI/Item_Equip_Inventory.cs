@@ -10,11 +10,6 @@ public class Item_Equip_Inventory : MonoBehaviour
   [SerializeField] public GameObject inventoryUI;
   public bool show_inventory = false;
 
-  private void Awake()
-  {
-    
-  }
-
   void Start()
   {
     // inventoryUI.SetActive(false);

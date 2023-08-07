@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ca28da132216d4c9a80c5dcab85779, type: 3}
+  m_Script: {fileID: 11500000, guid: b81a321be52b10a45a68eee76a80a45e, type: 3}
   m_Name: SandClock
   m_EditorClassIdentifier: 
   equipName: Sand Clock
   image: {fileID: 21300000, guid: 89becc639070f274e81a464c0c3eaef9, type: 3}
+  price: 30
+  description: Put yourself in motionless state and pause the time countdown in 2.5s.

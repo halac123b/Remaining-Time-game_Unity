@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "Item Stop watch", fileName = "New Item")]
 public class ItemStopWatchSO : ItemSO
@@ -9,6 +8,7 @@ public class ItemStopWatchSO : ItemSO
     playerStatus.canMove = false;
     playerStatus.canattack = false;
     playerStatus.SetStartCounting(false);
+    playerStatus.TriggerStopWatch();
 
     float delayTime = 2.5f; // Delay time in seconds
                             // Start the timer delay using the TimerDelayHandler
@@ -17,6 +17,7 @@ public class ItemStopWatchSO : ItemSO
       playerStatus.canMove = true;
       playerStatus.canattack = true;
       playerStatus.SetStartCounting(true);
+      playerStatus.TriggerStopWatch();
     });
   }
 }

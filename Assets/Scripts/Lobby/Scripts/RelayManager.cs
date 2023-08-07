@@ -120,7 +120,6 @@ public class RelayManager : NetworkBehaviour
 
     if (clientId == 3)
     {
-      Debug.Log("gaga");
       OnClientConnect?.Invoke(this, EventArgs.Empty);
 
       gameObject.GetComponent<NetworkObject>().Despawn();

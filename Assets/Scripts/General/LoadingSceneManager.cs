@@ -12,7 +12,6 @@ public enum SceneName : byte
   StandbyPhase,
   ShoppingPhase,
   MainPhase,
-  MainPhasev2,
   ResultPhase
 };
 

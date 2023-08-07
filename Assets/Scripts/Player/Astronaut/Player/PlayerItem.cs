@@ -23,30 +23,25 @@ public class PlayerItem : MonoBehaviour
 
   public ItemSlot GetItem(string name)
   {
-      foreach (var Item in itemList){
+    foreach (var Item in itemList)
+    {
 
-        if(Item.item.GetName() == name){
-          return Item;
-        }
+      if (Item.item.GetName() == name)
+      {
+        return Item;
       }
-      return null;
+    }
+    return null;
   }
 
-  private void Update()
+  public void UpdateItem()
   {
-    for(int i = 0 ; i < itemList.Count;i++)
+    for (int i = 0; i < itemList.Count; i++)
     {
       if (itemList[i].number == 0)
       {
         itemList.RemoveAt(i);
       }
     }
-
   }
-
-  // public void ChangeItem()
-  // {
-  //   currentItem = (currentItem + 1) % itemList.Count;
-  //   OnChangeItem?.Invoke(this, EventArgs.Empty);
-  // }
 }

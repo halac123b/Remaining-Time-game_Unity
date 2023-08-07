@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.Netcode;
 
 // Fix: GetTimer(0)
 
@@ -31,7 +30,21 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   public List<BuffSO> buffList = new List<BuffSO>();
 
-  public void Renew (){
+  public event EventHandler enableStopWatch;
+  public event EventHandler enableBuffTime;
+
+  public void TriggerStopWatch()
+  {
+    enableStopWatch?.Invoke(this, EventArgs.Empty);
+  }
+
+  public void TriggerBuffTime()
+  {
+    enableBuffTime?.Invoke(this, EventArgs.Empty);
+  }
+
+  public void Renew()
+  {
     canattack = true;
     canMove = true;
   }
@@ -86,8 +99,4 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   {
     startCounting = status;
   }
-
-  // public override void OnDestroy(){
-  //   Debug.Log("Bye " + point);
-  // }
 }

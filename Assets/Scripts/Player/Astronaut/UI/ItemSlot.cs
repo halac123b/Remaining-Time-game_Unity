@@ -10,21 +10,50 @@ public class ItemSlot : MonoBehaviour
   [SerializeField] private int slot;
   [SerializeField] private Image image;
   [SerializeField] private TextMeshProUGUI numberText;
+  Button slotBtn;
 
-  private void OnEnable()
+  PlayerStatus playerStatus;
+  PlayerItem playerItem;
+
+  private void Start()
   {
-    // playerItem = FindObjectOfType<PlayerItem>();
+    playerStatus = FindObjectOfType<PlayerStatus>();
+    playerItem = FindObjectOfType<PlayerItem>();
+    slotBtn = GetComponent<Button>();
+
+    if (slotBtn != null)
+    {
+      slotBtn.onClick.AddListener(delegate { ActivateItem(slot); });
+    }
   }
 
   private void Update()
   {
-    if(inventoryUI.GetInventory(slot).item != null &&  inventoryUI.GetInventory(slot).number!="0"){
+    if (inventoryUI.GetInventory(slot).item != null && int.Parse(inventoryUI.GetInventory(slot).number) > 0)
+    {
       image.sprite = inventoryUI.GetInventory(slot).item.GetSprite();
       numberText.text = inventoryUI.GetInventory(slot).number;
-    }else{
+    }
+    else
+    {
       image.sprite = null;
       numberText.text = "";
     }
   }
-  
+
+  private void ActivateItem(int slot)
+  {
+    inventoryUI.GetInventory(slot).item.Activate(playerStatus);
+
+    for (int i = 0; i < playerItem.itemList.Count; i++)
+    {
+      if (playerItem.itemList[i].item.name == inventoryUI.GetInventory(slot).item.name)
+      {
+        playerItem.itemList[i].number--;
+        break;
+      }
+    }
+
+    //playerItem.UpdateItem();
+  }
 }

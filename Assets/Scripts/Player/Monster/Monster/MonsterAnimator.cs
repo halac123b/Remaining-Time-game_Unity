@@ -10,9 +10,7 @@ public class MonsterAnimator : AnimatorController
   // Start is called before the first frame update
   [SerializeField] public Transform AimBar;
   [SerializeField] public Transform HPbar;
-
-  protected const string HURT = "hurt";
-  protected const string DEATH = "death";
+  [SerializeField] public MonsterSword monsterSword;
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -95,6 +93,9 @@ public class MonsterAnimator : AnimatorController
             animator.SetTrigger(DEATH);
             Destroy(animator.GetComponent<CapsuleCollider2D>());
         }
+    }
+    public void CreateTrigger(){
+       monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
     }
     public void ShowFloatText(string text){
  

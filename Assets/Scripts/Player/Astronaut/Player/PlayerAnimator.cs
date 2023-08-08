@@ -142,6 +142,26 @@ public class PlayerAnimator : AnimatorController
     Set_VERTICAL_HORIZONTAL(cover_animator, x, y);
     Set_VERTICAL_HORIZONTAL(weapon_animator, x, y);
   }
+
+  [ClientRpc]
+  public void AstronautHurtClientRpc(int dame,Vector2 pos,int nockBack){
+        if(!IsOwner) return;
+        
+        if(playerStatus.GetTimeLeft()> 0){
+
+          animator.SetFloat("dame",dame);
+          animator.SetTrigger(HURT);
+          GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
+          playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() - dame);
+          
+        }
+    } 
+
+    public void HurtFloating(string text){
+        GameObject floatingtext = Instantiate(FloatingText,playerMovement.transform.position, Quaternion.identity,playerMovement.transform);
+        floatingtext.GetComponent<TextMesh>().text = text;
+        floatingtext.GetComponent<TextMesh>().color = Color.red;
+    }
   public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
 

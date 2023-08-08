@@ -602,6 +602,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7486470319976659042, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6532385549668140179}
+    - targetCorrespondingSourceObject: {fileID: 6882509921675733444, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1945381451628968166}
   m_SourcePrefab: {fileID: 100100000, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
 --- !u!4 &293629237803727878 stripped
 Transform:
@@ -713,7 +716,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4831608051584819511, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
   m_PrefabInstance: {fileID: 6953675604038675482}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4540751376381314526}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe14bd0b0a563947a475b60e4094a58, type: 3}
@@ -729,3 +732,43 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6826148428847789037, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
   m_PrefabInstance: {fileID: 6953675604038675482}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4540751376381314526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6882509921675733444, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+  m_PrefabInstance: {fileID: 6953675604038675482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1945381451628968166
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540751376381314526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.006878078, y: 0.6587904}
+  m_Size: {x: 0.9470719, y: 1.3972577}
+  m_Direction: 0

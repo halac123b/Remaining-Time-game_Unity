@@ -17,9 +17,9 @@ TagManager:
   - Monster
   - MonsterBullet
   - PlayerWeapon
-  - 
-  - 
-  - 
+  - Wall
+  - WallCollider
+  - SubMonsterBullet
   - 
   - 
   - 

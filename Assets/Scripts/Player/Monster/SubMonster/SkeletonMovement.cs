@@ -37,7 +37,7 @@ public class SkeletonMovement : NetworkBehaviour
         // Nếu có vật thể "Player" gần nhất, di chuyển vật thể của bạn đến gần vật thể đó
         if (nearestPlayer != null)
         {
-            Vector3 direction = (nearestPlayer.position - transform.position).normalized;
+            Vector3 direction = (nearestPlayer.position - transform.position + new Vector3(0,0.5f,0)).normalized;
             return direction;
         }
         return new Vector3();

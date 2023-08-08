@@ -13383,7 +13383,7 @@ GameObject:
   - component: {fileID: 8925436577714452195}
   - component: {fileID: 6513984492088124997}
   - component: {fileID: 3811207504571904016}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16027,7 +16027,7 @@ GameObject:
   - component: {fileID: 1617997841024610668}
   - component: {fileID: 8080617015000218366}
   - component: {fileID: 106735302838691822}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20295,7 +20295,7 @@ Transform:
   - {fileID: 8152053515542451690}
   - {fileID: 1617997841024610668}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &8089730829465435376
 Grid:

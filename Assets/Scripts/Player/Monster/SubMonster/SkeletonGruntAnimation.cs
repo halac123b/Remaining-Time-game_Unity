@@ -19,6 +19,7 @@ public class SkeletonGruntAnimation : NetworkBehaviour
     [SerializeField] SkeletonMovement skeletonMovement;
     [SerializeField] Animator animator;
     [SerializeField] public Transform AimBar;
+    [SerializeField] public SubMonsterSword subMonsterSword;
 
     private float countDownt = 0;
     public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -62,7 +63,7 @@ public class SkeletonGruntAnimation : NetworkBehaviour
         animator.SetFloat(SPEED,direction.magnitude);
         if (!skeletonMovement.canmove)animator.SetFloat(SPEED,0);
         
-        if (InRangeAttack() && countDownt >=3) {
+        if (InRangeAttack() && countDownt >=2) {
             animator.SetTrigger(ATTACK);
             countDownt = 0;
         }
@@ -132,5 +133,8 @@ public class SkeletonGruntAnimation : NetworkBehaviour
         if(!IsOwner) return;
         skeletonMovement.canmove = true;
 
+    }
+    public void CreateTrigger(){
+        subMonsterSword.CreateTrigger();
     }
 }

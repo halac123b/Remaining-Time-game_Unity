@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAttack : StateMachineBehaviour
+public class MonsterAttack1 : StateMachineBehaviour
 {
    private PlayerMovement playerMovement;
   // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

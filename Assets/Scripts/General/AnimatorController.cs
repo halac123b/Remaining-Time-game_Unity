@@ -12,6 +12,9 @@ public class AnimatorController : NetworkBehaviour
   protected const string TYPE_ATTACK = "typeattack";
   protected const string ATTACK = "attack";
   protected const string ATTACK_CANCEL = "attackcancel";
+  protected const string HURT = "hurt";
+  protected const string DEATH = "death";
+
 
   [SerializeField] public Animator animator;
   [SerializeField] public GameObject FloatingText;

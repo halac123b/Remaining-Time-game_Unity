@@ -6158,7 +6158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2195696c76c2c82408e619d8eabe8a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 20
+  timeLeft: 45
   canattack: 1
   canMove: 1
   bid: 0

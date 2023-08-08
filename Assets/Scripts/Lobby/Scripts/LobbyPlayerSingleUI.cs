@@ -20,6 +20,8 @@ public class LobbyPlayerSingleUI : MonoBehaviour
 
   private Player player;
 
+  [SerializeField] private GameObject checkState;
+
 
   private void Awake()
   {
@@ -55,6 +57,18 @@ public class LobbyPlayerSingleUI : MonoBehaviour
 
     if (playerNameText != null) playerNameText.text = player.Data[LobbyManager.KEY_PLAYER_NAME].Value;
 
+    if (checkState != null)
+    {
+      if (player.Data[LobbyManager.KEY_READY_STATE].Value == "yes")
+      {
+        checkState.SetActive(true);
+      }
+      else
+      {
+        checkState.SetActive(false);
+      }
+    }
+
     string Body_Color = player.Data[LobbyManager.KEY_PLAYER_COLOR].Value;
     string[] rgba = Body_Color.Substring(5, Body_Color.Length - 6).Split(", ");
     Color color = new Color(float.Parse(rgba[0]), float.Parse(rgba[1]), float.Parse(rgba[2]), float.Parse(rgba[3]));
@@ -71,6 +85,4 @@ public class LobbyPlayerSingleUI : MonoBehaviour
       LobbyManager.Instance.KickPlayer(player.Id);
     }
   }
-
-
 }

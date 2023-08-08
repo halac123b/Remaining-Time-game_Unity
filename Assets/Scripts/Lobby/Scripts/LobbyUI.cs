@@ -17,13 +17,9 @@ public class LobbyUI : MonoBehaviour
   [SerializeField] private Transform container;
   [SerializeField] private TextMeshProUGUI lobbyNameText;
   [SerializeField] private TextMeshProUGUI playerCountText;
-  // [SerializeField] private TextMeshProUGUI gameModeText;
-  // [SerializeField] private Button changeMarineButton;
-  // [SerializeField] private Button changeNinjaButton;
 
   [SerializeField] private Button leaveLobbyButton;
   [SerializeField] private Button StartGameButton;
-
 
   private void Awake()
   {
@@ -72,16 +68,17 @@ public class LobbyUI : MonoBehaviour
 
   private void UpdateLobby()
   {
-    if(playerSingleTemplate != null)
-    UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
+    if (playerSingleTemplate != null)
+      UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
   }
 
   public void UpdateLobby(Lobby lobby)
   {
+
     ClearLobby();
 
     foreach (Player player in lobby.Players)
-    { 
+    {
       Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
       playerSingleTransform.gameObject.SetActive(true);
       LobbyPlayerSingleUI lobbyPlayerSingleUI = playerSingleTransform.GetComponent<LobbyPlayerSingleUI>();
@@ -108,14 +105,14 @@ public class LobbyUI : MonoBehaviour
   private void ClearLobby()
   {
     if (container)
-    foreach (Transform child in container)
-    {
-      if (child != null)
+      foreach (Transform child in container)
       {
-        if (child == playerSingleTemplate) continue;
-        Destroy(child.gameObject);
+        if (child != null)
+        {
+          if (child == playerSingleTemplate) continue;
+          Destroy(child.gameObject);
+        }
       }
-    }
   }
 
   private void Hide()

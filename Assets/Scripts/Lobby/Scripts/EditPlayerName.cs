@@ -59,6 +59,4 @@ public class EditPlayerName : MonoBehaviour
   {
     return playerName;
   }
-
-
 }

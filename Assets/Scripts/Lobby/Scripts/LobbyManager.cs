@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
   public const string KEY_PLAYER_NAME = "PlayerName";
   public const string KEY_PLAYER_COLOR = "Color";
   public const string KEY_GAME_MODE = "GameMode";
+  public const string KEY_READY_STATE = "ReadyState";
   public const string KEY_START_GAME = "StartGame_RelayCode";
 
   [SerializeField] private SceneName nextScene = SceneName.StandbyPhase;
@@ -46,19 +47,11 @@ public class LobbyManager : MonoBehaviour
     Conquest
   }
 
-  // public enum PlayerCharacter
-  // {
-  //     Marine,
-  //     Ninja,
-  //     Zombie
-  // }
-
-
-
   private float heartbeatTimer;
   private float lobbyPollTimer;
   private float refreshLobbyListTimer = 5f;
   private Lobby joinedLobby;
+
   // private string playerName;
   // public Color playerColor;
   private PlayerData playerData;
@@ -269,7 +262,8 @@ public class LobbyManager : MonoBehaviour
   {
     return new Player(AuthenticationService.Instance.PlayerId, null, new Dictionary<string, PlayerDataObject> {
             { KEY_PLAYER_NAME, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerData.playerName) },
-            { KEY_PLAYER_COLOR, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerData.color.ToString()) }
+            { KEY_PLAYER_COLOR, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerData.color.ToString()) },
+            { KEY_READY_STATE, new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "no")}
         });
   }
 
@@ -525,6 +519,11 @@ public class LobbyManager : MonoBehaviour
     {
       try
       {
+        if (GetReadyNumber() != LobbyManager.Instance.GetJoinedLobby().Players.Count)
+        {
+          Debug.Log("There is player not ready!");
+          return;
+        }
         Debug.Log("StartGame" + playerData.color);
 
         string relayCode = await RelayManager.Instance.CreateRelay(playerData);
@@ -555,4 +554,46 @@ public class LobbyManager : MonoBehaviour
     LoadingSceneManager.Instance.LoadScene(nextScene);
   }
 
+  public async void UpdatePlayerReady(string status)
+  {
+    if (joinedLobby != null)
+    {
+      try
+      {
+        UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+        options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        KEY_READY_STATE, new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: status)
+                    }
+                };
+
+        string playerId = AuthenticationService.Instance.PlayerId;
+
+        Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, playerId, options);
+        joinedLobby = lobby;
+
+        OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
+      }
+      catch (LobbyServiceException e)
+      {
+        Debug.Log(e);
+      }
+    }
+  }
+
+  private int GetReadyNumber()
+  {
+    int count = 0;
+    foreach (Player player in LobbyManager.Instance.GetJoinedLobby().Players)
+    {
+      if (player.Data[LobbyManager.KEY_READY_STATE].Value == "yes")
+      {
+        count++;
+      }
+    }
+    return count;
+  }
 }

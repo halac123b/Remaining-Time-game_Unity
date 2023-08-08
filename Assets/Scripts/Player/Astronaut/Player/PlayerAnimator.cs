@@ -156,7 +156,9 @@ public class PlayerAnimator : AnimatorController
           
         }
     } 
-
+    public void DestroyObj(){
+      Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+    }
     public void HurtFloating(string text){
         GameObject floatingtext = Instantiate(FloatingText,playerMovement.transform.position, Quaternion.identity,playerMovement.transform);
         floatingtext.GetComponent<TextMesh>().text = text;
@@ -164,7 +166,7 @@ public class PlayerAnimator : AnimatorController
     }
   public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
-
+   
     if (x <= -0.01f)
     {
       flipX.Value = false;

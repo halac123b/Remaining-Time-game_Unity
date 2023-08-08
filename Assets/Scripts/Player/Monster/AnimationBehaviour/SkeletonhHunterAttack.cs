@@ -8,13 +8,7 @@ public class SkeletonHunterAttack : StateMachineBehaviour
     [SerializeField] GameObject Arrow;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      // foreach (var param in animator.parameters)
-      // {
-      //    if (param.type == AnimatorControllerParameterType.Trigger)
-      //    {
-      //       animator.ResetTrigger(param.name);
-      //    }
-      // }
+      
        animator.GetComponent<SkeletonHunterAnimation>().SetCantMove();
     }
 

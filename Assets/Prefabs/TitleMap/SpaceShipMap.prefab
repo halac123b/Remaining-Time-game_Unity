@@ -4898,7 +4898,7 @@ GameObject:
   - component: {fileID: 6676187082812223418}
   - component: {fileID: 4137699323502307629}
   - component: {fileID: 5671037223120673331}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Colider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7721,7 +7721,7 @@ Transform:
   - {fileID: 6420209968046718900}
   - {fileID: 5330432685349669092}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &2120994318277049638
 Grid:

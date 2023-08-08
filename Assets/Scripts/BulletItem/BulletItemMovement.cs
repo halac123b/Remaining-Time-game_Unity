@@ -19,7 +19,6 @@ public class BulletItemMovement : MonoBehaviour
     void Start()
     {
         
-
         float angle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         // rigidbody2D.AddForce(moveVector*-moveDistance*5000);
@@ -28,9 +27,6 @@ public class BulletItemMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        
-        
-
         transform.rotation = rotation;
         transform.position += new Vector3(moveVector.x, moveVector.y) * -Speed*Time.deltaTime;
     }
@@ -39,6 +35,7 @@ public class BulletItemMovement : MonoBehaviour
     {
         // Debug.LogError("Vo");
         bool throuth = false;
+        Vector2 nockbackVector = new Vector2 (-moveVector.x,-moveVector.y);
         if (other.gameObject.layer ==LayerMask.NameToLayer("Monster")){
             // EquipmentSO equipmentSO = playerEquip.GetEquip(playerAnimator.GetPlayerData().playerWeapon);
             //     if (!equipmentSO) return;
@@ -48,7 +45,6 @@ public class BulletItemMovement : MonoBehaviour
             // Debug.LogError(monsteranimator +"/"+ gruntanimator +"/"+hunteranimaor);
 
             // Debug.LogError("i see OnTriggerEnter2D" + NetworkManager.Singleton.LocalClientId);  
-            Vector2 nockbackVector = new Vector2 (-moveVector.x,-moveVector.y);
             if(monsteranimator){
                 if (monsteranimator.time >= MonsterAnimator.TIME){
                     monsteranimator.GetHurtClientRpc(damage,nockbackVector,nockBack,idOwner);
@@ -66,6 +62,13 @@ public class BulletItemMovement : MonoBehaviour
                     hunteranimaor.GetHurtClientRpc(damage,nockbackVector,nockBack,idOwner);
                 }else throuth =true;
 
+            }
+        }
+        else if (other.gameObject.layer ==LayerMask.NameToLayer("Player")){
+            if (this.gameObject.layer == LayerMask.NameToLayer("MonsterBullet")) throuth = true;
+            if( other.GetComponent<PlayerAnimator>()){
+                PlayerAnimator playerAnimator = other.GetComponent<PlayerAnimator>();
+                playerAnimator.AstronautHurtClientRpc(2,nockbackVector,5);
             }
         }
         if (!throuth) Destroy(gameObject);

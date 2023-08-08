@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class SkeletonGruntAttack : StateMachineBehaviour
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-  
+   
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      // foreach (var param in animator.parameters)
-      // {
-      //    if (param.type == AnimatorControllerParameterType.Trigger)
-      //    {
-      //       animator.ResetTrigger(param.name);
-      //    }
-      // }
-      //  Rigidbody2D rigidbody2D = animator.GetComponentInParent<Rigidbody2D>();
-      //  rigidbody2D.AddForce(new Vector2());
       animator.GetComponent<SkeletonGruntAnimation>().SetCantMove();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -31,9 +23,8 @@ public class SkeletonGruntAttack : StateMachineBehaviour
     {
       //  Rigidbody2D rigidbody2D = animator.GetComponentInParent<Rigidbody2D>();
       //  rigidbody2D.transform.position += new Vector3();
-      animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
-      // reset(animator); 
       animator.GetComponent<SkeletonGruntAnimation>().SetCanMove();
+      animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
       
        
     }

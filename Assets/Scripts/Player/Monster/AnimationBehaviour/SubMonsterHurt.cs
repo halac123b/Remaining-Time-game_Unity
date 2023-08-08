@@ -14,7 +14,7 @@ public class SubMonsterHurt : StateMachineBehaviour
      //   skeletonGruntAnimation = animator.GetComponent<SkeletonGruntAnimation>();
      //   skeletonHunterAnimation = animator.GetComponent<SkeletonHunterAnimation>();
      //    Destroy(animator.GetComponent<CapsuleCollider2D>());
-
+        
     }
  
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -44,6 +44,7 @@ public class SubMonsterHurt : StateMachineBehaviour
      //        capsuleCollider2D.size = new Vector2(0,0.2f);
      //        capsuleCollider2D.offset = new Vector2(0.1f,0.3f);
      //   }
+      
       animator.GetComponentInParent<Rigidbody2D>().velocity = Vector3.zero;
     }
 

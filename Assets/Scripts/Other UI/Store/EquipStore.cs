@@ -8,6 +8,9 @@ public class EquipStore : MonoBehaviour
   [SerializeField] Button exitBtn;
 
   [SerializeField] private List<ItemSO> itemList = new List<ItemSO>();
+
+  [SerializeField] private List<BuffSO> buffList = new List<BuffSO>();
+
   private EquipmentInStore equipmentStock;
 
   [SerializeField] Image[] sprite;
@@ -37,8 +40,11 @@ public class EquipStore : MonoBehaviour
   public enum Mode : byte
   {
     Weapon,
-    Item
+    Item,
+    Buff
   };
+
+  private int lastMode = 0;
 
   private Mode storeMode = Mode.Weapon;
 
@@ -60,6 +66,7 @@ public class EquipStore : MonoBehaviour
 
     changeModeBtn[0].onClick.AddListener(delegate { ChangeMode(0); });
     changeModeBtn[1].onClick.AddListener(delegate { ChangeMode(1); });
+    changeModeBtn[2].onClick.AddListener(delegate { ChangeMode(2); });
 
     itemSlotBtn[0].onClick.AddListener(delegate { UpdateInfo(0); });
     itemSlotBtn[1].onClick.AddListener(delegate { UpdateInfo(1); });
@@ -77,16 +84,32 @@ public class EquipStore : MonoBehaviour
     if (mode == 0)
     {
       storeMode = Mode.Weapon;
-      weaponDescription.gameObject.SetActive(true);
-      itemDescription.gameObject.SetActive(false);
+      if (lastMode != 0)
+      {
+        weaponDescription.gameObject.SetActive(true);
+        itemDescription.gameObject.SetActive(false);
+      }
       ChangeColorMode(0);
     }
     else if (mode == 1)
     {
       storeMode = Mode.Item;
-      weaponDescription.gameObject.SetActive(false);
-      itemDescription.gameObject.SetActive(true);
+      if (lastMode == 0)
+      {
+        weaponDescription.gameObject.SetActive(false);
+        itemDescription.gameObject.SetActive(true);
+      }
       ChangeColorMode(1);
+    }
+    else if (mode == 2)
+    {
+      storeMode = Mode.Buff;
+      if (lastMode == 0)
+      {
+        weaponDescription.gameObject.SetActive(false);
+        itemDescription.gameObject.SetActive(true);
+      }
+      ChangeColorMode(2);
     }
 
     UpdateSlot();
@@ -96,16 +119,9 @@ public class EquipStore : MonoBehaviour
 
   private void ChangeColorMode(int index)
   {
-    if (index == 0)
-    {
-      changeModeBtn[0].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-      changeModeBtn[1].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-    }
-    else if (index == 1)
-    {
-      changeModeBtn[1].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-      changeModeBtn[0].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-    }
+    changeModeBtn[lastMode].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+    changeModeBtn[index].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+    lastMode = index;
   }
 
   private void OnEnable()
@@ -139,7 +155,9 @@ public class EquipStore : MonoBehaviour
 
     for (int i = 0; i < 4; i++)
     {
-      if ((storeMode == Mode.Weapon && i + currentSlot >= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && i + currentSlot >= itemList.Count))
+      if ((storeMode == Mode.Weapon && i + currentSlot >= equipmentStock.equipmentList.Count) ||
+        (storeMode == Mode.Item && i + currentSlot >= itemList.Count) ||
+        (storeMode == Mode.Buff && i + currentSlot >= buffList.Count))
       {
         sprite[i].sprite = alpha;
         price[i].text = "";
@@ -157,6 +175,12 @@ public class EquipStore : MonoBehaviour
           sprite[i].sprite = itemList[currentSlot + i].GetSprite();
           price[i].text = itemList[currentSlot + i].price.ToString() + "$";
         }
+
+        else if (storeMode == Mode.Buff)
+        {
+          sprite[i].sprite = buffList[currentSlot + i].image;
+          price[i].text = buffList[currentSlot + i].price.ToString() + "$";
+        }
       }
     }
 
@@ -166,10 +190,13 @@ public class EquipStore : MonoBehaviour
   private void UpdateInfo(int index)
   {
     // Update color
-    if ((storeMode == Mode.Weapon && index + currentSlot >= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && index + currentSlot >= itemList.Count))
+    if ((storeMode == Mode.Weapon && index + currentSlot >= equipmentStock.equipmentList.Count) ||
+      (storeMode == Mode.Item && index + currentSlot >= itemList.Count) ||
+      (storeMode == Mode.Buff && index + currentSlot >= buffList.Count))
     {
       return;
     }
+
     Color greenColor;
     ColorUtility.TryParseHtmlString("#69E5B2", out greenColor);
     if (lastActiveEquip != -1)
@@ -203,6 +230,13 @@ public class EquipStore : MonoBehaviour
 
       itemDescription.text = item.description;
     }
+
+    else if (storeMode == Mode.Buff)
+    {
+      BuffSO buff = buffList[currentSlot + index];
+      nameEquip.text = buff.name;
+      itemDescription.text = buff.description;
+    }
   }
 
   private void Exit()
@@ -226,12 +260,16 @@ public class EquipStore : MonoBehaviour
 
   private void BuyEquip(int index)
   {
-    if ((storeMode == Mode.Weapon && currentSlot + index > equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && currentSlot + index > itemList.Count))
+    if ((storeMode == Mode.Weapon && currentSlot + index > equipmentStock.equipmentList.Count) ||
+      (storeMode == Mode.Item && currentSlot + index > itemList.Count) ||
+      storeMode == Mode.Buff && currentSlot + index > buffList.Count)
     {
       return;
     }
 
-    if ((storeMode == Mode.Weapon && equipmentStock.equipmentList[currentSlot + index].GetPrice() > playerStatus.GetPoint()) || (storeMode == Mode.Item && itemList[currentSlot + index].price > playerStatus.GetPoint()))
+    if ((storeMode == Mode.Weapon && equipmentStock.equipmentList[currentSlot + index].GetPrice() > playerStatus.GetPoint()) ||
+      (storeMode == Mode.Item && itemList[currentSlot + index].price > playerStatus.GetPoint()) ||
+      (storeMode == Mode.Buff && buffList[currentSlot + index].price > playerStatus.GetPoint()))
     {
       return;
     }
@@ -268,6 +306,14 @@ public class EquipStore : MonoBehaviour
         playerItem.itemList.Add(newItem);
         pointText.text = playerStatus.GetPoint().ToString();
       }
+    }
+    else if (storeMode == Mode.Buff)
+    {
+      playerStatus.SetPoint(playerStatus.GetPoint() - buffList[currentSlot + index].price);
+      playerStatus.buffList.Add(buffList[currentSlot + index]);
+
+      buffList[currentSlot + index].Activate(playerStatus);
+      pointText.text = playerStatus.GetPoint().ToString();
     }
   }
 }

@@ -8,7 +8,6 @@ public class PlayerEquip : NetworkBehaviour
 {
   [SerializeField] public List<EquipmentSO> equipmentList = new List<EquipmentSO>();
   [SerializeField] public List<EquipmentSO> all = new List<EquipmentSO>();
- 
 
   public List<SubMonsterSO> subMonsterList = new List<SubMonsterSO>();
 

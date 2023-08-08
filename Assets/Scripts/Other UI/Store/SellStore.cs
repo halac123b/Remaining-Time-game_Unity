@@ -128,8 +128,8 @@ public class SellStore : MonoBehaviour
 
   private void ChangeColorMode(int index)
   {
-    changeModeBtn[lastMode].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-    changeModeBtn[index].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+    changeModeBtn[lastMode].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+    changeModeBtn[index].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
     lastMode = index;
   }
 

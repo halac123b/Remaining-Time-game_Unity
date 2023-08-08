@@ -37,8 +37,7 @@ public class LobbyPlayerSingleUI : MonoBehaviour
       }
     }
     go = characterImage.gameObject;
-    // Shader shader = Shader.Find("");
-    // Material material = new Material(shader);
+
     material = go.GetComponent<MeshRenderer>().material;
     material.color = Color.red;
     characterImage.material = material;

@@ -20,11 +20,15 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public int bid = 0;
 
   public int moveSpeed = 5;
+  public int protection = 5;
 
+  // Astronaut stat
+  public int processSpeed = 5;
+
+  // Monster start
   public int monsterAttack = 5;
   public int monsterHealth = 20;
   public int monsterRebornTime = 5;
-
   public bool ezrealEnable = false;
   public bool garenEnable = false;
 

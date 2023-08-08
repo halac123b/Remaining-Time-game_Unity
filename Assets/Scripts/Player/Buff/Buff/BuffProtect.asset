@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be4756dece7dc741881c236cdcd5ec9, type: 3}
+  m_Name: BuffProtect
+  m_EditorClassIdentifier: 
+  buffName: Buff Protection
+  image: {fileID: 21300000, guid: a76c3abd52464f4448af550a81bf119f, type: 3}
+  price: 80
+  value: 1
+  description: '*Available for all role
+
+    Increase protection by 5'

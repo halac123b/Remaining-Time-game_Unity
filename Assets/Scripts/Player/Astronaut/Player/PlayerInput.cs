@@ -12,6 +12,8 @@ public class PlayerInput : NetworkBehaviour
 {
   public PlayerInputAction playerInputActions;
   private Item_Equip_Inventory inventory;
+  private InfoUI infoTab;
+
   private PlayerItem playerItem;
   private int TypeMove;
   private bool isProcessing = false;
@@ -24,6 +26,7 @@ public class PlayerInput : NetworkBehaviour
     inventory = FindAnyObjectByType<Item_Equip_Inventory>();
     playerItem = FindAnyObjectByType<PlayerItem>();
     playerStatus = FindObjectOfType<PlayerStatus>();
+    infoTab = FindAnyObjectByType<InfoUI>();
 
     playerInputActions = new PlayerInputAction();
     playerInputActions.Player.Enable();
@@ -39,6 +42,8 @@ public class PlayerInput : NetworkBehaviour
     playerInputActions.Player._3.performed += _3Use;
     playerInputActions.Player.tab.started += OpenInventory;
     playerInputActions.Player.tab.canceled += CloseInventory;
+    playerInputActions.Player.Info.started += OpenInfo;
+    playerInputActions.Player.Info.canceled += CloseInfo;
   }
 
   private void CloseInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -61,8 +66,20 @@ public class PlayerInput : NetworkBehaviour
 
     inventory.show_inventory = true;
     playerStatus.canattack = false;
-
   }
+
+  private void OpenInfo(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    infoTab.gameObject.SetActive(true);
+  }
+
+  private void CloseInfo(UnityEngine.InputSystem.InputAction.CallbackContext context)
+  {
+    if (!IsOwner) return;
+    infoTab.gameObject.SetActive(false);
+  }
+
   private void _1Use(InputAction.CallbackContext context)
   {
     if (!IsOwner) return;

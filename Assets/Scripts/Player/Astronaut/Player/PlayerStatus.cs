@@ -81,7 +81,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
     timeLeft--;
     OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
 
-    if (timeLeft == 0)
+    if (timeLeft <= 0)
     {
       OnDeadTrigger?.Invoke(this, EventArgs.Empty);
     }

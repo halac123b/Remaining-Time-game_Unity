@@ -166,7 +166,7 @@ public class PlayerAnimator : AnimatorController
     }
   public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
-
+   
     if (x <= -0.01f)
     {
       flipX.Value = false;

@@ -156,7 +156,9 @@ public class PlayerAnimator : AnimatorController
           
         }
     } 
-
+    public void DestroyObj(){
+      Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+    }
     public void HurtFloating(string text){
         GameObject floatingtext = Instantiate(FloatingText,playerMovement.transform.position, Quaternion.identity,playerMovement.transform);
         floatingtext.GetComponent<TextMesh>().text = text;

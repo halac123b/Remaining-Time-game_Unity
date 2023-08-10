@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class MonsterRevive : StateMachineBehaviour
 {
+    HealthLazer healthLazer ;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Destroy(animator.GetComponent<CapsuleCollider2D>());
+             healthLazer = FindAnyObjectByType<HealthLazer>();
+            Destroy(animator.GetComponent<CapsuleCollider2D>());
+            if(healthLazer) healthLazer.relive = true;
+            
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -18,8 +23,10 @@ public class MonsterRevive : StateMachineBehaviour
         // Debug.LogError("normtime: "+ stateInfo.normalizedTime);
 
         if (monsterAnimation.HP.Value < monsterAnimation.MAX_HP)  monsterAnimation.ADDhp(0.3f);
-        else animator.SetTrigger("exit");
-        
+        else{
+            animator.SetTrigger("exit");
+            if(healthLazer) healthLazer.relive = false;
+        }
         
 
     }
@@ -35,6 +42,7 @@ public class MonsterRevive : StateMachineBehaviour
         capsuleCollider2D.isTrigger = true;
 
         monsterAnimation.SetMove(true);
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

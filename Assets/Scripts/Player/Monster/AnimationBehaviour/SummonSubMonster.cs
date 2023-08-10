@@ -15,22 +15,23 @@ public class SummonSubMonster : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     // override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     // {
-        
+
     // }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-        if(stateInfo.normalizedTime >= 1f && animator.GetComponent<MonsterAnimator>().Is_Server()){
-            
-            
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x+1,animator.transform.position.y + 2f), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x-1,animator.transform.position.y + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y+1 + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x,animator.transform.position.y-1 + 2f),animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+
+        if (stateInfo.normalizedTime >= 1f && animator.GetComponent<MonsterAnimator>().Is_Server())
+        {
+
+            // Instantiate(submonter, new Vector3(animator.transform.position.x + 1, animator.transform.position.y + 2f, 0), Quaternion.identity);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,new Vector3(animator.transform.position.x+1,animator.transform.position.y + 2f,0), 0);
+            // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x - 1, animator.transform.position.y + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+            // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x, animator.transform.position.y + 1 + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
+            // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x, animator.transform.position.y - 1 + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
         }
-        
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

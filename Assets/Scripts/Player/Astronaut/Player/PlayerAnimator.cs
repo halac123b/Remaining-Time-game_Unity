@@ -101,7 +101,7 @@ public class PlayerAnimator : AnimatorController
   protected override void Update()
   {
     if (!IsOwner) return;
-
+    // Debug.LogWarning(NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetCurrentRtt(NetworkManager.Singleton.LocalClientId));
 
     animator.SetInteger(TYPE_MOVE, playerMovement.GetTypeMove());
 

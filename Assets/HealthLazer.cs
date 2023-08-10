@@ -7,7 +7,10 @@ public class HealthLazer : MonoBehaviour
     // Start is called before the first frame update
     private LineRenderer lazer;
     private MonsterAnimator Monster;
+    [SerializeField] GameObject power;
     public bool relive = false;
+    public bool spawn = false;
+
     void Start()
     {
         lazer = GetComponent<LineRenderer>();
@@ -22,5 +25,13 @@ public class HealthLazer : MonoBehaviour
         if(relive && Monster){
             lazer.SetPosition(0, new Vector3 (Monster.transform.position.x,Monster.transform.position.y+2f));   
         }else lazer.SetPosition(0, transform.position);
+
+        if(spawn && Monster){
+             lazer.SetPosition(0, Monster.GetMousePos());   
+        }else lazer.SetPosition(0, transform.position);
+        
+        if (spawn || relive) power.SetActive(true);
+        else power.SetActive(false);
+
     }
 }

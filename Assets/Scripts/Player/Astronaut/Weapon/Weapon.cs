@@ -31,7 +31,7 @@ public class Weapon : NetworkBehaviour
             if (Mathf.Abs(y) >0.1f) x = 0;
             var trigg=gameObject.AddComponent<PolygonCollider2D>();
             trigg.isTrigger = true;
-            trigg.offset += new Vector2(-Mathf.Abs(x),y);
+            trigg.offset += new Vector2(-Mathf.Abs(x*0.5f),y);
             // Debug.LogError("(x,y): "+x+" "+y);
         }
     }

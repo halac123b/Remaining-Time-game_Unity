@@ -99,6 +99,11 @@ public class SkeletonHunterAnimation : NetworkBehaviour
         // Nếu có vật thể "Player" gần nhất, di chuyển vật thể của bạn đến gần vật thể đó
         if (nearestPlayer != null)
         {
+            Debug.DrawLine(transform.position,nearestPlayer.position);
+            RaycastHit2D line = Physics2D.Linecast(transform.position,nearestPlayer.position) ;
+            if(line.collider && line.collider.gameObject.layer == LayerMask.NameToLayer("Wall")){
+                return new Vector2 (0,0);
+            }
            Vector2 direction = (nearestPlayer.position - transform.position).normalized;
            return direction;
         }

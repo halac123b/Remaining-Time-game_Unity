@@ -11,7 +11,7 @@ public class OxyStatus : NetworkBehaviour
   [SerializeField] private Animator animator;
   [SerializeField] private HealthBar processBar;
 
-  private int speed = 5;
+  private int speed = 0;
 
   private bool countTrigger = true;
   private bool startCounting = false;
@@ -65,7 +65,7 @@ public class OxyStatus : NetworkBehaviour
   {
     startCounting = status;
     this.speed += speed;
-    SetAnimationClientRpc(status);
+    SetAnimationClientRpc(this.speed>0);
   }
   [ClientRpc]
   public void SetAnimationClientRpc(bool is_enable){

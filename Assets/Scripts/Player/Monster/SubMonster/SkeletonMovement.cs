@@ -26,9 +26,12 @@ public class SkeletonMovement : NetworkBehaviour
             // Debug.LogError(agent.isOnNavMesh);
             if (agent.isOnNavMesh){
                 // Debug.LogWarning(nearest.position);
+                agent.isStopped = false;
                 agent.SetDestination(new Vector3(nearest.position.x,nearest.position.y,0));
             }
-         } 
+         } else {
+            agent.isStopped = true;
+         }
         
     }
     /////////////////////Support//////////////////////////

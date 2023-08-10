@@ -42,9 +42,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapUnder
+    uniqueID: 1211105255
+    locked: 0
   - name: New Layer 1
     uniqueID: 2588942883
     locked: 0
+  - name: SubMonster
+    uniqueID: 1244200379
+    locked: 0
+  - name: Monster
+    uniqueID: 540865091
+    locked: 0
   - name: Player
     uniqueID: 1992879809
+    locked: 0
+  - name: MapUpper
+    uniqueID: 2141121843
+    locked: 0
+  - name: Overwrite
+    uniqueID: 2233319067
     locked: 0

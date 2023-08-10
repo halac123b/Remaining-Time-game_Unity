@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8706093791601465590}
   - component: {fileID: 3256587599414289049}
   - component: {fileID: 2746339604722742151}
+  - component: {fileID: -2783655466940741710}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,6 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentList: []
+  all: []
+  subMonsterList: []
+  currentEquip: 0
+  currentMonster: 0
+  canTriggerSkill: 0
 --- !u!114 &3256587599414289049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,4 +83,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLeft: 20
+  canattack: 1
+  canMove: 1
   bid: 0
+  moveSpeed: 5
+  protection: 5
+  processSpeed: 5
+  monsterAttack: 5
+  monsterHealth: 20
+  monsterRebornTime: 5
+  ezrealEnable: 0
+  garenEnable: 0
+  buffList: []
+--- !u!114 &-2783655466940741710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6521380719728189313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1

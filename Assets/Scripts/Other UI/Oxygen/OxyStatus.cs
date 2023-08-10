@@ -8,7 +8,7 @@ public class OxyStatus : NetworkBehaviour
   private NetworkVariable<int> process = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
   [SerializeField] private int threshold = 100;
-
+  [SerializeField] private Animator animator;
   [SerializeField] private HealthBar processBar;
 
   private int speed = 5;
@@ -65,5 +65,12 @@ public class OxyStatus : NetworkBehaviour
   {
     startCounting = status;
     this.speed += speed;
+    SetAnimationClientRpc(status);
+  }
+  [ClientRpc]
+  public void SetAnimationClientRpc(bool is_enable){
+      // if(this.speed > 5) animator.enabled = false;
+      // else animator.enabled = true;
+      animator.enabled = !is_enable;
   }
 }

@@ -26,7 +26,7 @@ public class PlayerInput : NetworkBehaviour
     inventory = FindAnyObjectByType<Item_Equip_Inventory>();
     playerItem = FindAnyObjectByType<PlayerItem>();
     playerStatus = FindObjectOfType<PlayerStatus>();
-    infoTab = FindAnyObjectByType<InfoUI>();
+    infoTab = FindObjectOfType<InfoUI>();
 
     playerInputActions = new PlayerInputAction();
     playerInputActions.Player.Enable();
@@ -71,13 +71,13 @@ public class PlayerInput : NetworkBehaviour
   private void OpenInfo(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    infoTab.gameObject.SetActive(true);
+    infoTab.EnableTab(true);
   }
 
   private void CloseInfo(UnityEngine.InputSystem.InputAction.CallbackContext context)
   {
     if (!IsOwner) return;
-    infoTab.gameObject.SetActive(false);
+    infoTab.EnableTab(false);
   }
 
   private void _1Use(InputAction.CallbackContext context)

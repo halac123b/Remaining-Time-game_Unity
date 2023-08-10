@@ -13,9 +13,9 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   [SerializeField] private GameObject gameUI;
 
-  private int numberConnected = 0;
+  [SerializeField] private Transform[] spawnPoint;
 
-  Vector3[] spawnPoint = new Vector3[2] { new Vector3(-10, 0, 0), new Vector3(10, 0, 0) };
+  private int numberConnected = 0;
 
   [SerializeField] SceneName nextScene = SceneName.MainPhase;
 
@@ -83,7 +83,9 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
     for (ulong i = 0; Convert.ToInt32(i) < NetworkManager.Singleton.ConnectedClients.Count; i++)
     {
-      NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(Character[PointManager.Instance.playerPoint[Convert.ToInt32(i)].playerIndex], new Vector3(i, i, 0), i);
+      System.Random random = new System.Random();
+
+      NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(Character[PointManager.Instance.playerPoint[Convert.ToInt32(i)].playerIndex], spawnPoint[random.Next(3)].position, i);
     }
 
 

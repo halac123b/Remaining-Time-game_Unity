@@ -12,6 +12,7 @@ public enum SceneName : byte
   StandbyPhase,
   ShoppingPhase,
   MainPhase,
+  MainPhasev3,
   ResultPhase
 };
 
@@ -83,6 +84,7 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
 
   private void LoadSceneLocal(SceneName sceneToLoad)
   {
+    Debug.Log(sceneToLoad.ToString());
     SceneManager.LoadScene(sceneToLoad.ToString());
   }
 
@@ -90,6 +92,7 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
   // network session
   private void LoadSceneNetwork(SceneName sceneToLoad)
   {
+    Debug.Log(sceneToLoad.ToString());
     NetworkManager.Singleton.SceneManager.LoadScene(
         sceneToLoad.ToString(),
         LoadSceneMode.Single);
@@ -123,6 +126,10 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
         break;
 
       case SceneName.MainPhase:
+        MainPhaseManager.Instance.ServerSceneInit();
+        break;
+
+      case SceneName.MainPhasev3:
         MainPhaseManager.Instance.ServerSceneInit();
         break;
 

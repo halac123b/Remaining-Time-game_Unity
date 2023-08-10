@@ -21,6 +21,8 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   [SerializeField] private Transform[] randomSpawnOxy;
 
+  [SerializeField] private GameObject compass;
+
   private OxyStatus oxyStatus;
 
   private Vector3 oxySpawnPoint;
@@ -57,11 +59,34 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
     playerStatus.OnDeadTrigger += ResultRecord;
 
+    playerStatus.enableCompass += TriggerCompass;
+
     if (IsHost)
     {
       System.Random random = new System.Random();
       oxySpawnPoint = randomSpawnOxy[random.Next(randomSpawnOxy.Length)].position;
     }
+  }
+
+  private void TriggerCompass(object sender, EventArgs e)
+  {
+    if (compass.activeSelf == false)
+    {
+      compass.SetActive(true);
+    }
+    else
+    {
+      compass.transform.localScale = Vector3.one;
+    }
+
+    StartCoroutine(TurnOffCompass());
+  }
+
+  IEnumerator TurnOffCompass()
+  {
+    yield return new WaitForSeconds(5f);
+
+    compass.transform.localScale = Vector3.zero;
   }
 
   private void ResultRecord(object sender, EventArgs e)

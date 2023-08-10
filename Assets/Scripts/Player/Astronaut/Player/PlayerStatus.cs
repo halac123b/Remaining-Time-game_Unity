@@ -36,6 +36,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   public event EventHandler enableStopWatch;
   public event EventHandler enableBuffTime;
+  public event EventHandler enableCompass;
 
   public void TriggerStopWatch()
   {
@@ -47,11 +48,17 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
     enableBuffTime?.Invoke(this, EventArgs.Empty);
   }
 
+  public void TriggerCompass()
+  {
+    enableCompass?.Invoke(this, EventArgs.Empty);
+  }
+
   public void Renew()
   {
     canattack = true;
     canMove = true;
   }
+
   public int GetPoint()
   {
     return point;

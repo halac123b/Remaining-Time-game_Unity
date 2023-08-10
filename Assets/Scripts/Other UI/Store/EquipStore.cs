@@ -126,10 +126,9 @@ public class EquipStore : MonoBehaviour
 
   private void OnEnable()
   {
-    storeMode = Mode.Weapon;
+    ChangeMode(0);
     currentSlot = 0;
-    UpdateSlot();
-    UpdateInfo(0);
+
     pointText.text = playerStatus.GetPoint().ToString() + "$";
   }
 

@@ -18,18 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StandbyPhase.unity
     guid: b115a26ecc5613b4e9b911ca31d76e2c
   - enabled: 1
+    path: Assets/Scenes/ShoppingPhase.unity
+    guid: a7537e0d21a7c8647abf82cc1f1d5c17
+  - enabled: 1
     path: Assets/Scenes/MainPhase.unity
     guid: d47f2d38418b9f64a90b585537e850ad
   - enabled: 0
     path: Assets/Scenes/MainPhasev2.unity
     guid: 78b0d6dd664efa14e890e44b5d41f84f
   - enabled: 1
-    path: Assets/Scenes/ShoppingPhase.unity
-    guid: a7537e0d21a7c8647abf82cc1f1d5c17
-  - enabled: 1
     path: Assets/Scenes/ResultPhase.unity
     guid: 01adae5373007ad4d8b0b232369e4232
-  - enabled: 1
-    path: Assets/Scenes/Test/Attack test.unity
-    guid: 133cfd6d60f18814db3f5fd1182da20c
   m_configObjects: {}

@@ -2051,7 +2051,7 @@ MonoBehaviour:
   nextScene: 4
   mapSprite:
   - {fileID: 21300000, guid: 0713f4b34699929458e18ea4fba99a46, type: 3}
-  - {fileID: 21300000, guid: d5045dd0024f34649900464f84187a36, type: 3}
+  - {fileID: 21300000, guid: 38195f66c7b790248944da6fe4a05e6e, type: 3}
   mapImage: {fileID: 1262981228}
 --- !u!4 &1773843395
 Transform:

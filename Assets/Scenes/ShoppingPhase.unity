@@ -1937,6 +1937,10 @@ MonoBehaviour:
   monsterPrefab: {fileID: 7552313123406739431, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
   countDown: {fileID: 6631988674882061963}
   gameUI: {fileID: 1677193756479773165}
+  spawnPoint:
+  - {fileID: 2059676120}
+  - {fileID: 1459852487}
+  - {fileID: 2003649589}
   nextScene: 5
   playerEquip: {fileID: 1360928353315941742}
 --- !u!1 &852793917

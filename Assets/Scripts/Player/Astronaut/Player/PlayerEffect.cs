@@ -8,6 +8,7 @@ public class PlayerEffect : NetworkBehaviour
 
   [SerializeField] private GameObject iceBar;
   [SerializeField] private GameObject plusTime;
+  [SerializeField] private GameObject latern;
 
 
   private void Awake()
@@ -16,9 +17,19 @@ public class PlayerEffect : NetworkBehaviour
 
     playerStatus.enableStopWatch += TriggerStopWatch;
     playerStatus.enableBuffTime += TriggerBuffTime;
+    playerStatus.enableLantern += TriggerLantern;
   }
 
   public void TriggerStopWatch(object sender, EventArgs e)
+  {
+    if (!IsOwner)
+    {
+      return;
+    }
+    latern.SetActive(!latern.activeSelf);
+  }
+
+  public void TriggerLantern(object sender, EventArgs e)
   {
     if (!IsOwner)
     {
@@ -40,5 +51,6 @@ public class PlayerEffect : NetworkBehaviour
   {
     playerStatus.enableStopWatch -= TriggerStopWatch;
     playerStatus.enableBuffTime -= TriggerBuffTime;
+    playerStatus.enableLantern -= TriggerLantern;
   }
 }

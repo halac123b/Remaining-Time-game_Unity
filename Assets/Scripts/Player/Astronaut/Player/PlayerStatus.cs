@@ -37,6 +37,12 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public event EventHandler enableStopWatch;
   public event EventHandler enableBuffTime;
   public event EventHandler enableCompass;
+  public event EventHandler enableLantern;
+
+  public void TriggerLantern()
+  {
+    enableLantern?.Invoke(this, EventArgs.Empty);
+  }
 
   public void TriggerStopWatch()
   {

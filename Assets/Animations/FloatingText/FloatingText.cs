@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class FloatingText : MonoBehaviour
 {
-  // Start is called before the first frame update
+  [SerializeField] private float delayTime;
+
   private void OnEnable()
   {
     StartCoroutine(Disable());
@@ -11,7 +12,7 @@ public class FloatingText : MonoBehaviour
 
   IEnumerator Disable()
   {
-    yield return new WaitForSecondsRealtime(1);
+    yield return new WaitForSecondsRealtime(delayTime);
     gameObject.SetActive(false);
   }
 }

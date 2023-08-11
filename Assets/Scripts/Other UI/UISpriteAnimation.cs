@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UISpriteAnimation : MonoBehaviour
 {
 
-  public Image m_Image;
+  private Image m_Image;
 
   public Sprite[] m_SpriteArray;
   public float m_Speed = .02f;
@@ -18,6 +18,7 @@ public class UISpriteAnimation : MonoBehaviour
 
   private void Start()
   {
+    m_Image = GetComponent<Image>();
     Func_PlayUIAnim();
   }
 

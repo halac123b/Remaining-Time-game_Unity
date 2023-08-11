@@ -420,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4510145361122546753, guid: 58a4d24221f57814a89aa19aadb0ce24, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6014872142810922768, guid: 58a4d24221f57814a89aa19aadb0ce24, type: 3}
       propertyPath: m_Color.b
@@ -687,7 +687,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8adec3d91926efe41863ca4112106208, type: 2}
     - target: {fileID: 7247212241071886364, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7247212241071886364, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_LocalPosition.x
@@ -753,6 +753,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7951785030057063578, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 7994331184798517648, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       propertyPath: m_SortingLayer
       value: 5
@@ -791,6 +795,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6882509921675733444, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1945381451628968166}
+    - targetCorrespondingSourceObject: {fileID: 6882509921675733444, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7741104909972804410}
   m_SourcePrefab: {fileID: 100100000, guid: 2935b914b6d4ac84288c7b62fb7f8209, type: 3}
 --- !u!4 &293629237803727878 stripped
 Transform:
@@ -958,3 +965,30 @@ CapsuleCollider2D:
   m_Offset: {x: -0.006878078, y: 0.6587904}
   m_Size: {x: 0.9470719, y: 1.3972577}
   m_Direction: 0
+--- !u!50 &7741104909972804410
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540751376381314526}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

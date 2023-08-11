@@ -43,7 +43,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     // Random next map
     System.Random random = new System.Random();
     //LoadingSceneManager.Instance.nextMap = random.Next(3);
-    LoadingSceneManager.Instance.nextMap = 1;
+    LoadingSceneManager.Instance.nextMap = 0;
 
     PointManager.Instance.IncreasePointAll(increaseAmount);
 

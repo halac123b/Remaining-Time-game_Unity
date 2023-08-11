@@ -63,14 +63,16 @@ public class OxyStatus : NetworkBehaviour
   [ServerRpc(RequireOwnership = false)]
   public void SetProcessServerRpc(bool status, int speed)
   {
+    Debug.Log("bruh");
     startCounting = status;
     this.speed += speed;
-    SetAnimationClientRpc(this.speed>0);
+    SetAnimationClientRpc(this.speed > 0);
   }
   [ClientRpc]
-  public void SetAnimationClientRpc(bool is_enable){
-      // if(this.speed > 5) animator.enabled = false;
-      // else animator.enabled = true;
-      animator.enabled = !is_enable;
+  public void SetAnimationClientRpc(bool is_enable)
+  {
+    // if(this.speed > 5) animator.enabled = false;
+    // else animator.enabled = true;
+    animator.enabled = !is_enable;
   }
 }

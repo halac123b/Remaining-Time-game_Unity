@@ -138,6 +138,7 @@ public class PlayerInput : NetworkBehaviour
   {
     if (!IsOwner) return;
     isProcessing = true;
+    UnityEngine.Debug.Log("ProcessON");
 
     StartCoroutine(CoutDownTrigger());
   }
@@ -145,6 +146,8 @@ public class PlayerInput : NetworkBehaviour
   IEnumerator CoutDownTrigger()
   {
     yield return new WaitForFixedUpdate();
+
+    UnityEngine.Debug.Log("now");
     isProcessing = false;
   }
 
@@ -159,6 +162,8 @@ public class PlayerInput : NetworkBehaviour
     if (!IsOwner) return;
     // StopAllCoroutines();
     isProcessing = false;
+
+    UnityEngine.Debug.Log("won");
   }
 
   private void Duck(InputAction.CallbackContext context)

@@ -97,6 +97,9 @@ public class MonsterAnimator : AnimatorController
     public void CreateTrigger(){
        monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
     }
+    public int GetDmg(){
+      return playerStatus.monsterAttack;
+    }
     public void ShowFloatText(string text){
  
             foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
@@ -132,20 +135,20 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !playerStatus.canattack) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack ) return;
     animator.SetInteger(TYPE_ATTACK, 1);
     animator.SetTrigger(ATTACK);
   }
 
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove) return;
+    if (!IsOwner || !playerStatus.canMove||!playerStatus.canattack || !playerStatus.garenEnable) return;
     animator.SetInteger(TYPE_ATTACK, 2);
     animator.SetTrigger(ATTACK);
   }
   private void TriggerAttack03Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack|| !playerStatus.ezrealEnable) return;
     animator.SetInteger(TYPE_ATTACK, 3);
     animator.SetTrigger(ATTACK);
   }

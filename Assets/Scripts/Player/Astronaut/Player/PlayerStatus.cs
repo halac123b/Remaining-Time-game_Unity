@@ -12,8 +12,8 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private bool countTrigger = true;
   private bool startCounting = false;
 
-  public bool canattack = true;
-  public bool canMove = true;
+  public bool canattack = true; 
+  public bool canMove = true; 
 
   private int point;
 
@@ -26,9 +26,9 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public int processSpeed = 5;
 
   // Monster start
-  public int monsterAttack = 5;
-  public int monsterHealth = 20;
-  public int monsterRebornTime = 5;
+  public int monsterAttack = 5; //
+  public int monsterHealth = 100; //
+  public int monsterRebornTime = 1; // (speed)
   public bool ezrealEnable = false;
   public bool garenEnable = false;
 

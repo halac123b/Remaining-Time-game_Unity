@@ -19,10 +19,11 @@ public class MonsterSword : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         Vector2 attackVector = new Vector2((monsterAnimator.GetFloat("Vertical")==0)?monsterAnimator.GetFloat("Horizontal"):0,monsterAnimator.GetFloat("Vertical")); 
             if (other.gameObject.layer ==LayerMask.NameToLayer("Player") && other.GetComponent<PlayerAnimator>()){        
-                if (monsterAnimator.GetInteger("typeattack") == 1) other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc(3,attackVector,5);
-                if (monsterAnimator.GetInteger("typeattack") == 2) other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc(5,attackVector,2);
+                if (monsterAnimator.GetInteger("typeattack") == 1) other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc( Mathf.FloorToInt(monsterAnimator.GetComponent<MonsterAnimator>().GetDmg()*0.6f),attackVector,5);
+                if (monsterAnimator.GetInteger("typeattack") == 2) other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc(Mathf.FloorToInt(monsterAnimator.GetComponent<MonsterAnimator>().GetDmg()*0.8f),attackVector,2);
 
             }
     }

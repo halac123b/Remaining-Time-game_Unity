@@ -26,7 +26,7 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    latern.SetActive(!latern.activeSelf);
+    iceBar.SetActive(!iceBar.activeSelf);
   }
 
   public void TriggerLantern(object sender, EventArgs e)
@@ -35,7 +35,7 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    iceBar.SetActive(!iceBar.activeSelf);
+    latern.SetActive(!latern.activeSelf);
   }
 
   public void TriggerBuffTime(object sender, EventArgs e)

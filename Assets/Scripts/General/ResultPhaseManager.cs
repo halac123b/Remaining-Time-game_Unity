@@ -75,8 +75,15 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
 
   private void LoadNextScene(object sender, EventArgs e)
   {
-    LoadingSceneManager.Instance.LoadScene(nextScene);
     LoadingSceneManager.Instance.GoNextRound();
+
+    if (LoadingSceneManager.Instance.GetRound() == 6)
+    {
+      nextScene = SceneName.Menu;
+      NetworkManager.Singleton.Shutdown();
+    }
+    LoadingSceneManager.Instance.LoadScene(nextScene);
+
   }
 
   [ClientRpc]

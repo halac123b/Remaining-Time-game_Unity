@@ -12,6 +12,7 @@ public enum SceneName : byte
   StandbyPhase,
   ShoppingPhase,
   MainPhase,
+  MainPhasev2,
   MainPhasev3,
   ResultPhase
 };
@@ -126,6 +127,10 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
         break;
 
       case SceneName.MainPhase:
+        MainPhaseManager.Instance.ServerSceneInit();
+        break;
+
+      case SceneName.MainPhasev2:
         MainPhaseManager.Instance.ServerSceneInit();
         break;
 

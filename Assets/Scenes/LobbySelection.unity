@@ -3603,10 +3603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14259dc4bfdeef4db5654c97251127d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyBtn:
-  - {fileID: 1828449079}
-  - {fileID: 1050341442}
-  - {fileID: 1640078647}
   nextScene: 3
   relayManager: {fileID: 572245940}
 --- !u!4 &818158579
@@ -5643,7 +5639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2bf7989bbc3284c9ee17ebab0503fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Image: {fileID: 1512044794}
   m_SpriteArray:
   - {fileID: 8793639957104055765, guid: 9c447c54c8e0416e9446cadb88c48fd3, type: 3}
   - {fileID: 6084859605308855041, guid: 9c447c54c8e0416e9446cadb88c48fd3, type: 3}

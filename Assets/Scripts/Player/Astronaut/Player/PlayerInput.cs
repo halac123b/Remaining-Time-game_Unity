@@ -37,9 +37,9 @@ public class PlayerInput : NetworkBehaviour
     //playerInputActions.Player.Process.performed += ProcessPerformed;
     playerInputActions.Player.Process.canceled += ProcessCanceled;
 
-    playerInputActions.Player._1.performed += _1Use;
-    playerInputActions.Player._2.performed += _2Use;
-    playerInputActions.Player._3.performed += _3Use;
+    // playerInputActions.Player._1.performed += _1Use;
+    // playerInputActions.Player._2.performed += _2Use;
+    // playerInputActions.Player._3.performed += _3Use;
     playerInputActions.Player.tab.started += OpenInventory;
     playerInputActions.Player.tab.canceled += CloseInventory;
     playerInputActions.Player.Info.started += OpenInfo;

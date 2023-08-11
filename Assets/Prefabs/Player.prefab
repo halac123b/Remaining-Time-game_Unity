@@ -414,6 +414,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3004287497692081234}
     m_Modifications:
+    - target: {fileID: 4172915131878295226, guid: 58a4d24221f57814a89aa19aadb0ce24, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1969488506
+      objectReference: {fileID: 0}
     - target: {fileID: 4510145361122546753, guid: 58a4d24221f57814a89aa19aadb0ce24, type: 3}
       propertyPath: m_Name
       value: Spot Light

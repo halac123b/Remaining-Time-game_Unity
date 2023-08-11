@@ -27,7 +27,9 @@ public class CameraControl : MonoBehaviour
     }
     void Update()
     {
-        Vector3 target = playerMovement.transform.position;
+        Vector3 target = new Vector3();
+        if (playerMovement) target  = playerMovement.transform.position;
+        
         target.z= -10f;
         if(playerMovement && Vector2.Distance(transform.position, playerMovement.transform.position) > 1f){
             transform.position = Vector3.Lerp ( transform.position, target, Time.deltaTime * 5f);

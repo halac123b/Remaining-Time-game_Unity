@@ -26,7 +26,11 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    iceBar.SetActive(!iceBar.activeSelf);
+    TurnOnIceClientRpc();
+  }
+  [ClientRpc]
+  public void TurnOnIceClientRpc(){
+     iceBar.SetActive(!iceBar.activeSelf);
   }
 
   public void TriggerLantern(object sender, EventArgs e)
@@ -35,16 +39,26 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    latern.SetActive(!latern.activeSelf);
+    TurnOnLaternClientRpc();
   }
 
+  [ClientRpc]
+  public void TurnOnLaternClientRpc(){
+     latern.SetActive(!latern.activeSelf);
+  }
+ 
   public void TriggerBuffTime(object sender, EventArgs e)
   {
     if (!IsOwner)
     {
       return;
     }
-    plusTime.SetActive(!plusTime.activeSelf);
+    TurnOnPlusTimeClientRpc();
+  }
+
+  [ClientRpc]
+  public void TurnOnPlusTimeClientRpc(){
+     plusTime.SetActive(!plusTime.activeSelf);
   }
 
   private void OnDisable()

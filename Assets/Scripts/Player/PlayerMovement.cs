@@ -4,7 +4,7 @@ using System;
 
 public class PlayerMovement : NetworkBehaviour
 {
-  private float moveSpeed = 5f;
+  // private float moveSpeed = 5f;
   private PlayerInput playerInput;
 
   private Vector2 moveVector;
@@ -14,7 +14,7 @@ public class PlayerMovement : NetworkBehaviour
   private PlayerStatus playerStatus;
 
   private void Awake()
-  {
+  { 
     playerInput = GetComponent<PlayerInput>();
     playerStatus = FindObjectOfType<PlayerStatus>();
   }
@@ -38,18 +38,18 @@ public class PlayerMovement : NetworkBehaviour
       HandleMovement();
     }
 
-    if (playerInput.GetTypeMove() == 1)
+    if (playerInput.GetTypeMove() == 1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex !=0)
     {
-      moveSpeed = 7f;
+      playerStatus.moveSpeed = 7f;
     }
     else if (playerInput.GetTypeMove() == 0)
     {
-      moveSpeed = 5f;
+      playerStatus.moveSpeed = 5f;
     }
 
-    if (playerInput.GetTypeMove() == -1)
+    if (playerInput.GetTypeMove() == -1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex !=0)
     {
-      moveSpeed = 3f;
+      playerStatus.moveSpeed = 3f;
     }
   }
 
@@ -66,7 +66,7 @@ public class PlayerMovement : NetworkBehaviour
   private void HandleMovement()
   {
     Vector2 inputVector = playerInput.GetMovementVectorNormalized();
-    float moveDistance = moveSpeed * Time.deltaTime;
+    float moveDistance = playerStatus.moveSpeed * Time.deltaTime;
 
 
     transform.position += new Vector3(inputVector.x, inputVector.y) * moveDistance;

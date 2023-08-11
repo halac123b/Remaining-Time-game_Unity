@@ -31,7 +31,7 @@ public class SummonSubMonster : StateMachineBehaviour
     {
         MonsterAnimator monsterAnimator = animator.GetComponent<MonsterAnimator>();
         NavMeshHit hit;
-        if (stateInfo.normalizedTime >= 1f && monsterAnimator.Is_Server() && NavMesh.SamplePosition(monsterAnimator.GetMousePos(), out hit, 1.0f, NavMesh.AllAreas))
+        if (stateInfo.normalizedTime >= 1f && monsterAnimator.Is_Server() && NavMesh.SamplePosition(monsterAnimator.GetMousePos(), out hit, 0.1f, NavMesh.AllAreas))
         {
             
             // monsterAnimator.UpdataMousePos();

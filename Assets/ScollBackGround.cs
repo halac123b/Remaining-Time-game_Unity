@@ -7,7 +7,7 @@ public class ScollBackGround : MonoBehaviour
     
     private SpriteRenderer quadRenderer;
 
-    float scrollSpeed = 0.5f;
+     public float scrollSpeed = 0.5f;
 
     void Start()
     {

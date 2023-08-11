@@ -5,7 +5,7 @@ using System;
 
 public class SpawnPointManager : NetworkBehaviour
 {
-  [SerializeField] Button[] targetPoint;
+  private Button[] targetPoint;
 
   [SerializeField] CountDown countDown;
 
@@ -13,7 +13,9 @@ public class SpawnPointManager : NetworkBehaviour
 
   private void Start()
   {
-    currentSpawnPoint = targetPoint[0].transform.position;
+    
+    targetPoint = GetComponentsInChildren<Button>();
+    currentSpawnPoint = targetPoint[UnityEngine.Random.Range(0,targetPoint.Length-1)].transform.position;
 
     foreach (Button btn in targetPoint)
     {

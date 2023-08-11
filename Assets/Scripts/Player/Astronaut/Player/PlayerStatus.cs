@@ -19,7 +19,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   public int bid = 0;
 
-  public int moveSpeed = 5;
+  public float moveSpeed = 5;
   public int protection = 5;
 
   // Astronaut stat

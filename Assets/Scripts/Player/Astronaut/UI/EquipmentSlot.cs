@@ -34,7 +34,7 @@ public class EquipmentSlot : NetworkBehaviour
 
   private void ChangeEquipSprite(object sender, EventArgs e)
   {
-    if(image == null) return;
+    if (image == null) return;
     if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex != 0)
     {
       image.sprite = playerEquip.GetCurrentEquip().GetSprite();
@@ -42,7 +42,6 @@ public class EquipmentSlot : NetworkBehaviour
     else
     {
       image.sprite = playerEquip.GetCurrentMonster().image;
-      Debug.Log("gaga");
     }
   }
 

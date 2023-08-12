@@ -18,9 +18,9 @@ public class MonsterAnimator : AnimatorController
 
   private PlayerEquip playerEquip;
 
-  public const float TIME  = 1f;
+  public const float TIME = 1f;
   public float time = 0;
- 
+
   protected override void Awake()
   {
     base.Awake();
@@ -33,6 +33,18 @@ public class MonsterAnimator : AnimatorController
 
     playerEquip = FindAnyObjectByType<PlayerEquip>();
   }
+
+  public override void OnDestroy()
+  {
+    playerInput.playerInputActions.Player.Attack.started -= TriggerAttack01Started;
+    playerInput.playerInputActions.Player.Attack02.started -= TriggerAttack02Started;
+    playerInput.playerInputActions.Player.Attack03.started -= TriggerAttack03Started;
+
+    playerInput.playerInputActions.Player.E_Btn.started -= TriggerSummon;
+
+    base.OnDestroy();
+  }
+
   public bool Is_Server()
   {
     return IsServer;
@@ -78,38 +90,45 @@ public class MonsterAnimator : AnimatorController
     mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
     mouse.Value = mouse_pos;
   }
-    [ClientRpc] 
-    public void GetHurtClientRpc(int dame,Vector2 pos,int nockBack,ulong id){
-        if (!IsOwner ) return;
-        index.Value = id;
-        if (HP.Value > 0 && time >= TIME) {
-            time = 0;
-            animator.SetTrigger(HURT);
-            GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
-            HP.Value -= dame;
-        }     
-        if (HP.Value <=0  )
-        {
-            animator.SetTrigger(DEATH);
-            Destroy(animator.GetComponent<CapsuleCollider2D>());
-        }
+  [ClientRpc]
+  public void GetHurtClientRpc(int dame, Vector2 pos, int nockBack, ulong id)
+  {
+    if (!IsOwner) return;
+    index.Value = id;
+    if (HP.Value > 0 && time >= TIME)
+    {
+      time = 0;
+      animator.SetTrigger(HURT);
+      GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized * nockBack, ForceMode2D.Impulse);
+      HP.Value -= dame;
     }
-    public void CreateTrigger(){
-       monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
+    if (HP.Value <= 0)
+    {
+      animator.SetTrigger(DEATH);
+      Destroy(animator.GetComponent<CapsuleCollider2D>());
     }
-    public int GetDmg(){
-      return playerStatus.monsterAttack;
+  }
+  public void CreateTrigger()
+  {
+    monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
+  }
+  public int GetDmg()
+  {
+    return playerStatus.monsterAttack;
+  }
+  public void ShowFloatText(string text)
+  {
+
+    foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID))
+    {
+      if (o.GetPlayerData().Id == index.Value)
+      {
+        GameObject floatingtext = Instantiate(o.FloatingText, o.playerMovement.transform.position, Quaternion.identity, o.playerMovement.transform);
+        floatingtext.GetComponent<TextMesh>().text = text;
+        o.weapon.increaseTime(20);
+      }
     }
-    public void ShowFloatText(string text){
- 
-            foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
-                if (o.GetPlayerData().Id == index.Value){
-                    GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
-                    floatingtext.GetComponent<TextMesh>().text = text;
-                    o.weapon.increaseTime(20);
-                }
-            }
-    }
+  }
   /////////////////////////////Handle Event////////////////////////////// 
 
   private void TriggerSummonHunter(InputAction.CallbackContext context)
@@ -135,20 +154,20 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !playerStatus.canattack ) return;
+    if (!IsOwner || animator == null || !playerStatus.canattack) return;
     animator.SetInteger(TYPE_ATTACK, 1);
     animator.SetTrigger(ATTACK);
   }
 
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove||!playerStatus.canattack || !playerStatus.garenEnable) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable) return;
     animator.SetInteger(TYPE_ATTACK, 2);
     animator.SetTrigger(ATTACK);
   }
   private void TriggerAttack03Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack|| !playerStatus.ezrealEnable) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable) return;
     animator.SetInteger(TYPE_ATTACK, 3);
     animator.SetTrigger(ATTACK);
   }

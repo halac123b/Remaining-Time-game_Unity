@@ -5123,7 +5123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2195696c76c2c82408e619d8eabe8a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 45
+  timeLeft: 5
   canattack: 1
   canMove: 1
   bid: 0
@@ -29243,7 +29243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 20
+  amountTime: 5
   timeLeft: 0
 --- !u!222 &6686363329185291623
 CanvasRenderer:

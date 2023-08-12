@@ -14,7 +14,7 @@ public class PlayerMovement : NetworkBehaviour
   private PlayerStatus playerStatus;
 
   private void Awake()
-  { 
+  {
     playerInput = GetComponent<PlayerInput>();
     playerStatus = FindObjectOfType<PlayerStatus>();
   }
@@ -38,7 +38,7 @@ public class PlayerMovement : NetworkBehaviour
       HandleMovement();
     }
 
-    if (playerInput.GetTypeMove() == 1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex !=0)
+    if (playerInput.GetTypeMove() == 1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex != 0)
     {
       playerStatus.moveSpeed = 7f;
     }
@@ -47,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour
       playerStatus.moveSpeed = 5f;
     }
 
-    if (playerInput.GetTypeMove() == -1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex !=0)
+    if (playerInput.GetTypeMove() == -1 && PointManager.Instance.playerPoint[clientId.Value].playerIndex != 0)
     {
       playerStatus.moveSpeed = 3f;
     }
@@ -55,8 +55,8 @@ public class PlayerMovement : NetworkBehaviour
 
   public void SetCanMove(bool canMove)
   {
-    if(IsOwner)
-    playerStatus.canMove = canMove;
+    if (IsOwner)
+      playerStatus.canMove = canMove;
   }
   public Vector2 MoveVector()
   {
@@ -67,7 +67,6 @@ public class PlayerMovement : NetworkBehaviour
   {
     Vector2 inputVector = playerInput.GetMovementVectorNormalized();
     float moveDistance = playerStatus.moveSpeed * Time.deltaTime;
-
 
     transform.position += new Vector3(inputVector.x, inputVector.y) * moveDistance;
 

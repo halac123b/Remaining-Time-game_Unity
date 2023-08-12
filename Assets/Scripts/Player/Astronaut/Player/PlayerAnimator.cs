@@ -49,6 +49,17 @@ public class PlayerAnimator : AnimatorController
     playerInput.playerInputActions.Player.Attack.started += TriggerAttackStarted;
   }
 
+  override public void OnDestroy()
+  {
+    playerEquip.OnChangeEquip -= OnChangeEquipped;
+
+    playerInput.playerInputActions.Player.Attack.started -= TriggerAttackStarted;
+
+    playerStatus.OnDeadTrigger -= OnDeadAnimation;
+
+    base.OnDestroy();
+  }
+
   public override void OnNetworkSpawn()
   {
     if (IsOwner)
@@ -144,29 +155,33 @@ public class PlayerAnimator : AnimatorController
   }
 
   [ClientRpc]
-  public void AstronautHurtClientRpc(int dame,Vector2 pos,int nockBack){
-        if(!IsOwner) return;
-        
-        if(playerStatus.GetTimeLeft()> 0){
+  public void AstronautHurtClientRpc(int dame, Vector2 pos, int nockBack)
+  {
+    if (!IsOwner) return;
 
-          animator.SetFloat("dame",dame);
-          animator.SetTrigger(HURT);
-          GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized*nockBack,ForceMode2D.Impulse);
-          playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() - dame);
-          
-        }
-    } 
-    public void DestroyObj(){
-      Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+    if (playerStatus.GetTimeLeft() > 0)
+    {
+
+      animator.SetFloat("dame", dame);
+      animator.SetTrigger(HURT);
+      GetComponentInParent<Rigidbody2D>().AddForce(pos.normalized * nockBack, ForceMode2D.Impulse);
+      playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() - dame);
+
     }
-    public void HurtFloating(string text){
-        GameObject floatingtext = Instantiate(FloatingText,playerMovement.transform.position, Quaternion.identity,playerMovement.transform);
-        floatingtext.GetComponent<TextMesh>().text = text;
-        floatingtext.GetComponent<TextMesh>().color = Color.red;
-    }
+  }
+  public void DestroyObj()
+  {
+    Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+  }
+  public void HurtFloating(string text)
+  {
+    GameObject floatingtext = Instantiate(FloatingText, playerMovement.transform.position, Quaternion.identity, playerMovement.transform);
+    floatingtext.GetComponent<TextMesh>().text = text;
+    floatingtext.GetComponent<TextMesh>().color = Color.red;
+  }
   public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {
-   
+
     if (x <= -0.01f)
     {
       flipX.Value = false;

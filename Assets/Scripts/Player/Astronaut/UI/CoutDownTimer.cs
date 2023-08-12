@@ -19,4 +19,9 @@ public class CoutDownTimer : MonoBehaviour
   {
     textContent.text = String.Format($"{playerStatus.GetTimeLeft() / 60:D2}:{playerStatus.GetTimeLeft() % 60:D2}");
   }
+
+  private void OnDestroy()
+  {
+    playerStatus.OnCountDownTrigger -= OnUpdateTime;
+  }
 }

@@ -75,6 +75,8 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     playerStatus.OnDeadTrigger -= ResultRecord;
 
     playerStatus.enableCompass -= TriggerCompass;
+
+    base.OnDestroy();
   }
 
   private void TriggerCompass(object sender, EventArgs e)

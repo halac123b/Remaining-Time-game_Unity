@@ -13,6 +13,5 @@ public class CompassNeedle : MonoBehaviour
   private void Update()
   {
     transform.up = Vector3.Slerp(transform.up, oxy.position, Time.deltaTime * rotateSpeed);
-    Debug.Log("vv " + oxy.position);
   }
 }

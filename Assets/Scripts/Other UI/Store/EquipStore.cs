@@ -112,9 +112,9 @@ public class EquipStore : MonoBehaviour
       ChangeColorMode(2);
     }
 
+    currentSlot = 0;
     UpdateSlot();
     UpdateInfo(0);
-    currentSlot = 0;
   }
 
   private void ChangeColorMode(int index)
@@ -143,7 +143,9 @@ public class EquipStore : MonoBehaviour
       navigationBtn[0].gameObject.SetActive(false);
     }
 
-    if ((storeMode == Mode.Weapon && currentSlot + 4 <= equipmentStock.equipmentList.Count) || (storeMode == Mode.Item && currentSlot + 4 <= itemList.Count))
+    if ((storeMode == Mode.Weapon && currentSlot + 4 < equipmentStock.equipmentList.Count) ||
+       (storeMode == Mode.Item && currentSlot + 4 < itemList.Count) ||
+       (storeMode == Mode.Buff && currentSlot + 4 < buffList.Count))
     {
       navigationBtn[1].gameObject.SetActive(true);
     }

@@ -42,8 +42,8 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
     // Random next map
     System.Random random = new System.Random();
-    //LoadingSceneManager.Instance.nextMap = random.Next(3);
-    LoadingSceneManager.Instance.nextMap = 0;
+    LoadingSceneManager.Instance.nextMap = random.Next(3);
+    //LoadingSceneManager.Instance.nextMap = 0;
 
     PointManager.Instance.IncreasePointAll(increaseAmount);
 
@@ -51,23 +51,26 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
     PlayerPoint playerData = PointManager.Instance.playerPoint[0];
 
-    UpdateUIClientRpc(0, playerData);
+    int nextMap = LoadingSceneManager.Instance.nextMap;
+    int round = LoadingSceneManager.Instance.GetRound();
+
+    UpdateUIClientRpc(0, playerData, nextMap, round);
 
     if (numPlayer >= 2)
     {
       PlayerPoint data = PointManager.Instance.playerPoint[1];
-      UpdateUIClientRpc(1, data);
+      UpdateUIClientRpc(1, data, nextMap, round);
     }
 
     if (numPlayer >= 3)
     {
       PlayerPoint data = PointManager.Instance.playerPoint[2];
-      UpdateUIClientRpc(2, data);
+      UpdateUIClientRpc(2, data, nextMap, round);
     }
   }
 
   [ClientRpc]
-  private void UpdateUIClientRpc(int index, PlayerPoint data)
+  private void UpdateUIClientRpc(int index, PlayerPoint data, int nextMap, int round)
   {
     playerName[index].text = data.playerData.playerName;
 
@@ -89,10 +92,10 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
       playerPoint[index].color = Color.red;
     }
 
-    roundSlider.value = LoadingSceneManager.Instance.GetRound();
+    roundSlider.value = round;
     roundText.text = roundSlider.value.ToString() + "/6";
 
-    mapImage.sprite = mapSprite[LoadingSceneManager.Instance.nextMap];
+    mapImage.sprite = mapSprite[nextMap];
   }
 
   private void LoadNextScene(object sender, EventArgs e)

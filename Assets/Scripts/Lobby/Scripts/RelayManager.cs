@@ -87,11 +87,10 @@ public class RelayManager : NetworkBehaviour
 
   IEnumerator CallServer(PlayerData playerData)
   {
-    yield return new WaitForSeconds(3.5f);
+    yield return new WaitForSeconds(4f);
     SetPlayerDataServerRpc(playerData);
 
     Destroy(gameObject, 2f);
-    Debug.Log("fag");
   }
 
   // private IEnumerator ActivateObjectForDuration()

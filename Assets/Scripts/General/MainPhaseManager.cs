@@ -68,6 +68,15 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     }
   }
 
+  override public void OnDestroy()
+  {
+    countDown.OnTimeOut -= StartGame;
+
+    playerStatus.OnDeadTrigger -= ResultRecord;
+
+    playerStatus.enableCompass -= TriggerCompass;
+  }
+
   private void TriggerCompass(object sender, EventArgs e)
   {
     if (compass.activeSelf == false)

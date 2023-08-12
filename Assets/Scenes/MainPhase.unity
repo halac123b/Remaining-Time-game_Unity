@@ -2432,11 +2432,11 @@ MonoBehaviour:
   monsterPrefab: {fileID: 7552313123406739431, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
   oxyPrefab: {fileID: 5910600176990297310, guid: fdb581ec8502e844db43fd28a5cf751c, type: 3}
   lifeTime: {fileID: 3603552554773039570}
-  nextScene: 7
+  nextScene: 8
   randomSpawnOxy:
   - {fileID: 8471826952051893147}
   - {fileID: 3520890341267847954}
-  - {fileID: 0}
+  - {fileID: 661686568}
   - {fileID: 9104478674639510938}
   - {fileID: 4391472502714615355}
   - {fileID: 3923768535367105941}

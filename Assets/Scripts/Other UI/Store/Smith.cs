@@ -52,7 +52,7 @@ public class Smith : NetworkBehaviour
     {
       if (Input.GetKeyDown(KeyCode.E))
       {
-        if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex == 0)
+        if (PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex == 0 && monsterShopUI != null)
         {
           monsterShopUI.SetActive(true);
         }

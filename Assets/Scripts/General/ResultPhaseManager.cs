@@ -54,17 +54,20 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     bool dualWin = false;
 
     PlayerPoint playerData;
+
+    int round = LoadingSceneManager.Instance.GetRound();
+
     for (int i = 0; i < 3; i++)
     {
       playerData = PointManager.Instance.playerPoint[i];
 
       if (dualWin && playerData.roundRank == 0)
       {
-        UpdateUIClientRpc(1, playerData, true);
+        UpdateUIClientRpc(1, playerData, round);
       }
       else
       {
-        UpdateUIClientRpc(playerData.roundRank, playerData);
+        UpdateUIClientRpc(playerData.roundRank, playerData, round);
       }
       if (playerData.roundRank == 0 && !dualWin)
       {
@@ -87,9 +90,9 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
   }
 
   [ClientRpc]
-  private void UpdateUIClientRpc(int index, PlayerPoint data, bool dualWin = false)
+  private void UpdateUIClientRpc(int index, PlayerPoint data, int round)
   {
-    sceneName.text = LoadingSceneManager.Instance.GetRound().ToString();
+    sceneName.text = round.ToString();
 
     playerName[index].text = data.playerData.playerName;
 

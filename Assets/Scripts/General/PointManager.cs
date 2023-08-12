@@ -57,6 +57,7 @@ public class PointManager : SingletonNetworkPersistent<PointManager>
     for (int i = 0; i < 3; i++)
     {
       playerPoint[i].playerIndex = (i + 1) % 3;//index[random.Next(index.Count)];
+      //playerPoint[i].playerIndex = index[random.Next(index.Count)];
       index.Remove(playerPoint[i].playerIndex);
     }
 

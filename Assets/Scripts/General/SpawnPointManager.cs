@@ -13,15 +13,16 @@ public class SpawnPointManager : NetworkBehaviour
 
   private void Start()
   {
-    
+
     targetPoint = GetComponentsInChildren<Button>();
-    currentSpawnPoint = targetPoint[UnityEngine.Random.Range(0,targetPoint.Length-1)].transform.position;
+    currentSpawnPoint = targetPoint[UnityEngine.Random.Range(0, targetPoint.Length - 1)].transform.position;
 
     foreach (Button btn in targetPoint)
     {
       btn.onClick.AddListener(delegate { SetSpawnPoint(btn.transform.position); });
     }
 
+    Debug.Log("Sending");
     countDown.OnTimeOut += SendSpawnPoint;
   }
 
@@ -33,7 +34,6 @@ public class SpawnPointManager : NetworkBehaviour
   private void SendSpawnPoint(object sender, EventArgs e)
   {
     SetSpawnPointServerRpc(Convert.ToInt32(NetworkManager.Singleton.LocalClientId), currentSpawnPoint);
-    Debug.Log("destroy");
     Destroy(gameObject, 0.5f);
   }
 

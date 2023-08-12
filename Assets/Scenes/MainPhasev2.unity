@@ -2806,7 +2806,7 @@ MonoBehaviour:
   monsterPrefab: {fileID: 7552313123406739431, guid: 0985f23be7713d84597a7bc35dbd55d7, type: 3}
   oxyPrefab: {fileID: 5910600176990297310, guid: fdb581ec8502e844db43fd28a5cf751c, type: 3}
   lifeTime: {fileID: 566447288}
-  nextScene: 7
+  nextScene: 8
   randomSpawnOxy:
   - {fileID: 835999209396210821}
   - {fileID: 7050918019696580902}

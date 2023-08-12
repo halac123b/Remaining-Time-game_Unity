@@ -63,7 +63,6 @@ public class OxyStatus : NetworkBehaviour
   [ServerRpc(RequireOwnership = false)]
   public void SetProcessServerRpc(bool status, int speed)
   {
-    Debug.Log("bruh");
     startCounting = status;
     this.speed += speed;
     SetAnimationClientRpc(this.speed > 0);

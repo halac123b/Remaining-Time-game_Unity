@@ -106,7 +106,7 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
   {
     LoadingSceneManager.Instance.GoNextRound();
 
-    if (LoadingSceneManager.Instance.GetRound() == 2)
+    if (LoadingSceneManager.Instance.GetRound() == 7)
     {
       nextScene = SceneName.SummaryPhase;
     }

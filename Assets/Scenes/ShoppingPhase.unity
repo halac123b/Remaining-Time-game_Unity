@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonUI: {fileID: 1601071366}
   shopUI: {fileID: 4657899151912617068}
-  monsterShopUI: {fileID: 5605101693412991998}
+  monsterShopUI: {fileID: 0}
   equipmentList: []
 --- !u!61 &674461748
 BoxCollider2D:
@@ -5205,7 +5205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2195696c76c2c82408e619d8eabe8a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 5
+  timeLeft: 42
   canattack: 1
   canMove: 1
   bid: 0
@@ -5217,6 +5217,7 @@ MonoBehaviour:
   monsterRebornTime: 5
   ezrealEnable: 0
   garenEnable: 0
+  NumMonster: 5
   buffList: []
 --- !u!1 &64389441031471925
 GameObject:
@@ -29325,7 +29326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 5
+  amountTime: 90
   timeLeft: 0
 --- !u!222 &6686363329185291623
 CanvasRenderer:

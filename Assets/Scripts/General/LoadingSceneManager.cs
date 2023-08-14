@@ -14,7 +14,8 @@ public enum SceneName : byte
   MainPhase,
   MainPhasev2,
   MainPhasev3,
-  ResultPhase
+  ResultPhase,
+  SummaryPhase
 };
 
 public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>

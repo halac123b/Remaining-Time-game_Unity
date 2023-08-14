@@ -34,6 +34,7 @@ public class SpawnPointManager : NetworkBehaviour
   private void SendSpawnPoint(object sender, EventArgs e)
   {
     SetSpawnPointServerRpc(Convert.ToInt32(NetworkManager.Singleton.LocalClientId), currentSpawnPoint);
+    Debug.Log("Ch1");
     Destroy(gameObject, 0.5f);
   }
 

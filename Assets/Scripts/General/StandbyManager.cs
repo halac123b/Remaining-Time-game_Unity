@@ -69,6 +69,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     }
   }
 
+
   [ClientRpc]
   private void UpdateUIClientRpc(int index, PlayerPoint data, int nextMap, int round)
   {
@@ -90,6 +91,10 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     if (data.rank == 1)
     {
       playerPoint[index].color = Color.red;
+    }
+    else
+    {
+      playerPoint[index].color = Color.white;
     }
 
     roundSlider.value = round;

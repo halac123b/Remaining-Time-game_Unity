@@ -38,7 +38,7 @@ public class CountDown : MonoBehaviour
     timeLeft--;
     timeText.text = timeLeft.ToString();
 
-    if (timeLeft == 0)
+    if (timeLeft <= 0)
     {
       OnTimeOut?.Invoke(this, EventArgs.Empty);
     }

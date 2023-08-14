@@ -171,7 +171,7 @@ public class PlayerAnimator : AnimatorController
   }
   public void DestroyObj()
   {
-    Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+    //Destroy(GetComponentInParent<PlayerMovement>().gameObject);
   }
   public void HurtFloating(string text)
   {

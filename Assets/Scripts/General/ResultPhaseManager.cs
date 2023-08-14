@@ -51,6 +51,8 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     }
     countDown.OnTimeOut += LoadNextScene;
 
+    ArrangeRank();
+
     bool dualWin = false;
 
     PlayerPoint playerData;
@@ -76,17 +78,40 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     }
   }
 
+  private void ArrangeRank()
+  {
+    int[] arr = new int[3];
+    for (int i = 0; i < 3; i++)
+    {
+      arr[i] = PointManager.Instance.playerPoint[i].point;
+    }
+
+    Array.Sort(arr);
+
+    for (int i = 0; i < 3; i++)
+    {
+      for (int j = 0; j < 3; j++)
+      {
+        if (PointManager.Instance.playerPoint[i].point == arr[j])
+        {
+          PointManager.Instance.playerPoint[i].rank = 2 - j;
+          arr[j] = -1;
+        }
+      }
+    }
+  }
+
   private void LoadNextScene(object sender, EventArgs e)
   {
     LoadingSceneManager.Instance.GoNextRound();
 
-    if (LoadingSceneManager.Instance.GetRound() == 6)
+    if (LoadingSceneManager.Instance.GetRound() == 7)
     {
       nextScene = SceneName.Menu;
-      NetworkManager.Singleton.Shutdown();
     }
     LoadingSceneManager.Instance.LoadScene(nextScene);
 
+    NetworkManager.Singleton.Shutdown();
   }
 
   [ClientRpc]
@@ -108,6 +133,10 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
     if (data.rank == 1)
     {
       playerPoint[index].color = Color.red;
+    }
+    else
+    {
+      playerPoint[index].color = Color.white;
     }
 
     if (index == 0)

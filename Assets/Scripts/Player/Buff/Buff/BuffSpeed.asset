@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Buff Speed
   image: {fileID: 21300000, guid: 13fc1908033379c4e805db95f73e3a40, type: 3}
-  price: 30
-  value: 5
-  description: Describe it
+  price: 15
+  value: 2
+  description: '*Available for all role
+
+    Increase move speed by 2.'

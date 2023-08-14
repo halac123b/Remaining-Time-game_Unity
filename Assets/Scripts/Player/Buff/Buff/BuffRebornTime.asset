@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Buff Reborn Time
   image: {fileID: 21300000, guid: 1852f4f2279121649b03be3fb4cd1832, type: 3}
-  price: 50
+  price: 15
   value: 1
-  description: Describe it
+  description: Decrease reborn time of Monster by 1s.

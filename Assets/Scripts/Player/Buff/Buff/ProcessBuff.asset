@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Process Speed
   image: {fileID: 21300000, guid: 5904e704d651d834195eec1052006afc, type: 3}
-  price: 50
-  value: 1
-  description: Increase process OXY speed by 5
+  price: 15
+  value: 2
+  description: Increase process OXY speed by 2

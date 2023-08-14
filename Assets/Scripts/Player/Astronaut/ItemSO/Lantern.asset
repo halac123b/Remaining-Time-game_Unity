@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipName: Lantern
   image: {fileID: 21300000, guid: 0f31cc02df2af474fb9ec7f9ad8dc6a2, type: 3}
-  price: 30
+  price: 10
   description: Light it up

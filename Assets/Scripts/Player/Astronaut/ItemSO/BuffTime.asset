@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipName: Buff Time
   image: {fileID: 21300000, guid: c70b09d373bf90241b2e3e57b056f9c1, type: 3}
-  price: 80
+  price: 15
   description: Increase time 2s

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipName: Sand Clock
   image: {fileID: 21300000, guid: 89becc639070f274e81a464c0c3eaef9, type: 3}
-  price: 30
+  price: 10
   description: Put yourself in motionless state and pause the time countdown in 2.5s.

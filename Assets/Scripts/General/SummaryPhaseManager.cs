@@ -3,6 +3,7 @@ using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.Services.Authentication;
 
 public class SummaryPhaseManager : SingletonNetwork<ResultPhaseManager>
 {
@@ -65,12 +66,18 @@ public class SummaryPhaseManager : SingletonNetwork<ResultPhaseManager>
 
   private void BackToMenu()
   {
-    // PointManager.Instance.gameObject.GetComponent<NetworkObject>().Despawn();
-    Destroy(PointManager.Instance.gameObject);
+    if (PointManager.Instance != null)
+    {
+      // PointManager.Instance.gameObject.GetComponent<NetworkObject>().Despawn();
+      Destroy(PointManager.Instance.gameObject);
 
-    Destroy(FindObjectOfType<PlayerStatus>().gameObject);
-
+      Destroy(FindObjectOfType<PlayerStatus>().gameObject);
+    }
     LoadingSceneManager.Instance.RefreshGame();
-    LoadingSceneManager.Instance.LoadScene(SceneName.Menu);
+
+    AuthenticationService.Instance.SignOut();
+
+    LoadingSceneManager.Instance.LoadScene(SceneName.Menu, false);
+
   }
 }

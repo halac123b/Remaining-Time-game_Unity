@@ -44,6 +44,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
 
   private void UpdatePointBid(object sender, EventArgs e)
   {
+    Debug.Log("Client " + NetworkManager.Singleton.LocalClientId);
     UpdatePointServerRpc(NetworkManager.Singleton.LocalClientId, playerStatus.GetPoint(), playerStatus.bid);
     playerEquip.canTriggerSkill = true;
   }

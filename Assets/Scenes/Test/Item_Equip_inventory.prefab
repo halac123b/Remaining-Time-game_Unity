@@ -492,7 +492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c90aba46d804565459babd5bcb672d14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -769,7 +769,7 @@ RectTransform:
   - {fileID: 2468405402295453822}
   - {fileID: 790540708304949345}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2390,12 +2390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fde58ee2c93ff40a4c9b3b8b625e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {fileID: 2215537586909572585}
-  protect: {fileID: 2703665153841492217}
-  process: {fileID: 8743030787291503609}
-  damage: {fileID: 6044334934061445541}
-  reborn: {fileID: 421136308164212863}
-  health: {fileID: 8865290105690630040}
   infoTab: {fileID: 1865842172294649172}
 --- !u!1 &3216356126247246234
 GameObject:

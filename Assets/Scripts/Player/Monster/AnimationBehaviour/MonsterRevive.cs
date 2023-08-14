@@ -40,7 +40,7 @@ public class MonsterRevive : StateMachineBehaviour
         capsuleCollider2D.size = new Vector2(1,2.5f);
         capsuleCollider2D.offset = new Vector2(0,2);
         capsuleCollider2D.isTrigger = true;
-
+        monsterAnimation.NumMonsterReal = monsterAnimation.playerStatus.NumMonster;
         monsterAnimation.SetMove(true);
 
     }

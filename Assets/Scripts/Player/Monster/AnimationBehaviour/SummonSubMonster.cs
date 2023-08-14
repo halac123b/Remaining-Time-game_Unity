@@ -12,7 +12,8 @@ public class SummonSubMonster : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         healthLazer = FindAnyObjectByType<HealthLazer>();
-        if(healthLazer){
+        if (healthLazer)
+        {
             healthLazer.spawn = true;
         }
     }
@@ -23,7 +24,16 @@ public class SummonSubMonster : StateMachineBehaviour
         MonsterAnimator monsterAnimator = animator.GetComponent<MonsterAnimator>();
 
         monsterAnimator.UpdataMousePos();
-        
+        if (healthLazer == null) return;
+
+        if (Vector2.Distance(monsterAnimator.GetMousePos(), FindAnyObjectByType<OxyStatus>().transform.position) >= 15f)
+        {
+            healthLazer.spawn = false;
+        }
+        else
+        {
+            healthLazer.spawn = true;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -31,17 +41,19 @@ public class SummonSubMonster : StateMachineBehaviour
     {
         MonsterAnimator monsterAnimator = animator.GetComponent<MonsterAnimator>();
         NavMeshHit hit;
-        if (stateInfo.normalizedTime >= 1f && monsterAnimator.Is_Server() && NavMesh.SamplePosition(monsterAnimator.GetMousePos(), out hit, 0.1f, NavMesh.AllAreas))
+        if (stateInfo.normalizedTime >= 1f && monsterAnimator.Is_Server() && NavMesh.SamplePosition(monsterAnimator.GetMousePos(), out hit, 0.1f, NavMesh.AllAreas) && Vector2.Distance(monsterAnimator.GetMousePos(), FindAnyObjectByType<OxyStatus>().transform.position) < 15f)
         {
-            
+
             // monsterAnimator.UpdataMousePos();
             // Instantiate(submonter, new Vector3(animator.transform.position.x + 1, animator.transform.position.y + 2f, 0), Quaternion.identity);
-            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter,hit.position, 0);
+            NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, hit.position, 0);
+            monsterAnimator.NumMonsterReal -= 1;
             // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x - 1, animator.transform.position.y + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
             // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x, animator.transform.position.y + 1 + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
             // NetworkObjectSpawner.SpawnNewNetworkObjectChangeOwnershipToClient(submonter, new Vector3(animator.transform.position.x, animator.transform.position.y - 1 + 2f, 0), animator.GetComponent<MonsterAnimator>().GetPlayerData().Id);
         }
-        if(healthLazer){
+        if (healthLazer)
+        {
             healthLazer.spawn = false;
         }
 

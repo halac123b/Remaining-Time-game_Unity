@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SkeletonGruntAnimation : NetworkBehaviour
 {
@@ -120,7 +121,9 @@ public class SkeletonGruntAnimation : NetworkBehaviour
             foreach (var o in FindObjectsByType<PlayerAnimator>(FindObjectsSortMode.InstanceID)){
                 if (o.GetPlayerData().Id == index.Value){
                     GameObject floatingtext = Instantiate(o.FloatingText,o.playerMovement.transform.position, Quaternion.identity,o.playerMovement.transform);
-                    floatingtext.GetComponent<TextMesh>().text = text;
+                    floatingtext.GetComponent<TextMeshPro>().text = text;
+                    floatingtext.GetComponent<TextMeshPro>().color = Color.blue;
+
                     o.weapon.increaseTime(5);
                 }
             }

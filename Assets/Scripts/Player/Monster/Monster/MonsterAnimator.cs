@@ -7,7 +7,6 @@ using TMPro;
 
 public class MonsterAnimator : AnimatorController
 {
-  public float MAX_HP = 300f;
   // Start is called before the first frame update
   [SerializeField] public Transform AimBar;
   [SerializeField] public Transform HPbar;
@@ -72,7 +71,7 @@ public class MonsterAnimator : AnimatorController
     garen_cd -= Time.deltaTime;
     ezreal_cd -= Time.deltaTime;
     time += Time.deltaTime;
-    HPbar.GetComponentInChildren<Slider>().value = HP.Value / MAX_HP;
+    HPbar.GetComponentInChildren<Slider>().value = HP.Value / playerStatus.monsterHealth;
     if (!IsOwner) return;
     // if (!playerStatus.canMove) Debug.LogError("Cannot Move"); 
   }

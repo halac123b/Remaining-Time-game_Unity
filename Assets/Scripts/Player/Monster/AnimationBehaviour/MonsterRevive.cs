@@ -22,7 +22,7 @@ public class MonsterRevive : StateMachineBehaviour
         // Debug.LogError("length: "+ stateInfo.length);
         // Debug.LogError("normtime: "+ stateInfo.normalizedTime);
 
-        if (monsterAnimation.HP.Value < monsterAnimation.MAX_HP)  monsterAnimation.ADDhp(0.3f);
+        if (monsterAnimation.HP.Value < monsterAnimation.playerStatus.monsterHealth)  monsterAnimation.ADDhp(monsterAnimation.playerStatus.monsterHealth*0.001f);
         else{
             animator.SetTrigger("exit");
             if(healthLazer) healthLazer.relive = false;

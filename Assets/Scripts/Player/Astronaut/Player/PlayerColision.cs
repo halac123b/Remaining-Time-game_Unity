@@ -6,12 +6,14 @@ public class PlayerColision : NetworkBehaviour
   private PlayerInput playerInput;
   private PlayerMovement playerMovement;
   private bool isProcessing = false;
-  private int processSpeed = 5;
+  private PlayerStatus playerStatus;
+  // private int processSpeed = 5;
 
   private void Start()
   {
     playerInput = GetComponent<PlayerInput>();
     playerMovement = GetComponent<PlayerMovement>();
+    playerStatus = GetComponent<PlayerStatus>();
   }
   private void OnTriggerStay2D(Collider2D other)
   {
@@ -31,11 +33,11 @@ public class PlayerColision : NetworkBehaviour
         {
           if (IsClient)
           {
-            oxy.SetProcessServerRpc(true, processSpeed);
+            oxy.SetProcessServerRpc(true, playerStatus.processSpeed);
           }
           else
           {
-            oxy.SetProcess(true, processSpeed);
+            oxy.SetProcess(true, playerStatus.processSpeed);
           }
 
           isProcessing = true;
@@ -45,11 +47,11 @@ public class PlayerColision : NetworkBehaviour
         {
           if (IsClient)
           {
-            oxy.SetProcessServerRpc(false, -processSpeed);
+            oxy.SetProcessServerRpc(false, -playerStatus.processSpeed);
           }
           else
           {
-            oxy.SetProcess(false, -processSpeed);
+            oxy.SetProcess(false, -playerStatus.processSpeed);
           }
           isProcessing = false;
           playerMovement.SetCanMove(true);
@@ -69,7 +71,7 @@ public class PlayerColision : NetworkBehaviour
       {
         isProcessing = false;
         playerMovement.SetCanMove(true);
-        oxy.SetProcess(false, processSpeed);
+        oxy.SetProcess(false, playerStatus.processSpeed);
       }
     }
   }

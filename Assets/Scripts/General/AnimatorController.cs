@@ -19,7 +19,7 @@ public class AnimatorController : NetworkBehaviour
   [SerializeField] public Animator animator;
   [SerializeField] public GameObject FloatingText;
 
-  protected PlayerStatus playerStatus;
+  public PlayerStatus playerStatus;
 
   protected PlayerInput playerInput;
   public PlayerMovement playerMovement;

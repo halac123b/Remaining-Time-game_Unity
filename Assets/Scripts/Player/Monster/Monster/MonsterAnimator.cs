@@ -13,7 +13,7 @@ public class MonsterAnimator : AnimatorController
   [SerializeField] public Transform HPbar;
   [SerializeField] public MonsterSword monsterSword;
   [SerializeField] private TextMeshPro playername;
-
+  public int NumMonsterReal ;
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -27,6 +27,7 @@ public class MonsterAnimator : AnimatorController
   protected override void Awake()
   {
     base.Awake();
+    NumMonsterReal = playerStatus.NumMonster;
     HP.Value = 300f;
     playerInput.playerInputActions.Player.Attack.started += TriggerAttack01Started;
     playerInput.playerInputActions.Player.Attack02.started += TriggerAttack02Started;
@@ -68,6 +69,8 @@ public class MonsterAnimator : AnimatorController
   protected override void Update()
   {
     base.Update();
+    garen_cd -= Time.deltaTime;
+    ezreal_cd -= Time.deltaTime;
     time += Time.deltaTime;
     HPbar.GetComponentInChildren<Slider>().value = HP.Value / MAX_HP;
     if (!IsOwner) return;
@@ -139,9 +142,10 @@ public class MonsterAnimator : AnimatorController
   }
   /////////////////////////////Handle Event////////////////////////////// 
 
+  
   private void TriggerSummonHunter(InputAction.CallbackContext context)
   {
-    if (IsOwner && playerStatus.canMove)
+    if (IsOwner && playerStatus.canMove && NumMonsterReal > 0)
       animator.SetTrigger("summonHunter");
   }
   private void TriggerSummon(InputAction.CallbackContext context)
@@ -167,17 +171,21 @@ public class MonsterAnimator : AnimatorController
     animator.SetTrigger(ATTACK);
   }
 
+   private float garen_cd = 5;
+   private float ezreal_cd = 3; 
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable || garen_cd < 0) return;
     animator.SetInteger(TYPE_ATTACK, 2);
     animator.SetTrigger(ATTACK);
+    garen_cd = 5;
   }
   private void TriggerAttack03Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable|| ezreal_cd < 0) return;
     animator.SetInteger(TYPE_ATTACK, 3);
     animator.SetTrigger(ATTACK);
+    ezreal_cd = 3;
   }
 
   // Update is called once per frame

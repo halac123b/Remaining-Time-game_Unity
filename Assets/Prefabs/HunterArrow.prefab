@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 20
   moveVector: {x: 0, y: 0}
-  damage: 0
+  damage: 2
   nockBack: 0
   idOwner: 0
 --- !u!50 &7179379861496784554

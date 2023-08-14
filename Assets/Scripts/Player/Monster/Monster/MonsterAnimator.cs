@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class MonsterAnimator : AnimatorController
 {
@@ -11,6 +12,8 @@ public class MonsterAnimator : AnimatorController
   [SerializeField] public Transform AimBar;
   [SerializeField] public Transform HPbar;
   [SerializeField] public MonsterSword monsterSword;
+  [SerializeField] private TextMeshPro playername;
+
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -57,6 +60,11 @@ public class MonsterAnimator : AnimatorController
 
   }
 
+  private void FixedUpdate()
+  {
+    playername.text = playerData.Value.playerName;
+
+  }
   protected override void Update()
   {
     base.Update();

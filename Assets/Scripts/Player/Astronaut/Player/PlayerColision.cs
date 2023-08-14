@@ -23,6 +23,7 @@ public class PlayerColision : NetworkBehaviour
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
 
     if (oxy != null)
+
     {
       if (playerInput.GetIsProcessing())
       {

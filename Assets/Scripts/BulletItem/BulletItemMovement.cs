@@ -36,10 +36,10 @@ public class BulletItemMovement : MonoBehaviour
         // Debug.LogError("Vo");
         bool throuth = false;
         Vector2 nockbackVector = new Vector2 (-moveVector.x,-moveVector.y);
-            var monsteranimator = other.gameObject.GetComponent<MonsterAnimator>();
 
         if (other.gameObject.layer ==LayerMask.NameToLayer("Monster")){
             // EquipmentSO equipmentSO = playerEquip.GetEquip(playerAnimator.GetPlayerData().playerWeapon);
+            var monsteranimator = other.gameObject.GetComponent<MonsterAnimator>();
             //     if (!equipmentSO) return;
             // var monsteranimator = other.gameObject.GetComponent<MonsterAnimator>();
             var gruntanimator = other.gameObject.GetComponent<SkeletonGruntAnimation>();
@@ -69,8 +69,11 @@ public class BulletItemMovement : MonoBehaviour
         else if (other.gameObject.layer ==LayerMask.NameToLayer("Player")){
             if (this.gameObject.layer == LayerMask.NameToLayer("MonsterBullet")) throuth = true;
             if( other.GetComponent<PlayerAnimator>()){
+                if (other.gameObject.GetComponent<MonsterAnimator>()){  
+                    damage = Mathf.FloorToInt(other.gameObject.GetComponent<MonsterAnimator>().GetDmg()*0.5f);
+                }
                 PlayerAnimator playerAnimator = other.GetComponent<PlayerAnimator>();
-                playerAnimator.AstronautHurtClientRpc(Mathf.FloorToInt(monsteranimator.GetDmg()*0.5f),nockbackVector,5);
+                playerAnimator.AstronautHurtClientRpc(damage,nockbackVector,5);
             }
         }
         if (!throuth) Destroy(gameObject);

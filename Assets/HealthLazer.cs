@@ -14,8 +14,8 @@ public class HealthLazer : MonoBehaviour
     void Start()
     {
         lazer = GetComponent<LineRenderer>();
-        lazer.SetPosition(0, transform.position);
-        lazer.SetPosition(1, transform.position);   
+        lazer.SetPosition(0, power.transform.position);
+        lazer.SetPosition(1, power.transform.position);   
         Monster = FindAnyObjectByType<MonsterAnimator>();
     }
 
@@ -24,11 +24,11 @@ public class HealthLazer : MonoBehaviour
     {
         if(relive && Monster){
             lazer.SetPosition(0, new Vector3 (Monster.transform.position.x,Monster.transform.position.y+2f));   
-        }else lazer.SetPosition(0, transform.position);
+        }else lazer.SetPosition(0, power.transform.position);
 
         if(spawn && Monster){
              lazer.SetPosition(0, Monster.GetMousePos());   
-        }else lazer.SetPosition(0, transform.position);
+        }else lazer.SetPosition(0, power.transform.position);
         
         if (spawn || relive) power.SetActive(true);
         else power.SetActive(false);

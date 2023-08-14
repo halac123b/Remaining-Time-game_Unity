@@ -23,7 +23,7 @@ public class SubMonsterSword : MonoBehaviour
         Vector2 attackVector = new Vector2((Gruntanimator.GetFloat("Vertical")==0)?Gruntanimator.GetFloat("Horizontal"):0,Gruntanimator.GetFloat("Vertical")); 
             if (other.gameObject.layer ==LayerMask.NameToLayer("Player") && other.GetComponent<PlayerAnimator>()){
                 // Debug.LogError("fuck");        
-                other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc(1,attackVector,5);
+                other.GetComponent<PlayerAnimator>().AstronautHurtClientRpc(1,attackVector,2);
             }
     }
     public void CreateTrigger(){

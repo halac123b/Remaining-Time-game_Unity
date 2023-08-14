@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SummaryPhaseManager : SingletonNetwork<ResultPhaseManager>
 {
@@ -39,6 +40,13 @@ public class SummaryPhaseManager : SingletonNetwork<ResultPhaseManager>
       UpdateUIClientRpc(playerData.rank, playerData);
     }
 
+    StartCoroutine(ShutDownServer());
+  }
+
+  IEnumerator ShutDownServer()
+  {
+    yield return new WaitForSecondsRealtime(3f);
+
     NetworkManager.Singleton.Shutdown();
   }
 
@@ -57,9 +65,12 @@ public class SummaryPhaseManager : SingletonNetwork<ResultPhaseManager>
 
   private void BackToMenu()
   {
-    Destroy(FindObjectOfType<PointManager>().gameObject);
+    // PointManager.Instance.gameObject.GetComponent<NetworkObject>().Despawn();
+    Destroy(PointManager.Instance.gameObject);
 
+    Destroy(FindObjectOfType<PlayerStatus>().gameObject);
 
+    LoadingSceneManager.Instance.RefreshGame();
     LoadingSceneManager.Instance.LoadScene(SceneName.Menu);
   }
 }

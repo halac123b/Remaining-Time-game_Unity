@@ -52,6 +52,12 @@ public class LoadingSceneManager : SingletonPersistent<LoadingSceneManager>
     StartCoroutine(Loading(sceneToLoad, isNetworkSessionActive));
   }
 
+  public void RefreshGame()
+  {
+    numPlayer = 0;
+    currentRound = 1;
+  }
+
   // Coroutine for the loading effect. It use an alpha in out effect
   private IEnumerator Loading(SceneName sceneToLoad, bool isNetworkSessionActive)
   {

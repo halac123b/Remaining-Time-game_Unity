@@ -12,8 +12,8 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   private bool countTrigger = true;
   private bool startCounting = false;
 
-  public bool canattack = true; 
-  public bool canMove = true; 
+  public bool canattack = true;
+  public bool canMove = true;
 
   private int point;
 
@@ -97,6 +97,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
     if (timeLeft <= 0)
     {
       OnDeadTrigger?.Invoke(this, EventArgs.Empty);
+      OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
     }
 
     countTrigger = true;

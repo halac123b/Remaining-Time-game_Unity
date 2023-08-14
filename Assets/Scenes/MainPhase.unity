@@ -2444,7 +2444,6 @@ MonoBehaviour:
   - {fileID: 9012003032880220039}
   - {fileID: 5718285147992315102}
   compass: {fileID: 7698167447013322842}
-  beginTimeAmount: 30
 --- !u!114 &3569491879733232679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2811,7 +2810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd3415c321cd548b62bc548b3ceb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountTime: 7
+  amountTime: 3
   timeLeft: 0
 --- !u!114 &5989343242695142534
 MonoBehaviour:

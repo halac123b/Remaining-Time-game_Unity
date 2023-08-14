@@ -88,7 +88,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
     playerAvatar[index].sprite = characterSprite[Mathf.Clamp(data.playerIndex, 0, 1)];
 
     playerPoint[index].text = data.point.ToString() + " $";
-    if (data.rank == 1)
+    if (data.rank == 0)
     {
       playerPoint[index].color = Color.red;
     }

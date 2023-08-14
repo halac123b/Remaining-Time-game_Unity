@@ -142,15 +142,15 @@ public class MonsterAnimator : AnimatorController
   /////////////////////////////Handle Event////////////////////////////// 
 
   
-  private void TriggerSummonHunter(InputAction.CallbackContext context)
-  {
-    if (IsOwner && playerStatus.canMove && NumMonsterReal > 0)
-      animator.SetTrigger("summonHunter");
-  }
+  // private void TriggerSummonHunter(InputAction.CallbackContext context)
+  // {
+  //   if (IsOwner && playerStatus.canMove && NumMonsterReal > 0)
+  //     animator.SetTrigger("summonHunter");
+  // }
   private void TriggerSummon(InputAction.CallbackContext context)
   {
 
-    if (IsOwner && playerEquip.canTriggerSkill && playerEquip.GetCurrentMonster() != null)
+    if (IsOwner && playerEquip.canTriggerSkill && playerEquip.GetCurrentMonster() != null && NumMonsterReal > 0)
     {
       switch (playerEquip.GetCurrentMonster().TypeWeapon)
       {

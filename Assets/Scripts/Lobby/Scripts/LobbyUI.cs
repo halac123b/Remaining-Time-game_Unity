@@ -39,7 +39,7 @@ public class LobbyUI : MonoBehaviour
     // });
     StartGameButton.onClick.AddListener(() =>
     {
-      LobbyManager.Instance.StartGame();
+      LobbyManager.Instance.StartGame(StartGameButton);
     });
   }
 

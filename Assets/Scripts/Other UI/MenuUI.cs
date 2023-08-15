@@ -9,7 +9,7 @@ public class MenuUI : MonoBehaviour
   private void Start()
   {
     startBtn = GetComponent<Button>();
-
     startBtn.onClick.AddListener(menuController.OnClickStart);
+
   }
 }

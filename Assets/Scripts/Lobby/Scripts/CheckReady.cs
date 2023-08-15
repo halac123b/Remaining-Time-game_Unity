@@ -29,7 +29,7 @@ public class CheckReady : MonoBehaviour
     else
     {
       readyState = "yes";
-      btnText.text = "Nope";
+      btnText.text = "Cancel";
     }
 
     LobbyManager.Instance.UpdatePlayerReady(readyState);

@@ -7,6 +7,7 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -513,7 +514,7 @@ public class LobbyManager : MonoBehaviour
     }
   }
 
-  public async void StartGame()
+  public async void StartGame(Button button)
   {
     if (IsLobbyHost())
     {
@@ -524,6 +525,7 @@ public class LobbyManager : MonoBehaviour
           Debug.Log("There is player not ready!");
           return;
         }
+        button.interactable = false;
         Debug.Log("StartGame" + playerData.color);
 
         string relayCode = await RelayManager.Instance.CreateRelay(playerData);

@@ -172,14 +172,14 @@ public class MonsterAnimator : AnimatorController
   private float ezreal_cd = 3;
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable || garen_cd < 0) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable || garen_cd > 0) return;
     animator.SetInteger(TYPE_ATTACK, 2);
     animator.SetTrigger(ATTACK);
     garen_cd = 5;
   }
   private void TriggerAttack03Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable || ezreal_cd < 0) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable || ezreal_cd > 0) return;
     animator.SetInteger(TYPE_ATTACK, 3);
     animator.SetTrigger(ATTACK);
     ezreal_cd = 3;

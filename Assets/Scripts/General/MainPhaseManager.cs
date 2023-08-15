@@ -30,7 +30,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private PlayerStatus playerStatus;
 
   //[SerializeField] private int beginTimeAmount = 30;
-  private int beginTimeAmount = 10;
+  private int beginTimeAmount = 90;
 
   private bool endRound = false;
 

@@ -27,7 +27,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   // Monster start
   public int monsterAttack = 5; //
-  public int monsterHealth = 100; //
+  public int monsterHealth = 300; //
   public int monsterRebornTime = 1; // (speed)
   public bool ezrealEnable = false;
   public bool garenEnable = false;

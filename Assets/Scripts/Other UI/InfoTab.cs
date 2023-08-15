@@ -27,6 +27,6 @@ public class InfoTab : MonoBehaviour
 
     damage.text = playerStatus.monsterAttack.ToString();
     reborn.text = playerStatus.monsterRebornTime.ToString();
-    health.text = playerStatus.monsterHealth.ToString();
+    health.text = playerStatus.GetMax_HP().ToString();
   }
 }

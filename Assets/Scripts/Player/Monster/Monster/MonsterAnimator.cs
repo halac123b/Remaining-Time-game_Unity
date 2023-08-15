@@ -69,7 +69,8 @@ public class MonsterAnimator : AnimatorController
     garen_cd -= Time.deltaTime;
     ezreal_cd -= Time.deltaTime;
     time += Time.deltaTime;
-    HPbar.GetComponentInChildren<Slider>().value = HP.Value / playerStatus.monsterHealth;
+    // Debug.LogError(GetComponentInChildren<Slider>()+" "+ HP.Value +" "+ playerStatus.GetMax_HP());
+    HPbar.GetComponentInChildren<Slider>().value = HP.Value / playerStatus.GetMax_HP();
     if (!IsOwner) return;
     // if (!playerStatus.canMove) Debug.LogError("Cannot Move"); 
   }

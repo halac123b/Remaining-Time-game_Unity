@@ -27,7 +27,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   // Monster start
   public int monsterAttack = 5; //
-  public int monsterHealth = 300; //
+  private float monsterHealth = 300; //
   public int monsterRebornTime = 1; // (speed)
   public bool ezrealEnable = false;
   public bool garenEnable = false;
@@ -117,5 +117,11 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public void SetStartCounting(bool status)
   {
     startCounting = status;
+  }
+  public float GetMax_HP(){
+    return monsterHealth;
+  }
+  public void SetMax_HP(float New){
+    monsterHealth = New;
   }
 }

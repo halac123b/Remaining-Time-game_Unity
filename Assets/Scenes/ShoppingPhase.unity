@@ -5205,7 +5205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2195696c76c2c82408e619d8eabe8a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 42
   canattack: 1
   canMove: 1
   bid: 0
@@ -5213,7 +5212,6 @@ MonoBehaviour:
   protection: 5
   processSpeed: 5
   monsterAttack: 5
-  monsterHealth: 20
   monsterRebornTime: 5
   ezrealEnable: 0
   garenEnable: 0

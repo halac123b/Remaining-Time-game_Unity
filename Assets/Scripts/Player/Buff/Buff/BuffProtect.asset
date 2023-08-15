@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Buff Protection
   image: {fileID: 21300000, guid: a76c3abd52464f4448af550a81bf119f, type: 3}
-  price: 80
+  price: 0
   value: 1
   description: '*Available for all role
 

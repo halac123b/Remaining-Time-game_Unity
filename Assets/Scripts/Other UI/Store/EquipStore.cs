@@ -242,7 +242,6 @@ public class EquipStore : MonoBehaviour
 
   private void Exit()
   {
-    playerStatus.canattack = true;
     playerStatus.canMove = true;
     gameObject.SetActive(false);
   }

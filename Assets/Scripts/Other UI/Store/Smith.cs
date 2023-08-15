@@ -60,8 +60,6 @@ public class Smith : NetworkBehaviour
         {
           shopUI.SetActive(true);
         }
-
-        playerStatus.canattack = false;
         playerStatus.canMove = false;
       }
     }

@@ -12,7 +12,7 @@ public class MonsterAnimator : AnimatorController
   [SerializeField] public Transform HPbar;
   [SerializeField] public MonsterSword monsterSword;
   [SerializeField] private TextMeshPro playername;
-  public int NumMonsterReal ;
+  public int NumMonsterReal;
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
   public NetworkVariable<ulong> index = new NetworkVariable<ulong>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -56,8 +56,6 @@ public class MonsterAnimator : AnimatorController
   {
     base.Start();
     if (!IsOwner) return;
-    playerStatus.Renew();
-
   }
 
   private void FixedUpdate()
@@ -141,7 +139,7 @@ public class MonsterAnimator : AnimatorController
   }
   /////////////////////////////Handle Event////////////////////////////// 
 
-  
+
   // private void TriggerSummonHunter(InputAction.CallbackContext context)
   // {
   //   if (IsOwner && playerStatus.canMove && NumMonsterReal > 0)
@@ -170,8 +168,8 @@ public class MonsterAnimator : AnimatorController
     animator.SetTrigger(ATTACK);
   }
 
-   private float garen_cd = 5;
-   private float ezreal_cd = 3; 
+  private float garen_cd = 5;
+  private float ezreal_cd = 3;
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
     if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable || garen_cd < 0) return;
@@ -181,7 +179,7 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack03Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable|| ezreal_cd < 0) return;
+    if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.ezrealEnable || ezreal_cd < 0) return;
     animator.SetInteger(TYPE_ATTACK, 3);
     animator.SetTrigger(ATTACK);
     ezreal_cd = 3;

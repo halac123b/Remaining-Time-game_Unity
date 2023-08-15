@@ -73,7 +73,6 @@ public class PlayerAnimator : AnimatorController
   {
     base.Start();
     if (!IsOwner) return;
-    playerStatus.Renew();
     AimBar.GetComponentInChildren<Slider>().value = 0;
     AimBar.gameObject.SetActive(false);
 

@@ -34,6 +34,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
   }
   private void Start()
   {
+
     if (IsHost)
     {
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
@@ -41,6 +42,7 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     countDown.OnTimeOut += UpdatePointBid;
     playerEquip.canTriggerSkill = false;
     playerStatus.canattack = false;
+    playerStatus.canMove = true;
   }
 
   private void UpdatePointBid(object sender, EventArgs e)

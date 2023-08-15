@@ -133,7 +133,7 @@ public class MonsterAnimator : AnimatorController
       if (o.GetPlayerData().Id == index.Value)
       {
         GameObject floatingtext = Instantiate(o.FloatingText, o.playerMovement.transform.position, Quaternion.identity, o.playerMovement.transform);
-        floatingtext.GetComponent<TextMesh>().text = text;
+        floatingtext.GetComponent<TextMeshPro>().text = text;
         o.weapon.increaseTime(20);
       }
     }

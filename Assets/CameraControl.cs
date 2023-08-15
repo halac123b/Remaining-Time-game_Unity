@@ -8,19 +8,15 @@ public class CameraControl : MonoBehaviour
 {
     // Start is called before the first frame update
     PlayerMovement playerMovement;
-    PlayerMovement[] playerMovements ;
     [SerializeField] public float speed = 0.2f;
     [SerializeField] public float size = 4.5f;
     // private bool zoom = false;
 
-    void Start()
-    {
-        playerMovements  = FindObjectsByType<PlayerMovement>(sortMode: FindObjectsSortMode.InstanceID);
-    }
+    private float zoomspeed;
 
     // Update is called once per frame
     private void FixedUpdate() {
-        foreach(var movement in playerMovements){
+        foreach(var movement in FindObjectsByType<PlayerMovement>(sortMode: FindObjectsSortMode.InstanceID)){
             if(movement.GetClientId() == NetworkManager.Singleton.LocalClientId){
                 playerMovement = movement;
             }

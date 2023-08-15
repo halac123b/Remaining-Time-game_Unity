@@ -69,9 +69,7 @@ public class BulletItemMovement : MonoBehaviour
         else if (other.gameObject.layer ==LayerMask.NameToLayer("Player")){
             if (this.gameObject.layer == LayerMask.NameToLayer("MonsterBullet")) throuth = true;
             if( other.GetComponent<PlayerAnimator>()){
-                if (other.gameObject.GetComponent<MonsterAnimator>()){  
-                    damage = Mathf.FloorToInt(other.gameObject.GetComponent<MonsterAnimator>().GetDmg()*1.5f);
-                }
+                damage = Mathf.FloorToInt(FindAnyObjectByType<MonsterAnimator>().GetDmg()*1.5f);     
                 PlayerAnimator playerAnimator = other.GetComponent<PlayerAnimator>();
                 playerAnimator.AstronautHurtClientRpc(damage,nockbackVector,5);
             }

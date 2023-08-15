@@ -26,7 +26,13 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    TurnOnIceClientRpc();
+    TurnOnIceServerRpc();
+  
+  }
+
+  [ServerRpc (RequireOwnership = false)]
+  public void TurnOnIceServerRpc(){
+     TurnOnIceClientRpc();
   }
   [ClientRpc]
   public void TurnOnIceClientRpc(){
@@ -39,7 +45,11 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    TurnOnLaternClientRpc();
+    TurnOnLaternServerRpc();
+  }
+  [ServerRpc (RequireOwnership = false)]
+  public void TurnOnLaternServerRpc(){
+     TurnOnLaternClientRpc();
   }
 
   [ClientRpc]
@@ -53,9 +63,13 @@ public class PlayerEffect : NetworkBehaviour
     {
       return;
     }
-    TurnOnPlusTimeClientRpc();
+    TurnOnPlusTimeServerRpc();
   }
 
+[ServerRpc]
+  public void TurnOnPlusTimeServerRpc(){
+     TurnOnPlusTimeClientRpc();
+  }
   [ClientRpc]
   public void TurnOnPlusTimeClientRpc(){
      plusTime.SetActive(!plusTime.activeSelf);

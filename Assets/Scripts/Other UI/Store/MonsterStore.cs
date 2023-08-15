@@ -212,12 +212,14 @@ public class MonsterStore : MonoBehaviour
 
   private void BuyEquip(int index)
   {
-    if (storeMode == Mode.Buff && currentSlot + index > buffList.Count)
+    if ((storeMode == Mode.Buff && currentSlot + index > buffList.Count) ||
+      (storeMode == Mode.Skill && currentSlot + index > equipmentStock.skillList.Count))
     {
       return;
     }
 
-    if (storeMode == Mode.Buff && buffList[currentSlot + index].price > playerStatus.GetPoint())
+    if ((storeMode == Mode.Buff && buffList[currentSlot + index].price > playerStatus.GetPoint()) ||
+      (storeMode == Mode.Skill && equipmentStock.skillList[currentSlot + index].price > playerStatus.GetPoint()))
     {
       return;
     }

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class EditPlayerName : MonoBehaviour
 {
 
@@ -18,13 +19,12 @@ public class EditPlayerName : MonoBehaviour
   [SerializeField] private Text playerNameText;
 
 
-  private string playerName = "Nope";
-
+  private string playerName = "player_" ;
 
   private void Awake()
   {
     Instance = this;
-
+    playerName += UnityEngine.Random.Range(10,99).ToString();
     GetComponent<Button>().onClick.AddListener(() =>
     {
       UI_InputWindow.Show_Static("Player Name", playerName, "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-", 20,

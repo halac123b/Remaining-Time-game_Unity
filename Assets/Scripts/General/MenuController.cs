@@ -31,6 +31,7 @@ public class MenuController : MonoBehaviour
 
   public void OnClickStart()
   {
+    
     LoadingSceneManager.Instance.LoadScene(nextScene, false);
   }
 }

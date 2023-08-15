@@ -24,4 +24,12 @@ public class CoutDownTimer : MonoBehaviour
   {
     playerStatus.OnCountDownTrigger -= OnUpdateTime;
   }
+
+  private void Update()
+  {
+    if (playerStatus.GetTimeLeft() < 0)
+    {
+      Destroy(gameObject);
+    }
+  }
 }

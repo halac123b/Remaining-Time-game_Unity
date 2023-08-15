@@ -81,7 +81,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
 
   private void Update()
   {
-    if (startCounting && countTrigger && timeLeft > 0)
+    if (startCounting && countTrigger)
     {
       StartCoroutine(CountDownTime());
     }
@@ -99,6 +99,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
     {
       OnDeadTrigger?.Invoke(this, EventArgs.Empty);
       OnCountDownTrigger?.Invoke(this, EventArgs.Empty);
+      startCounting = false;
     }
 
     countTrigger = true;
@@ -118,10 +119,12 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   {
     startCounting = status;
   }
-  public float GetMax_HP(){
+  public float GetMax_HP()
+  {
     return monsterHealth;
   }
-  public void SetMax_HP(float New){
+  public void SetMax_HP(float New)
+  {
     monsterHealth = New;
   }
 }

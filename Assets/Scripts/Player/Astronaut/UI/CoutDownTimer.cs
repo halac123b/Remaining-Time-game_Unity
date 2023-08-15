@@ -27,7 +27,7 @@ public class CoutDownTimer : MonoBehaviour
 
   private void Update()
   {
-    if (playerStatus.GetTimeLeft() < 0)
+    if (playerStatus.GetTimeLeft() <= 0)
     {
       Destroy(gameObject);
     }

@@ -260,9 +260,23 @@ public class PlayerAnimator : AnimatorController
       return;
     }
     animator.SetTrigger("isDeath");
-    playerMovement.enabled = false;
 
-    Destroy(playerPos);
+    if (GetComponentInParent<PlayerColision>().IsInProcessing())
+    {
+      FindObjectOfType<OxyStatus>().SetProcessServerRpc(false, -playerStatus.processSpeed);
+    }
+  }
+
+  [ServerRpc(RequireOwnership = false)]
+  private void DestroyPlayerServerRpc()
+  {
+    DestroyClientRpc();
+  }
+
+  [ClientRpc]
+  private void DestroyClientRpc()
+  {
+    Destroy(playerMovement.gameObject);
   }
 
   private void OnWeaponCarryChanged(bool previousValue, bool newValue)

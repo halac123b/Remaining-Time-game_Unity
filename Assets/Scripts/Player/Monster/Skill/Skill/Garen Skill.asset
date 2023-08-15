@@ -15,4 +15,6 @@ MonoBehaviour:
   buffName: Judegement
   image: {fileID: 21300000, guid: f27b8a6ce7176fc44821fb0319ecdace, type: 3}
   price: 30
-  description: Spin and deal 15 damage each second
+  description: '*Use Right Button to perform
+
+    Spin and deal 70% damage each second'

@@ -20,6 +20,7 @@ public class PlayerAnimator : AnimatorController
   [SerializeField] private SpriteRenderer cover_sprite;
   [SerializeField] private SpriteRenderer weapon_sprite;
   [SerializeField] private SpriteRenderer sprite;
+  [SerializeField] private GameObject playerPos;
 
   [SerializeField] private TextMeshPro playername;
   public Transform AimBar;
@@ -260,6 +261,8 @@ public class PlayerAnimator : AnimatorController
     }
     animator.SetTrigger("isDeath");
     playerMovement.enabled = false;
+
+    Destroy(playerPos);
   }
 
   private void OnWeaponCarryChanged(bool previousValue, bool newValue)

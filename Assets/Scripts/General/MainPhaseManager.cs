@@ -56,6 +56,8 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
   private void Start()
   {
     playerStatus = FindObjectOfType<PlayerStatus>();
+
+    playerStatus.Renew();
     countDown.OnTimeOut += StartGame;
 
     playerStatus.OnDeadTrigger += ResultRecord;
@@ -86,7 +88,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     }
     else
     {
-      compass.transform.localScale = Vector3.one*0.3f;
+      compass.transform.localScale = Vector3.one * 0.3f;
     }
 
     StartCoroutine(TurnOffCompass());

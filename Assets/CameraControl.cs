@@ -11,9 +11,11 @@ public class CameraControl : MonoBehaviour
     [SerializeField] public float speed = 0.2f;
     [SerializeField] public float size = 4.5f;
     // private bool zoom = false;
+
+    private float zoomspeed;
     void Start()
     {
-        
+        zoomspeed = speed* (Camera.main.orthographicSize - size) / Vector2.Distance(transform.position, playerMovement.transform.position);
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class CameraControl : MonoBehaviour
         if(playerMovement && Vector2.Distance(transform.position, playerMovement.transform.position) > 1f){
             transform.position = Vector3.Lerp ( transform.position, target, Time.deltaTime * 5f);
         }
-        if (playerMovement && Camera.main.orthographicSize - size > Mathf.Abs(0.05f)){
+        if (playerMovement && Mathf.Abs(Camera.main.orthographicSize - size) > 0.05f){
             Camera.main.orthographicSize -= speed* (Camera.main.orthographicSize - size) / Vector2.Distance(transform.position, playerMovement.transform.position);
         }
         

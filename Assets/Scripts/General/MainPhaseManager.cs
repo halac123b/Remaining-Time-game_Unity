@@ -86,7 +86,7 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
     }
     else
     {
-      compass.transform.localScale = Vector3.one;
+      compass.transform.localScale = Vector3.one*0.3f;
     }
 
     StartCoroutine(TurnOffCompass());

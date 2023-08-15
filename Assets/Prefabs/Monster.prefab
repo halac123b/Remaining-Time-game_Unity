@@ -474,12 +474,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3416456467640675089}
   FloatingText: {fileID: 2699428507742238733, guid: e509eeda6d729b249addea5b1fc7bc06, type: 3}
+  playerStatus: {fileID: 0}
   playerMovement: {fileID: 7523048113123377703}
-  MAX_HP: 300
   AimBar: {fileID: 8501821099943254005}
   HPbar: {fileID: 4093951713989158920}
   monsterSword: {fileID: 3625814470384475967}
   playername: {fileID: 1832545427542366387}
+  NumMonsterReal: 0
   index:
     m_InternalValue: 100
   HP:

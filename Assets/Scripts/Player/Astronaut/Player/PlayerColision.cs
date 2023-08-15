@@ -13,7 +13,7 @@ public class PlayerColision : NetworkBehaviour
   {
     playerInput = GetComponent<PlayerInput>();
     playerMovement = GetComponent<PlayerMovement>();
-    playerStatus = GetComponent<PlayerStatus>();
+    playerStatus = FindAnyObjectByType<PlayerStatus>();
   }
   private void OnTriggerStay2D(Collider2D other)
   {

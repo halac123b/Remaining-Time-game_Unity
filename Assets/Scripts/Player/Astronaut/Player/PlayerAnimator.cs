@@ -176,8 +176,8 @@ public class PlayerAnimator : AnimatorController
   public void HurtFloating(string text)
   {
     GameObject floatingtext = Instantiate(FloatingText, playerMovement.transform.position, Quaternion.identity, playerMovement.transform);
-    floatingtext.GetComponent<TextMesh>().text = text;
-    floatingtext.GetComponent<TextMesh>().color = Color.red;
+    floatingtext.GetComponent<TextMeshPro>().text = text;
+    floatingtext.GetComponent<TextMeshPro>().color = Color.red;
   }
   public override void Set_VERTICAL_HORIZONTAL(Animator anim, float x, float y)
   {

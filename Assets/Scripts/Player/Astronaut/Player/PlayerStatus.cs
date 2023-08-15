@@ -7,7 +7,7 @@ using System;
 
 public class PlayerStatus : SingletonPersistent<PlayerStatus>
 {
-  [SerializeField] private int timeLeft = 30;
+  private int timeLeft = 90;
 
   private bool countTrigger = true;
   private bool startCounting = false;
@@ -31,7 +31,7 @@ public class PlayerStatus : SingletonPersistent<PlayerStatus>
   public int monsterRebornTime = 1; // (speed)
   public bool ezrealEnable = false;
   public bool garenEnable = false;
-  public int NumMonster = 5 ; // :))
+  public int NumMonster = 5; // :))
 
   public List<BuffSO> buffList = new List<BuffSO>();
 

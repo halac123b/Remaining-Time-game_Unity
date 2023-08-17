@@ -169,8 +169,8 @@ public class MonsterAnimator : AnimatorController
     animator.SetTrigger(ATTACK);
   }
 
-  private float garen_cd = 5;
-  private float ezreal_cd = 3;
+  public float garen_cd = 5;
+  public float ezreal_cd = 3;
   private void TriggerAttack02Started(InputAction.CallbackContext context)
   {
     if (!IsOwner || !playerStatus.canMove || !playerStatus.canattack || !playerStatus.garenEnable || garen_cd > 0) return;

@@ -45,13 +45,13 @@ public class ResultPhaseManager : SingletonNetwork<ResultPhaseManager>
 
   private void Start()
   {
+    AudioManager.Instance.SetAndPlay(5);
     if (!IsHost)
     {
       return;
     }
     countDown.OnTimeOut += LoadNextScene;
 
-    Debug.Log("Test1");
     ArrangeRank();
 
     bool dualWin = false;

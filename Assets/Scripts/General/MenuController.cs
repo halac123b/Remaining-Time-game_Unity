@@ -9,6 +9,8 @@ public class MenuController : MonoBehaviour
 
   private void Start()
   {
+
+    AudioManager.Instance.SetAndPlay(0);
     // -- To test with latency on development builds --
     // To set the latency, jitter and packet-loss percentage values for develop builds we need
     // the following code to execute before NetworkManager attempts to connect (changing the

@@ -61,6 +61,8 @@ public class LobbyManager : MonoBehaviour
 
   private async void Awake()
   {
+    Debug.Log("aaa");
+    AudioManager.Instance.SetAndPlay(1);
     playerData.color = Color.red;
     playerData.playerWeapon = -1;
     try

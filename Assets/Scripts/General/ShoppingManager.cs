@@ -39,6 +39,8 @@ public class ShoppingManager : SingletonNetwork<ShoppingManager>
     {
       UpdateStatusClientRpc(PointManager.Instance.playerPoint[1].point, PointManager.Instance.playerPoint[2].point);
     }
+    AudioManager.Instance.SetAndPlay(1);
+
     countDown.OnTimeOut += UpdatePointBid;
     playerEquip.canTriggerSkill = false;
     playerStatus.canattack = false;

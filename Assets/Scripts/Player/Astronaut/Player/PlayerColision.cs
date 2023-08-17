@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 public class PlayerColision : NetworkBehaviour
 {
@@ -7,7 +8,6 @@ public class PlayerColision : NetworkBehaviour
   private PlayerMovement playerMovement;
   private bool isProcessing = false;
   private PlayerStatus playerStatus;
-  // private int processSpeed = 5;
 
   private void Start()
   {
@@ -15,6 +15,19 @@ public class PlayerColision : NetworkBehaviour
     playerMovement = GetComponent<PlayerMovement>();
     playerStatus = FindAnyObjectByType<PlayerStatus>();
   }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (!IsOwner || PointManager.Instance.playerPoint[Convert.ToInt16(NetworkManager.Singleton.LocalClientId)].playerIndex == 0)
+    {
+      return;
+    }
+    if (other.gameObject.GetComponentInParent<OxyStatus>() != null)
+    {
+      FindObjectOfType<OxyGuide>().EnableTut();
+    }
+  }
+
   private void OnTriggerStay2D(Collider2D other)
   {
     if (!IsOwner)
@@ -25,12 +38,12 @@ public class PlayerColision : NetworkBehaviour
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
 
     if (oxy != null)
-
     {
       if (playerInput.GetIsProcessing())
       {
         if (!isProcessing)
         {
+          FindObjectOfType<OxyGuide>().DisableTut();
           if (IsClient)
           {
             oxy.SetProcessServerRpc(true, playerStatus.processSpeed);
@@ -45,6 +58,7 @@ public class PlayerColision : NetworkBehaviour
         }
         else
         {
+          FindObjectOfType<OxyGuide>().EnableTut();
           if (IsClient)
           {
             oxy.SetProcessServerRpc(false, -playerStatus.processSpeed);
@@ -67,6 +81,7 @@ public class PlayerColision : NetworkBehaviour
     OxyStatus oxy = other.gameObject.GetComponentInParent<OxyStatus>();
     if (oxy != null)
     {
+      FindObjectOfType<OxyGuide>().DisableTut();
       if (isProcessing)
       {
         isProcessing = false;

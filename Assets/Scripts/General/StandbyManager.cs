@@ -29,6 +29,7 @@ public class StandbyManager : SingletonNetwork<StandbyManager>
 
   private void Start()
   {
+    AudioManager.Instance.SetAndPlay(2);
     if (!IsHost)
     {
       return;

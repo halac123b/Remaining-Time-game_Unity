@@ -3,6 +3,7 @@ using Unity.Netcode;
 using TMPro;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 {
@@ -55,6 +56,14 @@ public class MainPhaseManager : SingletonNetwork<MainPhaseManager>
 
   private void Start()
   {
+    if (SceneManager.GetActiveScene().buildIndex == 6)
+    {
+      AudioManager.Instance.SetAndPlay(4);
+    }
+    else
+    {
+      AudioManager.Instance.SetAndPlay(3);
+    }
     playerStatus = FindObjectOfType<PlayerStatus>();
 
     playerStatus.Renew();

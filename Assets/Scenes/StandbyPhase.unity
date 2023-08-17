@@ -824,6 +824,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433246560}
     m_Modifications:
+    - target: {fileID: 1154152160950466279, guid: 94e0e1109c6d35a429d96a9ea974568f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82306ec1555e74d41b5fc97d5e09f8e2, type: 3}
     - target: {fileID: 2226752682330332426, guid: 94e0e1109c6d35a429d96a9ea974568f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1045,7 +1049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977052351970051995, guid: f1e8e005431f51e418d3a51f6eab3916, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

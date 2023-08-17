@@ -4070,6 +4070,8 @@ GameObject:
   - component: {fileID: 1628087044}
   - component: {fileID: 1628087043}
   - component: {fileID: 1628087042}
+  - component: {fileID: 1628087047}
+  - component: {fileID: 1628087046}
   m_Layer: 5
   m_Name: Life
   m_TagString: Untagged
@@ -4180,6 +4182,37 @@ RectTransform:
   m_AnchoredPosition: {x: 161.8, y: 110.9}
   m_SizeDelta: {x: 83.8735, y: 36.94}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1628087046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628087041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3329802168
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1628087047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628087041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4680567dbe9d47a64968fe12c7eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1648420333
 GameObject:
   m_ObjectHideFlags: 0

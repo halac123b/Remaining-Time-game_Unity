@@ -51,7 +51,6 @@ public class PlayerInput : NetworkBehaviour
     if (!IsOwner) return;
     // UnityEngine.Debug.LogError($"show = false");
     inventory.show_inventory = false;
-    playerStatus.canattack = true;
   }
 
   private void OnDisable()
@@ -65,7 +64,6 @@ public class PlayerInput : NetworkBehaviour
     // UnityEngine.Debug.LogError($"show = true");
 
     inventory.show_inventory = true;
-    playerStatus.canattack = false;
   }
 
   private void OpenInfo(UnityEngine.InputSystem.InputAction.CallbackContext context)

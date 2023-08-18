@@ -10,6 +10,7 @@ public class OxyStatus : NetworkBehaviour
   [SerializeField] private int threshold = 100;
   [SerializeField] private Animator animator;
   [SerializeField] private HealthBar processBar;
+  [SerializeField] private GameObject selfLight;
 
   private int speed = 0;
 
@@ -73,5 +74,6 @@ public class OxyStatus : NetworkBehaviour
     // if(this.speed > 5) animator.enabled = false;
     // else animator.enabled = true;
     animator.enabled = !is_enable;
+    selfLight.SetActive(is_enable);
   }
 }

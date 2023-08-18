@@ -23,6 +23,8 @@ public class PlayerAnimator : AnimatorController
   [SerializeField] private GameObject playerPos;
 
   [SerializeField] private TextMeshPro playername;
+  [SerializeField] private Transform TimeBar;
+ 
   public Transform AimBar;
 
   private NetworkVariable<bool> flipX = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -52,11 +54,11 @@ public class PlayerAnimator : AnimatorController
 
   override public void OnDestroy()
   {
-    playerEquip.OnChangeEquip -= OnChangeEquipped;
+    if (playerEquip)playerEquip.OnChangeEquip -= OnChangeEquipped;
 
-    playerInput.playerInputActions.Player.Attack.started -= TriggerAttackStarted;
+    if (playerInput) playerInput.playerInputActions.Player.Attack.started -= TriggerAttackStarted;
 
-    playerStatus.OnDeadTrigger -= OnDeadAnimation;
+    if (playerStatus) playerStatus.OnDeadTrigger -= OnDeadAnimation;
 
     base.OnDestroy();
   }
@@ -76,7 +78,7 @@ public class PlayerAnimator : AnimatorController
     if (!IsOwner) return;
     AimBar.GetComponentInChildren<Slider>().value = 0;
     AimBar.gameObject.SetActive(false);
-
+    
     PlayerData data = new PlayerData
     {
       Id = playerData.Value.Id,
@@ -106,8 +108,10 @@ public class PlayerAnimator : AnimatorController
     {
       AimBar.gameObject.SetActive(false);
     }
+    CountDownTimer countDownTimer = TimeBar.GetComponentInChildren<CountDownTimer>();
 
-
+    TimeBar.GetComponentInChildren<Slider>().value =  (float)countDownTimer.Time.Value/ (float)countDownTimer.TimeMax.Value ;
+    countDownTimer.textContent.text = String.Format($"{countDownTimer.Time.Value / 60:D2}:{countDownTimer.Time.Value % 60:D2}");
   }
   protected override void Update()
   {
@@ -169,10 +173,10 @@ public class PlayerAnimator : AnimatorController
 
     }
   }
-  public void DestroyObj()
-  {
-    //Destroy(GetComponentInParent<PlayerMovement>().gameObject);
-  }
+  // public void DestroyObj()
+  // {
+  //   //Destroy(GetComponentInParent<PlayerMovement>().gameObject);
+  // }
   public void HurtFloating(string text)
   {
     GameObject floatingtext = Instantiate(FloatingText, playerMovement.transform.position, Quaternion.identity, playerMovement.transform);

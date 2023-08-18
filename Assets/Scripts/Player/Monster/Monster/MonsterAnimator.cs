@@ -12,6 +12,7 @@ public class MonsterAnimator : AnimatorController
   [SerializeField] public Transform HPbar;
   [SerializeField] public MonsterSword monsterSword;
   [SerializeField] private TextMeshPro playername;
+ 
   public int NumMonsterReal;
 
   private NetworkVariable<Vector2> mouse = new NetworkVariable<Vector2>(new Vector2(0, 0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -119,7 +120,11 @@ public class MonsterAnimator : AnimatorController
   }
   public void CreateTrigger()
   {
-    monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
+    monsterSword.CreateTrigger();
+    // monsterSword.CreateTrigger(animator.GetInteger(TYPE_ATTACK));
+  }
+  public void DelTrigger(){
+    monsterSword.DelTrigger();
   }
   public int GetDmg()
   {
@@ -134,6 +139,7 @@ public class MonsterAnimator : AnimatorController
       {
         GameObject floatingtext = Instantiate(o.FloatingText, o.playerMovement.transform.position, Quaternion.identity, o.playerMovement.transform);
         floatingtext.GetComponent<TextMeshPro>().text = text;
+        floatingtext.GetComponent<TextMeshPro>().color = Color.blue;
         o.weapon.increaseTime(20);
       }
     }
@@ -164,7 +170,7 @@ public class MonsterAnimator : AnimatorController
   }
   private void TriggerAttack01Started(InputAction.CallbackContext context)
   {
-    if (!IsOwner || animator == null || !playerStatus.canattack) return;
+    if (!IsOwner || animator == null || !playerStatus.canMove || !playerStatus.canattack ) return;
     animator.SetInteger(TYPE_ATTACK, 1);
     animator.SetTrigger(ATTACK);
   }

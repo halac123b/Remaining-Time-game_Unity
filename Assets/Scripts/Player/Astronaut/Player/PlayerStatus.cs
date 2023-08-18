@@ -7,7 +7,9 @@ using System;
 
 public class PlayerStatus : SingletonPersistent<PlayerStatus>
 {
-  private int timeLeft = 90;
+  public int MaxTimeLeft = 90;
+  public int timeLeft = 90;
+
 
   private bool countTrigger = true;
   private bool startCounting = false;

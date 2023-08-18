@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 20
   moveVector: {x: 0, y: 0}
-  damage: 0
-  nockBack: 0
+  damage: 40
+  nockBack: 2
   idOwner: 0
 --- !u!50 &7329930977195655338
 Rigidbody2D:

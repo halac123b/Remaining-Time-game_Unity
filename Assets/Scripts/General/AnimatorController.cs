@@ -18,6 +18,7 @@ public class AnimatorController : NetworkBehaviour
 
   [SerializeField] public Animator animator;
   [SerializeField] public GameObject FloatingText;
+   [SerializeField] private GameObject SelfLight;
 
   public PlayerStatus playerStatus;
 
@@ -43,7 +44,12 @@ public class AnimatorController : NetworkBehaviour
     if (IsOwner)
     {
       playerData.Value = PointManager.Instance.GetPlayerData(Convert.ToInt32(NetworkManager.Singleton.LocalClientId));
+      SelfLight.SetActive(true);
+    }else{
+      SelfLight.SetActive(false);
+
     }
+
   }
 
   protected virtual void Awake()

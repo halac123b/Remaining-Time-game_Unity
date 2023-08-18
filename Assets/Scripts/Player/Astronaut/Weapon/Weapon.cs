@@ -70,5 +70,6 @@ public class Weapon : NetworkBehaviour
         if(!IsOwner) return;
         var playerstatus = FindAnyObjectByType<PlayerStatus>();
         playerstatus.SetTimeLeft(playerstatus.GetTimeLeft()+time);
+        playerstatus.MaxTimeLeft+=time;
     }
 }

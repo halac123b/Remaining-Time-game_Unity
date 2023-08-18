@@ -23,6 +23,7 @@ public class MonsterAttack1 : StateMachineBehaviour
   {
     playerMovement = animator.GetComponentInParent<PlayerMovement>();
     playerMovement.SetCanMove(true);
+    animator.GetComponent<MonsterAnimator>().DelTrigger();
   }
 
   // OnStateMove is called right after Animator.OnAnimatorMove()

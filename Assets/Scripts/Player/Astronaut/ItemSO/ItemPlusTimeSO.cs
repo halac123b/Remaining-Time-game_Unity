@@ -7,7 +7,7 @@ public class ItemPlusTimeSO : ItemSO
 {
   public override void Activate(PlayerStatus playerStatus)
   {
-    playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() + 2);
+    playerStatus.SetTimeLeft(playerStatus.GetTimeLeft() + 10);
     playerStatus.TriggerBuffTime();
   }
 }
